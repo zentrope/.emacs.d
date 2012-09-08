@@ -12,7 +12,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages
+(defvar kfi-packages
   '(magit
     ac-nrepl
     auto-complete
@@ -20,6 +20,7 @@
     birds-of-paradise-plus-theme
     clojure-mode
     ido-ubiquitous
+    mark-multiple
     markdown-mode
     molokai-theme
     nrepl
@@ -28,7 +29,7 @@
     smex
     twilight-theme))
 
-(dolist (p my-packages)
+(dolist (p kfi-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
@@ -43,6 +44,7 @@
 (load "~/.emacs.d/configs/smex.el")
 (load "~/.emacs.d/configs/clojure.el")
 (load "~/.emacs.d/configs/markdown.el")
+(load "~/.emacs.d/configs/mark-multiple.el")
 (load "~/.emacs.d/configs/nrepl.el")
 (load "~/.emacs.d/configs/css.el")
 (load "~/.emacs.d/configs/javascript.el")
