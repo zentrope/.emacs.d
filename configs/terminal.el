@@ -1,3 +1,4 @@
+;; terminal.el
 
 ;; Turn off line highlighting when using the terminal.
 

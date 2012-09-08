@@ -13,21 +13,24 @@
   (package-refresh-contents))
 
 (defvar kfi-packages
-  '(magit
+  '(
     ac-nrepl
     auto-complete
     autopair
     birds-of-paradise-plus-theme
     clojure-mode
     ido-ubiquitous
+    magit
     mark-multiple
     markdown-mode
+    melpa
     molokai-theme
     nrepl
     paredit
     parenface
     smex
-    twilight-theme))
+    twilight-theme
+    ))
 
 (dolist (p kfi-packages)
   (when (not (package-installed-p p))

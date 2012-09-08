@@ -3,7 +3,7 @@
 ;; General stuff that makes looking at or using emacs a quantum easier.
 ;;-----------------------------------------------------------------------------
 
-(load-theme 'twilight t)
+(load-theme 'tomorrow-night-bright t)
 
 (column-number-mode 1)
 (cua-mode 1)
