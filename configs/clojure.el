@@ -9,10 +9,10 @@
   :group 'faces)
 
 (font-lock-add-keywords 'clojure-mode
-			'(("(\\|)" . 'kfi-paren-face)))
+                        '(("(\\|)" . 'kfi-paren-face)))
 
 (font-lock-add-keywords 'clojure-mode
-			'(("defpartial\\|defpage" . font-lock-keyword-face)))
+                        '(("defpartial\\|defpage" . font-lock-keyword-face)))
 
 
 (put-clojure-indent 'defpartial 'defun)
@@ -29,4 +29,13 @@
   (ANY 2)
   (context 2))
 
-(add-hook 'clojure-mode-hook #'(lambda () (paredit-mode 1)))
+(defun kfi-clojure-hook ()
+  (paredit-mode 1)
+  (local-set-key (kbd "RET") 'newline-and-indent))
+
+(add-hook 'clojure-mode-hook #'kfi-clojure-hook)
+;; (add-hook 'clojure-mode-hook #'(lambda ()
+;;                                  (paredit-mode 1)))
+
+;; (add-hook 'clojure-mode-hook '(lambda ()
+;;                                 (local-set-key (kbd "RET") 'newline-and-indent)))

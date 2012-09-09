@@ -25,6 +25,8 @@
 (setq-default indent-tabs-mode 0)
 (setq-default inhibit-startup-screen t)
 
+(setq-default standard-indent 2)
+
 (global-hl-line-mode 1)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
