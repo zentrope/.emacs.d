@@ -5,7 +5,7 @@
 (require 'package)
 
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (package-initialize)
 
@@ -17,19 +17,24 @@
     ac-nrepl
     auto-complete
     autopair
-    birds-of-paradise-plus-theme
     clojure-mode
     ido-ubiquitous
     magit
     mark-multiple
     markdown-mode
     melpa
-    molokai-theme
     nrepl
     paredit
     parenface
     smex
+
+    ;; themes
+    molokai-theme
+    solarized-theme
+    twilight-anti-bright-theme
+    twilight-bright-theme
     twilight-theme
+    underwater-theme
     ))
 
 (dolist (p kfi-packages)
