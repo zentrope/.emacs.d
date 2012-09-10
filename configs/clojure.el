@@ -32,6 +32,7 @@
 (defun kfi-clojure-hook ()
   (autopair-mode -1)
   (paredit-mode 1)
+  (setq indent-tabs-mode nil)
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)

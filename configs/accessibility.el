@@ -6,7 +6,9 @@
   (/ (display-pixel-width) 3))
 
 (defun kfi-y-offset ()
-  (/ (display-pixel-height) 3))
+  100
+;;  (/ (display-pixel-height) 6)
+  )
 
 (add-to-list 'initial-frame-alist `(top . ,(kfi-y-offset)))
 (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
@@ -25,7 +27,9 @@
 (cua-mode 1)
 (show-paren-mode t)
 
-(setq indent-tabs-mode nil)
+;; Seems to be the only way to force this globally.
+(custom-set-variables '(indent-tabs-mode nil))
+
 (setq-default line-spacing 0)
 (setq-default inhibit-startup-screen t)
 
