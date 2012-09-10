@@ -30,12 +30,8 @@
   (context 2))
 
 (defun kfi-clojure-hook ()
+  (autopair-mode -1)
   (paredit-mode 1)
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)
-;; (add-hook 'clojure-mode-hook #'(lambda ()
-;;                                  (paredit-mode 1)))
-
-;; (add-hook 'clojure-mode-hook '(lambda ()
-;;                                 (local-set-key (kbd "RET") 'newline-and-indent)))

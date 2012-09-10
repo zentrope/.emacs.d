@@ -15,7 +15,6 @@
 (tool-bar-mode 0)
 (set-fringe-mode '(0.5 0.5))
 
-
 (if (window-system)
     (progn
       (load-theme 'underwater t)
@@ -26,8 +25,8 @@
 (cua-mode 1)
 (show-paren-mode t)
 
+(setq indent-tabs-mode nil)
 (setq-default line-spacing 0)
-(setq-default indent-tabs-mode 0)
 (setq-default inhibit-startup-screen t)
 
 (setq-default standard-indent 2)
@@ -39,3 +38,5 @@
 (set-default 'blink-cursor-mode nil)
 (set-default 'cursor-type '(hbar . 2))
 (setq ring-bell-function 'ignore)
+
+(setq speedbar-show-unknown-files 1)
