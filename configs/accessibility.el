@@ -15,7 +15,12 @@
 (tool-bar-mode 0)
 (set-fringe-mode '(0.5 0.5))
 
-(load-theme 'underwater t)
+
+(if (window-system)
+    (progn
+      (load-theme 'underwater t)
+      (global-hl-line-mode 1)
+      (set-face-underline 'hl-line nil)))
 
 (column-number-mode 1)
 (cua-mode 1)
@@ -26,11 +31,6 @@
 (setq-default inhibit-startup-screen t)
 
 (setq-default standard-indent 2)
-
-(global-hl-line-mode 1)
-
-;; turn off underlining of hl-line, if it's on.
-(set-face-underline 'hl-line nil)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
