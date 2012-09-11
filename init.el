@@ -23,6 +23,7 @@
     mark-multiple
     markdown-mode
     melpa
+    multi-term
     nrepl
     paredit
     parenface
