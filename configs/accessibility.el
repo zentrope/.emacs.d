@@ -44,3 +44,22 @@
 (setq ring-bell-function 'ignore)
 
 (setq speedbar-show-unknown-files 1)
+
+;;-----------------------------------------------------------------------------
+;; Convenience functions
+;;-----------------------------------------------------------------------------
+
+(defun kfi-set-frame-width (arg)
+  (interactive "nFrame width: ")
+  (set-frame-width (selected-frame) arg))
+
+(defun kfi-set-frame-height (arg)
+  (interactive "nFrame height: ")
+  (set-frame-height (selected-frame) arg))
+
+(defun kfi-set-frame-dimensions (w h)
+  (interactive "nFrame width: \nnFrame height: ")
+  (set-frame-width (selected-frame) w)
+  (set-frame-height (selected-frame) h))
+
+;;-----------------------------------------------------------------------------
