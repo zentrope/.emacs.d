@@ -18,6 +18,7 @@
     auto-complete
     autopair
     clojure-mode
+    erc-hl-nicks
     ido-ubiquitous
     magit
     mark-multiple
