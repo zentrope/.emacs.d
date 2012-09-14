@@ -62,4 +62,10 @@
   (set-frame-width (selected-frame) w)
   (set-frame-height (selected-frame) h))
 
+(defun kfi-back-window ()
+  (interactive)
+  (other-window -1))
+
+(global-set-key (kbd "C-x p") 'kfi-back-window)
+
 ;;-----------------------------------------------------------------------------
