@@ -40,7 +40,7 @@
 (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 
 (set-default 'blink-cursor-mode nil)
-(set-default 'cursor-type '(hbar . 2))
+(set-default 'cursor-type '(hbar . 1))
 (setq ring-bell-function 'ignore)
 
 (setq speedbar-show-unknown-files 1)
