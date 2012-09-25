@@ -65,3 +65,12 @@
 (load "~/.emacs.d/configs/org.el")
 
 ;;-----------------------------------------------------------------------------
+;; Local, single machine customization:
+;;-----------------------------------------------------------------------------
+
+(defconst init-local-file "~/.emacs.d/init-local.el" "For customizing per device.")
+
+(if (file-exists-p init-local-file)
+    (load init-local-file))
+
+;;-----------------------------------------------------------------------------

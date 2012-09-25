@@ -4,3 +4,4 @@ backups
 *~
 /ac-comphist.dat
 site-lisp
+/init-local.el
