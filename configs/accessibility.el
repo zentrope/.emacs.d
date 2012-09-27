@@ -17,11 +17,34 @@
 (tool-bar-mode 0)
 (set-fringe-mode '(0.5 0.5))
 
+;;-----------------------------------------------------------------------------
+;; Theme related stuff
+;;-----------------------------------------------------------------------------
+
+(defvar kfi-default-theme 'underwater
+  "Default theme.")
+
+(defvar kfi-current-theme 'underwater
+  "Current theme.")
+
+(defun kfi-load-theme (theme)
+  (interactive "STheme:")
+  (load-theme theme t)
+  (setq kfi-current-theme theme)
+  (global-hl-line-mode 1)
+  (set-face-underline 'hl-line nil))
+
+(defun kfi-unload-theme ()
+  (interactive)
+  (if kfi-current-theme
+      (disable-theme kfi-current-theme)
+    (disable-theme kfi-default-theme))
+  (setq kfi-current-theme nil))
+
 (if (window-system)
-    (progn
-      (load-theme 'underwater t)
-      (global-hl-line-mode 1)
-      (set-face-underline 'hl-line nil)))
+    (kfi-load-theme kfi-default-theme))
+
+;;-----------------------------------------------------------------------------
 
 (column-number-mode 1)
 (cua-mode 1)
