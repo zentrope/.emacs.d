@@ -16,7 +16,7 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (set-fringe-mode '(0.5 0.5))
-(global-hl-line-mode 1)
+(global-hl-line-mode 0)
 
 ;;-----------------------------------------------------------------------------
 ;; Theme related stuff
@@ -42,8 +42,8 @@
     (disable-theme kfi-default-theme))
   (setq kfi-current-theme nil))
 
-;; (if (window-system)
-;;     (kfi-load-theme kfi-default-theme))
+(if (window-system)
+    (kfi-load-theme kfi-default-theme))
 
 ;;-----------------------------------------------------------------------------
 
