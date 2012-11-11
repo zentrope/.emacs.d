@@ -15,5 +15,5 @@
 (custom-set-variables
 ;; '(term-default-bg-color "#000000")
 ;; '(term-default-fg-color "#bbbbbb")
- '(term-ddefault-fg-color "#000000")
+ '(term-default-fg-color "#bbbbbb")
  )
