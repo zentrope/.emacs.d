@@ -1,11 +1,14 @@
 (require 'nrepl)
 
-;; This stuff is still too immature. As in, I get locked up buffers.
+(setq nrepl-popup-stacktraces nil)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
 
-;;(require 'ac-nrepl)
+;; Comment out the following if you get locked up buffers.
 
-;;(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-;;(add-hook 'clojure-nrepl-mode-hook 'ac-nrepl-setup)
+(require 'ac-nrepl)
 
-;; (eval-after-load "auto-complete"
-;;   '(add-to-list 'ac-modes 'nrepl-mode))
+(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'clojure-nrepl-mode-hook 'ac-nrepl-setup)
+
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'nrepl-mode))
