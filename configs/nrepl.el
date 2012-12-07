@@ -1,5 +1,7 @@
 (require 'nrepl)
 
+(setq nrepl-popup-stacktraces nil)
+
 ;; This stuff is still too immature. As in, I get locked up buffers.
 
 ;;(require 'ac-nrepl)
