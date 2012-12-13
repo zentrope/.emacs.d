@@ -94,4 +94,10 @@
 
 (global-set-key (kbd "C-x p") 'kfi-back-window)
 
+(defun kfi-open-this ()
+  (interactive)
+  (shell-command (concat "open " (buffer-name))))
+
+(global-set-key (kbd "C-x o") 'kfi-open-this)
+
 ;;-----------------------------------------------------------------------------
