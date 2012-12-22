@@ -29,6 +29,7 @@
     paredit
     parenface
     smex
+    multi-web-mode
 
     ;; themes
     molokai-theme
@@ -63,6 +64,7 @@
 (load "~/.emacs.d/configs/terminal.el")
 (load "~/.emacs.d/configs/erc.el")
 (load "~/.emacs.d/configs/org.el")
+(load "~/.emacs.d/confis/multiweb.el")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:

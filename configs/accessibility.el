@@ -61,7 +61,7 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
-(set-face-attribute 'default nil :family "Monaco" :height 110 :weight 'normal)
+(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 
 (set-default 'blink-cursor-mode nil)
 (set-default 'cursor-type '(hbar . 1))
