@@ -1,0 +1,2 @@
+
+(require 'clojurescript-mode)
