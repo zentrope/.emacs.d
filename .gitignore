@@ -5,3 +5,4 @@ backups
 /ac-comphist.dat
 site-lisp
 /init-local.el
+/.mc-lists.el

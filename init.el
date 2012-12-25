@@ -21,7 +21,7 @@
     erc-hl-nicks
     ido-ubiquitous
     magit
-    mark-multiple
+    multiple-cursors
     markdown-mode
     melpa
     multi-term
@@ -58,7 +58,7 @@
 (load "~/.emacs.d/configs/clojurescript.el")
 (load "~/.emacs.d/configs/emacs-lisp.el")
 (load "~/.emacs.d/configs/markdown.el")
-(load "~/.emacs.d/configs/mark-multiple.el")
+(load "~/.emacs.d/configs/multiple-cursors.el")
 (load "~/.emacs.d/configs/nrepl.el")
 (load "~/.emacs.d/configs/css.el")
 (load "~/.emacs.d/configs/javascript.el")
