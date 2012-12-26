@@ -2,6 +2,13 @@
 ;; General stuff that makes looking at or using emacs a quantum easier.
 ;;-----------------------------------------------------------------------------
 
+
+(defvar kfi-local-bin (concat (getenv "HOME") "/Bin") "Local execs.")
+
+(setenv "PATH" (concat (getenv "PATH") ":" kfi-local-bin))
+(setq exec-path (append exec-path (list kfi-local-bin) ))
+
+
 (defun kfi-x-offset ()
   (/ (display-pixel-width) 3))
 
@@ -98,6 +105,6 @@
   (interactive)
   (shell-command (concat "open " (buffer-name))))
 
-(global-set-key (kbd "C-x o") 'kfi-open-this)
+(global-set-key (kbd "C-c C-x o") 'kfi-open-this)
 
 ;;-----------------------------------------------------------------------------

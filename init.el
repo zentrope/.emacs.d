@@ -31,6 +31,7 @@
     smex
     multi-web-mode
     clojurescript-mode
+    cljsbuild-mode
 
     ;; themes
     molokai-theme
@@ -56,6 +57,7 @@
 (load "~/.emacs.d/configs/smex.el")
 (load "~/.emacs.d/configs/clojure.el")
 (load "~/.emacs.d/configs/clojurescript.el")
+(load "~/.emacs.d/configs/cljsbuild.el")
 (load "~/.emacs.d/configs/emacs-lisp.el")
 (load "~/.emacs.d/configs/markdown.el")
 (load "~/.emacs.d/configs/multiple-cursors.el")
