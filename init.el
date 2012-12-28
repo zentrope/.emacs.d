@@ -69,6 +69,7 @@
 (load "~/.emacs.d/configs/erc.el")
 (load "~/.emacs.d/configs/org.el")
 (load "~/.emacs.d/configs/multiweb.el")
+(load "~/.emacs.d/configs/magit.el")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:
