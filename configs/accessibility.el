@@ -103,7 +103,7 @@
 
 (defun kfi-open-this ()
   (interactive)
-  (shell-command (concat "open " (buffer-name))))
+  (shell-command (concat "open '" (buffer-name) "'")))
 
 (global-set-key (kbd "C-c C-x o") 'kfi-open-this)
 
