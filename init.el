@@ -18,6 +18,7 @@
     auto-complete
     autopair
     clojure-mode
+    dired-details
     erc-hl-nicks
     ido-ubiquitous
     magit
@@ -70,6 +71,7 @@
 (load "~/.emacs.d/configs/org.el")
 (load "~/.emacs.d/configs/multiweb.el")
 (load "~/.emacs.d/configs/magit.el")
+(load "~/.emacs.d/configs/dired-details.el")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:
