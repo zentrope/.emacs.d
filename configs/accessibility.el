@@ -68,7 +68,7 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
-(set-face-attribute 'default nil :family "Monaco" :height 130 :weight 'normal)
+(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 
 (set-default 'blink-cursor-mode nil)
 (set-default 'cursor-type '(hbar . 1))
@@ -106,5 +106,17 @@
   (shell-command (concat "open '" (buffer-name) "'")))
 
 (global-set-key (kbd "C-c C-x o") 'kfi-open-this)
+
+(defun kfi-set-font-size (size)
+  (interactive "nNew size: ")
+  (set-face-attribute 'default nil :height size))
+
+(defun kfi-font-size-up ()
+  (interactive)
+  (kfi-set-font-size (+ (face-attribute 'default :height) 10)))
+
+(defun kfi-font-size-down ()
+  (interactive)
+  (kfi-set-font-size (- (face-attribute 'default :height) 10)))
 
 ;;-----------------------------------------------------------------------------
