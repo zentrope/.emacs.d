@@ -2,12 +2,10 @@
 ;; General stuff that makes looking at or using emacs a quantum easier.
 ;;-----------------------------------------------------------------------------
 
-
 (defvar kfi-local-bin (concat (getenv "HOME") "/Bin") "Local execs.")
 
 (setenv "PATH" (concat (getenv "PATH") ":" kfi-local-bin))
 (setq exec-path (append exec-path (list kfi-local-bin) ))
-
 
 (defun kfi-x-offset ()
   (/ (display-pixel-width) 3))
@@ -40,6 +38,7 @@
   (load-theme theme t)
   (setq kfi-current-theme theme)
   (global-hl-line-mode 1)
+  (set-default 'cursor-type 'hollow)
   (set-face-underline 'hl-line nil))
 
 (defun kfi-unload-theme ()
@@ -72,6 +71,8 @@
 
 (set-default 'blink-cursor-mode nil)
 (set-default 'cursor-type '(hbar . 1))
+(set-default 'cursor-type 'hollow)
+
 (setq ring-bell-function 'ignore)
 
 (setq speedbar-show-unknown-files 1)
