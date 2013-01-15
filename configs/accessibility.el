@@ -38,6 +38,7 @@
   (load-theme theme t)
   (setq kfi-current-theme theme)
   (global-hl-line-mode 1)
+  (blink-cursor-mode 0)
   (set-default 'cursor-type 'hollow)
   (set-face-underline 'hl-line nil))
 
@@ -69,8 +70,7 @@
 
 (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 
-(set-default 'blink-cursor-mode nil)
-(set-default 'cursor-type '(hbar . 1))
+(blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 
 (setq ring-bell-function 'ignore)
