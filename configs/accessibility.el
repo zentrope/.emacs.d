@@ -33,7 +33,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
-(set-default 'cursor-type 'box)
+(set-default 'cursor-type '(hbar . 4))
 (setq ring-bell-function 'ignore)
 (setq speedbar-show-unknown-files 1)
 (setq default-directory "~/Dropbox/Notes/")
@@ -45,7 +45,7 @@
 (set-background-color "#111111")
 (set-foreground-color "grey90")
 (set-face-background 'region "darkslateblue")
-(set-face-background 'hl-line "#222244")
+(set-face-background 'hl-line "#181830")
 (set-face-background 'fringe "#161616")
 
 (set-face-foreground 'font-lock-comment-face "grey40")
