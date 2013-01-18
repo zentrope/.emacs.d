@@ -1,5 +1,5 @@
 ;;-----------------------------------------------------------------------------
-;; General stuff that makes looking at or using emacs a quantum easier.
+;; General stuff that makes Emacs slightly more usable.
 ;;-----------------------------------------------------------------------------
 
 (defvar kfi-local-bin (concat (getenv "HOME") "/Bin") "Local execs.")
@@ -12,6 +12,7 @@
 
 (add-to-list 'initial-frame-alist `(top . 60))
 (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
+(add-to-list 'initial-frame-alist `(width . 90))
 (add-to-list 'initial-frame-alist
              (cons 'height (/ (- (display-pixel-height) 160)
                               (frame-char-height))))
@@ -32,7 +33,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
-(set-default 'cursor-type 'hollow)
+(set-default 'cursor-type 'box)
 (setq ring-bell-function 'ignore)
 (setq speedbar-show-unknown-files 1)
 (setq default-directory "~/Dropbox/Notes/")
@@ -46,10 +47,15 @@
 (set-face-background 'region "darkslateblue")
 (set-face-background 'hl-line "#222244")
 (set-face-background 'fringe "#161616")
+
 (set-face-foreground 'font-lock-comment-face "grey40")
-(set-face-foreground 'font-lock-string-face "darkseagreen")
 (set-face-attribute 'font-lock-comment-face nil :italic t)
+
+(set-face-foreground 'font-lock-string-face "darkseagreen")
 (set-face-attribute 'font-lock-string-face nil :italic t)
+
+(set-cursor-color "darkgoldenrod")
+(set-face-foreground 'show-paren-match-face "black")
 
 (eval-after-load 'magit
   '(progn
