@@ -36,7 +36,7 @@
 (set-default 'cursor-type '(hbar . 4))
 (setq ring-bell-function 'ignore)
 (setq speedbar-show-unknown-files 1)
-(setq default-directory "~/Dropbox/Notes/")
+;;(setq default-directory "~")
 
 ;;-----------------------------------------------------------------------------
 ;; Colors

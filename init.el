@@ -33,7 +33,7 @@
     multi-web-mode
     clojurescript-mode
     cljsbuild-mode
-    rainbow-delimiters-mode
+    rainbow-delimiters
 
     ;; themes
     molokai-theme
@@ -54,6 +54,7 @@
 
 (load "~/.emacs.d/configs/setup.el")
 (load "~/.emacs.d/configs/accessibility.el")
+(load "~/.emacs.d/configs/rainbow.el")
 (load "~/.emacs.d/configs/autocomplete.el")
 (load "~/.emacs.d/configs/ido.el")
 (load "~/.emacs.d/configs/smex.el")
@@ -73,7 +74,6 @@
 (load "~/.emacs.d/configs/multiweb.el")
 (load "~/.emacs.d/configs/magit.el")
 (load "~/.emacs.d/configs/dired-details.el")
-(load "~/.emacs.d/configs/rainbow.el")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:
