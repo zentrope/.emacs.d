@@ -10,74 +10,52 @@
 (defun kfi-x-offset ()
   (/ (display-pixel-width) 3))
 
-(defun kfi-y-offset ()
-  100
-;;  (/ (display-pixel-height) 6)
-  )
-
-(add-to-list 'initial-frame-alist `(top . ,(kfi-y-offset)))
+(add-to-list 'initial-frame-alist `(top . 60))
 (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
+(add-to-list 'initial-frame-alist
+             (cons 'height (/ (- (display-pixel-height) 160)
+                              (frame-char-height))))
+
+;;-----------------------------------------------------------------------------
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (set-fringe-mode '(0.5 0.5))
-(global-hl-line-mode 0)
-
-;;-----------------------------------------------------------------------------
-;; Theme related stuff
-;;-----------------------------------------------------------------------------
-
-(defvar kfi-default-theme 'underwater
-  "Default theme.")
-
-(defvar kfi-current-theme 'underwater
-  "Current theme.")
-
-(defun kfi-load-theme (theme)
-  (interactive "STheme:")
-  (load-theme theme t)
-  (setq kfi-current-theme theme)
-  (global-hl-line-mode 1)
-  (blink-cursor-mode 0)
-  (set-default 'cursor-type 'hollow)
-  (set-face-underline 'hl-line nil))
-
-(defun kfi-unload-theme ()
-  (interactive)
-  (if kfi-current-theme
-      (disable-theme kfi-current-theme)
-    (disable-theme kfi-default-theme))
-  (setq kfi-current-theme nil))
-
-(if (window-system)
-    (kfi-load-theme kfi-default-theme))
-
-;;-----------------------------------------------------------------------------
-
+(global-hl-line-mode 1)
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
-
-;; Seems to be the only way to force this globally.
 (custom-set-variables '(indent-tabs-mode nil))
-
 (setq-default line-spacing 0)
 (setq-default inhibit-startup-screen t)
-
 (setq-default standard-indent 2)
-
 (add-hook 'before-save-hook 'whitespace-cleanup)
-
 (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
-
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
-
 (setq ring-bell-function 'ignore)
-
 (setq speedbar-show-unknown-files 1)
-
 (setq default-directory "~/Dropbox/Notes/")
+
+;;-----------------------------------------------------------------------------
+;; Colors
+;;-----------------------------------------------------------------------------
+
+(set-background-color "#111111")
+(set-foreground-color "grey90")
+(set-face-background 'region "darkslateblue")
+(set-face-background 'hl-line "#222244")
+(set-face-background 'fringe "#161616")
+(set-face-foreground 'font-lock-comment-face "grey40")
+(set-face-foreground 'font-lock-string-face "darkseagreen")
+(set-face-attribute 'font-lock-comment-face nil :italic t)
+(set-face-attribute 'font-lock-string-face nil :italic t)
+
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "royalblue")
+     (set-face-foreground 'magit-diff-del "mediumpurple")
+     (set-face-background 'magit-item-highlight "#111111")))
 
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
