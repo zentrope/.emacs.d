@@ -33,7 +33,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
-(set-default 'cursor-type '(hbar . 4))
+(set-default 'cursor-type 'hollow) ; '(hbar . 4)
 (setq ring-bell-function 'ignore)
 (setq speedbar-show-unknown-files 1)
 ;;(setq default-directory "~")
@@ -42,9 +42,28 @@
 ;; Colors
 ;;-----------------------------------------------------------------------------
 
-(set-background-color "#111111")
-(set-foreground-color "grey90")
+(setq default-frame-alist
+      '((foreground-color . "grey90")
+        (background-color . "#111111")
+        (vertical-scroll-bars . nil)
+        (cursor-color . "darkcyan")
+        (width . 90)))
+
+(set-face-foreground 'region "white")
 (set-face-background 'region "darkslateblue")
+
+(set-face-background 'modeline "#6699CC") ; "#4477aa"
+(set-face-foreground 'modeline "black")
+(set-face-attribute 'modeline nil :family "Menlo" :height 100 :weight 'bold)
+
+(add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
+
+(defun kfi-craft-minibuffer ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :family "Menlo" :height 110))))
+
+(set-face-background 'modeline-inactive "#222233")
+
 (set-face-background 'hl-line "#181830")
 (set-face-background 'fringe "#161616")
 
@@ -54,7 +73,7 @@
 (set-face-foreground 'font-lock-string-face "darkseagreen")
 (set-face-attribute 'font-lock-string-face nil :italic t)
 
-(set-cursor-color "darkgoldenrod")
+(set-cursor-color "darkcyan")
 (set-face-foreground 'show-paren-match-face "black")
 
 (eval-after-load 'magit
@@ -66,6 +85,9 @@
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
 ;;-----------------------------------------------------------------------------
+
+;; Switch to next frame, if there is one.
+(global-set-key "\M-`" 'other-frame)
 
 (defun kfi-set-frame-width (arg)
   (interactive "nFrame width: ")
