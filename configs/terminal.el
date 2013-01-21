@@ -13,7 +13,7 @@
 (setq multi-term-program "/bin/bash")
 
 (custom-set-variables
-;; '(term-default-bg-color "#000000")
+ '(term-default-bg-color "#000000")
 ;; '(term-default-fg-color "#bbbbbb")
  '(term-default-fg-color "#bbbbbb")
  )
