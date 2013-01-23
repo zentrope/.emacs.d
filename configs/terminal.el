@@ -13,7 +13,9 @@
 (setq multi-term-program "/bin/bash")
 
 (custom-set-variables
- '(term-default-bg-color "#000000")
+ ;; Should figure out a way to query the current
+ ;; background color and subtitute it here.
+ '(term-default-bg-color "#111111")
 ;; '(term-default-fg-color "#bbbbbb")
  '(term-default-fg-color "#bbbbbb")
  )
