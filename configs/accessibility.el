@@ -21,7 +21,7 @@
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-(set-fringe-mode '(0.5 0.5))
+(set-fringe-mode (cons 1 1))
 (global-hl-line-mode 1)
 (column-number-mode 1)
 (cua-mode 1)
@@ -52,9 +52,9 @@
 (set-face-foreground 'region "white")
 (set-face-background 'region "darkslateblue")
 
-(set-face-background 'modeline "#6699CC") ; "#4477aa"
-(set-face-foreground 'modeline "black")
-(set-face-attribute 'modeline nil :family "Menlo" :height 100 :weight 'bold)
+(set-face-background 'mode-line "#6699CC") ; "#4477aa"
+(set-face-foreground 'mode-line "black")
+(set-face-attribute 'mode-line nil :family "Menlo" :height 100 :weight 'bold)
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
