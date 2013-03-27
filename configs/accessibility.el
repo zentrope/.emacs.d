@@ -89,6 +89,10 @@
 ;; Switch to next frame, if there is one.
 (global-set-key "\M-`" 'other-frame)
 
+;;Rebind buffer-list to buffer-menu
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+(global-set-key (kbd "<C-tab>") 'buffer-menu)
+
 (defun kfi-set-frame-width (arg)
   (interactive "nFrame width: ")
   (set-frame-width (selected-frame) arg))
