@@ -33,15 +33,6 @@
     multi-web-mode
     clojurescript-mode
     cljsbuild-mode
-    rainbow-delimiters
-
-    ;; themes
-    molokai-theme
-    solarized-theme
-    twilight-anti-bright-theme
-    twilight-bright-theme
-    twilight-theme
-    underwater-theme
     ))
 
 (dolist (p kfi-packages)
