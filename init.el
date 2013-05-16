@@ -33,6 +33,7 @@
     multi-web-mode
     clojurescript-mode
     cljsbuild-mode
+    diff-hl
     ))
 
 (dolist (p kfi-packages)
@@ -45,7 +46,6 @@
 
 (load "~/.emacs.d/configs/setup.el")
 (load "~/.emacs.d/configs/accessibility.el")
-(load "~/.emacs.d/configs/rainbow.el")
 (load "~/.emacs.d/configs/autocomplete.el")
 (load "~/.emacs.d/configs/ido.el")
 (load "~/.emacs.d/configs/smex.el")
@@ -65,6 +65,7 @@
 (load "~/.emacs.d/configs/multiweb.el")
 (load "~/.emacs.d/configs/magit.el")
 (load "~/.emacs.d/configs/dired-details.el")
+(load "~/.emacs.d/configs/diff-hl.el")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:

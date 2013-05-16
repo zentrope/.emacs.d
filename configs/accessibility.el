@@ -21,7 +21,7 @@
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-(set-fringe-mode (cons 1 1))
+;;(set-fringe-mode (cons 1 1))
 (global-hl-line-mode 1)
 (column-number-mode 1)
 (cua-mode 1)
@@ -70,8 +70,8 @@
 (set-face-foreground 'font-lock-comment-face "grey40")
 (set-face-attribute 'font-lock-comment-face nil :italic t)
 
-(set-face-foreground 'font-lock-string-face "darkseagreen")
-(set-face-attribute 'font-lock-string-face nil :italic t)
+;;(set-face-foreground 'font-lock-string-face "darkseagreen")
+;;(set-face-attribute 'font-lock-string-face nil :italic t)
 
 (set-cursor-color "darkcyan")
 (set-face-foreground 'show-paren-match-face "black")
