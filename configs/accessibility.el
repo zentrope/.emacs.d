@@ -50,11 +50,16 @@
         (width . 90)))
 
 (set-face-foreground 'region "white")
-(set-face-background 'region "darkslateblue")
+(set-face-background 'region "#333355")
 
-(set-face-background 'mode-line "#6699CC") ; "#4477aa"
-(set-face-foreground 'mode-line "black")
-(set-face-attribute 'mode-line nil :family "Menlo" :height 100 :weight 'bold)
+(set-face-attribute 'mode-line nil
+                    :foreground "gray85"
+                    :background "#333355"
+                    :family "Menlo"
+                    :height 100
+                    :weight 'normal
+                    :box nil
+                    :box '(:line-width 2 :color "#333355" :style nil))
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
