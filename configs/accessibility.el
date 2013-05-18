@@ -55,22 +55,34 @@
 (set-face-attribute 'mode-line nil
                     :foreground "gray85"
                     :background "#333355"
-                    :family "Menlo"
+                    :family "Monaco"
                     :height 100
                     :weight 'normal
-                    :box nil
                     :box '(:line-width 2 :color "#333355" :style nil))
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
 (defun kfi-craft-minibuffer ()
   (set (make-local-variable 'face-remapping-alist)
-       '((default :family "Menlo" :height 110))))
+       '((default :family "Monaco" :height 100))))
 
-(set-face-background 'modeline-inactive "#222233")
+(set-face-attribute 'mode-line-inactive nil
+                    :foreground "gray60"
+                    :background "#222233"
+                    :family "Monaco"
+                    :height 100
+                    :weight 'normal
+                    :italic t
+                    :box nil)
 
-(set-face-background 'hl-line "#181830")
-(set-face-background 'fringe "#161616")
+(set-face-attribute 'hl-line nil
+                    :foreground nil
+                    :background "#181830"
+                    :box nil)
+
+(set-face-attribute 'fringe nil
+                    :background "#111111"
+                    :box '(:line-width 2 :color "white" :style nil))
 
 (set-face-foreground 'font-lock-comment-face "grey40")
 (set-face-attribute 'font-lock-comment-face nil :italic t)
