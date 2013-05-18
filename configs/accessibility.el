@@ -39,6 +39,22 @@
 ;;(setq default-directory "~")
 
 ;;-----------------------------------------------------------------------------
+;; Keybindings
+;;-----------------------------------------------------------------------------
+
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<left>") 'windmove-left)
+(global-set-key (kbd "s-<up>") 'windmove-up)
+(global-set-key (kbd "s-<down>") 'windmove-down)
+
+;; Switch to next frame, if there is one.
+(global-set-key "\M-`" 'other-frame)
+
+;;Rebind buffer-list to buffer-menu
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+(global-set-key (kbd "<C-tab>") 'buffer-menu)
+
+;;-----------------------------------------------------------------------------
 ;; Colors
 ;;-----------------------------------------------------------------------------
 
@@ -60,12 +76,6 @@
                     :weight 'normal
                     :box '(:line-width 2 :color "#333355" :style nil))
 
-(add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
-
-(defun kfi-craft-minibuffer ()
-  (set (make-local-variable 'face-remapping-alist)
-       '((default :family "Monaco" :height 100))))
-
 (set-face-attribute 'mode-line-inactive nil
                     :foreground "gray60"
                     :background "#222233"
@@ -73,7 +83,15 @@
                     :height 100
                     :weight 'normal
                     :italic t
-                    :box nil)
+                    :box '(:line-width 2 :color "#222233" :style nil))
+
+(add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
+
+(defun kfi-craft-minibuffer ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :family "Monaco" :height 100))))
+
+
 
 (set-face-attribute 'hl-line nil
                     :foreground nil
@@ -103,12 +121,6 @@
 ;; Convenience functions
 ;;-----------------------------------------------------------------------------
 
-;; Switch to next frame, if there is one.
-(global-set-key "\M-`" 'other-frame)
-
-;;Rebind buffer-list to buffer-menu
-(global-set-key (kbd "C-x C-b") 'buffer-menu)
-(global-set-key (kbd "<C-tab>") 'buffer-menu)
 
 (defun kfi-set-frame-width (arg)
   (interactive "nFrame width: ")
