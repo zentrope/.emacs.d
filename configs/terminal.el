@@ -22,3 +22,11 @@
           (function
            (lambda ()
              (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
+;; Allow pasting text to be sent to the underlying shell process.
+(add-hook
+ 'term-mode-hook
+ (lambda ()
+   (define-key term-raw-map (kbd "C-y") 'term-paste)
+   (define-key term-raw-map (kbd "C-v") 'term-paste)
+   (define-key term-raw-map (kbd "s-v") 'term-paste)))
