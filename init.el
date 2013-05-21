@@ -34,6 +34,7 @@
     clojurescript-mode
     cljsbuild-mode
     diff-hl
+    fold-dwim-org
     ))
 
 (dolist (p kfi-packages)

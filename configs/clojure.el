@@ -11,12 +11,6 @@
 (font-lock-add-keywords 'clojure-mode
                         '(("(\\|)" . 'kfi-paren-face)))
 
-(font-lock-add-keywords 'clojure-mode
-                        '(("defpartial\\|defpage" . font-lock-keyword-face)))
-
-
-(put-clojure-indent 'defpartial 'defun)
-(put-clojure-indent 'defpage 'defun)
 (put-clojure-indent 'cond 'defun)
 
 (define-clojure-indent
@@ -57,6 +51,8 @@
   (nrepl-eval-expression-at-point))
 
 (defun kfi-clojure-hook ()
+  (hs-minor-mode)
+  (fold-dwim-org/minor-mode)
   (autopair-mode -1)
   (paredit-mode 1)
   (setq indent-tabs-mode nil)
