@@ -58,34 +58,29 @@
 ;; Colors
 ;;-----------------------------------------------------------------------------
 
-;; If I'm going to make my own theme-like thing, I need to remove the
-;; colors from the following so that I can pass them in as a parameter
-;; and use the same code. At this point, I don't really know much
-;; about elisp data structures.
+(defconst light-style '((foreground . "#111111")
+                      (background . "white")
+                      (region-background . "gray80")
+                      (hl-line . "honeydew1")))
 
-;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Hash-Tables.html
-;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html#Association-Lists
+(defconst dark-style '((foreground . "white")
+                     (background . "#111111")
+                     (region-background . "#333355")
+                     (hl-line . "#181830")))
 
-(defvar light-theme
-  '((foreground "#111111")
-    (background "white")
-    (region-background "gray80")))
+(defun val-of (key alist)
+  (cdr (assoc key alist)))
 
-(defun kfi-light ()
-  (interactive)
-  (setq default-frame-alist
-        '((foreground-color . "#111111")
-          (background-color . "white")
-          (vertical-scroll-bars . nil)
-          (cursor-color . "darkcyan")
-          (width . 90)))
-
-  (set-face-background 'default "white" (window-frame (frame-selected-window)))
-  (set-face-foreground 'default "#111111" (window-frame (frame-selected-window)))
-
+(defun kfi-apply-style (style)
+  (setq default-frame-alist '((foreground-color . (val-of 'foreground style))
+                              (background-color . (val-of 'background style))
+                              (vertical-scroll-bars . nil)
+                              (cursor-color . "darkcyan")
+                              (width . 90)))
+  (set-face-background 'default (val-of 'background style) (window-frame (frame-selected-window)))
+  (set-face-foreground 'default (val-of 'foreground style) (window-frame (frame-selected-window)))
   (set-face-foreground 'region nil)
-  (set-face-background 'region "gray80")
-
+  (set-face-background 'region (val-of 'region-background style))
   (set-face-attribute 'mode-line nil
                       :foreground "gray85"
                       :background "#333355"
@@ -105,82 +100,38 @@
 
   (set-face-attribute 'hl-line nil
                       :foreground nil
-                      :background "honeydew1"
+                      :background (val-of 'hl-line style)
                       :box nil)
 
-  (set-face-attribute 'fringe nil
-                      :background "white"
-                      :box '(:line-width 2 :color "gray90" :style nil))
+  (set-face-attribute 'fringe nil :background (val-of 'background style))
 
   (set-face-foreground 'font-lock-comment-face "grey40")
   (set-face-attribute 'font-lock-comment-face nil :italic t)
 
   (set-cursor-color "darkcyan")
   (set-face-foreground 'show-paren-match-face "black")
+  (message "facing magit")
   (eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "royalblue")
-     (set-face-foreground 'magit-diff-del "mediumpurple")
-     (set-face-background 'magit-item-highlight "white"))))
+    '(progn (set-face-foreground 'magit-diff-add "royalblue")
+            (set-face-foreground 'magit-diff-del "mediumpurple")
+            (set-face-background 'magit-item-highlight (face-background 'default))))
+)
+
+(defun kfi-light ()
+  (interactive)
+  (kfi-apply-style light-style))
 
 (defun kfi-dark ()
   (interactive)
-  (setq default-frame-alist
-        '((foreground-color . "grey90")
-          (background-color . "#111111")
-          (vertical-scroll-bars . nil)
-          (cursor-color . "darkcyan")
-          (width . 90)))
+  (kfi-apply-style dark-style))
 
-  (set-face-foreground 'region "white")
-  (set-face-background 'region "#333355")
-
-  (set-face-attribute 'mode-line nil
-                      :foreground "gray85"
-                      :background "#333355"
-                      :family "Monaco"
-                      :height 100
-                      :weight 'normal
-                      :box '(:line-width 2 :color "#333355" :style nil))
-
-  (set-face-attribute 'mode-line-inactive nil
-                      :foreground "gray60"
-                      :background "#222233"
-                      :family "Monaco"
-                      :height 100
-                      :weight 'normal
-                      :italic t
-                      :box '(:line-width 2 :color "#222233" :style nil))
-  (set-face-attribute 'hl-line nil
-                    :foreground nil
-                    :background "#181830"
-                    :box nil)
-
-  (set-face-attribute 'fringe nil
-                      :background "#111111"
-                      :box '(:line-width 2 :color "white" :style nil))
-
-  (set-face-foreground 'font-lock-comment-face "grey40")
-  (set-face-attribute 'font-lock-comment-face nil :italic t)
-
-
-  (set-cursor-color "darkcyan")
-  (set-face-foreground 'show-paren-match-face "black")
-
-  (eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "royalblue")
-     (set-face-foreground 'magit-diff-del "mediumpurple")
-     (set-face-background 'magit-item-highlight "#111111"))))
-
-(kfi-dark)
+(kfi-light)
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
 (defun kfi-craft-minibuffer ()
   (set (make-local-variable 'face-remapping-alist)
        '((default :family "Monaco" :height 100))))
-
 
 ;;(set-face-foreground 'font-lock-string-face "darkseagreen")
 ;;(set-face-attribute 'font-lock-string-face nil :italic t)
