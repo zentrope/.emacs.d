@@ -59,24 +59,20 @@
 ;;-----------------------------------------------------------------------------
 
 (defconst light-style '((foreground . "#111111")
-                      (background . "white")
-                      (region-background . "gray80")
-                      (hl-line . "honeydew1")))
+                        (background . "white")
+                        (region-background . "gray80")
+                        (hl-line . "honeydew1")))
 
 (defconst dark-style '((foreground . "white")
-                     (background . "#111111")
-                     (region-background . "#333355")
-                     (hl-line . "#181830")))
+                       (background . "#111111")
+                       (region-background . "#333355")
+                       (hl-line . "#181830")))
 
 (defun val-of (key alist)
   (cdr (assoc key alist)))
 
 (defun kfi-apply-style (style)
-  (setq default-frame-alist '((foreground-color . (val-of 'foreground style))
-                              (background-color . (val-of 'background style))
-                              (vertical-scroll-bars . nil)
-                              (cursor-color . "darkcyan")
-                              (width . 90)))
+
   (set-face-background 'default (val-of 'background style) (window-frame (frame-selected-window)))
   (set-face-foreground 'default (val-of 'foreground style) (window-frame (frame-selected-window)))
   (set-face-foreground 'region nil)
@@ -110,12 +106,13 @@
 
   (set-cursor-color "darkcyan")
   (set-face-foreground 'show-paren-match-face "black")
-  (message "facing magit")
+
   (eval-after-load 'magit
-    '(progn (set-face-foreground 'magit-diff-add "royalblue")
-            (set-face-foreground 'magit-diff-del "mediumpurple")
-            (set-face-background 'magit-item-highlight (face-background 'default))))
-)
+    '(progn
+       (set-face-foreground 'magit-diff-add "royalblue")
+       (set-face-foreground 'magit-diff-del "mediumpurple")
+       (set-face-background 'magit-item-highlight (face-background 'default))
+       (message "magit after load done"))))
 
 (defun kfi-light ()
   (interactive)
@@ -178,4 +175,5 @@
   (interactive)
   (kfi-set-font-size (- (face-attribute 'default :height) 10)))
 
+(message "accessibility.el loaded")
 ;;-----------------------------------------------------------------------------
