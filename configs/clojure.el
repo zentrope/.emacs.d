@@ -51,8 +51,8 @@
   (nrepl-eval-expression-at-point))
 
 (defun kfi-clojure-hook ()
-  (hs-minor-mode)
-  (fold-dwim-org/minor-mode)
+  ;; (hs-minor-mode)
+  ;; (fold-dwim-org/minor-mode)
   (autopair-mode -1)
   (paredit-mode 1)
   (setq indent-tabs-mode nil)
