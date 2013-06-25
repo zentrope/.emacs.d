@@ -123,7 +123,7 @@
   (interactive)
   (kfi-apply-style dark-style))
 
-(kfi-light)
+(kfi-dark)
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
