@@ -6,3 +6,4 @@ backups
 site-lisp
 /init-local.el
 /.mc-lists.el
+configs/*.elc
