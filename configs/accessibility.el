@@ -8,11 +8,11 @@
 (setq exec-path (append exec-path (list kfi-local-bin) ))
 
 (defun kfi-x-offset ()
-  (/ (display-pixel-width) 3))
+  (/ (display-pixel-width) 4))
 
 (add-to-list 'initial-frame-alist `(top . 60))
 (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
-(add-to-list 'initial-frame-alist `(width . 90))
+(add-to-list 'initial-frame-alist `(width . 100))
 (add-to-list 'initial-frame-alist
              (cons 'height (/ (- (display-pixel-height) 160)
                               (frame-char-height))))
