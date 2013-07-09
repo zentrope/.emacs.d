@@ -1,3 +1,2 @@
-
 (require 'auto-complete-config)
-(ac-config-default)
+;;(ac-config-default)
