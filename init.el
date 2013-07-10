@@ -19,6 +19,7 @@
   '(
     ac-nrepl
     auto-complete
+    autopair
     clojure-mode
     dired-details
     erc-hl-nicks
@@ -36,7 +37,6 @@
     clojurescript-mode
     cljsbuild-mode
     diff-hl
-    smartparens
     ))
 
 (dolist (p kfi-packages)
@@ -51,7 +51,6 @@
 
 (load "~/.emacs.d/configs/setup")
 (load "~/.emacs.d/configs/accessibility")
-(load "~/.emacs.d/configs/smartparens")
 (load "~/.emacs.d/configs/autocomplete")
 (load "~/.emacs.d/configs/ido")
 (load "~/.emacs.d/configs/smex")
@@ -64,6 +63,7 @@
 (load "~/.emacs.d/configs/nrepl")
 (load "~/.emacs.d/configs/css")
 (load "~/.emacs.d/configs/javascript")
+(load "~/.emacs.d/configs/autopair")
 (load "~/.emacs.d/configs/terminal")
 (load "~/.emacs.d/configs/erc")
 (load "~/.emacs.d/configs/org")

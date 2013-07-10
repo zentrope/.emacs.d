@@ -2,6 +2,7 @@
 
 (defun kfi-elisp-hook ()
   (paredit-mode 1)
+  (autopair-mode -1)
   (setq indent-tabs-mode nil)
   (local-set-key (kbd "RET") 'newline-and-indent))
 
