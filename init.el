@@ -34,7 +34,6 @@
     parenface
     smex
     multi-web-mode
-    clojurescript-mode
     cljsbuild-mode
     diff-hl
     ))
@@ -55,7 +54,6 @@
 (load "~/.emacs.d/configs/ido")
 (load "~/.emacs.d/configs/smex")
 (load "~/.emacs.d/configs/clojure")
-(load "~/.emacs.d/configs/clojurescript")
 (load "~/.emacs.d/configs/cljsbuild")
 (load "~/.emacs.d/configs/emacs-lisp")
 (load "~/.emacs.d/configs/markdown")
