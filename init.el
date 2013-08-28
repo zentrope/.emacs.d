@@ -69,6 +69,7 @@
 (load "~/.emacs.d/configs/magit.el")
 (load "~/.emacs.d/configs/dired-details")
 (load "~/.emacs.d/configs/diff-hl")
+(load "~/.emacs.d/configs/html")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:
