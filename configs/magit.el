@@ -1,5 +1,7 @@
 (require 'magit)
 
+(setq magit-emacsclient-executable "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient")
+
 ;; full screen magit-status
 
 (defadvice magit-status (around magit-fullscreen activate)
