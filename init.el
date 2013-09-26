@@ -36,6 +36,7 @@
     multi-web-mode
     cljsbuild-mode
     diff-hl
+    base16-theme
     ))
 
 (dolist (p kfi-packages)

@@ -2,7 +2,7 @@
 ;; General stuff that makes Emacs slightly more usable.
 ;;-----------------------------------------------------------------------------
 
-(defvar kfi-local-bin (concat (getenv "HOME") "/Bin") "Local execs.")
+(defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
 
 (setenv "PATH" (concat (getenv "PATH") ":" kfi-local-bin))
 (setq exec-path (append exec-path (list kfi-local-bin) ))
@@ -36,8 +36,11 @@
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow) ; '(hbar . 4)
 (setq ring-bell-function 'ignore)
-(setq speedbar-show-unknown-files 1)
+;;(setq speedbar-show-unknown-files 1)
 ;;(setq default-directory "~")
+
+
+
 
 ;;-----------------------------------------------------------------------------
 ;; Keybindings
@@ -59,71 +62,49 @@
 ;; Colors
 ;;-----------------------------------------------------------------------------
 
-(defconst light-style '((foreground . "#111111")
-                        (background . "white")
-                        (region-background . "gray80")
-                        (hl-line . "honeydew1")))
+(load-theme 'base16-default t)
 
-(defconst dark-style '((foreground . "white")
-                       (background . "#111111")
-                       (region-background . "#333355")
-                       (hl-line . "#181830")))
+;; Need to detect what theme we're using and make customizations,
+;; maybe.
 
-(defun val-of (key alist)
-  (cdr (assoc key alist)))
+(set-face-attribute 'fringe nil :background "black")
 
-(defun kfi-apply-style (style)
+(set-face-attribute 'mode-line nil
+                    :foreground "gray85"
+                    :background "#333355"
+                    :family "Monaco"
+                    :height 100
+                    :weight 'normal
+                    :box '(:line-width 2 :color "#333355" :style nil))
 
-  (set-face-background 'default (val-of 'background style) (window-frame (frame-selected-window)))
-  (set-face-foreground 'default (val-of 'foreground style) (window-frame (frame-selected-window)))
-  (set-face-foreground 'region nil)
-  (set-face-background 'region (val-of 'region-background style))
-  (set-face-attribute 'mode-line nil
-                      :foreground "gray85"
-                      :background "#333355"
-                      :family "Monaco"
-                      :height 100
-                      :weight 'normal
-                      :box '(:line-width 2 :color "#333355" :style nil))
+(set-face-attribute 'mode-line-inactive nil
+                    :foreground "gray60"
+                    :background "#222233"
+                    :family "Monaco"
+                    :height 100
+                    :weight 'normal
+                    :italic t
+                    :box '(:line-width 2 :color "#222233" :style nil))
 
-  (set-face-attribute 'mode-line-inactive nil
-                      :foreground "gray60"
-                      :background "#222233"
-                      :family "Monaco"
-                      :height 100
-                      :weight 'normal
-                      :italic t
-                      :box '(:line-width 2 :color "#222233" :style nil))
+(set-face-background 'default "black" (window-frame (frame-selected-window)))
 
-  (set-face-attribute 'hl-line nil
-                      :foreground nil
-                      :background (val-of 'hl-line style)
-                      :box nil)
+(set-face-foreground 'region nil)
+(set-face-background 'region "#333355")
 
-  (set-face-attribute 'fringe nil :background (val-of 'background style))
+(set-face-attribute 'hl-line nil
+                    :foreground nil
+                    :background "#181830"
+                    :box nil)
 
-  (set-face-foreground 'font-lock-comment-face "grey40")
-  (set-face-attribute 'font-lock-comment-face nil :italic t)
+(set-cursor-color "darkcyan")
+(set-face-foreground 'show-paren-match-face "black")
 
-  (set-cursor-color "darkcyan")
-  (set-face-foreground 'show-paren-match-face "black")
-
-  (eval-after-load 'magit
-    '(progn
-       (set-face-foreground 'magit-diff-add "royalblue")
-       (set-face-foreground 'magit-diff-del "mediumpurple")
-       (set-face-background 'magit-item-highlight (face-background 'default))
-       (message "magit after load done"))))
-
-(defun kfi-light ()
-  (interactive)
-  (kfi-apply-style light-style))
-
-(defun kfi-dark ()
-  (interactive)
-  (kfi-apply-style dark-style))
-
-(kfi-dark)
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "royalblue")
+     (set-face-foreground 'magit-diff-del "mediumpurple")
+     (set-face-background 'magit-item-highlight (face-background 'default))
+     (message "magit after load done")))
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
@@ -133,7 +114,8 @@
 
 ;;(set-face-foreground 'font-lock-string-face "darkseagreen")
 ;;(set-face-attribute 'font-lock-string-face nil :italic t)
-
+(set-face-attribute 'font-lock-comment-face nil :foreground "#666666")
+(set-face-attribute 'font-lock-comment-face nil :italic t)
 
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
