@@ -39,9 +39,6 @@
 ;;(setq speedbar-show-unknown-files 1)
 ;;(setq default-directory "~")
 
-
-
-
 ;;-----------------------------------------------------------------------------
 ;; Keybindings
 ;;-----------------------------------------------------------------------------
@@ -62,13 +59,6 @@
 ;; Colors
 ;;-----------------------------------------------------------------------------
 
-(load-theme 'base16-default t)
-
-;; Need to detect what theme we're using and make customizations,
-;; maybe.
-
-(set-face-attribute 'fringe nil :background "black")
-
 (set-face-attribute 'mode-line nil
                     :foreground "gray85"
                     :background "#333355"
@@ -86,24 +76,18 @@
                     :italic t
                     :box '(:line-width 2 :color "#222233" :style nil))
 
-(set-face-background 'default "black" (window-frame (frame-selected-window)))
-
-(set-face-foreground 'region nil)
-(set-face-background 'region "#333355")
-
-(set-face-attribute 'hl-line nil
-                    :foreground nil
-                    :background "#181830"
-                    :box nil)
-
 (set-cursor-color "darkcyan")
 (set-face-foreground 'show-paren-match-face "black")
+(set-face-attribute 'font-lock-comment-face nil :foreground "#666666")
+(set-face-attribute 'font-lock-comment-face nil :italic t)
 
 (eval-after-load 'magit
   '(progn
      (set-face-foreground 'magit-diff-add "royalblue")
      (set-face-foreground 'magit-diff-del "mediumpurple")
-     (set-face-background 'magit-item-highlight (face-background 'default))
+     (set-face-background 'magit-diff-add (face-attribute 'default :background))
+     (set-face-background 'magit-diff-del (face-attribute 'default :background))
+     (set-face-background 'magit-item-highlight (face-attribute 'default :background))
      (message "magit after load done")))
 
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
@@ -112,10 +96,45 @@
   (set (make-local-variable 'face-remapping-alist)
        '((default :family "Monaco" :height 100))))
 
-;;(set-face-foreground 'font-lock-string-face "darkseagreen")
-;;(set-face-attribute 'font-lock-string-face nil :italic t)
-(set-face-attribute 'font-lock-comment-face nil :foreground "#666666")
-(set-face-attribute 'font-lock-comment-face nil :italic t)
+;;-----------------------------------------------------------------------------
+
+(defvar kfi-theme-mode t)
+
+(defun kfi-dark-markers ()
+  (interactive)
+  (require 'magit)
+  (set-face-background 'magit-diff-add (face-attribute 'default :background))
+  (set-face-background 'magit-diff-del (face-attribute 'default :background))
+  (set-face-background 'magit-item-highlight (face-attribute 'default :background))
+  (set-face-foreground 'region nil)
+  (set-face-background 'region "#333355")
+  (set-face-attribute 'hl-line nil
+                      :foreground nil
+                      :background "#181830"
+                      :box nil))
+
+(defun kfi-light-markers ()
+  (interactive)
+  (require 'magit)
+  (set-face-background 'magit-diff-add (face-attribute 'default :background))
+  (set-face-background 'magit-diff-del (face-attribute 'default :background))
+  (set-face-background 'magit-item-highlight (face-attribute 'default :background))
+  (set-face-foreground 'region nil)
+  (set-face-background 'region "lavender")
+  (set-face-attribute 'hl-line nil
+                      :foreground nil
+                      :background "aliceblue"
+                      :box nil))
+
+(defun kfi-switch ()
+  (interactive)
+  (invert-face 'default)
+  (if kfi-theme-mode
+      (kfi-dark-markers)
+    (kfi-light-markers))
+  (setq kfi-theme-mode (not kfi-theme-mode)))
+
+(kfi-light-markers)
 
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
