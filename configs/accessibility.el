@@ -2,6 +2,8 @@
 ;; General stuff that makes Emacs slightly more usable.
 ;;-----------------------------------------------------------------------------
 
+(setq default-directory "~/")
+
 (defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
 
 (setenv "PATH" (concat (getenv "PATH") ":" kfi-local-bin))
@@ -14,7 +16,7 @@
 (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
 (add-to-list 'initial-frame-alist `(width . 100))
 (add-to-list 'initial-frame-alist
-             (cons 'height (/ (- (display-pixel-height) 160)
+             (cons 'height (/ (- (display-pixel-height) 260)
                               (frame-char-height))))
 
 ;;-----------------------------------------------------------------------------
