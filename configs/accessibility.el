@@ -103,6 +103,10 @@
 
 (defvar kfi-theme-mode t)
 
+(defun kfi-cli-markers ()
+  (interactive)
+  (set-face-attribute 'hl-line nil :foreground nil :background "grey20" :box nil))
+
 (defun kfi-dark-markers ()
   (interactive)
   (require 'magit)
