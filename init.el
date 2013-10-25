@@ -17,7 +17,7 @@
 
 (defvar kfi-packages
   '(
-    ac-nrepl
+    ;; ac-nrepl
     auto-complete
     autopair
     clojure-mode
@@ -29,7 +29,8 @@
     markdown-mode
     melpa
     multi-term
-    nrepl
+    cider
+    ;; nrepl
     paredit
     parenface
     smex
@@ -59,7 +60,7 @@
 (load "~/.emacs.d/configs/emacs-lisp")
 (load "~/.emacs.d/configs/markdown")
 (load "~/.emacs.d/configs/multiple-cursors")
-(load "~/.emacs.d/configs/nrepl")
+(load "~/.emacs.d/configs/cider")
 (load "~/.emacs.d/configs/css")
 (load "~/.emacs.d/configs/javascript")
 (load "~/.emacs.d/configs/autopair")
@@ -67,7 +68,7 @@
 (load "~/.emacs.d/configs/erc")
 (load "~/.emacs.d/configs/org")
 (load "~/.emacs.d/configs/multiweb")
-(load "~/.emacs.d/configs/magit.el")
+(load "~/.emacs.d/configs/magit")
 (load "~/.emacs.d/configs/dired-details")
 (load "~/.emacs.d/configs/diff-hl")
 (load "~/.emacs.d/configs/html")

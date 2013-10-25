@@ -2,6 +2,7 @@
 ;; General stuff that makes Emacs slightly more usable.
 ;;-----------------------------------------------------------------------------
 
+(invert-face 'default)
 (setq default-directory "~/")
 
 (defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
@@ -132,11 +133,11 @@
   (interactive)
   (invert-face 'default)
   (if kfi-theme-mode
-      (kfi-dark-markers)
-    (kfi-light-markers))
+      (kfi-light-markers)
+    (kfi-dark-markers))
   (setq kfi-theme-mode (not kfi-theme-mode)))
 
-(kfi-light-markers)
+(kfi-dark-markers)
 
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
