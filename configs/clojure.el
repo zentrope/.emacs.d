@@ -37,15 +37,13 @@
 (put-clojure-indent 'cond 'defun)
 
 (define-clojure-indent
-  (defroutes 'defun)
-  (go 0)
+  (go-loop 1)
   (GET 2)
   (POST 2)
   (PUT 2)
   (DELETE 2)
   (HEAD 2)
-  (ANY 2)
-  (context 2))
+  (ANY 2))
 
 (defun kfi-clojure-flash-region (start end)
   (let ((overlay (make-overlay start end)))
