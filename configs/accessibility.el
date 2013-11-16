@@ -59,89 +59,10 @@
 (global-set-key (kbd "<C-tab>") 'buffer-menu)
 
 ;;-----------------------------------------------------------------------------
-;; Colors
+;; Theme
 ;;-----------------------------------------------------------------------------
 
-(set-face-attribute 'mode-line nil
-                    :foreground "gray85"
-                    :background "#333355"
-                    :family "Monaco"
-                    :height 100
-                    :weight 'normal
-                    :box '(:line-width 2 :color "#333355" :style nil))
-
-(set-face-attribute 'mode-line-inactive nil
-                    :foreground "gray60"
-                    :background "#222233"
-                    :family "Monaco"
-                    :height 100
-                    :weight 'normal
-                    :italic t
-                    :box '(:line-width 2 :color "#222233" :style nil))
-
-(set-cursor-color "darkcyan")
-(set-face-foreground 'show-paren-match-face "black")
-(set-face-attribute 'font-lock-comment-face nil :foreground "#666666")
-(set-face-attribute 'font-lock-comment-face nil :italic t)
-
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "royalblue")
-     (set-face-foreground 'magit-diff-del "mediumpurple")
-     (set-face-background 'magit-diff-add (face-attribute 'default :background))
-     (set-face-background 'magit-diff-del (face-attribute 'default :background))
-     (set-face-background 'magit-item-highlight (face-attribute 'default :background))
-     (message "magit after load done")))
-
-(add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
-
-(defun kfi-craft-minibuffer ()
-  (set (make-local-variable 'face-remapping-alist)
-       '((default :family "Monaco" :height 100))))
-
-;;-----------------------------------------------------------------------------
-
-(defvar kfi-theme-mode t)
-
-(defun kfi-cli-markers ()
-  (interactive)
-  (set-face-attribute 'hl-line nil :foreground nil :background "grey20" :box nil))
-
-(defun kfi-dark-markers ()
-  (interactive)
-  (require 'magit)
-  (set-face-background 'magit-diff-add (face-attribute 'default :background))
-  (set-face-background 'magit-diff-del (face-attribute 'default :background))
-  (set-face-background 'magit-item-highlight (face-attribute 'default :background))
-  (set-face-foreground 'region nil)
-  (set-face-background 'region "#333355")
-  (set-face-attribute 'hl-line nil
-                      :foreground nil
-                      :background "#181830"
-                      :box nil))
-
-(defun kfi-light-markers ()
-  (interactive)
-  (require 'magit)
-  (set-face-background 'magit-diff-add (face-attribute 'default :background))
-  (set-face-background 'magit-diff-del (face-attribute 'default :background))
-  (set-face-background 'magit-item-highlight (face-attribute 'default :background))
-  (set-face-foreground 'region nil)
-  (set-face-background 'region "lavender")
-  (set-face-attribute 'hl-line nil
-                      :foreground nil
-                      :background "aliceblue"
-                      :box nil))
-
-(defun kfi-switch ()
-  (interactive)
-  (invert-face 'default)
-  (if kfi-theme-mode
-      (kfi-light-markers)
-    (kfi-dark-markers))
-  (setq kfi-theme-mode (not kfi-theme-mode)))
-
-(kfi-dark-markers)
+(load-theme 'ample t)
 
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions

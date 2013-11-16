@@ -17,7 +17,6 @@
 
 (defvar kfi-packages
   '(
-    ;; ac-nrepl
     auto-complete
     autopair
     clojure-mode
@@ -30,7 +29,6 @@
     melpa
     multi-term
     cider
-    ;; nrepl
     paredit
     parenface
     smex
@@ -38,6 +36,7 @@
     cljsbuild-mode
     diff-hl
     base16-theme
+    ample-theme
     ))
 
 (dolist (p kfi-packages)
