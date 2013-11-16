@@ -7,9 +7,6 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(add-to-list 'package-archives
-             '("geiser" . "http://download.savannah.gnu.org/releases/geiser/packages/") t)
-
 (package-initialize)
 
 (when (not package-archive-contents)
