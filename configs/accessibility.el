@@ -64,6 +64,23 @@
 
 (load-theme 'ample t)
 
+;; Make minibuffer have a smaller font
+(add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
+
+(defun kfi-craft-minibuffer ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :family "Menlo" :height 100))))
+
+;; Make mode line less obtrusive
+
+(set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
+                    :family "Menlo" :height 100 :weight 'normal
+                    :box '(:line-width 2 :color "#333355" :style nil))
+
+(set-face-attribute 'mode-line-inactive nil :foreground "gray60" :background "#222233"
+                    :family "Menlo" :height 110 :weight 'normal :italic t
+                    :box '(:line-width 2 :color "#222233" :style nil))
+
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
 ;;-----------------------------------------------------------------------------
@@ -105,5 +122,4 @@
   (interactive)
   (kfi-set-font-size (- (face-attribute 'default :height) 10)))
 
-(message "accessibility.el loaded")
 ;;-----------------------------------------------------------------------------
