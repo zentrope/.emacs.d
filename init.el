@@ -20,6 +20,7 @@
     dired-details
     erc-hl-nicks
     ido-ubiquitous
+    ido-vertical-mode
     magit
     multiple-cursors
     markdown-mode
