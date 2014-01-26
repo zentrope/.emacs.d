@@ -32,7 +32,7 @@
 (font-lock-add-keywords 'clojure-mode
                         '(("(\\|)" . 'kfi-paren-face)))
 
-(setq clojure-defun-style-default-indent t)
+;;(setq clojure-defun-style-default-indent t)
 
 (defun kfi-clojure-hook ()
   (paredit-mode 1)
