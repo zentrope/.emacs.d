@@ -43,6 +43,11 @@
 ;; Keybindings
 ;;-----------------------------------------------------------------------------
 
+;; On OSX C-M-@ amd M-S-SPC doesn't work in a terminl.
+(global-set-key (kbd "C-M-SPC") 'mark-sexp)
+(global-set-key (kbd "M-RET") 'mark-sexp)
+
+;; GUI
 (global-set-key (kbd "s-<right>") 'windmove-right)
 (global-set-key (kbd "s-<left>") 'windmove-left)
 (global-set-key (kbd "s-<up>") 'windmove-up)
