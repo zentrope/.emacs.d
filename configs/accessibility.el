@@ -2,7 +2,6 @@
 ;; General stuff that makes Emacs slightly more usable.
 ;;-----------------------------------------------------------------------------
 
-(invert-face 'default)
 (setq default-directory "~/")
 
 (defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
@@ -24,8 +23,8 @@
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-;;(set-fringe-mode (cons 1 1))
-(global-hl-line-mode 1)
+(menu-bar-mode 0)
+(fringe-mode '(6 . 0))
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
@@ -34,13 +33,11 @@
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
-;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
+(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
-(set-default 'cursor-type 'hollow) ; '(hbar . 4)
+(set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
-;;(setq speedbar-show-unknown-files 1)
-;;(setq default-directory "~")
 
 ;;-----------------------------------------------------------------------------
 ;; Keybindings
@@ -63,6 +60,13 @@
 ;;-----------------------------------------------------------------------------
 
 (load-theme 'ample t)
+
+(global-hl-line-mode 1)
+(set-face-attribute 'fringe nil :background "black")
+(set-face-attribute 'default nil :background "black")
+
+(when (not window-system)
+  (global-hl-line-mode 0))
 
 ;; Make minibuffer have a smaller font
 (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
