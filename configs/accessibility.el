@@ -64,6 +64,8 @@
 (global-hl-line-mode 1)
 (set-face-attribute 'fringe nil :background "black")
 (set-face-attribute 'default nil :background "black")
+(set-face-attribute font-lock-string-face nil :slant 'italic)
+(set-face-attribute font-lock-comment-face nil :slant 'italic)
 
 (when (not window-system)
   (global-hl-line-mode 0))
