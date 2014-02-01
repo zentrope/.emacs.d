@@ -41,4 +41,6 @@
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)
-(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode) ;; redundant?
+
+(setq cider-repl-use-pretty-printing 1)
