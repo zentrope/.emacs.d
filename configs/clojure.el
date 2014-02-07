@@ -34,6 +34,12 @@
 
 ;;(setq clojure-defun-style-default-indent t)
 
+(define-clojure-indent
+  (GET 'defun)
+  (PUT 'defun)
+  (DELETE 'defun)
+  (POST 'defun))
+
 (defun kfi-clojure-hook ()
   (paredit-mode 1)
   (autopair-mode -1)
