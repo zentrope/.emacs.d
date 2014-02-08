@@ -4,8 +4,12 @@
 
 (require 'package)
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(setq package-archives
+      ;; ONLY pull from melpa.
+      (list '("melpa" . "http://melpa.milkbox.net/packages/")))
+
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (package-initialize)
 
