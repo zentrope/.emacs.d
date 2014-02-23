@@ -23,7 +23,13 @@
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-(menu-bar-mode 0)
+
+(when (not window-system)
+  ;;
+  ;; When running in the terminal, turn off the menu.
+  ;;
+  (menu-bar-mode 0))
+
 (fringe-mode '(6 . 0))
 (column-number-mode 1)
 (cua-mode 1)
