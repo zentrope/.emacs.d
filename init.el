@@ -39,6 +39,7 @@
     diff-hl
     base16-theme
     ample-theme
+    htmlize
     ))
 
 (dolist (p kfi-packages)
