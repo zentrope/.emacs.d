@@ -106,6 +106,14 @@
   (interactive "nFrame width: ")
   (set-frame-width (selected-frame) arg))
 
+(defun kfi-dw ()
+  (interactive)
+  (kfi-set-frame-width 180))
+
+(defun kfi-sw ()
+  (interactive)
+  (kfi-set-frame-width 90))
+
 (defun kfi-set-frame-height (arg)
   (interactive "nFrame height: ")
   (set-frame-height (selected-frame) arg))
@@ -126,6 +134,8 @@
   (shell-command (concat "open '" (buffer-name) "'")))
 
 (global-set-key (kbd "C-c C-x o") 'kfi-open-this)
+(global-set-key (kbd "C-c C-x w") 'kfi-dw)
+(global-set-key (kbd "C-c C-x s") 'kfi-sw)
 
 (defun kfi-set-font-size (size)
   (interactive "nNew size: ")
