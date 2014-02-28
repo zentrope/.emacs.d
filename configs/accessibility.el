@@ -39,8 +39,8 @@
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
-(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
+;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
@@ -73,8 +73,8 @@
 (load-theme 'ample t)
 
 (global-hl-line-mode 1)
-(set-face-attribute 'fringe nil :background "black")
-(set-face-attribute 'default nil :background "black")
+(set-face-attribute 'fringe nil :background "#191919")
+(set-face-attribute 'default nil :background "#191919")
 (set-face-attribute font-lock-string-face nil :slant 'italic)
 (set-face-attribute font-lock-comment-face nil :slant 'italic)
 
