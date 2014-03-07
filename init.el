@@ -40,6 +40,7 @@
     base16-theme
     ample-theme
     htmlize
+    smooth-scrolling
     ))
 
 (dolist (p kfi-packages)
@@ -75,6 +76,7 @@
 (load "~/.emacs.d/configs/diff-hl")
 (load "~/.emacs.d/configs/html")
 (load "~/.emacs.d/configs/java")
+(load "~/.emacs.d/configs/scroll")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:
