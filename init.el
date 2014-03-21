@@ -42,6 +42,7 @@
     diff-hl
     base16-theme
     ample-theme
+    flatui-theme
     htmlize
     smooth-scrolling
     ))

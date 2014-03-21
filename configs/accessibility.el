@@ -70,13 +70,25 @@
 ;; Theme
 ;;-----------------------------------------------------------------------------
 
-(load-theme 'ample t)
-
 (global-hl-line-mode 1)
-(set-face-attribute 'fringe nil :background "#191919")
-(set-face-attribute 'default nil :background "#191919")
-(set-face-attribute font-lock-string-face nil :slant 'italic)
-(set-face-attribute font-lock-comment-face nil :slant 'italic)
+
+(load-theme 'flatui t)
+;; (load-theme 'ample t)
+
+;; (set-face-attribute 'fringe nil :background "#191919")
+;; (set-face-attribute 'default nil :background "#191919")
+;; (set-face-attribute font-lock-string-face nil :slant 'italic)
+;; (set-face-attribute font-lock-comment-face nil :slant 'italic)
+
+;; ;; Make mode line less obtrusive
+
+;; (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
+;;                     :family "Menlo" :height 100 :weight 'normal
+;;                     :box '(:line-width 2 :color "#333355" :style nil))
+
+;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60" :background "#222233"
+;;                     :family "Menlo" :height 110 :weight 'normal :italic t
+;;                     :box '(:line-width 2 :color "#222233" :style nil))
 
 (when (not window-system)
   (global-hl-line-mode 0))
@@ -88,15 +100,6 @@
   (set (make-local-variable 'face-remapping-alist)
        '((default :family "Menlo" :height 100))))
 
-;; Make mode line less obtrusive
-
-(set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
-                    :family "Menlo" :height 100 :weight 'normal
-                    :box '(:line-width 2 :color "#333355" :style nil))
-
-(set-face-attribute 'mode-line-inactive nil :foreground "gray60" :background "#222233"
-                    :family "Menlo" :height 110 :weight 'normal :italic t
-                    :box '(:line-width 2 :color "#222233" :style nil))
 
 ;;-----------------------------------------------------------------------------
 ;; Convenience functions
