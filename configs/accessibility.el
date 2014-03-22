@@ -66,6 +66,13 @@
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 (global-set-key (kbd "<C-tab>") 'buffer-menu)
 
+(global-set-key (kbd "C-c C-x r")
+                #'(lambda ()
+                    (interactive)
+                    (find-file "/Users/keith/Dripbox/scratch.org")))
+
+;;(setq initial-buffer-choice "/Users/keith/Dripbox/scratch.org")
+
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------

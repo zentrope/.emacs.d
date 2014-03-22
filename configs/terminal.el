@@ -11,8 +11,8 @@
 (ad-activate 'term-char-mode)
 
 (setq multi-term-program "/bin/bash")
-(set-face-attribute 'term nil :background "black")
-(set-face-attribute 'term nil :foreground "#999999")
+;; (set-face-attribute 'term nil :background "black")
+;; (set-face-attribute 'term nil :foreground "#999999")
 
 (add-hook 'term-exec-hook
           (function
