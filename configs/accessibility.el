@@ -59,8 +59,11 @@
 (global-set-key (kbd "s-<up>") 'windmove-up)
 (global-set-key (kbd "s-<down>") 'windmove-down)
 
+(global-set-key (kbd "s-+") 'text-scale-increase)
+(global-set-key (kbd "s-_") 'text-scale-decrease)
+
 ;; Switch to next frame, if there is one.
-(global-set-key "\M-`" 'other-frame)
+(global-set-key (kbd "M-`") 'other-frame)
 
 ;;Rebind buffer-list to buffer-menu
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
@@ -81,31 +84,40 @@
               ";; C-c C-x h   -> org-home/home.org\n"
               "\n\n"))
 
-;;(setq initial-buffer-choice "/Users/keith/Dripbox/scratch.org")
-
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
 
-(global-hl-line-mode 1)
+(when (window-system)
 
-(load-theme 'flatui t)
-;; (load-theme 'ample t)
+  (global-hl-line-mode 1)
 
-;; (set-face-attribute 'fringe nil :background "#191919")
-;; (set-face-attribute 'default nil :background "#191919")
-;; (set-face-attribute font-lock-string-face nil :slant 'italic)
-;; (set-face-attribute font-lock-comment-face nil :slant 'italic)
+  ;; (load-theme 'flatui t)
+  ;; (load-theme 'ample t)
+  (load-theme 'wombat t)
 
-;; ;; Make mode line less obtrusive
+  ;; (set-face-attribute 'fringe nil :background "#191919")
+  ;; (set-face-attribute 'default nil :background "#191919")
+  ;; (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "pink")
+  (set-face-attribute font-lock-comment-face nil :slant 'italic)
 
-;; (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
-;;                     :family "Menlo" :height 100 :weight 'normal
-;;                     :box '(:line-width 2 :color "#333355" :style nil))
+  (set-face-attribute 'hl-line nil :foreground nil :underline nil)
+  (set-face-foreground 'highlight nil)
 
-;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60" :background "#222233"
-;;                     :family "Menlo" :height 110 :weight 'normal :italic t
-;;                     :box '(:line-width 2 :color "#222233" :style nil))
+  (set-face-attribute 'region nil :foreground nil :background "dimgray")
+  (set-cursor-color "orange")
+
+  (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
+                      :family "Monaco" :height 100 :weight 'normal
+                      :box '(:line-width 2 :color "#333355" :style nil))
+
+  (set-face-attribute 'mode-line-inactive nil :foreground "gray60" :background "#222233"
+                      :family "Monaco" :height 110 :weight 'normal :italic t
+                      :box '(:line-width 2 :color "#222233" :style nil))
+  ;;
+  (powerline-default-theme)
+  ;;
+  )
 
 (when (not window-system)
   (global-hl-line-mode 0))
