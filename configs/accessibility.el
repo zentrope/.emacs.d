@@ -111,23 +111,28 @@
                       :family "Monaco" :height 100 :weight 'normal
                       :box '(:line-width 2 :color "#333355" :style nil))
 
-  (set-face-attribute 'mode-line-inactive nil :foreground "gray60" :background "#222233"
-                      :family "Monaco" :height 110 :weight 'normal :italic t
+  (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                      :background "#222233" :family "Monaco" :height 110
+                      :weight 'normal :italic t
                       :box '(:line-width 2 :color "#222233" :style nil))
   ;;
+  ;; Not sure if this works.
+  (with-current-buffer (get-buffer " *Echo Area 0*")
+    (setq-local face-remapping-alist '((default :family "Monaco" :height 100))))
+  ;;
   (powerline-default-theme)
+  ;;
+  ;; Make minibuffer have a smaller font
+  (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
+
+  (defun kfi-craft-minibuffer ()
+    (set (make-local-variable 'face-remapping-alist)
+         '((default :family "Monaco" :height 100))))
   ;;
   )
 
 (when (not window-system)
   (global-hl-line-mode 0))
-
-;; Make minibuffer have a smaller font
-(add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
-
-(defun kfi-craft-minibuffer ()
-  (set (make-local-variable 'face-remapping-alist)
-       '((default :family "Menlo" :height 100))))
 
 
 ;;-----------------------------------------------------------------------------
