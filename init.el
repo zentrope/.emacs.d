@@ -77,7 +77,7 @@
 (load "~/.emacs.d/configs/multiweb")
 (load "~/.emacs.d/configs/magit")
 (load "~/.emacs.d/configs/dired-details")
-(load "~/.emacs.d/configs/diff-hl")
+;; (load "~/.emacs.d/configs/diff-hl")
 (load "~/.emacs.d/configs/html")
 (load "~/.emacs.d/configs/java")
 (load "~/.emacs.d/configs/scroll")
