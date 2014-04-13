@@ -15,3 +15,5 @@
 ;; Move to a flyspell config file?
 
 (setq-default ispell-program-name "/usr/local/bin/aspell")
+
+(setq ns-use-srgb-colorspace t)
