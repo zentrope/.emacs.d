@@ -31,7 +31,7 @@
     magit
     multiple-cursors
     markdown-mode
-    melpa
+    melpa-upstream-visit
     multi-term
     cider
     paredit
@@ -45,6 +45,7 @@
     flatui-theme
     htmlize
     smooth-scrolling
+    powerline
     ))
 
 (dolist (p kfi-packages)
