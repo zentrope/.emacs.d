@@ -42,12 +42,10 @@
   (POST 'defun))
 
 (defun kfi-clojure-hook ()
-  (paredit-mode 1)
-  (autopair-mode -1)
   (setq indent-tabs-mode nil)
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)
-(add-hook 'clojure-mode-hook 'paredit-mode) ;; redundant?
+(add-hook 'clojure-mode-hook 'paredit-mode)
 
 (setq cider-repl-use-pretty-printing 1)

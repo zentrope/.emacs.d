@@ -22,7 +22,7 @@
 (defvar kfi-packages
   '(
     auto-complete
-    autopair
+    paredit
     clojure-mode
     dired-details
     erc-hl-nicks
@@ -34,7 +34,6 @@
     melpa-upstream-visit
     multi-term
     cider
-    paredit
     parenface
     smex
     multi-web-mode
@@ -71,7 +70,6 @@
 (load "~/.emacs.d/configs/cider")
 (load "~/.emacs.d/configs/css")
 (load "~/.emacs.d/configs/javascript")
-(load "~/.emacs.d/configs/autopair")
 (load "~/.emacs.d/configs/terminal")
 (load "~/.emacs.d/configs/erc")
 (load "~/.emacs.d/configs/org")
