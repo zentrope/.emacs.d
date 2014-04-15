@@ -99,7 +99,8 @@
   ;; (set-face-attribute 'fringe nil :background "#191919")
   ;; (set-face-attribute 'default nil :background "#191919")
   ;; (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "pink")
-  (set-face-attribute font-lock-string-face nil :foreground "darkseagreen")
+  (set-face-attribute font-lock-string-face nil :foreground "dodgerblue")
+
   (set-face-attribute font-lock-comment-face nil :slant 'italic)
 
   (set-face-attribute 'hl-line nil :foreground nil :underline nil)
