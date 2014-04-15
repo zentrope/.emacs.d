@@ -9,7 +9,8 @@
 (setq auto-save-file-name-transforms `((".*" "~/.emacs.d/backups")))
 
 (when (equal system-type 'darwin)
-  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+  ;;  (setenv "PATH" (concat "/usr/local/bin:/usr/texbin:" (getenv "PATH")))
+  (push "/usr/texbin" exec-path)
   (push "/usr/local/bin" exec-path))
 
 ;; Move to a flyspell config file?
