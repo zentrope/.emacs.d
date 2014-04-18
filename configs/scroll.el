@@ -1,3 +1,3 @@
-(require 'smooth-scrolling)
+;; (require 'smooth-scrolling)
 
-(setq smooth-scroll-margin 1)
+;; (setq smooth-scroll-margin 1)
