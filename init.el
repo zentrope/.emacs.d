@@ -21,7 +21,7 @@
 
 (defvar kfi-packages
   '(
-    auto-complete
+;;    auto-complete
     paredit
     clojure-mode
     dired-details
@@ -38,12 +38,12 @@
     smex
     multi-web-mode
     cljsbuild-mode
-    diff-hl
+;;    diff-hl
     base16-theme
     ample-theme
     flatui-theme
     htmlize
-    smooth-scrolling
+;;    smooth-scrolling
     powerline
     ))
 
@@ -59,7 +59,7 @@
 
 (load "~/.emacs.d/configs/setup")
 (load "~/.emacs.d/configs/accessibility")
-(load "~/.emacs.d/configs/autocomplete")
+;;(load "~/.emacs.d/configs/autocomplete")
 (load "~/.emacs.d/configs/ido")
 (load "~/.emacs.d/configs/smex")
 (load "~/.emacs.d/configs/clojure")
