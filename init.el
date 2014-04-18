@@ -79,7 +79,7 @@
 ;; (load "~/.emacs.d/configs/diff-hl")
 (load "~/.emacs.d/configs/html")
 (load "~/.emacs.d/configs/java")
-(load "~/.emacs.d/configs/scroll")
+;;(load "~/.emacs.d/configs/scroll")
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:

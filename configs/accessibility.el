@@ -90,7 +90,7 @@
 
 (when (window-system)
 
-  (global-hl-line-mode 1)
+  (global-hl-line-mode 0)
 
   ;; (load-theme 'flatui t)
   ;; (load-theme 'ample t)
