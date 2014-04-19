@@ -12,3 +12,5 @@
   (auto-fill-mode 1))
 
 (add-hook 'markdown-mode-hook 'kfi-markdown-mode-hook)
+
+(provide 'kfi-markdown)

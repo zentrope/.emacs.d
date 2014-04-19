@@ -4,3 +4,5 @@
 
 (setq cider-popup-stacktraces nil)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
+
+(provide 'kfi-cider)

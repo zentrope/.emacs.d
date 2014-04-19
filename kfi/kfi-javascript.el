@@ -6,3 +6,5 @@
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'js-mode-hook #'kfi-js-mode-hook)
+
+(provide 'kfi-javascript)

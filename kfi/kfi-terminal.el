@@ -1,4 +1,4 @@
-;; terminal.el
+;; kfi-terminal.el
 
 (require 'multi-term)
 
@@ -25,3 +25,5 @@
    (define-key term-raw-map (kbd "C-y") 'term-paste)
    (define-key term-raw-map (kbd "C-v") 'term-paste)
    (define-key term-raw-map (kbd "s-v") 'term-paste)))
+
+(provide 'kfi-terminal)

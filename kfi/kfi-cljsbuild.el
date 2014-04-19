@@ -1,4 +1,3 @@
-
 (require 'cljsbuild-mode)
 
 ;;  * Install the mode with M-x package-install RET cljsbuild-mode
@@ -10,3 +9,5 @@
 ;;  * Run 'lein cljsbuild auto' in it
 ;;
 ;;  * Start cljsbuild-mode in the terminal buffer with M-x cljsbuild-mode
+
+(provide 'kfi-cljsbuild)

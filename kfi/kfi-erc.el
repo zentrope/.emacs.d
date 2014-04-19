@@ -7,3 +7,5 @@
 (add-hook 'erc-mode-hook 'kfi-erc-mode-hook)
 
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+
+(provide 'kfi-erc)

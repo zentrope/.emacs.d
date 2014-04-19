@@ -1,5 +1,30 @@
 ;;-----------------------------------------------------------------------------
-;; Bootstrap Packaging
+;; Locations
+;;-----------------------------------------------------------------------------
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+(setq auto-save-file-name-transforms `((".*" "~/.emacs.d/backups")))
+
+(when (equal system-type 'darwin)
+  (push "/usr/texbin" exec-path)
+  (push "/usr/local/bin" exec-path))
+
+;;-----------------------------------------------------------------------------
+;; Paths
+;;-----------------------------------------------------------------------------
+
+(setq default-directory "~/")
+
+(defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
+
+(setenv "PATH" (concat (getenv "PATH") ":" kfi-local-bin))
+(setq exec-path (append exec-path (list kfi-local-bin) ))
+
+;;-----------------------------------------------------------------------------
+;; Packages
 ;;-----------------------------------------------------------------------------
 
 (require 'package)
@@ -8,11 +33,7 @@
       ;; ONLY pull from melpa.
       (list '("melpa" . "http://melpa.milkbox.net/packages/")))
 
-;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (package-initialize)
 
@@ -21,7 +42,6 @@
 
 (defvar kfi-packages
   '(
-;;    auto-complete
     paredit
     clojure-mode
     dired-details
@@ -38,12 +58,10 @@
     smex
     multi-web-mode
     cljsbuild-mode
-;;    diff-hl
     base16-theme
     ample-theme
     flatui-theme
     htmlize
-;;    smooth-scrolling
     powerline
     ))
 
@@ -52,34 +70,38 @@
     (package-install p)))
 
 ;;-----------------------------------------------------------------------------
-;; Load customizations and setups: order matters.
+;; Package customizations
 ;;-----------------------------------------------------------------------------
 
-(byte-recompile-directory (expand-file-name "~/.emacs.d/configs/") 0)
+(add-to-list 'load-path "~/.emacs.d/kfi/")
 
-(load "~/.emacs.d/configs/setup")
-(load "~/.emacs.d/configs/accessibility")
-;;(load "~/.emacs.d/configs/autocomplete")
-(load "~/.emacs.d/configs/ido")
-(load "~/.emacs.d/configs/smex")
-(load "~/.emacs.d/configs/clojure")
-(load "~/.emacs.d/configs/cljsbuild")
-(load "~/.emacs.d/configs/emacs-lisp")
-(load "~/.emacs.d/configs/markdown")
-(load "~/.emacs.d/configs/multiple-cursors")
-(load "~/.emacs.d/configs/cider")
-(load "~/.emacs.d/configs/css")
-(load "~/.emacs.d/configs/javascript")
-(load "~/.emacs.d/configs/terminal")
-(load "~/.emacs.d/configs/erc")
-(load "~/.emacs.d/configs/org")
-(load "~/.emacs.d/configs/multiweb")
-(load "~/.emacs.d/configs/magit")
-(load "~/.emacs.d/configs/dired-details")
-;; (load "~/.emacs.d/configs/diff-hl")
-(load "~/.emacs.d/configs/html")
-(load "~/.emacs.d/configs/java")
-;;(load "~/.emacs.d/configs/scroll")
+(defvar customized-packages
+  '(
+    kfi-cider
+    kfi-cljsbuild
+    kfi-clojure
+    kfi-css
+    kfi-dired-details
+    kfi-emacs-lisp
+    kfi-erc
+    kfi-functions
+    kfi-html
+    kfi-ido
+    kfi-java
+    kfi-javascript
+    kfi-keyboard
+    kfi-magit
+    kfi-markdown
+    kfi-multiple-cursors
+    kfi-multiweb
+    kfi-org
+    kfi-smex
+    kfi-terminal
+    kfi-theme
+    ))
+
+(dolist (package customized-packages)
+  (require package))
 
 ;;-----------------------------------------------------------------------------
 ;; Local, single machine customization:

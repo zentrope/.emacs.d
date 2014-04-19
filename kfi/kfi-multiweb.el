@@ -1,4 +1,3 @@
-
 (require 'multi-web-mode)
 
 (setq mweb-default-major-mode 'html-mode)
@@ -11,3 +10,5 @@
 (setq mweb-filename-extensions '("html"))
 
 (multi-web-global-mode 1)
+
+(provide 'kfi-multiweb)

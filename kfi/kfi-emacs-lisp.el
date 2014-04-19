@@ -6,3 +6,5 @@
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'emacs-lisp-mode-hook #'kfi-elisp-hook)
+
+(provide 'kfi-emacs-lisp)

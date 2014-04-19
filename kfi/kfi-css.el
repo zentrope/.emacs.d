@@ -4,3 +4,5 @@
 
 (add-hook 'css-mode-hook '(lambda ()
   (local-set-key (kbd "RET") 'newline-and-indent)))
+
+(provide 'kfi-css)
