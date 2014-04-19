@@ -56,7 +56,7 @@
   (set-face-attribute 'hl-line nil :foreground nil :underline nil)
   (set-face-foreground 'highlight nil)
 
-  (set-face-attribute 'region nil :foreground nil :background "grey20")
+  ;; (set-face-attribute 'region nil :foreground nil :background "blue")
 
   (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
                       :family "Monaco" :height 100 :weight 'normal
