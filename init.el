@@ -95,6 +95,7 @@
     kfi-multiple-cursors
     kfi-multiweb
     kfi-org
+    kfi-paredit
     kfi-smex
     kfi-terminal
     kfi-theme
