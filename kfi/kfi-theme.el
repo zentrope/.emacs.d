@@ -47,8 +47,8 @@
   ;; (load-theme 'ample t)
   ;; (load-theme 'wombat t)
 
-  ;; (set-face-attribute 'fringe nil :background "#191919")
-  ;; (set-face-attribute 'default nil :background "#191919")
+  (set-face-attribute 'fringe nil :background "#191919")
+  (set-face-attribute 'default nil :background "#191919")
 
   ;; (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "pink")
   (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray40")
