@@ -29,9 +29,13 @@
 
 (require 'package)
 
+;; Development
 (setq package-archives
-      ;; ONLY pull from melpa.
       (list '("melpa" . "http://melpa.milkbox.net/packages/")))
+
+;; Stable
+;; (setq package-archives
+;;       (list '("melpa" . "http://hiddencameras.milkbox.net/packages/")))
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
@@ -42,27 +46,27 @@
 
 (defvar kfi-packages
   '(
-    paredit
+    ample-theme
+    base16-theme
+    cider
+    cljsbuild-mode
     clojure-mode
     dired-details
     erc-hl-nicks
+    flatui-theme
+    htmlize
     ido-ubiquitous
     ido-vertical-mode
     magit
-    multiple-cursors
     markdown-mode
     melpa-upstream-visit
     multi-term
-    cider
-    parenface
-    smex
     multi-web-mode
-    cljsbuild-mode
-    base16-theme
-    ample-theme
-    flatui-theme
-    htmlize
+    multiple-cursors
+    paredit
+    parenface
     powerline
+    smex
     ))
 
 (dolist (p kfi-packages)
