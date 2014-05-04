@@ -25,12 +25,12 @@
 (global-set-key (kbd "C-c C-x r")
                 #'(lambda ()
                     (interactive)
-                    (find-file "/Users/keith/Dripbox/org-work/scratch.org")))
+                    (find-file "/Users/keith/dripbox/org-work/scratch.org")))
 
 (global-set-key (kbd "C-c C-x h")
                 #'(lambda ()
                     (interactive)
-                    (find-file "/Users/keith/Dripbox/org-home/home.org")))
+                    (find-file "/Users/keith/dripbox/org-home/home.org")))
 
 (setq initial-scratch-message
       (concat ";; C-c C-x r   -> org-work/scratch.org\n"
