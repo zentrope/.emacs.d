@@ -100,6 +100,7 @@
     kfi-multiweb
     kfi-org
     kfi-paredit
+    kfi-shell-script
     kfi-smex
     kfi-terminal
     kfi-theme
