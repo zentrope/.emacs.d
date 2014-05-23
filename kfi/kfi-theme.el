@@ -50,11 +50,14 @@
   (set-face-attribute 'fringe nil :background "#191919")
   (set-face-attribute 'default nil :background "black")
 
-  (set-face-attribute font-lock-keyword-face nil :foreground "sienna")
+  (set-face-attribute font-lock-keyword-face nil :foreground "peru")
   (set-face-attribute font-lock-preprocessor-face nil :foreground "steelblue")
   (set-face-attribute font-lock-function-name-face nil :foreground "dodgerblue")
-  (set-face-attribute font-lock-constant-face nil :slant 'italic :foreground "plum")
-  (set-face-attribute font-lock-string-face nil :foreground "peru")
+  (set-face-attribute font-lock-constant-face nil
+                      :slant 'italic :foreground "mediumslateblue")
+  (set-face-attribute font-lock-string-face nil
+                      :slant 'italic
+                      :foreground "plum")
 
   ;; (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "pink")
   (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray40")
@@ -86,7 +89,8 @@
     (set (make-local-variable 'face-remapping-alist)
          '((default :family "Monaco" :height 100))))
   ;;
-  (set-cursor-color "orange"))
+)
+(set-cursor-color "orange")
 
 (setq ns-use-srgb-colorspace t)
 
