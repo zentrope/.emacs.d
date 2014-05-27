@@ -92,9 +92,9 @@
     kfi-emacs-lisp
     kfi-erc
     kfi-functions
-    kfi-helm
+    ;; kfi-helm
     kfi-html
-    ;; kfi-ido
+    kfi-ido
     kfi-java
     kfi-javascript
     kfi-keyboard
@@ -105,7 +105,7 @@
     kfi-org
     kfi-paredit
     kfi-shell-script
-    ;; kfi-smex
+    kfi-smex
     kfi-terminal
     kfi-theme
     ))
