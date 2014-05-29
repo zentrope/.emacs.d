@@ -11,7 +11,8 @@
 
 (setq multi-term-program "/bin/bash")
 ;; (set-face-attribute 'term nil :background "black")
-;; (set-face-attribute 'term nil :foreground "#999999")
+(set-face-attribute 'term nil :foreground "#aaaaaa")
+(set-face-attribute 'term-color-yellow nil :foreground "sienna")
 
 (add-hook 'term-exec-hook
           (function
