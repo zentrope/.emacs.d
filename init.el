@@ -6,7 +6,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
-(setq auto-save-file-name-transforms `((".*" "~/.emacs.d/backups/")))
+;;(setq auto-save-file-name-transforms `((".*" "~/.emacs.d/backups/")))
 
 (when (equal system-type 'darwin)
   (push "/usr/texbin" exec-path)
@@ -54,10 +54,10 @@
     dired-details
     erc-hl-nicks
     flatui-theme
-    helm
-    helm-dash
-    helm-ls-git
-    helm-package
+    ;; helm
+    ;; helm-dash
+    ;; helm-ls-git
+    ;; helm-package
     htmlize
     ido-ubiquitous
     magit

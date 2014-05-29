@@ -27,12 +27,12 @@
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-;;(setq-default line-spacing 0)
+(setq-default line-spacing 1)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 ;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
-;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
@@ -89,7 +89,8 @@
     (set (make-local-variable 'face-remapping-alist)
          '((default :family "Monaco" :height 100))))
   ;;
-)
+  )
+
 (set-cursor-color "orange")
 
 (setq ns-use-srgb-colorspace t)

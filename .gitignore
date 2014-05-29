@@ -8,3 +8,4 @@ site-lisp
 /.mc-lists.el
 configs/*.elc
 /recentf
+/projectile-bookmarks.eld
