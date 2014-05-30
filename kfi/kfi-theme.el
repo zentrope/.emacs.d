@@ -37,7 +37,6 @@
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
 
-
 (when window-system
   (global-hl-line-mode 0)
 
@@ -47,8 +46,8 @@
   ;; (load-theme 'ample t)
   ;; (load-theme 'wombat t)
 
-  (set-face-attribute 'fringe nil :background "#191919")
-  (set-face-attribute 'default nil :background "black")
+  (set-face-attribute 'fringe nil :background "#262626")
+  (set-face-attribute 'default nil :background "#262626")
 
   (set-face-attribute font-lock-keyword-face nil :foreground "peru")
   (set-face-attribute font-lock-preprocessor-face nil :foreground "steelblue")
