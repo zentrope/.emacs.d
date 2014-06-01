@@ -104,6 +104,7 @@
     kfi-multiweb
     kfi-org
     kfi-paredit
+    kfi-server
     kfi-shell-script
     kfi-smex
     kfi-terminal
