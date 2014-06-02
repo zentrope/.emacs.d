@@ -66,20 +66,24 @@
 
   ;; (set-face-attribute 'region nil :foreground nil :background "blue")
 
-  (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
-                      :family "Monaco" :height 100 :weight 'normal
-                      :box '(:line-width 2 :color "#333355" :style nil))
+  ;; (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
+  ;;                     :family "Monaco" :height 100 :weight 'normal
+  ;;                     :box '(:line-width 2 :color "#333355" :style nil))
 
-  (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "#222233" :family "Monaco" :height 110
-                      :weight 'normal :italic t
-                      :box '(:line-width 2 :color "#222233" :style nil))
+  ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+  ;;                     :background "#222233" :family "Monaco" :height 110
+  ;;                     :weight 'normal :italic t
+  ;;                     :box '(:line-width 2 :color "#222233" :style nil))
+
+
   ;;
   ;; Not sure if this works.
   (with-current-buffer (get-buffer " *Echo Area 0*")
     (setq-local face-remapping-alist '((default :family "Monaco" :height 100))))
   ;;
-  ;; (powerline-default-theme)
+  (powerline-default-theme)
+  (set-face-attribute 'mode-line nil :height 100 :weight 'normal)
+  (set-face-attribute 'mode-line-inactive nil :height 100 :italic t :weight 'normal)
   ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
