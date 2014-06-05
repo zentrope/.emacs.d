@@ -82,8 +82,12 @@
     (setq-local face-remapping-alist '((default :family "Monaco" :height 100))))
   ;;
   (powerline-default-theme)
-  (set-face-attribute 'mode-line nil :height 100 :weight 'normal)
-  (set-face-attribute 'mode-line-inactive nil :height 100 :italic t :weight 'normal)
+  (set-face-attribute 'powerline-active1 nil :foreground "violet" :background "grey18")
+  (set-face-attribute 'powerline-active2 nil :foreground "lime" :background "#333355")
+
+  (set-face-attribute 'mode-line nil :height 120 :weight 'normal :box nil
+                      :background "grey33" :foreground "palegreen")
+  (set-face-attribute 'mode-line-inactive nil :height 120 :weight 'normal :box nil)
   ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
