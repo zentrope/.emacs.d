@@ -82,23 +82,30 @@
     (setq-local face-remapping-alist '((default :family "Monaco" :height 100))))
   ;;
   (powerline-default-theme)
-  (set-face-attribute 'powerline-active1 nil :foreground "violet" :background "grey18")
-  (set-face-attribute 'powerline-active2 nil :foreground "lime" :background "#333355")
+  (set-face-attribute 'powerline-active1 nil :foreground "violet" :background "black")
+  (set-face-attribute 'powerline-active2 nil :foreground "lime" :background "black")
 
-  (set-face-attribute 'mode-line nil :height 120 :weight 'normal :box nil
-                      :background "grey33" :foreground "palegreen")
-  (set-face-attribute 'mode-line-inactive nil :height 120 :weight 'normal :box nil)
+  (set-face-attribute 'powerline-inactive1 nil :foreground "violet" :background "grey22")
+  (set-face-attribute 'powerline-inactive2 nil :foreground "lime" :background "grey22")
+
+  (set-face-attribute 'mode-line nil :height 100 :weight 'normal
+                      :box '(:line-width 2 :color "black" :style nil)
+                      :background "black" :foreground "palegreen")
+
+  (set-face-attribute 'mode-line-inactive nil :height 100 :weight 'normal
+                      :background "grey22"
+                      :box '(:line-width 2 :color "grey22" :style nil))
   ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
+
+  (add-to-list 'default-frame-alist '(cursor-color . "orange"))
 
   (defun kfi-craft-minibuffer ()
     (set (make-local-variable 'face-remapping-alist)
          '((default :family "Monaco" :height 100))))
   ;;
   )
-
-(set-cursor-color "orange")
 
 (setq ns-use-srgb-colorspace t)
 
