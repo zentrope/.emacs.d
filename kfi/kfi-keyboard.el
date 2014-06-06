@@ -32,9 +32,15 @@
                     (interactive)
                     (find-file "/Users/keith/dripbox/org-home/home.org")))
 
+(global-set-key (kbd "C-c C-x c")
+                #'(lambda ()
+                    (interactive)
+                    (find-file "/Users/keith/dripbox/docs/clojure-script.org")))
+
 (setq initial-scratch-message
       (concat ";; C-c C-x r   -> org-work/scratch.org\n"
               ";; C-c C-x h   -> org-home/home.org\n"
+              ";; C-c C-x c   -> dripbox/docs/clojure-script.org\n"
               "\n\n"))
 
 (provide 'kfi-keyboard)
