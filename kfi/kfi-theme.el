@@ -42,61 +42,64 @@
 
   (invert-face 'default)
 
-  ;; (load-theme 'flatui t)
-  ;; (load-theme 'ample t)
-  ;; (load-theme 'wombat t)
+  (defun kfi-setup-default-theme-overrides ()
+    ;;
+    ;; Frame
+    (set-face-attribute 'fringe nil :background "#262626")
+    (set-face-attribute 'default nil :background "#262626")
+    ;;
+    ;; Font-lock
+    (set-face-attribute font-lock-keyword-face nil :foreground "peru")
+    (set-face-attribute font-lock-preprocessor-face nil :foreground "steelblue")
+    (set-face-attribute font-lock-function-name-face nil :foreground "cornflowerblue")
+    (set-face-attribute font-lock-constant-face nil :slant 'italic :foreground "mediumslateblue")
+    (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "plum")
+    (set-face-attribute font-lock-variable-name-face nil :foreground "sandybrown")
+    (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray40"))
 
-  (set-face-attribute 'fringe nil :background "#262626")
-  (set-face-attribute 'default nil :background "#262626")
-
-  (set-face-attribute font-lock-keyword-face nil :foreground "peru")
-  (set-face-attribute font-lock-preprocessor-face nil :foreground "steelblue")
-  (set-face-attribute font-lock-function-name-face nil :foreground "cornflowerblue")
-  (set-face-attribute font-lock-constant-face nil
-                      :slant 'italic :foreground "mediumslateblue")
-  (set-face-attribute font-lock-string-face nil
-                      :slant 'italic
-                      :foreground "plum")
-
-  (set-face-attribute font-lock-variable-name-face nil :foreground "sandybrown")
-
-  ;; (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "pink")
-  (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray40")
+  (kfi-setup-default-theme-overrides)
 
   (set-face-attribute 'hl-line nil :foreground nil :underline nil)
   (set-face-foreground 'highlight nil)
 
-  ;; (set-face-attribute 'region nil :foreground nil :background "blue")
+  (defun kfi-setup-modeline-non-powerline ()
+    (set-face-attribute 'region nil :foreground nil :background "blue")
 
-  ;; (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
-  ;;                     :family "Monaco" :height 100 :weight 'normal
-  ;;                     :box '(:line-width 2 :color "#333355" :style nil))
+    (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
+                        :family "Monaco" :height 100 :weight 'normal
+                        :box '(:line-width 2 :color "#333355" :style nil))
 
-  ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-  ;;                     :background "#222233" :family "Monaco" :height 110
-  ;;                     :weight 'normal :italic t
-  ;;                     :box '(:line-width 2 :color "#222233" :style nil))
+    (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                        :background "#222233" :family "Monaco" :height 110
+                        :weight 'normal :italic t
+                        :box '(:line-width 2 :color "#222233" :style nil)))
 
+
+  ;; (kfi-setup-modeline-non-powerline)
 
   ;;
   ;; Not sure if this works.
   (with-current-buffer (get-buffer " *Echo Area 0*")
     (setq-local face-remapping-alist '((default :family "Monaco" :height 100))))
   ;;
-  (powerline-default-theme)
-  (set-face-attribute 'powerline-active1 nil :foreground "violet" :background "black")
-  (set-face-attribute 'powerline-active2 nil :foreground "lime" :background "black")
 
-  (set-face-attribute 'powerline-inactive1 nil :foreground "violet" :background "grey22")
-  (set-face-attribute 'powerline-inactive2 nil :foreground "lime" :background "grey22")
+  (defun kfi-setup-powerline ()
+    (powerline-default-theme)
+    (set-face-attribute 'powerline-active1 nil :foreground "violet" :background "black")
+    (set-face-attribute 'powerline-active2 nil :foreground "lime" :background "black")
 
-  (set-face-attribute 'mode-line nil :height 100 :weight 'normal
-                      :box '(:line-width 2 :color "black" :style nil)
-                      :background "black" :foreground "palegreen")
+    (set-face-attribute 'powerline-inactive1 nil :foreground "violet" :background "grey22")
+    (set-face-attribute 'powerline-inactive2 nil :foreground "lime" :background "grey22")
 
-  (set-face-attribute 'mode-line-inactive nil :height 100 :weight 'normal
-                      :background "grey22"
-                      :box '(:line-width 2 :color "grey22" :style nil))
+    (set-face-attribute 'mode-line nil :height 100 :weight 'normal
+                        :box '(:line-width 2 :color "black" :style nil)
+                        :background "black" :foreground "palegreen")
+
+    (set-face-attribute 'mode-line-inactive nil :height 100 :weight 'normal
+                        :background "grey22"
+                        :box '(:line-width 2 :color "grey22" :style nil))  )
+
+  (kfi-setup-powerline)
   ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
