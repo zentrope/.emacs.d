@@ -65,7 +65,7 @@
   (defun kfi-setup-modeline-non-powerline ()
     (set-face-attribute 'region nil :foreground nil :background "blue")
 
-    (set-face-attribute 'mode-line nil :foreground "palegreen" :background "black"
+    (set-face-attribute 'mode-line nil :foreground "dodgerblue" :background "black"
                         :family "Menlo" :height 100 :weight 'normal
                         :box '(:line-width 4 :color "black" :style nil))
 
