@@ -65,17 +65,17 @@
   (defun kfi-setup-modeline-non-powerline ()
     (set-face-attribute 'region nil :foreground nil :background "blue")
 
-    (set-face-attribute 'mode-line nil :foreground "gray85" :background "#333355"
-                        :family "Monaco" :height 100 :weight 'normal
-                        :box '(:line-width 2 :color "#333355" :style nil))
+    (set-face-attribute 'mode-line nil :foreground "palegreen" :background "black"
+                        :family "Menlo" :height 100 :weight 'normal
+                        :box '(:line-width 4 :color "black" :style nil))
 
     (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                        :background "#222233" :family "Monaco" :height 110
-                        :weight 'normal :italic t
-                        :box '(:line-width 2 :color "#222233" :style nil)))
+                        :background "#222222" :family "Menlo" :height 100
+                        :weight 'normal :italic nil
+                        :box '(:line-width 4 :color "#222222" :style nil)))
 
 
-  ;; (kfi-setup-modeline-non-powerline)
+  (kfi-setup-modeline-non-powerline)
 
   ;;
   ;; Not sure if this works.
@@ -99,7 +99,7 @@
                         :background "grey22"
                         :box '(:line-width 2 :color "grey22" :style nil))  )
 
-  (kfi-setup-powerline)
+  ;;(kfi-setup-powerline)
   ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
