@@ -45,13 +45,12 @@
 
 (defvar kfi-packages
   '(
-    cider
     cljsbuild-mode
-    clojure-mode
     dired-details
     erc-hl-nicks
     htmlize
     ido-ubiquitous
+    json-mode
     magit
     markdown-mode
     melpa-upstream-visit
@@ -59,9 +58,11 @@
     multi-web-mode
     multiple-cursors
     paredit
-    parenface
     powerline
     smex
+    org
+    cider
+    clojure-mode
     ))
 
 (dolist (p kfi-packages)
