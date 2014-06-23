@@ -9,3 +9,5 @@ site-lisp
 configs/*.elc
 /recentf
 /projectile-bookmarks.eld
+/.DS_Store
+/games/

@@ -53,9 +53,9 @@
     (set-face-attribute font-lock-preprocessor-face nil :foreground "steelblue")
     (set-face-attribute font-lock-function-name-face nil :foreground "cornflowerblue")
     (set-face-attribute font-lock-constant-face nil :slant 'italic :foreground "mediumslateblue")
-    (set-face-attribute font-lock-string-face nil :slant 'italic :foreground "plum")
+    (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "plum")
     (set-face-attribute font-lock-variable-name-face nil :foreground "sandybrown")
-    (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray40"))
+    (set-face-attribute font-lock-comment-face nil :slant 'normal :foreground "gray40"))
 
   (kfi-setup-default-theme-overrides)
 

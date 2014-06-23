@@ -36,6 +36,7 @@
 
 (define-clojure-indent
   (cond 'defun)
+  (cond-> 'defun)
   (GET 'defun)
   (PUT 'defun)
   (DELETE 'defun)
