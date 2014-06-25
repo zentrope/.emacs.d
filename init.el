@@ -20,6 +20,8 @@
 (defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
 
 (setenv "PATH" (concat (getenv "PATH") ":" kfi-local-bin))
+(setenv "LEIN_JVM_OPTS" "-Djava.awt.headless=true")
+
 (setq exec-path (append exec-path (list kfi-local-bin) ))
 
 ;;-----------------------------------------------------------------------------
