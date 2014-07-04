@@ -48,6 +48,7 @@
 (defvar kfi-packages
   '(
     cljsbuild-mode
+    deft
     dired-details
     erc-hl-nicks
     ghc
@@ -85,6 +86,7 @@
     kfi-cljsbuild
     kfi-clojure
     kfi-css
+    kfi-deft
     kfi-dired-details
     kfi-emacs-lisp
     kfi-erc
