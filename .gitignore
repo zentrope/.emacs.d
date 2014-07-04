@@ -11,3 +11,4 @@ configs/*.elc
 /projectile-bookmarks.eld
 /.DS_Store
 /games/
+/tramp

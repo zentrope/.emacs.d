@@ -50,7 +50,9 @@
     cljsbuild-mode
     dired-details
     erc-hl-nicks
+    ghc
     htmlize
+    haskell-mode
     ido-ubiquitous
     json-mode
     magit
@@ -87,6 +89,7 @@
     kfi-emacs-lisp
     kfi-erc
     kfi-functions
+    kfi-haskell
     kfi-html
     kfi-ido
     kfi-java
