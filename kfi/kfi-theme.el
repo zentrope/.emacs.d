@@ -65,14 +65,14 @@
   (defun kfi-setup-modeline-non-powerline ()
     (set-face-attribute 'region nil :foreground nil :background "blue")
 
-    (set-face-attribute 'mode-line nil :foreground "dodgerblue" :background "black"
+    (set-face-attribute 'mode-line nil :foreground "dodgerblue" :background "#262626"
                         :family "Menlo" :height 100 :weight 'normal
-                        :box '(:line-width 4 :color "black" :style nil))
+                        :box '(:line-width 4 :color "#262626" :style nil))
 
     (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                        :background "#222222" :family "Menlo" :height 100
+                        :background "#000000" :family "Menlo" :height 100
                         :weight 'normal :italic nil
-                        :box '(:line-width 4 :color "#222222" :style nil)))
+                        :box '(:line-width 4 :color "#000000" :style nil)))
 
 
   (kfi-setup-modeline-non-powerline)
