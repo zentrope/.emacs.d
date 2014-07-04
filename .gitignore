@@ -12,3 +12,4 @@ configs/*.elc
 /.DS_Store
 /games/
 /tramp
+/url/
