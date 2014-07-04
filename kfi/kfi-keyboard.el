@@ -22,25 +22,11 @@
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 (global-set-key (kbd "<C-tab>") 'buffer-menu)
 
-(global-set-key (kbd "C-c C-x r")
-                #'(lambda ()
-                    (interactive)
-                    (find-file "/Users/keith/dripbox/org-work/scratch.org")))
-
-(global-set-key (kbd "C-c C-x h")
-                #'(lambda ()
-                    (interactive)
-                    (find-file "/Users/keith/dripbox/org-home/home.org")))
-
-(global-set-key (kbd "C-c C-x c")
-                #'(lambda ()
-                    (interactive)
-                    (find-file "/Users/keith/dripbox/docs/clojure-script.org")))
+(global-set-key [f1] 'deft)
 
 (setq initial-scratch-message
-      (concat ";; C-c C-x r   -> org-work/scratch.org\n"
-              ";; C-c C-x h   -> org-home/home.org\n"
-              ";; C-c C-x c   -> dripbox/docs/clojure-script.org\n"
+      (concat ";; F1 -> deft"
+              ";;\n"
               "\n\n"))
 
 (provide 'kfi-keyboard)
