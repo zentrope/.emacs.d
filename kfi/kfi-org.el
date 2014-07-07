@@ -14,7 +14,7 @@ html {
 }
 
 #content {
-  width: 700px;
+  width: 650px;
   margin: 0 auto;
 }
 
@@ -33,7 +33,7 @@ a:hover {
 }
 
 pre {
-  background: #444;
+  background: #222;
   color: white;
   font-family: menlo, monospace;
   line-height: 1.5em; font-size: 10pt !important;
@@ -48,7 +48,7 @@ td { text-align: left; padding: 4px; margin: 0; }
 th { text-align: left !important; padding: 4px; margin: 0; }
 
 #postamble {
-  width: 700px;
+  width: 650px;
   margin: 0 auto;
   margin-top: 50pt;
   border-top: 1px dotted silver;
