@@ -81,8 +81,10 @@
 
   ;;
   ;; Not sure if this works.
-  (with-current-buffer (get-buffer " *Echo Area 0*")
-    (setq-local face-remapping-alist '((default :family "Monaco" :height 100))))
+  (defun kfi-fix-echo-area ()
+    (interactive)
+    (with-current-buffer (get-buffer " *Echo Area 0*")
+      (setq-local face-remapping-alist '((default :family "Monaco" :height 100)))))
   ;;
 
   (defun kfi-setup-powerline ()
@@ -111,7 +113,7 @@
   (defun kfi-craft-minibuffer ()
     (set (make-local-variable 'face-remapping-alist)
          '((default :family "Monaco" :height 100))))
-  ;;
+
   )
 
 (setq ns-use-srgb-colorspace t)
