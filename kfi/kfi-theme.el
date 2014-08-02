@@ -7,12 +7,12 @@
   ;;(/ (display-pixel-width) 4)
   )
 
-(add-to-list 'initial-frame-alist `(top . 60))
-(add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
-(add-to-list 'initial-frame-alist `(width . 100))
-(add-to-list 'initial-frame-alist
-             (cons 'height (/ (- (display-pixel-height) 160)
-                              (frame-char-height))))
+;; (add-to-list 'initial-frame-alist `(top . 60))
+;; (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
+;; (add-to-list 'initial-frame-alist `(width . 100))
+;; (add-to-list 'initial-frame-alist
+;;              (cons 'height (/ (- (display-pixel-height) 160)
+;;                               (frame-char-height))))
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
