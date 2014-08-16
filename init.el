@@ -51,7 +51,6 @@
     deft
     dired-details
     erc-hl-nicks
-    ghc
     htmlize
     ido-ubiquitous
     json-mode
