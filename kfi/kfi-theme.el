@@ -24,7 +24,7 @@
   (global-hl-line-mode 0)
   (menu-bar-mode 0))
 
-(fringe-mode '(1 . 1))
+(fringe-mode '(6 . 6))
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
@@ -47,8 +47,8 @@
   (defun kfi-setup-default-theme-overrides ()
     ;;
     ;; Frame
-    (set-face-attribute 'fringe nil :background "#262626")
-    (set-face-attribute 'default nil :background "black")
+    (set-face-attribute 'fringe nil :background "#111111")
+    (set-face-attribute 'default nil :background "#111111")
     ;;
     ;; Font-lock
     (set-face-attribute font-lock-keyword-face nil :foreground "peru")
