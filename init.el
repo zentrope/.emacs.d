@@ -32,13 +32,15 @@
 
 ;; Development
 (setq package-archives
-      (list '("melpa" . "http://melpa.milkbox.net/packages/")))
+      (list '("melpa" . "http://melpa.milkbox.net/packages/")
+            '("gnu" . "http://elpa.gnu.org/packages/")
+            '("org" . "http://orgmode.org/elpa/")))
 
 ;; Stable
 ;; (setq package-archives
 ;;       (list '("melpa" . "http://hiddencameras.milkbox.net/packages/")))
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (package-initialize)
 
