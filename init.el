@@ -50,6 +50,7 @@
 (defvar kfi-packages
   '(
     cljsbuild-mode
+    company
     deft
     dired-details
     erc-hl-nicks
