@@ -32,7 +32,7 @@
 
 ;; Development
 (setq package-archives
-      (list '("melpa" . "http://melpa.milkbox.net/packages/")
+      (list '("melpa" . "http://melpa.org/packages/")
             '("gnu" . "http://elpa.gnu.org/packages/")
             '("org" . "http://orgmode.org/elpa/")))
 
