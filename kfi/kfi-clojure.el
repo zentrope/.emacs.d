@@ -40,7 +40,9 @@
   (GET 'defun)
   (PUT 'defun)
   (DELETE 'defun)
-  (POST 'defun))
+  (POST 'defun)
+  (OPTIONS 'defun)
+  (ALL 'defun))
 
 (defun kfi-clojure-hook ()
   (setq indent-tabs-mode nil)
@@ -48,6 +50,7 @@
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)
 (add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook 'cider-mode)
 
 (setq cider-repl-use-pretty-printing 1)
 
