@@ -42,7 +42,7 @@
   (DELETE 'defun)
   (POST 'defun)
   (OPTIONS 'defun)
-  (ALL 'defun))
+  (ANY 'defun))
 
 (defun kfi-clojure-hook ()
   (setq indent-tabs-mode nil)
