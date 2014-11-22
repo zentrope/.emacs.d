@@ -32,9 +32,12 @@
 
 ;; Development
 (setq package-archives
-      (list '("melpa" . "http://melpa.org/packages/")
-            '("gnu" . "http://elpa.gnu.org/packages/")
-            '("org" . "http://orgmode.org/elpa/")))
+      (list '("melpa"        . "http://melpa.org/packages/")
+            '("melpa-stable" . "http://stable.melpa.org/packages/")
+            '("gnu"          . "http://elpa.gnu.org/packages/")
+            '("org"          . "http://orgmode.org/elpa/")))
+
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 ;; Stable
 ;; (setq package-archives
