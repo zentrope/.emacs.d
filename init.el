@@ -65,6 +65,7 @@
     multiple-cursors
     paredit
     powerline
+    restclient
     smex
     org
     cider
