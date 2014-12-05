@@ -39,12 +39,6 @@
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
-;; Stable
-;; (setq package-archives
-;;       (list '("melpa" . "http://hiddencameras.milkbox.net/packages/")))
-
-;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-
 (package-initialize)
 
 (when (not package-archive-contents)
