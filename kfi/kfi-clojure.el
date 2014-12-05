@@ -50,8 +50,5 @@
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)
 (add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'cider-mode)
-
-(setq cider-repl-use-pretty-printing 1)
 
 (provide 'kfi-clojure)

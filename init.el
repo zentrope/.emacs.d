@@ -52,6 +52,7 @@
     erc-hl-nicks
     htmlize
     ido-ubiquitous
+    inf-clojure
     json-mode
     magit
     markdown-mode
@@ -63,7 +64,7 @@
     restclient
     smex
     org
-    cider
+;;    cider
     clojure-mode
     ))
 
@@ -79,7 +80,7 @@
 
 (defvar customized-packages
   '(
-    kfi-cider
+;;    kfi-cider
     kfi-cljsbuild
     kfi-clojure
     kfi-css

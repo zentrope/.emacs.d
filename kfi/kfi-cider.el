@@ -9,4 +9,7 @@
 (add-hook 'cider-mode-hook 'company-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
+;;(add-hook 'clojure-mode-hook 'cider-mode)
+(setq cider-repl-use-pretty-printing 1)
+
 (provide 'kfi-cider)

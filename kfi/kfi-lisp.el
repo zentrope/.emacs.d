@@ -1,5 +1,8 @@
 ;; Playing around with a simple Clojure inferior-lisp.
 
-(setq inferior-lisp-program (concat (getenv "HOME") "/bin/boot repl"))
+(require 'inf-clojure)
+
+(setq inferior-lisp-program "lein repl")
+(setq inf-clojure-program "lein repl")
 
 (provide 'kfi-lisp)

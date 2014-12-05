@@ -17,7 +17,7 @@
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-(setq-default line-spacing 1)
+(setq-default line-spacing 3)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -33,7 +33,7 @@
   (global-hl-line-mode 1)
 
   (defun kfi-setup-modeline ()
-    (set-face-attribute 'region nil :foreground nil :background "lightblue1")
+    (set-face-attribute 'region nil :foreground nil :background "darkseagreen2")
     (set-face-attribute 'hl-line nil :foreground nil :background "lavender" :underline nil)
 
     (set-face-attribute 'mode-line nil :foreground "royalblue" :background "#dddddd"
