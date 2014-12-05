@@ -64,7 +64,7 @@
     restclient
     smex
     org
-;;    cider
+    cider
     clojure-mode
     ))
 
@@ -80,7 +80,7 @@
 
 (defvar customized-packages
   '(
-;;    kfi-cider
+    kfi-cider
     kfi-cljsbuild
     kfi-clojure
     kfi-css
@@ -92,7 +92,7 @@
     kfi-ido
     kfi-java
     kfi-javascript
-    kfi-lisp
+    ;; kfi-lisp     ;; really, inf-clojure.
     kfi-keyboard
     kfi-magit
     kfi-markdown
