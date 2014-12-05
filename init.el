@@ -54,7 +54,6 @@
   '(
     cljsbuild-mode
     company
-    deft
     dired-details
     erc-hl-nicks
     htmlize
@@ -67,7 +66,6 @@
     multi-web-mode
     multiple-cursors
     paredit
-    powerline
     restclient
     smex
     org
@@ -91,7 +89,6 @@
     kfi-cljsbuild
     kfi-clojure
     kfi-css
-    kfi-deft
     kfi-dired-details
     kfi-emacs-lisp
     kfi-erc
