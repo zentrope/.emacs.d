@@ -1,18 +1,6 @@
 ;;-----------------------------------------------------------------------------
-;; Theme
+;; Theme / Appearance related stuff.
 ;;-----------------------------------------------------------------------------
-
-(defun kfi-x-offset ()
-  50
-  ;;(/ (display-pixel-width) 4)
-  )
-
-;; (add-to-list 'initial-frame-alist `(top . 60))
-;; (add-to-list 'initial-frame-alist `(left . ,(kfi-x-offset)))
-;; (add-to-list 'initial-frame-alist `(width . 100))
-;; (add-to-list 'initial-frame-alist
-;;              (cons 'height (/ (- (display-pixel-height) 160)
-;;                               (frame-char-height))))
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
@@ -39,7 +27,27 @@
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
 
-(when window-system
+(setq dark-mode nil)
+
+(when (and window-system (not dark-mode))
+  (global-hl-line-mode 1)
+
+  (defun kfi-setup-modeline ()
+    (set-face-attribute 'region nil :foreground nil :background "lightblue1")
+    (set-face-attribute 'hl-line nil :foreground nil :background "lavender" :underline nil)
+
+    (set-face-attribute 'mode-line nil :foreground "royalblue" :background "#dddddd"
+                        :family "Menlo" :height 100 :weight 'normal
+                        :box '(:line-width 4 :color "#dddddd" :style nil))
+
+    (set-face-attribute 'mode-line-inactive nil :foreground "#666666"
+                        :background "#bbbbbb" :family "Menlo" :height 100
+                        :weight 'normal :italic t
+                        :box '(:line-width 4 :color "#bbbbbb" :style nil)))
+  (kfi-setup-modeline)
+  (add-to-list 'default-frame-alist '(cursor-color . "dodgerblue")))
+
+(when (and window-system dark-mode)
   (global-hl-line-mode 0)
 
   (invert-face 'default)
@@ -64,7 +72,7 @@
   (set-face-attribute 'hl-line nil :foreground nil :underline nil)
   (set-face-foreground 'highlight nil)
 
-  (defun kfi-setup-modeline-non-powerline ()
+  (defun kfi-setup-modeline ()
     (set-face-attribute 'region nil :foreground nil :background "blue")
 
     (set-face-attribute 'mode-line nil :foreground "dodgerblue" :background "#262626"
@@ -76,45 +84,25 @@
                         :weight 'normal :italic nil
                         :box '(:line-width 4 :color "#000000" :style nil)))
 
+  (kfi-setup-modeline)
 
-  (kfi-setup-modeline-non-powerline)
+  (add-to-list 'default-frame-alist '(cursor-color . "orange")))
 
+(when window-system
   ;;
   ;; Not sure if this works.
   (defun kfi-fix-echo-area ()
     (interactive)
     (with-current-buffer (get-buffer " *Echo Area 0*")
       (setq-local face-remapping-alist '((default :family "Monaco" :height 100)))))
-  ;;
 
-  (defun kfi-setup-powerline ()
-    (powerline-default-theme)
-    (set-face-attribute 'powerline-active1 nil :foreground "violet" :background "black")
-    (set-face-attribute 'powerline-active2 nil :foreground "lime" :background "black")
-
-    (set-face-attribute 'powerline-inactive1 nil :foreground "violet" :background "grey22")
-    (set-face-attribute 'powerline-inactive2 nil :foreground "lime" :background "grey22")
-
-    (set-face-attribute 'mode-line nil :height 100 :weight 'normal
-                        :box '(:line-width 2 :color "black" :style nil)
-                        :background "black" :foreground "palegreen")
-
-    (set-face-attribute 'mode-line-inactive nil :height 100 :weight 'normal
-                        :background "grey22"
-                        :box '(:line-width 2 :color "grey22" :style nil))  )
-
-  ;;(kfi-setup-powerline)
-  ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
-  (add-to-list 'default-frame-alist '(cursor-color . "orange"))
 
   (defun kfi-craft-minibuffer ()
     (set (make-local-variable 'face-remapping-alist)
-         '((default :family "Monaco" :height 100))))
-
-  )
+         '((default :family "Monaco" :height 100)))))
 
 (setq ns-use-srgb-colorspace t)
 

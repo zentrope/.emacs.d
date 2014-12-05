@@ -100,6 +100,7 @@
     kfi-ido
     kfi-java
     kfi-javascript
+    kfi-lisp
     kfi-keyboard
     kfi-magit
     kfi-markdown
