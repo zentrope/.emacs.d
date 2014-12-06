@@ -4,6 +4,7 @@
 
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
+(setq scroll-step 1)
 
 (when (not window-system)
   ;;
