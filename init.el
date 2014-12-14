@@ -89,6 +89,7 @@
     kfi-erc
     kfi-functions
     kfi-html
+    kfi-ibuffer
     kfi-ido
     kfi-java
     kfi-javascript

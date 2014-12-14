@@ -18,15 +18,4 @@
 ;; Switch to next frame, if there is one.
 (global-set-key (kbd "M-`") 'other-frame)
 
-;;Rebind buffer-list to buffer-menu
-(global-set-key (kbd "C-x C-b") 'buffer-menu)
-(global-set-key (kbd "<C-tab>") 'buffer-menu)
-
-(global-set-key [f1] 'deft)
-
-(setq initial-scratch-message
-      (concat ";; F1 -> deft"
-              ";;\n"
-              "\n\n"))
-
 (provide 'kfi-keyboard)
