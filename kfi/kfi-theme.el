@@ -28,7 +28,7 @@
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
 
-(setq dark-mode nil)
+(setq dark-mode t)
 
 (when (and window-system (not dark-mode))
   (global-hl-line-mode 1)
