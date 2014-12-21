@@ -2,7 +2,7 @@
 
 (require 'multi-term)
 
-;; Turn off current-line-highlighting and auto-pair.
+;; Turn off stuff that only makes sense in a regular buffer.
 (defadvice term-char-mode (after term-char-mode-fixes ())
   (set (make-local-variable 'hl-line-mode) nil)
   (set (make-local-variable 'global-hl-line-mode) nil))
@@ -10,9 +10,10 @@
 (ad-activate 'term-char-mode)
 
 (setq multi-term-program "/bin/bash")
-;; (set-face-attribute 'term nil :background "black")
+(set-face-attribute 'term nil :background "#111111")
 (set-face-attribute 'term nil :foreground "#aaaaaa")
-(set-face-attribute 'term-color-yellow nil :foreground "sienna")
+(set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
+(set-face-attribute 'term-color-black nil :foreground "gray50")
 
 (when (string= (face-attribute 'default :background) "White")
   (set-face-attribute 'term nil :foreground "#444444" :background "white")
