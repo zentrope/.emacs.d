@@ -14,10 +14,11 @@
 (set-face-attribute 'term nil :foreground "#aaaaaa")
 (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
 (set-face-attribute 'term-color-black nil :foreground "gray50")
+(set-face-attribute 'term-color-yellow nil :foreground "sienna")
 
-(when (string= (face-attribute 'default :background) "White")
-  (set-face-attribute 'term nil :foreground "#444444" :background "white")
-  (set-face-attribute 'term-color-white nil :foreground "black"))
+;; (when (string= (face-attribute 'default :background) "White")
+;;   (set-face-attribute 'term nil :foreground "#444444" :background "white")
+;;   (set-face-attribute 'term-color-white nil :foreground "black"))
 
 (add-hook 'term-exec-hook
           (function
