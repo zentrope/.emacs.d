@@ -35,7 +35,8 @@
 
   (defun kfi-setup-modeline ()
     (set-face-attribute 'region nil :foreground nil :background "darkseagreen2")
-    (set-face-attribute 'hl-line nil :foreground nil :background "lavender" :underline nil)
+    (set-face-attribute 'hl-line nil :foreground nil :background "lavender"
+                        :underline nil)
 
     (set-face-attribute 'mode-line nil :foreground "royalblue" :background "#dddddd"
                         :family "Menlo" :height 100 :weight 'normal
@@ -49,7 +50,7 @@
   (add-to-list 'default-frame-alist '(cursor-color . "dodgerblue")))
 
 (when (and window-system dark-mode)
-  (global-hl-line-mode 0)
+  (global-hl-line-mode 1)
 
   (invert-face 'default)
 
@@ -70,8 +71,11 @@
 
   (kfi-setup-default-theme-overrides)
 
-  (set-face-attribute 'hl-line nil :foreground nil :underline nil)
-  (set-face-foreground 'highlight nil)
+  ;; (set-face-attribute 'hl-line nil :foreground nil :underline nil)
+  ;; (set-face-foreground 'highlight nil)
+
+  (set-face-attribute 'hl-line nil :foreground nil :background "gray15"
+                      :underline nil)
 
   (defun kfi-setup-modeline ()
     (set-face-attribute 'region nil :foreground nil :background "blue")
@@ -87,7 +91,7 @@
 
   (kfi-setup-modeline)
 
-  (add-to-list 'default-frame-alist '(cursor-color . "orange")))
+  (add-to-list 'default-frame-alist '(cursor-color . "dodgerblue")))
 
 (when window-system
   ;;
