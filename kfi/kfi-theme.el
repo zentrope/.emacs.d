@@ -80,14 +80,18 @@
   (defun kfi-setup-modeline ()
     (set-face-attribute 'region nil :foreground nil :background "blue")
 
-    (set-face-attribute 'mode-line nil :foreground "dodgerblue" :background "#262626"
-                        :family "Menlo" :height 100 :weight 'normal
-                        :box '(:line-width 4 :color "#262626" :style nil))
+    (set-face-attribute 'mode-line nil
+                        :foreground "white"
+                        :background "dodgerblue4"
+                        :family "Monaco" :height 100 :weight 'normal
+                        :box '(:line-width 2 :color "dodgerblue4" :style nil))
 
     (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                        :background "#000000" :family "Menlo" :height 100
+                        :background "gray15" :family "Menlo" :height 100
                         :weight 'normal :italic nil
-                        :box '(:line-width 4 :color "#000000" :style nil)))
+                        :box '(:line-width 2 :color "gray17" :style nil))
+    ;;
+    )
 
   (kfi-setup-modeline)
 
