@@ -9,7 +9,16 @@
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 (setq erc-fill-prefix "    ")
 (setq erc-prompt (lambda () (concat "\n" (buffer-name) " > ")))
-(set-face-attribute 'erc-prompt-face nil :foreground "darkorange" :background nil)
-(set-face-attribute 'erc-timestamp-face nil :foreground "gray25" :background nil)
+(set-face-attribute 'erc-prompt-face nil :foreground "darkorange" :background "#111111")
+(set-face-attribute 'erc-timestamp-face nil :foreground "gray25" :background "#111111")
 (setq erc-fill-column 78)
+(setq erc-scroll-to-bottom -1)
+(setq erc-truncate-buffer-on-save t)
+(setq erc-max-buffer-size 30000)
+
+(defvar erc-insert-post-hook)
+(add-hook 'erc-insert-post-hook
+          'erc-truncate-buffer)
+(setq erc-truncate-buffer-on-save t)
+
 (provide 'kfi-erc)

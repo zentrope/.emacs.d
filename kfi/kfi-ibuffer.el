@@ -10,6 +10,7 @@
                ("web" (or (mode . css-mode)
                           (mode . html-mode)
                           (mode . js-mode)))
+               ("erc" (name . "^\\#"))
                ("elisp" (mode . emacs-lisp-mode))
                ("dirs" (mode . dired-mode))
                ("temps" (name . "^\\*.*\\*$"))
