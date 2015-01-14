@@ -53,6 +53,7 @@
     htmlize
     ido-ubiquitous
     inf-clojure
+    jabber
     json-mode
     magit
     markdown-mode
@@ -91,6 +92,7 @@
     kfi-html
     kfi-ibuffer
     kfi-ido
+    kfi-jabber
     kfi-java
     kfi-javascript
     ;; kfi-lisp     ;; really, inf-clojure.
