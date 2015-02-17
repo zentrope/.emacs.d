@@ -10,7 +10,7 @@
 (ad-activate 'term-char-mode)
 
 (setq multi-term-program "/bin/bash")
-(set-face-attribute 'term nil :background "#111111")
+(set-face-attribute 'term nil :background "#212021")
 (set-face-attribute 'term nil :foreground "#aaaaaa")
 (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
 (set-face-attribute 'term-color-black nil :foreground "gray50")
