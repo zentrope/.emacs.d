@@ -57,8 +57,8 @@
   (defun kfi-setup-default-theme-overrides ()
     ;;
     ;; Frame
-    (set-face-attribute 'fringe nil :background "#111111")
-    (set-face-attribute 'default nil :background "#111111")
+    (set-face-attribute 'fringe nil :background "#212021")
+    (set-face-attribute 'default nil :background "#212021")
     ;;
     ;; Font-lock
     (set-face-attribute font-lock-keyword-face nil :foreground "peru")
