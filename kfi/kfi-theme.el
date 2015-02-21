@@ -27,6 +27,7 @@
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
+(set-face-attribute 'linum nil :foreground "#4a525a")
 
 (setq dark-mode t)
 
