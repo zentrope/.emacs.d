@@ -67,6 +67,9 @@
     org
     cider
     clojure-mode
+    scala-mode2
+    sbt-mode
+    jsx-mode
     ))
 
 (dolist (p kfi-packages)
@@ -95,7 +98,9 @@
     kfi-jabber
     kfi-java
     kfi-javascript
+    kfi-jsx
     ;; kfi-lisp     ;; really, inf-clojure.
+    kfi-linum
     kfi-keyboard
     kfi-magit
     kfi-markdown

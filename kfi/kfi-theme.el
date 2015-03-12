@@ -18,18 +18,16 @@
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-(setq-default line-spacing 3)
+(setq-default line-spacing 0)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
+(setq-default tab-width 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
-;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
+(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
-
-;; when linum mode?
-;;(set-face-attribute 'linum nil :foreground "#4a525a")
 
 (setq dark-mode t)
 

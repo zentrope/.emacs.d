@@ -1,4 +1,5 @@
-;;(setq js-indent-level 2)
+(require 'js-mode)
+
 
 (defun kfi-js-mode-hook ()
   (setq indent-tabs-mode nil)
