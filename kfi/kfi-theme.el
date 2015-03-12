@@ -6,6 +6,9 @@
 (tool-bar-mode 0)
 (setq scroll-step 1)
 
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
 (when (not window-system)
   ;;
   ;; When running in the terminal, turn off the menu.
