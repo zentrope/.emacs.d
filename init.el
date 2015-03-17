@@ -52,8 +52,6 @@
     erc-hl-nicks
     htmlize
     ido-ubiquitous
-    inf-clojure
-    jabber
     json-mode
     magit
     markdown-mode
@@ -95,11 +93,9 @@
     kfi-html
     kfi-ibuffer
     kfi-ido
-    kfi-jabber
     kfi-java
     kfi-javascript
     kfi-jsx
-    ;; kfi-lisp     ;; really, inf-clojure.
     kfi-linum
     kfi-keyboard
     kfi-magit

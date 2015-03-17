@@ -6,7 +6,7 @@
 
 (dolist (hook '(clojure-mode-hook
                 js-mode-hook
-                emacs-lisp-mode-hook
+                ;; emacs-lisp-mode-hook
                 scala-mode-hook))
   (add-hook hook (lambda () (linum-mode t))))
 
