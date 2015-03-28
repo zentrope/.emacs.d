@@ -62,6 +62,7 @@
     paredit
     restclient
     smex
+    swift-mode
     org
     cider
     clojure-mode
@@ -107,6 +108,7 @@
     kfi-server
     kfi-shell-script
     kfi-smex
+    kfi-swift
     kfi-terminal
     kfi-theme
     ))
