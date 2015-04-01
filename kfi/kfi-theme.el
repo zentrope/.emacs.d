@@ -34,6 +34,10 @@
 
 (setq dark-mode t)
 
+;; Transparency
+(set-frame-parameter (selected-frame) 'alpha '(95 95))
+(add-to-list 'default-frame-alist '(alpha 95 95))
+
 (when (and window-system (not dark-mode))
   (global-hl-line-mode 1)
 
