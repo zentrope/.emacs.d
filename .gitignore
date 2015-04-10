@@ -16,3 +16,4 @@ configs/*.elc
 /ido.last
 /kfi/.nrepl-history
 /jabber-avatar-cache/
+/smex-items
