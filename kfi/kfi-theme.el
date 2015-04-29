@@ -35,11 +35,14 @@
 (setq dark-mode t)
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(95 95))
-(add-to-list 'default-frame-alist '(alpha 95 95))
+;; (set-frame-parameter (selected-frame) 'alpha '(95 95))
+;; (add-to-list 'default-frame-alist '(alpha 95 95))
 
 (when (and window-system (not dark-mode))
   (global-hl-line-mode 1)
+  (set-face-attribute 'fringe nil :background "white")
+  (set-face-attribute 'default nil :background "white")
+  (set-face-attribute 'default nil :family "Menlo" :height 140 :weight 'normal)
 
   (defun kfi-setup-modeline ()
     (set-face-attribute 'region nil :foreground nil :background "darkseagreen2")
