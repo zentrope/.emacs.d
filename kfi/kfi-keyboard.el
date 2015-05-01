@@ -2,6 +2,9 @@
 ;; Keybindings
 ;;-----------------------------------------------------------------------------
 
+(setq mac-command-modifier 'super)
+(global-set-key (kbd "s-p") 'projectile-find-file)
+
 ;; On OSX C-M-@ amd M-S-SPC doesn't work in a terminl.
 (global-set-key (kbd "C-M-SPC") 'mark-sexp)
 (global-set-key (kbd "M-RET") 'mark-sexp)

@@ -2,7 +2,8 @@
 
 ;; https://github.com/bbatsov/projectile
 
-(add-hook 'clojure-mode-hook 'projectile-mode)
-(add-hook 'elisp-mode-hook 'projectile-mode)
+(projectile-global-mode)
+;; (add-hook 'clojure-mode-hook 'projectile-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'projectile-mode)
 
 (provide 'kfi-projectile)
