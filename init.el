@@ -52,6 +52,7 @@
     erc-hl-nicks
     htmlize
     ido-ubiquitous
+    ido-vertical-mode
     json-mode
     magit
     markdown-mode
@@ -60,6 +61,7 @@
     multi-web-mode
     multiple-cursors
     paredit
+    projectile
     restclient
     smex
     swift-mode
@@ -105,6 +107,7 @@
     kfi-multiweb
     kfi-org
     kfi-paredit
+    kfi-projectile
     kfi-server
     kfi-shell-script
     kfi-smex
