@@ -14,7 +14,7 @@
 (set-face-attribute 'term nil :foreground "#aaaaaa")
 (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
 (set-face-attribute 'term-color-black nil :foreground "gray50")
-(set-face-attribute 'term-color-yellow nil :foreground "sienna")
+(set-face-attribute 'term-color-yellow nil :foreground "peru")
 
 ;; (when (string= (face-attribute 'default :background) "White")
 ;;   (set-face-attribute 'term nil :foreground "#444444" :background "white")
