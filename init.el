@@ -58,7 +58,7 @@
     markdown-mode
     melpa-upstream-visit
     multi-term
-    multi-web-mode
+    web-mode
     multiple-cursors
     paredit
     projectile
@@ -69,9 +69,7 @@
     cider
     clojure-mode
     scala-mode2
-    sbt-mode
-    jsx-mode
-    ))
+    sbt-mode))
 
 (dolist (p kfi-packages)
   (when (not (package-installed-p p))
@@ -98,13 +96,11 @@
     kfi-ido
     kfi-java
     kfi-javascript
-    kfi-jsx
     kfi-linum
     kfi-keyboard
     kfi-magit
     kfi-markdown
     kfi-multiple-cursors
-    kfi-multiweb
     kfi-org
     kfi-paredit
     kfi-projectile
@@ -114,6 +110,7 @@
     kfi-swift
     kfi-terminal
     kfi-theme
+    kfi-webmode
     ))
 
 (dolist (package customized-packages)
