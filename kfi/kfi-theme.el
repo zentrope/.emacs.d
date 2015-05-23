@@ -42,7 +42,7 @@
   (global-hl-line-mode 1)
   (set-face-attribute 'fringe nil :background "white")
   (set-face-attribute 'default nil :background "white")
-  (set-face-attribute 'default nil :family "Menlo" :height 140 :weight 'normal)
+  (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 
   (defun kfi-setup-modeline ()
     (set-face-attribute 'region nil :foreground nil :background "darkseagreen2")
