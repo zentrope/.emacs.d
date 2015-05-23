@@ -21,7 +21,7 @@
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-(setq-default line-spacing 0)
+(setq-default line-spacing 4)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
@@ -58,7 +58,28 @@
                         :weight 'normal :italic t
                         :box '(:line-width 4 :color "#bbbbbb" :style nil)))
   (kfi-setup-modeline)
-  (add-to-list 'default-frame-alist '(cursor-color . "dodgerblue")))
+  (add-to-list 'default-frame-alist '(cursor-color . "dodgerblue"))
+
+  (defun kfi-setup-light-theme-overrides ()
+    ;;
+    ;; Frame
+    ;; (set-face-attribute 'fringe nil :background "white")
+    ;; (set-face-attribute 'default nil :background "white")
+    ;;
+    ;; Font-lock
+    (set-face-attribute font-lock-keyword-face nil :foreground "#a61d5d" :weight 'normal)
+    (set-face-attribute font-lock-preprocessor-face nil :foreground "red")
+    (set-face-attribute font-lock-function-name-face nil :foreground "black")
+    (set-face-attribute font-lock-variable-name-face nil :foreground "#657492")
+    (set-face-attribute font-lock-constant-face nil :foreground "#0086b3")
+    (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "#13208e")
+    (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray60" :height 100)
+    (set-face-attribute font-lock-type-face nil :foreground "#795da3"))
+
+  (kfi-setup-light-theme-overrides)
+  ;;
+  )
+
 
 (when (and window-system dark-mode)
   (global-hl-line-mode 1)
