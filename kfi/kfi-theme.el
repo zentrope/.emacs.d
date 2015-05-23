@@ -66,11 +66,12 @@
     ;; (set-face-attribute 'fringe nil :background "white")
     ;; (set-face-attribute 'default nil :background "white")
     ;;
-    ;; Font-lock
+    ;; Font-lock (mainly Clojure)
     (set-face-attribute font-lock-keyword-face nil :foreground "#a61d5d" :weight 'normal)
-    (set-face-attribute font-lock-preprocessor-face nil :foreground "red")
+    ;; Java interop
+    (set-face-attribute font-lock-preprocessor-face nil :foreground "sienna")
     (set-face-attribute font-lock-function-name-face nil :foreground "black")
-    (set-face-attribute font-lock-variable-name-face nil :foreground "#657492")
+    (set-face-attribute font-lock-variable-name-face nil :foreground "dodgerblue")
     (set-face-attribute font-lock-constant-face nil :foreground "#0086b3")
     (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "#13208e")
     (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray60" :height 100)
