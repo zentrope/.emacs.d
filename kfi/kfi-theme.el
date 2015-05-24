@@ -21,7 +21,7 @@
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-(setq-default line-spacing 4)
+(setq-default line-spacing 1)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
@@ -74,7 +74,8 @@
     (set-face-attribute font-lock-variable-name-face nil :foreground "dodgerblue")
     (set-face-attribute font-lock-constant-face nil :foreground "#0086b3")
     (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "#13208e")
-    (set-face-attribute font-lock-comment-face nil :slant 'italic :foreground "gray60" :height 100)
+    (set-face-attribute font-lock-comment-face nil :slant 'normal
+                        :foreground "gray60" :height 100)
     (set-face-attribute font-lock-type-face nil :foreground "#795da3"))
 
   (kfi-setup-light-theme-overrides)
