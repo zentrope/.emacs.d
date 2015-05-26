@@ -45,8 +45,8 @@
   (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 
   (defun kfi-setup-modeline ()
-    (set-face-attribute 'region nil :foreground nil :background "darkseagreen2")
-    (set-face-attribute 'hl-line nil :foreground nil :background "lavender"
+    (set-face-attribute 'region nil :foreground nil :background "lavender")
+    (set-face-attribute 'hl-line nil :foreground nil :background "aliceblue"
                         :underline nil)
 
     (set-face-attribute 'mode-line nil :foreground "royalblue" :background "#dddddd"
@@ -74,8 +74,8 @@
     (set-face-attribute font-lock-variable-name-face nil :foreground "dodgerblue")
     (set-face-attribute font-lock-constant-face nil :foreground "#0086b3")
     (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "#13208e")
-    (set-face-attribute font-lock-comment-face nil :slant 'normal
-                        :foreground "gray60" :height 100)
+    (set-face-attribute font-lock-comment-face nil :slant 'italic
+                        :foreground "gray75" :height 120)
     (set-face-attribute font-lock-type-face nil :foreground "#795da3"))
 
   (kfi-setup-light-theme-overrides)
