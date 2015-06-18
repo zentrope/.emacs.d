@@ -37,7 +37,7 @@
             '("gnu"          . "http://elpa.gnu.org/packages/")
             '("org"          . "http://orgmode.org/elpa/")))
 
-;;(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (package-initialize)
 
