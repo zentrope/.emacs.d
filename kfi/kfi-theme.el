@@ -93,7 +93,7 @@
     ;; Frame
     ;; (set-face-attribute 'fringe nil :background "#212021")
     ;; (set-face-attribute 'default nil :background "#212021")
-    (set-face-attribute 'fringe nil :background "black")
+    (set-face-attribute 'fringe nil :background "#151525")
     (set-face-attribute 'default nil :background "black")
     ;;
     ;; Font-lock
