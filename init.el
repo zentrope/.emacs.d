@@ -46,7 +46,7 @@
 
 (defvar kfi-packages
   '(
-    cljsbuild-mode
+    clj-refactor
     company
     dired-details
     erc-hl-nicks
