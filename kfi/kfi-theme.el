@@ -2,6 +2,7 @@
 ;; Theme / Appearance related stuff.
 ;;-----------------------------------------------------------------------------
 
+(delete-selection-mode 1)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (setq scroll-step 1)
