@@ -7,6 +7,7 @@
 (setq ibuffer-saved-filter-groups
       (quote (("default"
                ("clojure" (mode . clojure-mode))
+               ("clojure-script" (mode . clojurescript-mode))
                ("web" (or (mode . css-mode)
                           (mode . html-mode)
                           (mode . js-mode)))

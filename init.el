@@ -84,7 +84,6 @@
 (defvar customized-packages
   '(
     kfi-cider
-    kfi-cljsbuild
     kfi-clojure
     kfi-css
     kfi-dired-details
