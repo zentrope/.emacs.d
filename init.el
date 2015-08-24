@@ -9,7 +9,8 @@
 
 (when (equal system-type 'darwin)
   (push "/usr/texbin" exec-path)
-  (push "/usr/local/bin" exec-path))
+  (push "/usr/local/bin" exec-path)
+  (push "~/bin" exec-path))
 
 ;;-----------------------------------------------------------------------------
 ;; Paths
