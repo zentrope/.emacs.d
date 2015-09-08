@@ -3,7 +3,6 @@
 ;;-----------------------------------------------------------------------------
 
 (delete-selection-mode 1)
-(scroll-bar-mode 0)
 (tool-bar-mode 0)
 (setq scroll-step 1)
 
@@ -17,7 +16,10 @@
   (global-hl-line-mode 0)
   (menu-bar-mode 0))
 
-(fringe-mode '(6 . 6))
+(when window-system
+  (scroll-bar-mode 0)
+  (fringe-mode '(6 . 6)))
+
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
