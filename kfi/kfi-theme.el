@@ -20,6 +20,14 @@
   (scroll-bar-mode 0)
   (fringe-mode '(6 . 6)))
 
+(setq text-mode nil)
+
+(when text-mode
+  ;; Writing text in Markdown, say.
+  (fringe-mode '(80 . 80))
+  (setq-default line-spacing 5)
+  (set-face-attribute 'default nil :family "Monaco" :height 140 :weight 'normal))
+
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
@@ -44,7 +52,7 @@
 (when (and window-system (not dark-mode))
   (global-hl-line-mode 1)
   (set-face-attribute 'fringe nil :background "white")
-  (set-face-attribute 'default nil :background "white")
+  (set-face-attribute 'default nil :background "white" :foreground "black")
   (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
 
   (defun kfi-setup-modeline ()
