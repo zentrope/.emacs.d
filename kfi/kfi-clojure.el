@@ -1,27 +1,30 @@
 (require 'clojure-mode)
-
 (require 'clj-refactor)
 
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("(\\(fn\\)[\[[:space:]]"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "λ")
-                               nil))))))
+(defconst kfi-clj-lambda
+  `(("(\\(fn\\)[\[[:space:]]"
+     (0 (progn (compose-region (match-beginning 1)
+                               (match-end 1) "λ")
+               nil)))))
 
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("\\(#\\)("
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "ƒ")
-                               nil))))))
+(defconst kfi-clj-anonfn
+  `(("\\(#\\)("
+     (0 (progn (compose-region (match-beginning 1)
+                               (match-end 1) "ƒ")
+               nil)))))
 
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("\\(#\\){"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "∈")
-                               nil))))))
+(defconst kfi-clj-settag
+  `(("\\(#\\){"
+     (0 (progn (compose-region (match-beginning 1)
+                               (match-end 1) "∈")
+               nil)))))
+
+(font-lock-add-keywords 'clojure-mode       kfi-clj-lambda)
+(font-lock-add-keywords 'clojure-mode       kfi-clj-anonfn)
+(font-lock-add-keywords 'clojure-mode       kfi-clj-settag)
+(font-lock-add-keywords 'clojurescript-mode kfi-clj-anonfn)
+(font-lock-add-keywords 'clojurescript-mode kfi-clj-lambda)
+(font-lock-add-keywords 'clojurescript-mode kfi-clj-settag)
 
 (defface kfi-paren-face
   '((((class color) (background dark))
@@ -31,21 +34,13 @@
   "Face used to dim parentheses."
   :group 'faces)
 
-(font-lock-add-keywords 'clojure-mode
-                        '(("(\\|)" . 'kfi-paren-face)))
+(defconst kfi-face '(("(\\|)" . 'kfi-paren-face)))
 
-;;(setq clojure-defun-style-default-indent t)
+(font-lock-add-keywords 'clojure-mode kfi-face)
+(font-lock-add-keywords 'clojurescript-mode kfi-face)
 
-(define-clojure-indent
-  (cond 'defun)
-  (cond-> 'defun)
-  (GET 'defun)
-  (PUT 'defun)
-  (DELETE 'defun)
-  (POST 'defun)
-  (OPTIONS 'defun)
-  (ANY 'defun)
-  (defcomponent 'defun))
+(setq clojure-defun-style-default-indent t)
+;;(setq clojure-defun-style-default-indent nil)
 
 (defun kfi-clojure-hook ()
   (setq indent-tabs-mode nil)
