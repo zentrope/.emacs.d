@@ -74,8 +74,8 @@
   (defun kfi-setup-light-theme-overrides ()
     ;;
     ;; Frame
-    ;; (set-face-attribute 'fringe nil :background "white")
-    ;; (set-face-attribute 'default nil :background "white")
+    (set-face-attribute 'fringe nil :background "white")
+    (set-face-attribute 'default nil :background "white")
     ;;
     ;; Font-lock (mainly Clojure)
     (set-face-attribute font-lock-keyword-face nil :foreground "#a61d5d" :weight 'normal)
@@ -86,7 +86,7 @@
     (set-face-attribute font-lock-constant-face nil :foreground "#0086b3")
     (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "#13208e")
     (set-face-attribute font-lock-comment-face nil :slant 'italic
-                        :foreground "gray75" :height 120)
+                        :foreground "mediumpurple" :height 120)
     (set-face-attribute font-lock-type-face nil :foreground "#795da3"))
 
   (kfi-setup-light-theme-overrides)
