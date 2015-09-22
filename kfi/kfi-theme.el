@@ -85,7 +85,7 @@
     (set-face-attribute font-lock-variable-name-face nil :foreground "dodgerblue")
     (set-face-attribute font-lock-constant-face nil :foreground "#0086b3")
     (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "#13208e")
-    (set-face-attribute font-lock-comment-face nil :slant 'italic
+    (set-face-attribute font-lock-comment-face nil :slant 'normal
                         :foreground "mediumpurple" :height 120)
     (set-face-attribute font-lock-type-face nil :foreground "#795da3"))
 
