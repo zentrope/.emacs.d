@@ -114,7 +114,7 @@
     (set-face-attribute font-lock-constant-face nil :slant 'italic :foreground "mediumslateblue")
     (set-face-attribute font-lock-string-face nil :slant 'normal :foreground "plum")
     (set-face-attribute font-lock-variable-name-face nil :foreground "sandybrown")
-    (set-face-attribute font-lock-comment-face nil :slant 'normal :foreground "gray40"))
+    (set-face-attribute font-lock-comment-face nil :slant 'normal :foreground "mediumpurple"))
 
   (kfi-setup-default-theme-overrides)
 
