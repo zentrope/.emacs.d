@@ -48,7 +48,6 @@
 
 (defvar kfi-packages
   '(
-    clj-refactor
     company
     dired-details
     erc-hl-nicks
@@ -69,9 +68,7 @@
     swift-mode
     org
     cider
-    clojure-mode
-    scala-mode2
-    sbt-mode))
+    clojure-mode))
 
 (dolist (p kfi-packages)
   (when (not (package-installed-p p))

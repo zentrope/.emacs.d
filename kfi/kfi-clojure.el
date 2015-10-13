@@ -1,5 +1,4 @@
 (require 'clojure-mode)
-;; (require 'clj-refactor)
 
 (defconst kfi-clj-lambda
   `(("(\\(fn\\)[\[[:space:]]"
@@ -39,16 +38,20 @@
 (font-lock-add-keywords 'clojure-mode kfi-face)
 (font-lock-add-keywords 'clojurescript-mode kfi-face)
 
-(setq clojure-defun-style-default-indent t)
-;;(setq clojure-defun-style-default-indent nil)
+(defun kfi-cljs-indent ()
+  (interactive)
+  ;; Mainly for doing dom/html structures.
+  (setq clojure-defun-style-default-indent t))
+
+(defun kfi-clj-indent ()
+  (interactive)
+  (setq clojure-defun-style-default-indent nil))
+
+(kfi-clj-indent)
 
 (defun kfi-clojure-hook ()
   (setq indent-tabs-mode nil)
-  (local-set-key (kbd "RET") 'newline-and-indent)
-  ;; (clj-refactor-mode 1)
-  ;; (yas-minor-mode 1) ; for adding require/use/import
-  ;; (cljr-add-keybindings-with-prefix "C-c C-m")
-  )
+  (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'clojure-mode-hook #'kfi-clojure-hook)
 (add-hook 'clojure-mode-hook 'paredit-mode)
