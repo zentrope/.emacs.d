@@ -19,9 +19,9 @@
 (setq erc-fill-prefix "    ")
 (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
 (set-face-attribute 'erc-prompt-face nil
-                    :foreground "darkorange" :background "#212021")
+                    :foreground "darkorange" :background "black")
 (set-face-attribute 'erc-timestamp-face nil
-                    :foreground "gray25" :background "#212021")
+                    :foreground "gray25" :background "black")
 (setq erc-fill-column 78)
 (setq erc-scroll-to-bottom -2)
 (setq erc-truncate-buffer-on-save t)
