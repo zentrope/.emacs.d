@@ -11,6 +11,7 @@
 
 (if window-system
     (progn (scroll-bar-mode 0)
+           (global-hl-line-mode 1)
            (fringe-mode '(6 . 6)))
     (progn (global-hl-line-mode 0)
            (menu-bar-mode 0)))
@@ -156,9 +157,9 @@
 
   (set-face-attribute 'mode-line nil
                       :foreground "#ccc"
-                      :background "#036"
+                      :background "#374350"
                       :family "Monaco" :height 100 :weight 'normal
-                      :box '(:line-width 2 :color "#036" :style nil))
+                      :box '(:line-width 2 :color "#374350" :style nil))
 
   (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
                       :background "gray15" :family "Menlo" :height 100
