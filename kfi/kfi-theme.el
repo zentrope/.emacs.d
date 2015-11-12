@@ -21,13 +21,14 @@
   ;; Writing text in Markdown, say.
   (fringe-mode '(80 . 80))
   (setq-default line-spacing 5)
-  (set-face-attribute 'default nil :family "Monaco" :height 140 :weight 'normal))
+  (set-face-attribute 'default nil :family "monaco" :height 140 :weight 'normal)
+  )
 
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-(setq-default line-spacing 4)
+(setq-default line-spacing 3)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
@@ -151,7 +152,7 @@
 ;;     (add-to-list 'default-frame-alist '(cursor-color . "dodgerblue"))))
 
 (defun kfi-setup-modeline ()
-  (set-face-attribute 'region nil :foreground nil :background "blue")
+  (set-face-attribute 'region nil :foreground nil :background "#374350")
 
   (set-face-attribute 'mode-line nil
                       :foreground "#ccc"
