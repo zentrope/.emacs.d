@@ -69,7 +69,8 @@
     swift-mode
     org
     cider
-    clojure-mode))
+    clojure-mode
+    clojure-mode-extra-font-locking))
 
 (dolist (p kfi-packages)
   (when (not (package-installed-p p))

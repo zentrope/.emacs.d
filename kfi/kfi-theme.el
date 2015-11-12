@@ -43,12 +43,18 @@
 
 (when window-system
   (load-theme 'atom-one-dark t)
-  (set-face-attribute 'fringe nil :background "black")
-  (set-face-attribute 'default nil :background "black"))
+
+  ;; Adjustments to atom-one-dark theme
+  (set-face-attribute 'fringe nil :background "#000000")
+  (set-face-attribute 'default nil :background "#000000")
+  (set-face-attribute font-lock-comment-face nil :slant 'italic)
+  (set-face-attribute font-lock-function-name-face nil :foreground "#ABB2BF")
+  (set-face-attribute font-lock-builtin-face nil :foreground "#71abec")
+  (set-face-attribute font-lock-type-face nil :foreground "#71abec"))
 
 ;; Transparency
-;; (set-frame-parameter (selected-frame) 'alpha '(95 95))
-;; (add-to-list 'default-frame-alist '(alpha 95 95))
+(set-frame-parameter (selected-frame) 'alpha '(95 95))
+(add-to-list 'default-frame-alist '(alpha 95 95))
 
 ;; (defun kfi-set-theme-mode ()
 ;;   (when (and window-system (not dark-mode))
@@ -164,6 +170,7 @@
   (kfi-setup-modeline)
 ;;  (kfi-set-theme-mode)
 
+  (global-linum-mode 1)
   (defun kfi-go-dark ()
     (interactive)
     (setq dark-mode t)

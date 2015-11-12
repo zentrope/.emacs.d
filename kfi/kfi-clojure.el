@@ -1,4 +1,5 @@
 (require 'clojure-mode)
+(require 'clojure-mode-extra-font-locking)
 
 (defconst kfi-clj-lambda
   `(("(\\(fn\\)[\[[:space:]]"
