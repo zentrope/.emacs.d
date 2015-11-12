@@ -1,7 +1,7 @@
 (require 'linum)
 
-(set-face-attribute 'linum nil :foreground "#4a525a")
-(setq linum-format "%4d \u2502")
+(set-face-attribute 'linum nil :foreground "#333")
+(setq linum-format "%4d ")
 
 ;; (dolist (hook '(clojure-mode-hook
 ;;                 js-mode-hook
