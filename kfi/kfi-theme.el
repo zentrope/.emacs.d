@@ -29,13 +29,13 @@
 (cua-mode 1)
 (show-paren-mode t)
 (custom-set-variables '(indent-tabs-mode nil))
-(setq-default line-spacing 3)
+(setq-default line-spacing 1)
 (setq-default inhibit-startup-screen t)
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
-(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
@@ -52,11 +52,25 @@
   (set-face-attribute font-lock-comment-face nil :slant 'italic)
   (set-face-attribute font-lock-function-name-face nil :foreground "#ABB2BF")
   (set-face-attribute font-lock-builtin-face nil :foreground "#71abec")
-  (set-face-attribute font-lock-type-face nil :foreground "#71abec"))
+  (set-face-attribute font-lock-type-face nil :foreground "#71abec")
+
+  (set-face-attribute 'magit-diff-removed nil :foreground "firebrick"
+                      :background "black")
+
+  (set-face-attribute 'magit-diff-added nil :foreground "green"
+                      :background "black")
+
+  (set-face-attribute 'magit-diff-added-highlight nil
+                      :foreground "#98C379"
+                      :background "black")
+
+  (set-face-attribute 'magit-diff-removed-highlight nil
+                      :foreground "indianred"
+                      :background "black"))
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(95 95))
-(add-to-list 'default-frame-alist '(alpha 95 95))
+;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
+;; (add-to-list 'default-frame-alist '(alpha 100 100))
 
 ;; (defun kfi-set-theme-mode ()
 ;;   (when (and window-system (not dark-mode))
