@@ -186,16 +186,17 @@
   (kfi-setup-modeline)
 ;;  (kfi-set-theme-mode)
 
-  (global-linum-mode 1)
-  (defun kfi-go-dark ()
-    (interactive)
-    (setq dark-mode t)
-    (kfi-set-theme-mode))
+  (global-linum-mode 0)
 
-  (defun kfi-go-light ()
-    (interactive)
-    (setq dark-mode nil)
-    (kfi-set-theme-mode))
+  ;; (defun kfi-go-dark ()
+  ;;   (interactive)
+  ;;   (setq dark-mode t)
+  ;;   (kfi-set-theme-mode))
+
+  ;; (defun kfi-go-light ()
+  ;;   (interactive)
+  ;;   (setq dark-mode nil)
+  ;;   (kfi-set-theme-mode))
 
   ;;
   ;; Not sure if this works.

@@ -2,6 +2,18 @@
 ;; Locations
 ;;-----------------------------------------------------------------------------
 
+(defun arrange-frame (w h x y)
+  (let ((frame (selected-frame)))
+    (set-frame-position frame x y)
+    (set-frame-size frame w h)))
+
+(when window-system
+  (let ((w 100)
+        (h 60)
+        (x 1000)
+        (y 100))
+    (arrange-frame w h x y)))
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
@@ -39,7 +51,6 @@
             '("org"          . "http://orgmode.org/elpa/")))
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-(add-to-list 'package-pinned-packages '(clj-refactor . "melpa-stable") t)
 
 (package-initialize)
 
