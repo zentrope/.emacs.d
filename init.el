@@ -1,9 +1,10 @@
 ;; REWRITE
 
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(tooltip-mode -1)
+(when window-system
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (tooltip-mode -1))
 
 (defun arrange-frame (w h x y)
   (let ((frame (selected-frame)))
