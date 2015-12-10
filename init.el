@@ -1,6 +1,9 @@
-;;-----------------------------------------------------------------------------
-;; Locations
-;;-----------------------------------------------------------------------------
+;; REWRITE
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(tooltip-mode -1)
 
 (defun arrange-frame (w h x y)
   (let ((frame (selected-frame)))
@@ -14,15 +17,111 @@
         (y 100))
     (arrange-frame w h x y)))
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;;-----------------------------------------------------------------------------
+
+(require 'package)
+
+;; Development
+(setq package-archives
+      (list '("melpa"        . "http://melpa.org/packages/")
+            '("melpa-stable" . "http://stable.melpa.org/packages/")
+            '("gnu"          . "http://elpa.gnu.org/packages/")
+            '("org"          . "http://orgmode.org/elpa/")))
+
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+
+(setq use-package-verbose t)
+
+(use-package css-mode
+  :ensure t
+  :config
+  (setq css-indent-offset 2)
+  (add-hook 'css-mode-hook '(lambda ()
+                              (local-set-key (kbd "RET") 'newline-and-indent))))
+
+(use-package ido
+  :init
+  (progn (ido-mode 1)
+         (ido-vertical-mode 1)
+
+         (setq ido-enable-flex-matching t)
+         (setq ido-everywhere t)
+
+         (use-package ido-ubiquitous
+           :ensure t
+           :init (ido-ubiquitous-mode))
+         (use-package ido-vertical-mode
+           :ensure t
+           :init (ido-vertical-mode 1))))
+
+(use-package paredit
+  :ensure t)
+
+(use-package org
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (setq org-html-doctype "html5")
+  (setq org-export-with-smart-quotes t)
+  (setq org-replace-disputed-keys t)
+  (setq org-html-head "<style>html { font-family: helvetica, sans-serif; }</style>"))
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.markdown$" "\\.md$"
+         "\\.mkd$"
+         "\\.mkdn$"
+         "\\.mdown$"
+         "\\.mdwn$" "\\.text$")
+  :config
+  (defun kfi-markdown-mode-hook ()
+    (auto-fill-mode 1))
+
+  (add-hook 'markdown-mode-hook 'kfi-markdown-mode-hook))
+
+(use-package web-mode
+  :ensure t
+  :mode ("\\.html?\\'" "\\.js?\\'" "\\.jsx$")
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-indent-style 2)
+  (setq web-mode-content-types
+        (cons '("jsx" . "\\.js\\'") web-mode-content-types))
+  (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
+  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
+
+(use-package dired-details
+  :ensure t
+  :config
+  (setq-default dired-details-hidden-string "--- ")
+  (dired-details-install))
+
+(use-package projectile
+  :ensure t
+  :commands projectile-global-mode)
+
+;;-----------------------------------------------------------------------------
+;; Locations
+;;-----------------------------------------------------------------------------
 
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
 
-(when (equal system-type 'darwin)
-  (push "/usr/texbin" exec-path)
-  (push "/usr/local/bin" exec-path)
-  (push "~/bin" exec-path))
+
+(setq custom-file  (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
 
 ;;-----------------------------------------------------------------------------
 ;; Paths
@@ -41,19 +140,6 @@
 ;; Packages
 ;;-----------------------------------------------------------------------------
 
-(require 'package)
-
-;; Development
-(setq package-archives
-      (list '("melpa"        . "http://melpa.org/packages/")
-            '("melpa-stable" . "http://stable.melpa.org/packages/")
-            '("gnu"          . "http://elpa.gnu.org/packages/")
-            '("org"          . "http://orgmode.org/elpa/")))
-
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-
-(package-initialize)
-
 (when (not package-archive-contents)
   (package-refresh-contents))
 
@@ -61,24 +147,16 @@
   '(
     atom-one-dark-theme
     company
-    dired-details
     erc-hl-nicks
     htmlize
-    ido-ubiquitous
-    ido-vertical-mode
     json-mode
     magit
-    markdown-mode
     melpa-upstream-visit
     multi-term
-    web-mode
     multiple-cursors
-    paredit
-    projectile
     restclient
     smex
     swift-mode
-    org
     cider
     clojure-mode
     clojure-mode-extra-font-locking))
@@ -97,31 +175,23 @@
   '(
     kfi-cider
     kfi-clojure
-    kfi-css
-    kfi-dired-details
     kfi-emacs-lisp
     kfi-erc
     kfi-functions
     kfi-html
     kfi-ibuffer
-    kfi-ido
     kfi-java
     kfi-javascript
     kfi-linum
     kfi-keyboard
     kfi-magit
-    kfi-markdown
     kfi-multiple-cursors
-    kfi-org
-    kfi-paredit
-    kfi-projectile
     kfi-server
     kfi-shell-script
     kfi-smex
     kfi-swift
     kfi-terminal
     kfi-theme
-    kfi-webmode
     ))
 
 (dolist (package customized-packages)
@@ -136,21 +206,3 @@
 
 (if (file-exists-p init-local-file)
     (load init-local-file))
-
-;;-----------------------------------------------------------------------------
-;; Ugh
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("b2d6d3519462edc6373c02ea7c871fa7653f84e5dd6dba582b116ddf2c8c9af1" default)))
- '(indent-tabs-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
