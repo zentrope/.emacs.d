@@ -65,6 +65,8 @@
            :ensure t
            :init (ido-vertical-mode 1))))
 
+
+
 (use-package paredit
   :ensure t)
 
@@ -113,6 +115,51 @@
   :ensure t
   :commands projectile-global-mode)
 
+(use-package dash-at-point
+  :ensure t
+  :bind (("s-D"     . dash-at-point)
+         ("C-c e"   . dash-at-point-with-docset)))
+
+(use-package helm
+  ;; http://tuhdo.github.io/helm-intro.html#sec-31
+  :ensure t
+  :diminish helm-mode
+  :config (progn
+
+            (require 'helm-config)
+
+            (use-package helm-projectile
+              :ensure t
+              :commands helm-projectile
+              :bind ("s-p" . helm-projectile))
+
+            (use-package helm-ag
+              :ensure t)
+
+            (setq helm-locate-command "mdfind -interpret -name %s %s"
+                  helm-ff-newfile-prompt-p nil
+                  helm-M-x-fuzzy-match t)
+            (helm-mode)
+            (helm-autoresize-mode t)
+            ;; rebind tab to do persistent action
+            (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+            ;; make TAB works in terminal
+            (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+            ;; list actions using C-z
+            (define-key helm-map (kbd "C-z")  'helm-select-action)
+            (bind-key (kbd "M-x") 'helm-M-x))
+
+  :bind (("C-c h" . helm-command-prefix)
+         ("C-x b" . helm-mini)
+         ("C-`" . helm-resume)
+         ("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)))
+
+;; (use-package smex
+;;   :if (not (featurep 'helm-mode))
+;;   :ensure t
+;;   :bind ("M-x" . smex))
+
 ;;-----------------------------------------------------------------------------
 ;; Locations
 ;;-----------------------------------------------------------------------------
@@ -155,7 +202,6 @@
     multi-term
     multiple-cursors
     restclient
-    smex
     swift-mode
     cider
     clojure-mode
@@ -188,7 +234,6 @@
     kfi-multiple-cursors
     kfi-server
     kfi-shell-script
-    kfi-smex
     kfi-swift
     kfi-terminal
     kfi-theme
