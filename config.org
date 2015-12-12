@@ -1,30 +1,8 @@
-#+title: Configuration
+#+title: The Dot in Emacs.d
 #+author: Keith Irwin
 #+startup: content
 
-* Configuration
-
-** Themes
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package cyberpunk-theme
-    :disabled t
-    :ensure t
-    :config
-    (load-theme 'cyberpunk t)
-    (set-face-attribute 'mode-line nil
-                        :box '(:line-width 2 :color "#333333" :style nil))
-    (set-face-attribute `mode-line-inactive nil
-                        :box '(:line-width 2 :color "#1a1a1a" :style nil)))
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package seti-theme
-    :disabled t
-    :ensure t
-    :config
-    (load-theme 'seti t))
-#+end_src
+* Themes
 
 This is my main theme. Bright where it needs to be, but no where else.
 
@@ -52,9 +30,34 @@ This is my main theme. Bright where it needs to be, but no where else.
                             :box '(:line-width 2 :color "gray15" :style nil))))
 #+end_src
 
-** Web Programming
+Cyberpunk is disabled, but it has some nice things.
 
-*** web-mode
+#+begin_src emacs-lisp :tangle yes
+  (use-package cyberpunk-theme
+    :disabled t
+    :ensure t
+    :config
+    (load-theme 'cyberpunk t)
+    (set-face-attribute 'mode-line nil
+                        :box '(:line-width 2 :color "#333333" :style nil))
+    (set-face-attribute `mode-line-inactive nil
+                        :box '(:line-width 2 :color "#1a1a1a" :style nil)))
+#+end_src
+
+Another kinda nice theme, but still not quite for me.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package seti-theme
+    :disabled t
+    :ensure t
+    :config
+    (load-theme 'seti t))
+#+end_src
+
+
+* Web Programming
+
+** web-mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package web-mode
@@ -71,7 +74,7 @@ This is my main theme. Bright where it needs to be, but no where else.
     (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
 #+end_src
 
-*** CSS Mode
+** CSS Mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package css-mode
@@ -82,7 +85,7 @@ This is my main theme. Bright where it needs to be, but no where else.
                                 (local-set-key (kbd "RET") 'newline-and-indent))))
 #+end_src
 
-*** Rest client
+** Rest client
 
 Handy mode for running raw web requests. Alas, not particularly good
 for web-sockets.
@@ -93,9 +96,9 @@ for web-sockets.
 #+end_src
 
 
-** Languages
+* Languages
 
-*** Clojure
+** Clojure
 
 The Clojure IDE. A ton of features, most of which I can ignore.
 
@@ -132,8 +135,8 @@ why I end up turning any IDE I use into an editor.
 #+end_src
 
 
-** Text Processing
-*** Org Mode
+* Text Processing
+** Orgmode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package org
@@ -151,7 +154,7 @@ why I end up turning any IDE I use into an editor.
       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
 #+end_src
 
-*** Markdown Mode
+** Markdown
 
 #+begin_src emacs-lisp :tangle yes
   (use-package markdown-mode
