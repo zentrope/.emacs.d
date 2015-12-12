@@ -1,0 +1,169 @@
+#+title: Configuration
+#+author: Keith Irwin
+#+startup: content
+
+* Configuration
+
+** Themes
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package cyberpunk-theme
+    :disabled t
+    :ensure t
+    :config
+    (load-theme 'cyberpunk t)
+    (set-face-attribute 'mode-line nil
+                        :box '(:line-width 2 :color "#333333" :style nil))
+    (set-face-attribute `mode-line-inactive nil
+                        :box '(:line-width 2 :color "#1a1a1a" :style nil)))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package seti-theme
+    :disabled t
+    :ensure t
+    :config
+    (load-theme 'seti t))
+#+end_src
+
+This is my main theme. Bright where it needs to be, but no where else.
+
+#+begin_src emacs-lisp :tangle yes
+    (use-package atom-one-dark-theme
+      :if window-system
+      :ensure t
+      :config
+      (progn
+        (load-theme 'atom-one-dark t)
+        (set-face-attribute 'fringe nil :background "#000000")
+        (set-face-attribute 'fringe nil :background "#111711")
+        (set-face-attribute 'default nil :background "#111711")
+        ;; (set-face-background hl-line-face "gray13")
+        (set-face-attribute 'mode-line nil
+                            :foreground "#ccc"
+                            :background "#374350"
+                            :underline nil
+                            :family "Monaco" :height 100 :weight 'normal
+                            :box '(:line-width 2 :color "#374350" :style nil))
+
+        (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                            :background "gray15" :family "Menlo" :height 100
+                            :weight 'normal :italic nil
+                            :box '(:line-width 2 :color "gray15" :style nil))))
+#+end_src
+
+** Web Programming
+
+*** web-mode
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package web-mode
+    :ensure t
+    :mode ("\\.html?\\'" "\\.js?\\'" "\\.jsx$")
+    :config
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-indent-style 2)
+    (setq web-mode-content-types
+          (cons '("jsx" . "\\.js\\'") web-mode-content-types))
+    (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
+    (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
+#+end_src
+
+*** CSS Mode
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package css-mode
+    :ensure t
+    :config
+    (setq css-indent-offset 2)
+    (add-hook 'css-mode-hook '(lambda ()
+                                (local-set-key (kbd "RET") 'newline-and-indent))))
+#+end_src
+
+*** Rest client
+
+Handy mode for running raw web requests. Alas, not particularly good
+for web-sockets.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package restclient
+    :ensure t)
+#+end_src
+
+
+** Languages
+
+*** Clojure
+
+The Clojure IDE. A ton of features, most of which I can ignore.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package cider
+    :ensure t
+    :config
+    (setq cider-font-lock-dynamically '(macro core function var))
+    (setq cider-repl-use-clojure-font-lock t)
+    (setq cider-overlays-use-font-lock t)
+    (add-hook 'cider-repl-mode-hook 'paredit-mode)
+    (add-hook 'cider-repl-mode-hook 'company-mode)
+    (add-hook 'cider-mode-hook 'company-mode)
+    (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (setq cider-repl-use-pretty-printing 1))
+#+end_src
+
+Paredit is transformative thought technology in the same way Lisp is.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package paredit
+    :ensure t)
+#+end_src
+
+Cider depends on company mode for completion. I'm not a big fan of
+completion most of the time. I always turn it off in IDEs, which is
+why I end up turning any IDE I use into an editor.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package company
+    :ensure t)
+#+end_src
+
+
+** Text Processing
+*** Org Mode
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package org
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook 'turn-on-auto-fill)
+    (setq org-html-doctype "html5")
+    (setq org-export-with-smart-quotes t)
+    (setq org-replace-disputed-keys t)
+    (setq org-html-head "<style>html { font-family: helvetica, sans-serif; }</style>")
+    (use-package org-bullets
+      :disabled t
+      :ensure t
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
+#+end_src
+
+*** Markdown Mode
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package markdown-mode
+    :ensure t
+    :mode ("\\.markdown$" "\\.md$"
+           "\\.mkd$"
+           "\\.mkdn$"
+           "\\.mdown$"
+           "\\.mdwn$" "\\.text$")
+    :config
+    (defun kfi-markdown-mode-hook ()
+      (auto-fill-mode 1))
+
+    (add-hook 'markdown-mode-hook 'kfi-markdown-mode-hook))
+#+end_src

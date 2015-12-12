@@ -1,7 +1,7 @@
 ;; REWRITE
 
 (when window-system
-  (menu-bar-mode -1)
+  (menu-bar-mode 1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   (tooltip-mode -1))
@@ -44,12 +44,7 @@
 
 (setq use-package-verbose t)
 
-(use-package css-mode
-  :ensure t
-  :config
-  (setq css-indent-offset 2)
-  (add-hook 'css-mode-hook '(lambda ()
-                              (local-set-key (kbd "RET") 'newline-and-indent))))
+(org-babel-load-file (concat user-emacs-directory "config.org"))
 
 (use-package ido
   :init
@@ -65,45 +60,10 @@
            :ensure t
            :init (ido-vertical-mode 1))))
 
-
-
-(use-package paredit
-  :ensure t)
-
-(use-package org
+(use-package yasnippet
   :ensure t
   :config
-  (add-hook 'org-mode-hook 'turn-on-auto-fill)
-  (setq org-html-doctype "html5")
-  (setq org-export-with-smart-quotes t)
-  (setq org-replace-disputed-keys t)
-  (setq org-html-head "<style>html { font-family: helvetica, sans-serif; }</style>"))
-
-(use-package markdown-mode
-  :ensure t
-  :mode ("\\.markdown$" "\\.md$"
-         "\\.mkd$"
-         "\\.mkdn$"
-         "\\.mdown$"
-         "\\.mdwn$" "\\.text$")
-  :config
-  (defun kfi-markdown-mode-hook ()
-    (auto-fill-mode 1))
-
-  (add-hook 'markdown-mode-hook 'kfi-markdown-mode-hook))
-
-(use-package web-mode
-  :ensure t
-  :mode ("\\.html?\\'" "\\.js?\\'" "\\.jsx$")
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-indent-style 2)
-  (setq web-mode-content-types
-        (cons '("jsx" . "\\.js\\'") web-mode-content-types))
-  (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
-  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
+  (yas-global-mode 1))
 
 (use-package dired-details
   :ensure t
@@ -134,7 +94,12 @@
               :bind ("s-p" . helm-projectile))
 
             (use-package helm-ag
-              :ensure t)
+              :ensure t
+              :config
+              (setq helm-ag-base-command
+                    "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
+              (setq helm-ag-command-option "--all-text")
+              (setq helm-ag-insert-at-point 'symbol))
 
             (setq helm-locate-command "mdfind -interpret -name %s %s"
                   helm-ff-newfile-prompt-p nil
@@ -155,10 +120,10 @@
          ("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)))
 
-;; (use-package smex
-;;   :if (not (featurep 'helm-mode))
-;;   :ensure t
-;;   :bind ("M-x" . smex))
+(use-package smex
+  :disabled t
+  :ensure t
+  :bind ("M-x" . smex))
 
 ;;-----------------------------------------------------------------------------
 ;; Locations
@@ -192,8 +157,6 @@
 
 (defvar kfi-packages
   '(
-    atom-one-dark-theme
-    company
     erc-hl-nicks
     htmlize
     json-mode
@@ -201,9 +164,6 @@
     melpa-upstream-visit
     multi-term
     multiple-cursors
-    restclient
-    swift-mode
-    cider
     clojure-mode
     clojure-mode-extra-font-locking))
 
@@ -219,7 +179,7 @@
 
 (defvar customized-packages
   '(
-    kfi-cider
+    kfi-theme
     kfi-clojure
     kfi-emacs-lisp
     kfi-erc
@@ -234,9 +194,7 @@
     kfi-multiple-cursors
     kfi-server
     kfi-shell-script
-    kfi-swift
     kfi-terminal
-    kfi-theme
     ))
 
 (dolist (package customized-packages)

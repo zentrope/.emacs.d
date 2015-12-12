@@ -18,3 +18,5 @@ configs/*.elc
 /jabber-avatar-cache/
 /smex-items
 /eshell/
+/config.el
+/config.html
