@@ -4,7 +4,7 @@
 
 * Themes
 
-This is my main theme. Bright where it needs to be, but no where else.
+This is my main theme. Bright where it needs to be, but nowhere else.
 
 #+begin_src emacs-lisp :tangle yes
     (use-package atom-one-dark-theme
@@ -118,7 +118,8 @@ The Clojure IDE. A ton of features, most of which I can ignore.
     (setq cider-repl-use-pretty-printing 1))
 #+end_src
 
-Paredit is transformative thought technology in the same way Lisp is.
+Paredit is a transformative thought technology in the same way Lisp
+is.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package paredit
