@@ -1,4 +1,4 @@
-#+title: The Dot in Emacs.d
+#+title: Emacs Configuration
 #+author: Keith Irwin
 #+startup: content
 
@@ -7,27 +7,29 @@
 This is my main theme. Bright where it needs to be, but nowhere else.
 
 #+begin_src emacs-lisp :tangle yes
-    (use-package atom-one-dark-theme
-      :if window-system
-      :ensure t
-      :config
-      (progn
-        (load-theme 'atom-one-dark t)
-        (set-face-attribute 'fringe nil :background "#000000")
-        (set-face-attribute 'fringe nil :background "#111711")
-        (set-face-attribute 'default nil :background "#111711")
-        ;; (set-face-background hl-line-face "gray13")
-        (set-face-attribute 'mode-line nil
-                            :foreground "#ccc"
-                            :background "#374350"
-                            :underline nil
-                            :family "Monaco" :height 100 :weight 'normal
-                            :box '(:line-width 2 :color "#374350" :style nil))
+      (use-package atom-one-dark-theme
+        :if window-system
+        :ensure t
+        :config
+        (progn
+          (load-theme 'atom-one-dark t)
+          (set-face-attribute 'fringe nil :background "#000000")
+          (set-face-attribute 'fringe nil :background "#111711")
+          (set-face-attribute 'default nil :background "#111711")
+          ;; This gives an error, so,
+          ;; TODO: set hl-line-face when move to org is complete
+          ;; (set-face-background hl-line-face "gray13")
+          (set-face-attribute 'mode-line nil
+                              :foreground "#ccc"
+                              :background "#374350"
+                              :underline nil
+                              :family "Monaco" :height 100 :weight 'normal
+                              :box '(:line-width 2 :color "#374350" :style nil))
 
-        (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                            :background "gray15" :family "Menlo" :height 100
-                            :weight 'normal :italic nil
-                            :box '(:line-width 2 :color "gray15" :style nil))))
+          (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                              :background "gray15" :family "Menlo" :height 100
+                              :weight 'normal :italic nil
+                              :box '(:line-width 2 :color "gray15" :style nil))))
 #+end_src
 
 Cyberpunk is disabled, but it has some nice things.
@@ -53,7 +55,6 @@ Another kinda nice theme, but still not quite for me.
     :config
     (load-theme 'seti t))
 #+end_src
-
 
 * Emacs Augmentation
 
@@ -115,7 +116,7 @@ sophisticated "ido" kind of thing.
            ("C-x C-f" . helm-find-files)))
 #+end_src
 
-Ido and smex are a much more Emacs-y command and file completion mode,
+Ido and smex comprise a more Emacs-y command and file completion mode
 which I might return to if helm makes my eyes bleed too much.
 
 #+begin_src emacs-lisp :tangle yes
