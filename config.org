@@ -2,7 +2,7 @@
 #+author: Keith Irwin
 #+startup: content
 
-* Themes
+* Appearance
 
 This is my main theme. Bright where it needs to be, but nowhere else.
 
@@ -55,6 +55,90 @@ Another kinda nice theme, but still not quite for me.
 #+end_src
 
 
+* Emacs Augmentation
+
+Packages for customizing Emacs itself.
+
+Shortens up the dired buffer, removing dates, file-sizes and so
+on. Most of the time I just want a list of files.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package dired-details
+    :ensure t
+    :config
+    (setq-default dired-details-hidden-string "--- ")
+    (dired-details-install))
+#+end_src
+
+Trying out [[https://github.com/emacs-helm/helm][Helm]] which is a world unto itself. A much more
+sophisticated "ido" kind of thing.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package helm
+    ;; http://tuhdo.github.io/helm-intro.html#sec-31
+    :ensure t
+    :diminish helm-mode
+    :config (progn
+
+              (require 'helm-config)
+
+              (use-package helm-projectile
+                :ensure t
+                :commands helm-projectile
+                :bind ("s-p" . helm-projectile))
+
+              (use-package helm-ag
+                :ensure t
+                :config
+                (setq helm-ag-base-command
+                      "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
+                (setq helm-ag-command-option "--all-text")
+                (setq helm-ag-insert-at-point 'symbol))
+
+              (setq helm-locate-command "mdfind -interpret -name %s %s"
+                    helm-ff-newfile-prompt-p nil
+                    helm-M-x-fuzzy-match t)
+              (helm-mode)
+              (helm-autoresize-mode t)
+              ;; rebind tab to do persistent action
+              (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+              ;; make TAB works in terminal
+              (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+              ;; list actions using C-z
+              (define-key helm-map (kbd "C-z")  'helm-select-action)
+              (bind-key (kbd "M-x") 'helm-M-x))
+
+    :bind (("C-c h" . helm-command-prefix)
+           ("C-x b" . helm-mini)
+           ("C-`" . helm-resume)
+           ("M-x" . helm-M-x)
+           ("C-x C-f" . helm-find-files)))
+#+end_src
+
+Ido and smex are a much more Emacs-y command and file completion mode,
+which I might return to if helm makes my eyes bleed too much.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ido
+    :init
+    (progn (ido-mode 1)
+
+           (setq ido-enable-flex-matching t)
+           (setq ido-everywhere t)
+
+           (use-package ido-ubiquitous
+             :ensure t
+             :init (ido-ubiquitous-mode))
+           (use-package ido-vertical-mode
+             :ensure t
+             :init (ido-vertical-mode 1))))
+
+  (use-package smex
+    :disabled t
+    :ensure t
+    :bind ("M-x" . smex))
+#+end_src
+
 * Web Programming
 
 ** web-mode
@@ -95,8 +179,39 @@ for web-sockets.
     :ensure t)
 #+end_src
 
-
 * Languages
+
+** Convenient augmentation
+
+Starting to use snippets just a little, mainly in markup
+languages.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package yasnippet
+    :ensure t
+    :config
+    (yas-global-mode 1))
+#+end_src
+
+[[https://github.com/bbatsov/projectile][Projectile]] has become increasingly useful especially for front-end web
+application development which tends towards lots of files.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package projectile
+    :ensure t
+    :commands projectile-global-mode)
+#+end_src
+
+Trying this out. I use [[https://kapeli.com/dash][Dash]] a lot, especially when I don't know the
+name of something. This package lets you point at something and look
+it up, which is more handy for reading other peoples' code.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package dash-at-point
+    :ensure t
+    :bind (("s-D"     . dash-at-point)
+           ("C-c e"   . dash-at-point-with-docset)))
+#+end_src
 
 ** Clojure
 
@@ -135,8 +250,8 @@ why I end up turning any IDE I use into an editor.
     :ensure t)
 #+end_src
 
-
 * Text Processing
+
 ** Orgmode
 
 #+begin_src emacs-lisp :tangle yes
@@ -148,6 +263,7 @@ why I end up turning any IDE I use into an editor.
     (setq org-export-with-smart-quotes t)
     (setq org-replace-disputed-keys t)
     (setq org-html-head "<style>html { font-family: helvetica, sans-serif; }</style>")
+    (setq org-src-fontify-natively t)
     (use-package org-bullets
       :disabled t
       :ensure t

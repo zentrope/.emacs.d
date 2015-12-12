@@ -42,89 +42,14 @@
 (require 'diminish)
 (require 'bind-key)
 
-(setq use-package-verbose t)
+;;(setq use-package-verbose t)
 
 (org-babel-load-file (concat user-emacs-directory "config.org"))
 
-(use-package ido
-  :init
-  (progn (ido-mode 1)
-
-         (setq ido-enable-flex-matching t)
-         (setq ido-everywhere t)
-
-         (use-package ido-ubiquitous
-           :ensure t
-           :init (ido-ubiquitous-mode))
-         (use-package ido-vertical-mode
-           :ensure t
-           :init (ido-vertical-mode 1))))
-
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode 1))
-
-(use-package dired-details
-  :ensure t
-  :config
-  (setq-default dired-details-hidden-string "--- ")
-  (dired-details-install))
-
-(use-package projectile
-  :ensure t
-  :commands projectile-global-mode)
-
-(use-package dash-at-point
-  :ensure t
-  :bind (("s-D"     . dash-at-point)
-         ("C-c e"   . dash-at-point-with-docset)))
-
-(use-package helm
-  ;; http://tuhdo.github.io/helm-intro.html#sec-31
-  :ensure t
-  :diminish helm-mode
-  :config (progn
-
-            (require 'helm-config)
-
-            (use-package helm-projectile
-              :ensure t
-              :commands helm-projectile
-              :bind ("s-p" . helm-projectile))
-
-            (use-package helm-ag
-              :ensure t
-              :config
-              (setq helm-ag-base-command
-                    "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
-              (setq helm-ag-command-option "--all-text")
-              (setq helm-ag-insert-at-point 'symbol))
-
-            (setq helm-locate-command "mdfind -interpret -name %s %s"
-                  helm-ff-newfile-prompt-p nil
-                  helm-M-x-fuzzy-match t)
-            (helm-mode)
-            (helm-autoresize-mode t)
-            ;; rebind tab to do persistent action
-            (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-            ;; make TAB works in terminal
-            (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-            ;; list actions using C-z
-            (define-key helm-map (kbd "C-z")  'helm-select-action)
-            (bind-key (kbd "M-x") 'helm-M-x))
-
-  :bind (("C-c h" . helm-command-prefix)
-         ("C-x b" . helm-mini)
-         ("C-`" . helm-resume)
-         ("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)))
-
-(use-package smex
-  :disabled t
-  :ensure t
-  :bind ("M-x" . smex))
-
+;;-----------------------------------------------------------------------------
+;; EVERYTHING BELOW HERE MUST MOVE TO CONFIG.ORG
+;;
+;;
 ;;-----------------------------------------------------------------------------
 ;; Locations
 ;;-----------------------------------------------------------------------------
