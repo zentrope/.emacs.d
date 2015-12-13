@@ -215,11 +215,11 @@ application development which tends towards lots of files.
     :commands projectile-global-mode)
 #+end_src
 
+*** dash
+
 Trying this out. I use [[https://kapeli.com/dash][Dash]] a lot, especially when I don't know the
 name of something. This package lets you point at something and look
 it up, which is more handy for reading other peoples' code.
-
-*** dash
 
 #+begin_src emacs-lisp :tangle yes
   (use-package dash-at-point
@@ -233,7 +233,7 @@ it up, which is more handy for reading other peoples' code.
 [[http://magit.vc][Magit]] is a super nice Git client. Feels like the command line, but has
 nice visual components. In a lot of ways, Emacs seems like an
 alternate reality where the Mac-like GUI universe never happened and
-killed non-GUI innovation.
+thus killed non-GUI innovation.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package magit
