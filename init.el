@@ -88,8 +88,7 @@
     melpa-upstream-visit
     multi-term
     multiple-cursors
-    clojure-mode
-    clojure-mode-extra-font-locking))
+    ))
 
 (dolist (p kfi-packages)
   (when (not (package-installed-p p))
@@ -104,7 +103,6 @@
 (defvar customized-packages
   '(
     kfi-theme
-    kfi-clojure
     kfi-emacs-lisp
     kfi-erc
     kfi-functions
@@ -132,3 +130,6 @@
 
 (if (file-exists-p init-local-file)
     (load init-local-file))
+
+
+(message "Ready Player One")

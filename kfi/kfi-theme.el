@@ -13,7 +13,7 @@
     (progn (scroll-bar-mode 0)
            (global-hl-line-mode 1)
            (fringe-mode '(6 . 6)))
-  (progn (global-hl-line-mode 0)
+  (progn (global-hl-line-mode 1)
          (menu-bar-mode 0)))
 
 (column-number-mode 1)
@@ -32,9 +32,6 @@
 (setq ring-bell-function 'ignore)
 
 (when window-system
-  ;;(kfi-setup-modeline)
-
-  ;;(global-linum-mode 0)
 
   ;;
   ;; Not sure if this works.
