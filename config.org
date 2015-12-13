@@ -56,10 +56,11 @@ Another kinda nice theme, but still not quite for me.
     (load-theme 'seti t))
 #+end_src
 
-* Emacs Augmentation
+* Extensions
 
 Packages for customizing Emacs itself.
 
+** dired-details
 Shortens up the dired buffer, removing dates, file-sizes and so
 on. Most of the time I just want a list of files.
 
@@ -70,6 +71,8 @@ on. Most of the time I just want a list of files.
     (setq-default dired-details-hidden-string "--- ")
     (dired-details-install))
 #+end_src
+
+** helm
 
 Trying out [[https://github.com/emacs-helm/helm][Helm]] which is a world unto itself. A much more
 sophisticated "ido" kind of thing.
@@ -116,6 +119,8 @@ sophisticated "ido" kind of thing.
            ("C-x C-f" . helm-find-files)))
 #+end_src
 
+** ido/smex
+
 Ido and smex comprise a more Emacs-y command and file completion mode
 which I might return to if helm makes my eyes bleed too much.
 
@@ -159,7 +164,7 @@ which I might return to if helm makes my eyes bleed too much.
     (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
 #+end_src
 
-** CSS Mode
+** css-mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package css-mode
@@ -170,7 +175,7 @@ which I might return to if helm makes my eyes bleed too much.
                                 (local-set-key (kbd "RET") 'newline-and-indent))))
 #+end_src
 
-** Rest client
+** restclient
 
 Handy mode for running raw web requests. Alas, not particularly good
 for web-sockets.
@@ -274,6 +279,10 @@ why I end up turning any IDE I use into an editor.
 
 ** clojure
 
+I spend most of my time in Clojure and ClojureScript.
+
+*** cider
+
 The Clojure IDE. A ton of features, most of which I can ignore.
 
 #+begin_src emacs-lisp :tangle yes
@@ -294,7 +303,7 @@ The Clojure IDE. A ton of features, most of which I can ignore.
 
 * Text Processing
 
-** Orgmode
+** org-mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package org
@@ -313,7 +322,7 @@ The Clojure IDE. A ton of features, most of which I can ignore.
       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
 #+end_src
 
-** Markdown
+** markdown
 
 #+begin_src emacs-lisp :tangle yes
   (use-package markdown-mode
