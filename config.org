@@ -180,9 +180,14 @@ for web-sockets.
     :ensure t)
 #+end_src
 
-* Languages
+* Programming Languages
 
-** Convenient augmentation
+** utilities
+
+A bunch of stuff broadly applicable to any programming language
+environment.
+
+*** yasnipet
 
 Starting to use snippets just a little, mainly in markup
 languages.
@@ -193,6 +198,8 @@ languages.
     :config
     (yas-global-mode 1))
 #+end_src
+
+*** projectile
 
 [[https://github.com/bbatsov/projectile][Projectile]] has become increasingly useful especially for front-end web
 application development which tends towards lots of files.
@@ -207,6 +214,8 @@ Trying this out. I use [[https://kapeli.com/dash][Dash]] a lot, especially when 
 name of something. This package lets you point at something and look
 it up, which is more handy for reading other peoples' code.
 
+*** dash
+
 #+begin_src emacs-lisp :tangle yes
   (use-package dash-at-point
     :ensure t
@@ -214,7 +223,56 @@ it up, which is more handy for reading other peoples' code.
            ("C-c e"   . dash-at-point-with-docset)))
 #+end_src
 
-** Clojure
+*** magit
+
+[[http://magit.vc][Magit]] is a super nice Git client. Feels like the command line, but has
+nice visual components. In a lot of ways, Emacs seems like an
+alternate reality where the Mac-like GUI universe never happened and
+killed non-GUI innovation.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package magit
+    :ensure t
+    :config
+    ;; Courtesy Magnars
+    (defadvice magit-status (around magit-fullscreen activate)
+      (window-configuration-to-register :magit-fullscreen)
+      ad-do-it
+      (delete-other-windows))
+
+    (defun magit-quit-session ()
+      "Restores the previous window configuration and kills the magit buffer"
+      (interactive)
+      (kill-buffer)
+      (jump-to-register :magit-fullscreen))
+
+    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+
+    (global-set-key (kbd "C-c g") 'magit-status))
+#+end_src
+
+*** paredit
+
+Paredit is a transformative thought technology in the same way Lisp
+is.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package paredit
+    :ensure t)
+#+end_src
+
+*** company
+
+Cider depends on company mode for completion. I'm not a big fan of
+completion most of the time. I always turn it off in IDEs, which is
+why I end up turning any IDE I use into an editor.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package company
+    :ensure t)
+#+end_src
+
+** clojure
 
 The Clojure IDE. A ton of features, most of which I can ignore.
 
@@ -232,23 +290,6 @@ The Clojure IDE. A ton of features, most of which I can ignore.
 
     (add-hook 'clojure-mode-hook 'cider-mode)
     (setq cider-repl-use-pretty-printing 1))
-#+end_src
-
-Paredit is a transformative thought technology in the same way Lisp
-is.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package paredit
-    :ensure t)
-#+end_src
-
-Cider depends on company mode for completion. I'm not a big fan of
-completion most of the time. I always turn it off in IDEs, which is
-why I end up turning any IDE I use into an editor.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package company
-    :ensure t)
 #+end_src
 
 * Text Processing

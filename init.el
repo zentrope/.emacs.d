@@ -85,7 +85,6 @@
     erc-hl-nicks
     htmlize
     json-mode
-    magit
     melpa-upstream-visit
     multi-term
     multiple-cursors
@@ -115,7 +114,6 @@
     kfi-javascript
     kfi-linum
     kfi-keyboard
-    kfi-magit
     kfi-multiple-cursors
     kfi-server
     kfi-shell-script
