@@ -73,8 +73,21 @@ Sometimes I want the default white Emacs theme, so:
   (defun kfi-light ()
     (interactive)
     (disable-theme 'atom-one-dark)
-    (set-face-attribute 'fringe nil :background "#ffffff")
-    (set-face-attribute 'default nil :background "#f2f2f2"))
+    (set-face-attribute 'fringe nil :background "#fff")
+    (set-face-attribute 'default nil :background "#fff")
+    (set-face-background hl-line-face "gray90")
+
+    (set-face-attribute 'mode-line nil
+                        :foreground "dodgerblue"
+                        :background "gray90"
+                        :underline nil
+                        :family "Monaco" :height 100 :weight 'normal
+                        :box '(:line-width 2 :color "gray90" :style nil))
+
+    (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                        :background "#f2f2f2" :family "Menlo" :height 100
+                        :weight 'normal :italic nil
+                        :box '(:line-width 2 :color "#f2f2f2" :style nil)))
 #+end_src
 
 * Extensions
@@ -82,6 +95,7 @@ Sometimes I want the default white Emacs theme, so:
 Packages for customizing Emacs itself.
 
 ** dired-details
+
 Shortens up the dired buffer, removing dates, file-sizes and so
 on. Most of the time I just want a list of files.
 
