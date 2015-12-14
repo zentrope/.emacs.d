@@ -14,6 +14,7 @@
            (global-hl-line-mode 1)
            (fringe-mode '(6 . 6)))
   (progn (global-hl-line-mode 1)
+         (set-face-background hl-line-face "gray13")
          (menu-bar-mode 0)))
 
 (column-number-mode 1)

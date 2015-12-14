@@ -4,6 +4,8 @@
 
 * Appearance
 
+** atom one dark
+
 This is my main theme. Bright where it needs to be, but nowhere else.
 
 #+begin_src emacs-lisp :tangle yes
@@ -32,6 +34,8 @@ This is my main theme. Bright where it needs to be, but nowhere else.
                           :box '(:line-width 2 :color "gray15" :style nil))))
 #+end_src
 
+** cyberpunk
+
 Cyberpunk is disabled, but it has some nice things.
 
 #+begin_src emacs-lisp :tangle yes
@@ -45,6 +49,8 @@ Cyberpunk is disabled, but it has some nice things.
     (set-face-attribute `mode-line-inactive nil
                         :box '(:line-width 2 :color "#1a1a1a" :style nil)))
 #+end_src
+
+** seti
 
 Another kinda nice theme, but still not quite for me.
 
@@ -145,6 +151,98 @@ which I might return to if helm makes my eyes bleed too much.
     :bind ("M-x" . smex))
 #+end_src
 
+* Program Facilities
+
+A bunch of stuff broadly applicable to any programming language
+environment.
+
+** yasnippets
+
+Starting to use snippets just a little, mainly in markup languages.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package yasnippet
+    :ensure t
+    :config
+    (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets/")
+                                 yas-installed-snippets-dir))
+    (yas-global-mode 1))
+#+end_src
+
+** projectile
+
+[[https://github.com/bbatsov/projectile][Projectile]] has become increasingly useful especially for front-end web
+application development which tends towards lots of files.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package projectile
+    :ensure t
+    :commands projectile-global-mode)
+#+end_src
+
+** dash
+
+Trying this out. I use [[https://kapeli.com/dash][Dash]] a lot, especially when I don't know the
+name of something. This package lets you point at something and look
+it up, which is more handy for reading other peoples' code.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package dash-at-point
+    :ensure t
+    :bind (("s-D"     . dash-at-point)
+           ("C-c e"   . dash-at-point-with-docset)))
+#+end_src
+
+** magit
+
+[[http://magit.vc][Magit]] is a super nice Git client. Feels like the command line, but has
+nice visual components. In a lot of ways, Emacs seems like an
+alternate reality where the Mac-like GUI universe never happened and
+thus killed non-GUI innovation.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package magit
+    :ensure t
+    :config
+    ;; Courtesy Magnars
+    (defadvice magit-status (around magit-fullscreen activate)
+      (window-configuration-to-register :magit-fullscreen)
+      ad-do-it
+      (delete-other-windows))
+
+    (defun magit-quit-session ()
+      "Restores the previous window configuration and kills the magit buffer"
+      (interactive)
+      (kill-buffer)
+      (jump-to-register :magit-fullscreen))
+
+    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+
+    (global-set-key (kbd "C-c g") 'magit-status)
+    (global-set-key (kbd "C-c l") 'magit-log))
+#+end_src
+
+** paredit
+
+Paredit is a transformative thought technology in the same way Lisp
+is.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package paredit
+    :ensure t)
+#+end_src
+
+** company
+
+Cider depends on company mode for completion. I'm not a big fan of
+completion most of the time. I always turn it off in IDEs, which is
+why I end up turning any IDE I use into an editor.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package company
+    :ensure t)
+#+end_src
+
 * Web Programming
 
 ** web-mode
@@ -186,96 +284,6 @@ for web-sockets.
 #+end_src
 
 * Programming Languages
-
-** utilities
-
-A bunch of stuff broadly applicable to any programming language
-environment.
-
-*** yasnipet
-
-Starting to use snippets just a little, mainly in markup
-languages.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package yasnippet
-    :ensure t
-    :config
-    (yas-global-mode 1))
-#+end_src
-
-*** projectile
-
-[[https://github.com/bbatsov/projectile][Projectile]] has become increasingly useful especially for front-end web
-application development which tends towards lots of files.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package projectile
-    :ensure t
-    :commands projectile-global-mode)
-#+end_src
-
-*** dash
-
-Trying this out. I use [[https://kapeli.com/dash][Dash]] a lot, especially when I don't know the
-name of something. This package lets you point at something and look
-it up, which is more handy for reading other peoples' code.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package dash-at-point
-    :ensure t
-    :bind (("s-D"     . dash-at-point)
-           ("C-c e"   . dash-at-point-with-docset)))
-#+end_src
-
-*** magit
-
-[[http://magit.vc][Magit]] is a super nice Git client. Feels like the command line, but has
-nice visual components. In a lot of ways, Emacs seems like an
-alternate reality where the Mac-like GUI universe never happened and
-thus killed non-GUI innovation.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package magit
-    :ensure t
-    :config
-    ;; Courtesy Magnars
-    (defadvice magit-status (around magit-fullscreen activate)
-      (window-configuration-to-register :magit-fullscreen)
-      ad-do-it
-      (delete-other-windows))
-
-    (defun magit-quit-session ()
-      "Restores the previous window configuration and kills the magit buffer"
-      (interactive)
-      (kill-buffer)
-      (jump-to-register :magit-fullscreen))
-
-    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
-
-    (global-set-key (kbd "C-c g") 'magit-status))
-#+end_src
-
-*** paredit
-
-Paredit is a transformative thought technology in the same way Lisp
-is.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package paredit
-    :ensure t)
-#+end_src
-
-*** company
-
-Cider depends on company mode for completion. I'm not a big fan of
-completion most of the time. I always turn it off in IDEs, which is
-why I end up turning any IDE I use into an editor.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package company
-    :ensure t)
-#+end_src
 
 ** clojure
 
