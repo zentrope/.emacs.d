@@ -6,16 +6,18 @@
 
 ** atom one dark
 
-This is my main theme. Bright where it needs to be, but nowhere else.
+This is my main theme. Bright where it needs to be, but nowhere
+else. I've added a command =kfi-dark= to invoke the theme after
+invoking =kfi-light= (see below).
 
 #+begin_src emacs-lisp :tangle yes
   (use-package atom-one-dark-theme
     :if window-system
     :ensure t
     :config
-    (progn
+    (defun kfi-dark ()
+      (interactive)
       (load-theme 'atom-one-dark t)
-      (set-face-attribute 'fringe nil :background "#000000")
       (set-face-attribute 'fringe nil :background "#111711")
       (set-face-attribute 'default nil :background "#111711")
       ;; This gives an error, so,
@@ -31,7 +33,8 @@ This is my main theme. Bright where it needs to be, but nowhere else.
       (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
                           :background "gray15" :family "Menlo" :height 100
                           :weight 'normal :italic nil
-                          :box '(:line-width 2 :color "gray15" :style nil))))
+                          :box '(:line-width 2 :color "gray15" :style nil)))
+    (kfi-dark))
 #+end_src
 
 ** cyberpunk
@@ -60,6 +63,18 @@ Another kinda nice theme, but still not quite for me.
     :ensure t
     :config
     (load-theme 'seti t))
+#+end_src
+
+** reset to default
+
+Sometimes I want the default white Emacs theme, so:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun kfi-light ()
+    (interactive)
+    (disable-theme 'atom-one-dark)
+    (set-face-attribute 'fringe nil :background "#ffffff")
+    (set-face-attribute 'default nil :background "#f2f2f2"))
 #+end_src
 
 * Extensions
@@ -290,6 +305,9 @@ for web-sockets.
 I spend most of my time in Clojure and ClojureScript.
 
 *** paren-face
+
+Diming the parenthesis really emphasizes the semantics of the
+expressions over their syntax. Right?
 
 #+begin_src emacs-lisp :tangle yes
   (use-package paren-face
