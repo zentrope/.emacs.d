@@ -4,7 +4,7 @@
 
 * Appearance
 
-** atom one dark
+** dark: atom-one-dark
 
 This is my main theme. Bright where it needs to be, but nowhere
 else. I've added a command =kfi-dark= to invoke the theme after
@@ -20,9 +20,6 @@ invoking =kfi-light= (see below).
       (load-theme 'atom-one-dark t)
       (set-face-attribute 'fringe nil :background "#111711")
       (set-face-attribute 'default nil :background "#111711")
-      ;; This gives an error, so,
-      ;; TODO: set hl-line-face when move to org is complete
-      ;; (set-face-background hl-line-face "gray13")
       (set-face-attribute 'mode-line nil
                           :foreground "#ccc"
                           :background "#374350"
@@ -33,39 +30,18 @@ invoking =kfi-light= (see below).
       (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
                           :background "gray15" :family "Menlo" :height 100
                           :weight 'normal :italic nil
-                          :box '(:line-width 2 :color "gray15" :style nil)))
+                          :box '(:line-width 2 :color "gray15" :style nil))
+
+      ;; ERC customizations
+      (set-face-attribute 'erc-prompt-face nil
+                          :foreground "darkorange" :background "#111711")
+      (set-face-attribute 'erc-timestamp-face nil
+                          :foreground "gray25" :background "#111711"))
+
     (kfi-dark))
 #+end_src
 
-** cyberpunk
-
-Cyberpunk is disabled, but it has some nice things.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package cyberpunk-theme
-    :disabled t
-    :ensure t
-    :config
-    (load-theme 'cyberpunk t)
-    (set-face-attribute 'mode-line nil
-                        :box '(:line-width 2 :color "#333333" :style nil))
-    (set-face-attribute `mode-line-inactive nil
-                        :box '(:line-width 2 :color "#1a1a1a" :style nil)))
-#+end_src
-
-** seti
-
-Another kinda nice theme, but still not quite for me.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package seti-theme
-    :disabled t
-    :ensure t
-    :config
-    (load-theme 'seti t))
-#+end_src
-
-** reset to default
+** light: default
 
 Sometimes I want the default white Emacs theme, so:
 
@@ -87,7 +63,57 @@ Sometimes I want the default white Emacs theme, so:
     (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
                         :background "#f2f2f2" :family "Menlo" :height 100
                         :weight 'normal :italic nil
-                        :box '(:line-width 2 :color "#f2f2f2" :style nil)))
+                        :box '(:line-width 2 :color "#f2f2f2" :style nil))
+
+    ;; ERC customizations
+    (set-face-attribute 'erc-prompt-face nil
+                        :foreground "dodgerblue" :background "white")
+    (set-face-attribute 'erc-timestamp-face nil
+                        :foreground "dodgerblue" :background "white"))
+#+end_src
+
+* Applications
+
+Customize applications run within an Emacs context, like IRC, etc.
+
+** erc (irc client)
+
+I like to close Emacs more often than IRC, but I still use this. Note
+that theme adjustments are above, not included here.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package erc-hl-nicks
+    :ensure t)
+
+  (use-package erc
+    :ensure t
+    :config
+    (defun kfi-erc-mode-hook ()
+      (make-local-variable 'global-hl-line-mode)
+      (setq global-hl-line-mode nil))
+
+    (add-hook 'erc-mode-hook 'kfi-erc-mode-hook)
+
+    ;; Not sure if this is necessary.
+    (progn (add-to-list 'erc-modules 'truncate)
+           (add-to-list 'erc-modules 'scrolltobottom)
+           (erc-update-modules))
+
+    (erc-scrolltobottom-mode 1)
+
+    (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+    (setq erc-fill-prefix "    ")
+    (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
+
+    (setq erc-fill-column 78)
+    (setq erc-scroll-to-bottom -2)
+    (setq erc-truncate-buffer-on-save t)
+    (setq erc-max-buffer-size 30000)
+
+    (defvar erc-insert-post-hook)
+    (add-hook 'erc-insert-post-hook
+              'erc-truncate-buffer)
+    (setq erc-truncate-buffer-on-save t))
 #+end_src
 
 * Extensions

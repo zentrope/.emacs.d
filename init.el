@@ -82,7 +82,6 @@
 
 (defvar kfi-packages
   '(
-    erc-hl-nicks
     htmlize
     json-mode
     melpa-upstream-visit
@@ -104,7 +103,6 @@
   '(
     kfi-theme
     kfi-emacs-lisp
-    kfi-erc
     kfi-functions
     kfi-html
     kfi-ibuffer
