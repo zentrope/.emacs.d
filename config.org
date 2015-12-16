@@ -32,6 +32,9 @@ invoking =kfi-light= (see below).
                           :weight 'normal :italic nil
                           :box '(:line-width 2 :color "gray15" :style nil))
 
+      ;; Linum customization
+      (set-face-attribute 'linum nil :foreground "#333")
+
       ;; ERC customizations
       (set-face-attribute 'erc-prompt-face nil
                           :foreground "darkorange" :background "#111711")
@@ -64,6 +67,9 @@ Sometimes I want the default white Emacs theme, so:
                         :background "#f2f2f2" :family "Menlo" :height 100
                         :weight 'normal :italic nil
                         :box '(:line-width 2 :color "#f2f2f2" :style nil))
+
+    ;; Linum customization
+    (set-face-attribute 'linum nil :foreground "#ccc")
 
     ;; ERC customizations
     (set-face-attribute 'erc-prompt-face nil
@@ -296,6 +302,18 @@ why I end up turning any IDE I use into an editor.
 #+begin_src emacs-lisp :tangle yes
   (use-package company
     :ensure t)
+#+end_src
+
+** linum-mode
+
+Occasionally useful. I leave this at the default: off. There are some
+theme customizations above.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package linum
+    :ensure t
+    :config
+    (setq linum-format "%4d "))
 #+end_src
 
 * Web Programming

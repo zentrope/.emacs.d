@@ -108,7 +108,6 @@
     kfi-ibuffer
     kfi-java
     kfi-javascript
-    kfi-linum
     kfi-keyboard
     kfi-multiple-cursors
     kfi-server
