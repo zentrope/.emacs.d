@@ -85,6 +85,11 @@ on. Most of the time I just want a list of files.
 This is yet another version of ~ido~ or ~helm~ which claims to be
 simpler and cleaner than all the others. I. Want. To. Believe.
 
+Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
+~counsel~.
+
+ - [[http://pragmaticemacs.com/emacs/super-spotlight-search-with-counsel/][Super spotlight search with counsel]]
+
 #+begin_src emacs-lisp :tangle yes
   (use-package counsel
     :ensure t)
