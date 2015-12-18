@@ -216,7 +216,9 @@ application development which tends towards lots of files.
 #+begin_src emacs-lisp :tangle yes
   (use-package projectile
     :ensure t
-    :commands projectile-global-mode)
+    :commands projectile-global-mode
+    :config
+    (setq projectile-completion-system 'ivy))
 #+end_src
 
 ** dash
