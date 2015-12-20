@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: sab_
+# key: sab_
+# binding: direct-keybinding
+# --
+[sablono.core :as html :refer-macros [html]]

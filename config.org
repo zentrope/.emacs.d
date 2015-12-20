@@ -82,6 +82,8 @@ on. Most of the time I just want a list of files.
 
 ** ivy-mode, swiper, counsel
 
+/Disabled for now./
+
 This is yet another version of ~ido~ or ~helm~ which claims to be
 simpler and cleaner than all the others. I. Want. To. Believe.
 
@@ -92,12 +94,14 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
 
 #+begin_src emacs-lisp :tangle yes
   (use-package counsel
+    :disabled t
     :ensure t
     :config
     ;; Hide .dot files, other 'hidden' detritus
     (setq counsel-find-file-ignore-regexp "\\(?:\\`[#.]\\)\\|\\(?:[#~]\\'\\)"))
 
   (use-package swiper
+    :disabled t
     :ensure t
     :config
     (ivy-mode 1)
@@ -127,7 +131,6 @@ sophisticated "ido" kind of thing.
 #+begin_src emacs-lisp :tangle yes
   (use-package helm
     ;; http://tuhdo.github.io/helm-intro.html#sec-31
-    :disabled t
     :ensure t
     :diminish helm-mode
     :config (progn
@@ -151,7 +154,7 @@ sophisticated "ido" kind of thing.
                     helm-ff-newfile-prompt-p nil
                     helm-M-x-fuzzy-match t)
               (helm-mode)
-              (helm-autoresize-mode t)
+              ;;(helm-autoresize-mode t)
               ;; rebind tab to do persistent action
               (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
               ;; make TAB works in terminal
