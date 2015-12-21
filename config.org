@@ -154,7 +154,9 @@ sophisticated "ido" kind of thing.
                     helm-ff-newfile-prompt-p nil
                     helm-M-x-fuzzy-match t)
               (helm-mode)
-              ;;(helm-autoresize-mode t)
+              (helm-autoresize-mode t)
+              (setq helm-autoresize-max-height 40
+                    helm-autoresize-min-height 40)
               ;; rebind tab to do persistent action
               (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
               ;; make TAB works in terminal
@@ -177,6 +179,7 @@ which I might return to if helm makes my eyes bleed too much.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package ido
+    :disabled t
     :init
     (progn (ido-mode 1)
 
@@ -224,7 +227,7 @@ application development which tends towards lots of files.
     :ensure t
     :commands projectile-global-mode
     :config
-    (setq projectile-completion-system 'ivy))
+    (setq projectile-completion-system 'helm))
 #+end_src
 
 ** dash
@@ -418,7 +421,15 @@ The Clojure IDE. A ton of features, most of which I can ignore.
     (setq org-html-doctype "html5")
     (setq org-export-with-smart-quotes t)
     (setq org-replace-disputed-keys t)
-    (setq org-html-head "<style>html { font-family: helvetica, sans-serif; }</style>")
+    (setq org-html-head "<style>
+                           html { font-family: helvetica, sans-serif; padding: 50px; }
+                           table { width: 100%; border-collapse: collapse; font-size: 10pt }
+                           tr:nth-child(odd) {background: aliceblue}
+                           tr:nth-child(even) {background: #fff}
+                           th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
+                                background-color: #f6f6f6; text-align: left !important; }
+                           td { padding: 4px; border: 1px solid #d8d8d8; }
+                         </style>")
     (setq org-src-fontify-natively t)
     (use-package org-bullets
       :disabled t
