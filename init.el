@@ -104,7 +104,6 @@
   '(
     kfi-theme
     kfi-emacs-lisp
-    kfi-functions
     kfi-html
     kfi-ibuffer
     kfi-java
