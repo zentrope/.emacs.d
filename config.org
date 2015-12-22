@@ -209,10 +209,12 @@ Some functions I find useful, when I remember them.
     (set-frame-width (selected-frame) arg))
 
   (defun kfi-dw ()
+    "Double-wide with C-c C-x w."
     (interactive)
     (kfi-set-frame-width 180))
 
   (defun kfi-sw ()
+    "Single wide with C-c C-x s."
     (interactive)
     (kfi-set-frame-width 90))
 
@@ -263,12 +265,12 @@ Some functions I find useful, when I remember them.
 
   (defun kfi-sort-words (reverse beg end)
     "Sort words in region alphabetically, in REVERSE if negative.
-     Prefixed with negative \\[universal-argument], sorts in reverse.
+       Prefixed with negative \\[universal-argument], sorts in reverse.
 
-     The variable `sort-fold-case' determines whether alphabetic case
-     affects the sort order.
+       The variable `sort-fold-case' determines whether alphabetic case
+       affects the sort order.
 
-     See `sort-regexp-fields'."
+       See `sort-regexp-fields'."
     (interactive "*P\nr")
     (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 #+end_src
