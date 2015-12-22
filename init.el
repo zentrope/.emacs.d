@@ -72,7 +72,7 @@
 (setenv "PATH" (concat usr-local-bin ":" (getenv "PATH") ":" kfi-local-bin))
 (setenv "LEIN_JVM_OPTS" "-Djava.awt.headless=true")
 
-(setq exec-path (append exec-path (list kfi-local-bin) ))
+(setq exec-path (append exec-path (list kfi-local-bin usr-local-bin)))
 
 ;;-----------------------------------------------------------------------------
 ;; Packages
@@ -127,6 +127,5 @@
 
 (if (file-exists-p init-local-file)
     (load init-local-file))
-
 
 (message "Ready Player One")
