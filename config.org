@@ -157,37 +157,41 @@ sophisticated "ido" kind of thing.
     ;; http://tuhdo.github.io/helm-intro.html#sec-31
     :ensure t
     :diminish helm-mode
-    :config (progn
+    :config
+    (progn
 
-              (require 'helm-config)
+      (require 'helm-config)
 
-              (use-package helm-projectile
-                :ensure t
-                :commands helm-projectile
-                :bind ("s-p" . helm-projectile))
+      (use-package helm-projectile
+        :ensure t
+        :commands helm-projectile
+        :bind ("s-p" . helm-projectile))
 
-              (use-package helm-ag
-                :ensure t
-                :config
-                (setq helm-ag-base-command
-                      "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
-                (setq helm-ag-command-option "--all-text")
-                (setq helm-ag-insert-at-point 'symbol))
+      (use-package helm-ag
+        :ensure t
+        :config
+        (setq helm-ag-base-command
+              "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
+        (setq helm-ag-command-option "--all-text")
+        (setq helm-ag-insert-at-point 'symbol))
 
-              (setq helm-locate-command "mdfind -interpret -name %s %s"
-                    helm-ff-newfile-prompt-p nil
-                    helm-M-x-fuzzy-match t)
-              (helm-mode)
-              (helm-autoresize-mode t)
-              (setq helm-autoresize-max-height 40
-                    helm-autoresize-min-height 40)
-              ;; rebind tab to do persistent action
-              (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-              ;; make TAB works in terminal
-              (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-              ;; list actions using C-z
-              (define-key helm-map (kbd "C-z")  'helm-select-action)
-              (bind-key (kbd "M-x") 'helm-M-x))
+      (helm-mode)
+      (helm-autoresize-mode t)
+      (setq helm-locate-command "mdfind -interpret -name %s %s"
+            helm-ff-newfile-prompt-p nil
+            helm-M-x-fuzzy-match t
+            helm-autoresize-max-height 40
+            helm-autoresize-min-height 40
+            helm-ff-skip-boring-files t)
+      ;; (let ((tmp helm-boring-file-regexp-list))
+      ;;   (setq helm-boring-file-regexp-list (append tmp '("\\.[A-Za-z]+"))))
+      ;; rebind tab to do persistent action
+      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+      ;; make TAB works in terminal
+      (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+      ;; list actions using C-z
+      (define-key helm-map (kbd "C-z")  'helm-select-action)
+      (bind-key (kbd "M-x") 'helm-M-x))
 
     :bind (("C-c h" . helm-command-prefix)
            ("C-x b" . helm-mini)
