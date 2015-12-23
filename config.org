@@ -841,8 +841,8 @@ and all that needs to be integrated into the above outline.
 
 ** Sync buffers to what's on the file system
 
-/Docs:/ Global Auto Revert mode is a global minor mode that reverts any
-buffer associated with a file when the file changes on disk.
+/Docs:/ Global Auto Revert mode is a global minor mode that reverts any buffer
+associated with a file when the file changes on disk.
 
 #+begin_src emacs-lisp :tangle yes
   (global-auto-revert-mode 1)
@@ -858,6 +858,15 @@ buffer associated with a file when the file changes on disk.
 
 #+begin_src emacs-lisp :tangle yes
   (setq org-html-postamble nil)
+#+end_src
+
+** Extend the EOL column
+
+I've got truncate long lines on, but this should be appropriate for text
+oriented buffers like, say, the one in which I edit this file.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq fill-column 80)
 #+end_src
 
 * Appearance
