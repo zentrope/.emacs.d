@@ -2,6 +2,29 @@
 #+author: Keith Irwin
 #+startup: content
 
+* Environment & Packaging
+
+** Buffer backups
+
+#+begin_src emacs-lisp :tangle yes
+  (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
+#+end_src
+
+** Executable environment
+
+#+begin_src emacs-lisp :tangle yes
+  (setq default-directory "~/")
+
+  (defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
+  (defvar usr-local-bin "/usr/local/bin")
+
+  (setenv "PATH" (concat usr-local-bin ":" (getenv "PATH") ":" kfi-local-bin))
+  (setenv "LEIN_JVM_OPTS" "-Djava.awt.headless=true")
+
+  (setq exec-path (append exec-path (list kfi-local-bin usr-local-bin)))
+#+end_src
+
+
 * Applications
 
 Customize applications run within an Emacs context, like IRC, etc.
@@ -421,6 +444,13 @@ for web-sockets.
     :ensure t)
 #+end_src
 
+** JSON mode
+
+#+begin_src emacs-lisp :tangle yes
+(use-package json-mode
+  :ensure t)
+#+end_src
+
 * Programming Languages
 
 ** clojure
@@ -485,7 +515,32 @@ The Clojure IDE. A ton of features, most of which I can ignore.
     (setq cider-repl-use-pretty-printing 1))
 #+end_src
 
+** javascript
+
+Can't avoid it, though I mostly do by using ClojureScript.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package js
+    :ensure t
+    :config
+    (defun kfi-js-mode-hook ()
+      (setq indent-tabs-mode nil)
+      (setq js-indent-level 2)
+      (local-set-key (kbd "RET") 'newline-and-indent))
+
+    (add-hook 'js-mode-hook #'kfi-js-mode-hook))
+#+end_src
+
 * Text Processing
+** htmlize
+
+This helps org-mode export colorize code blocks. I think. Do I still
+need this?
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package htmlize
+    :ensure t)
+#+end_src
 
 ** org-mode
 
@@ -533,7 +588,276 @@ The Clojure IDE. A ton of features, most of which I can ignore.
     (add-hook 'markdown-mode-hook 'kfi-markdown-mode-hook))
 #+end_src
 
+** HTML
+
+The idea is to not have to press tab at the beginning of every
+line. No that I type HTML much anymore.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'html-mode-hook '(lambda ()
+    (local-set-key (kbd "RET") 'newline-and-indent)))
+#+end_src
+
+* Unsorted
+
+Random stuff I've not sorted into the outline because I just need to
+get it ported to this file. Move later! Move later?
+
+** melpa-upstream-visit
+
+Last update was 2013. Do I need this anymore?
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package melpa-upstream-visit
+    :ensure t)
+#+end_src
+
+** multi-term
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package multi-term
+    :ensure t)
+#+end_src
+
+** multiple-cursors
+
+I need to figure out that mode where you can highlight a fragment,
+then optionally select the additional fragments. I use this /a lot/
+for search and replace kinds of operations and sometimes the thing I'm
+searching for is common enough to be embedded in lots of other
+symbols.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package multiple-cursors
+    :ensure t
+    :config
+    (global-set-key (kbd "C-M->") 'mc/mark-all-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this))
+#+end_src
+
+** emacs-lisp
+
+#+begin_src emacs-lisp :tangle yes
+  (defun kfi-elisp-hook ()
+    (paredit-mode 1)
+    (eldoc-mode 1)
+    (setq indent-tabs-mode nil)
+    (local-set-key (kbd "RET") 'newline-and-indent))
+
+  (add-hook 'emacs-lisp-mode-hook #'kfi-elisp-hook)
+#+end_src
+
+** ibuffer
+
+#+begin_src emacs-lisp :tangle yes
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (global-set-key (kbd "<C-tab>") 'ibuffer)
+
+  (setq ibuffer-saved-filter-groups
+        (quote (("default"
+                 ("clojure" (mode . clojure-mode))
+                 ("clojure-script" (mode . clojurescript-mode))
+                 ("web" (or (mode . css-mode)
+                            (mode . html-mode)
+                            (mode . js-mode)))
+                 ("erc" (name . "^\\#"))
+                 ("elisp" (mode . emacs-lisp-mode))
+                 ("dirs" (mode . dired-mode))
+                 ("temps" (name . "^\\*.*\\*$"))
+                 ;;
+                 ))))
+
+  (add-hook 'ibuffer-mode-hook
+            (lambda ()
+              (ibuffer-switch-to-saved-filter-groups "default")))
+#+end_src
+
+** java
+
+I almost never futz with Java in Emacs, at least not any "real"
+project. But here we are anyway, just in case.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun kfi-java-hook ()
+    (setq c-basic-offset 2
+          tab-width 2
+          indent-tabs-mode nil))
+
+  (add-hook 'java-mode-hook #'kfi-java-hook)
+#+end_src
+
+** keyboard
+
+#+begin_src emacs-lisp :tangle yes
+  (setq mac-command-modifqier 'super)
+
+  ;; Have I duped this from somewhere else?
+  (global-set-key (kbd "s-p") 'projectile-find-file)
+
+  ;; On OSX C-M-@ amd M-S-SPC doesn't work in a terminl.
+  (global-set-key (kbd "C-M-SPC") 'mark-sexp)
+  (global-set-key (kbd "M-RET") 'mark-sexp)
+
+  ;; GUI
+  (global-set-key (kbd "s-<right>") 'windmove-right)
+  (global-set-key (kbd "s-<left>") 'windmove-left)
+  (global-set-key (kbd "s-<up>") 'windmove-up)
+  (global-set-key (kbd "s-<down>") 'windmove-down)
+
+  ;; Mimics normal Mac keybindings for font resizing
+  (global-set-key (kbd "s-+") 'text-scale-increase)
+  (global-set-key (kbd "s-_") 'text-scale-decrease)
+
+  ;; Switch to next frame, if there is one.
+  (global-set-key (kbd "M-`") 'other-frame)
+#+end_src
+
+** emacs-server
+
+#+begin_src emacs-lisp :tangle yes
+  (when (not (server-running-p))
+      (server-start))
+#+end_src
+
+** shell-script
+
+#+begin_src emacs-lisp :tangle yes
+  (setq sh-basic-offset 2)
+  (setq sh-indentation 2)
+#+end_src
+
+** terminal
+
+Every now and then I run shells from within Emacs. I think I need to
+change my technique on this. Use eshell for running quick tasks
+related to the code, but use a regular terminal outside of Emacs for
+most other stuff.
+
+Nevertheless, here's what I've been using for quite some time. The
+main limitation is not detecting the underlying theme such that the
+shell background is appropriate.
+
+#+begin_src emacs-lisp :tangle yes
+  (require 'multi-term)
+
+  ;; Turn off stuff that only makes sense in a regular buffer.
+  (defadvice term-char-mode (after term-char-mode-fixes ())
+    (set (make-local-variable 'hl-line-mode) nil)
+    (set (make-local-variable 'global-hl-line-mode) nil))
+
+  (ad-activate 'term-char-mode)
+
+  (setq multi-term-program "/bin/bash")
+  (set-face-attribute 'term nil :background "black")
+  (set-face-attribute 'term nil :foreground "#aaaaaa")
+  (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
+  (set-face-attribute 'term-color-black nil :foreground "gray50")
+  (set-face-attribute 'term-color-yellow nil :foreground "peru")
+
+  ;; (when (string= (face-attribute 'default :background) "White")
+  ;;   (set-face-attribute 'term nil :foreground "#444444" :background "white")
+  ;;   (set-face-attribute 'term-color-white nil :foreground "black"))
+
+  (add-hook 'term-exec-hook
+            (function
+             (lambda ()
+               (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
+  ;; Allow pasting text to be sent to the underlying shell process.
+  (add-hook
+   'term-mode-hook
+   (lambda ()
+     (define-key term-raw-map (kbd "C-y") 'term-paste)
+     (define-key term-raw-map (kbd "C-v") 'term-paste)
+     (define-key term-raw-map (kbd "s-v") 'term-paste)))
+#+end_src
+
+** catch-all (old 'theme' file)
+
+I used to put everything that wasn't explicitly part of a package
+configuration into the "theme" config file. Here's all that remains
+and all that needs to be integrated into the above outline.
+
+#+begin_src emacs-lisp :tangle yes
+  (delete-selection-mode 1)
+  (tool-bar-mode 0)
+  (setq scroll-step 1)
+
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+
+  (if window-system
+      (progn (scroll-bar-mode 0)
+             (global-hl-line-mode 1)
+             (fringe-mode '(6 . 6)))
+    (progn (global-hl-line-mode 1)
+           (set-face-background hl-line-face "gray13")
+           (menu-bar-mode 0)))
+
+  (column-number-mode 1)
+  (cua-mode 1)
+  (show-paren-mode t)
+  (custom-set-variables '(indent-tabs-mode nil))
+  (setq-default line-spacing 1)
+  (setq-default inhibit-startup-screen t)
+  (setq-default standard-indent 2)
+  (setq-default tab-width 2)
+  (add-hook 'before-save-hook 'whitespace-cleanup)
+  ;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+  ;;(set-face-attribute 'default nil :family "Inconsolata" :height 140 :weight 'normal)
+  (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
+  (blink-cursor-mode 0)
+  (set-default 'cursor-type 'hollow)
+  (setq ring-bell-function 'ignore)
+
+  (when window-system
+
+    ;;
+    ;; Not sure if this works.
+    (defun kfi-fix-echo-area ()
+      (interactive)
+      (with-current-buffer (get-buffer " *Echo Area 0*")
+        (setq-local face-remapping-alist '((default :family "Monaco" :height 100)))))
+
+    ;; Make minibuffer have a smaller font
+    (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
+
+    (defun kfi-craft-minibuffer ()
+      (set (make-local-variable 'face-remapping-alist)
+           '((default :family "Monaco" :height 100)))))
+
+  (setq ns-use-srgb-colorspace t)
+#+end_src
+
+* Extras
+
+** Sync buffers to what's on the file system
+
+/Docs:/ Global Auto Revert mode is a global minor mode that reverts any
+buffer associated with a file when the file changes on disk.
+
+#+begin_src emacs-lisp :tangle yes
+  (global-auto-revert-mode 1)
+#+end_src
+
+** Do not wrap lines when they're too long
+
+#+begin_src emacs-lisp :tangle yes
+  (setq-default truncate-lines t)
+#+end_src
+
+** Don't attach a postamble to org-mode exports
+
+#+begin_src emacs-lisp :tangle yes
+  (setq org-html-postamble nil)
+#+end_src
+
 * Appearance
+
+This is last so that I can manage the appearance of everything above
+this. Or, well, at least I think I can do that. I'm not really sure
+about how ~use-package~ deals with lazy-loading and so on.
 
 ** dark: atom-one-dark
 
