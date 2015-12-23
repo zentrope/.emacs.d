@@ -8,6 +8,8 @@
 
 #+begin_src emacs-lisp :tangle yes
   (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
+  (setq backup-inhibited t)
+  (setq auto-save-default nil)
 #+end_src
 
 ** Executable environment
@@ -23,7 +25,6 @@
 
   (setq exec-path (append exec-path (list kfi-local-bin usr-local-bin)))
 #+end_src
-
 
 * Applications
 
@@ -641,10 +642,12 @@ symbols.
 #+begin_src emacs-lisp :tangle yes
   (defun kfi-elisp-hook ()
     (paredit-mode 1)
-    (eldoc-mode 1)
     (setq indent-tabs-mode nil)
     (local-set-key (kbd "RET") 'newline-and-indent))
 
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook #'kfi-elisp-hook)
 #+end_src
 
