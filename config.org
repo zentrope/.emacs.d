@@ -446,7 +446,9 @@ for web-sockets.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package restclient
-    :ensure t)
+    :ensure t
+    :config
+    (setq restclient-same-buffer-response t))
 #+end_src
 
 ** JSON mode
