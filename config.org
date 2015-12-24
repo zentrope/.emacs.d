@@ -665,6 +665,7 @@ symbols.
 
   (setq ibuffer-saved-filter-groups
         (quote (("default"
+                 ("org" (mode . org-mode))
                  ("clojure" (mode . clojure-mode))
                  ("clojure-script" (mode . clojurescript-mode))
                  ("web" (or (mode . css-mode)
@@ -840,7 +841,6 @@ and all that needs to be integrated into the above outline.
 #+end_src
 
 * Extras
-
 ** Sync buffers to what's on the file system
 
 /Docs:/ Global Auto Revert mode is a global minor mode that reverts any buffer

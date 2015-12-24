@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: partner_
+# key: partner_
+# binding: direct-keybinding
+# --
+(ns lattice-client.partner.$1
+  (:require
+   [lattice-client.lib.pub :as pub :refer [trace!]]
+   [lattice-client.shared.formats :as formats]
+   [lattice-client.shared.icons :as icon]
+   [lattice-client.partner.api :as api]
+   [quiescent.core :as q :refer-macros [defcomponent]]
+   [sablono.core :as html :refer-macros [html]]))
+
+$0
