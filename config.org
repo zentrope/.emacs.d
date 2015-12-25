@@ -358,6 +358,14 @@ thus killed non-GUI innovation.
   (use-package magit
     :ensure t
     :config
+
+    (defun kfi-toggle-magit-revert-buffers ()
+      (interactive)
+      (setq magit-revert-buffers
+            (if (eq nil magit-revert-buffers)
+                'usage
+              nil)))
+
     ;; Courtesy Magnars
     (defadvice magit-status (around magit-fullscreen activate)
       (window-configuration-to-register :magit-fullscreen)
