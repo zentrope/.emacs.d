@@ -363,8 +363,12 @@ thus killed non-GUI innovation.
       (interactive)
       (setq magit-revert-buffers
             (if (eq nil magit-revert-buffers)
-                'usage
-              nil)))
+                (progn
+                  (message "Setting revert-buffers to 'usage.")
+                  'usage)
+              (progn
+                (message "Setting revert-buffers to nil.")
+                nil))))
 
     ;; Courtesy Magnars
     (defadvice magit-status (around magit-fullscreen activate)
