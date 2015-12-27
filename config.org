@@ -834,7 +834,6 @@ and all that needs to be integrated into the above outline.
   (setq ring-bell-function 'ignore)
 
   (when window-system
-
     ;;
     ;; Not sure if this works.
     (defun kfi-fix-echo-area ()
@@ -901,11 +900,14 @@ Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.o
 ** OSX Environment
 
 So that Emacs on OSX follows the account's =$PATH=. I probably already
-have this fixed up enough in =init.el-, but here's this, too.
+have this fixed up enough in =init.el=, but here's this, too.
+
+Note: For some reason, =exec-path-from-shell-initialize= is undefined
+on my systems. Something to waste time investigating!
 
 #+begin_src emacs-lisp :tangle yes
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize))
+  ;; (when (memq window-system '(mac ns))
+  ;;   (exec-path-from-shell-initialize))
 #+end_src
 
 ** Banish custom config to another file
@@ -920,6 +922,17 @@ a separate file:
 
 And I'm not even going to load it. The goal (for me) is to never need
 that file. So, uh, there.
+
+** UTF8 encoding
+
+Is this kind of thing still needed? I see it in other peoples' config
+files, but I've never knowingly had a problem with glyphs.
+
+#+begin_src emacs-lisp :tangle yes
+  (prefer-coding-system 'utf-8)
+  (when (display-graphic-p)
+    (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+end_src
 
 * Appearance
 
