@@ -883,6 +883,21 @@ oriented buffers like, say, the one in which I edit this file.
   (setq fill-column 80)
 #+end_src
 
+** Try for a smooth scrolling experience
+
+Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.org][Joost Diepenmaat]] at [[https://github.com/joodie][Github]].
+
+#+begin_src emacs-lisp :tangle yes
+  (setq redisplay-dont-pause t
+        scroll-margin 1
+        scroll-step 1
+        scroll-conservatively 10000
+        scroll-preserve-screen-position 1)
+
+  (setq mouse-wheel-follow-mouse 't)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+#+end_src
+
 * Appearance
 
 This is last so that I can manage the appearance of everything above
@@ -916,6 +931,8 @@ invoking =kfi-light= (see below).
                           :background "gray15" :family "Menlo" :height 100
                           :weight 'normal :italic nil
                           :box '(:line-width 2 :color "gray15" :style nil))
+
+      (set-face-attribute 'region nil :background "#369")
 
       ;; Linum customization
       (set-face-attribute 'linum nil :foreground "#333")
