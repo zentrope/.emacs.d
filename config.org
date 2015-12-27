@@ -898,6 +898,29 @@ Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.o
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 #+end_src
 
+** OSX Environment
+
+So that Emacs on OSX follows the account's =$PATH=. I probably already
+have this fixed up enough in =init.el-, but here's this, too.
+
+#+begin_src emacs-lisp :tangle yes
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
+#+end_src
+
+** Banish custom config to another file
+
+If I use any of the custom config facility, I want that stuff to go to
+a separate file:
+
+#+begin_src emacs-lisp :tangle yes
+  (setq custom-file "~/.emacs.d/custom.el")
+  ;; (load custom-file)
+#+end_src
+
+And I'm not even going to load it. The goal (for me) is to never need
+that file. So, uh, there.
+
 * Appearance
 
 This is last so that I can manage the appearance of everything above
