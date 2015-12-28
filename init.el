@@ -25,13 +25,15 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; https://github.com/jwiegley/use-package
 (eval-when-compile
   (require 'use-package))
 (require 'diminish)
 (require 'bind-key)
 
-(when (not package-archive-contents)
-  (package-refresh-contents))
 
 ;;(setq use-package-verbose t)
 

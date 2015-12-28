@@ -21,3 +21,4 @@ configs/*.elc
 /config.el
 /config.html
 /.org-id-locations
+/custom.el

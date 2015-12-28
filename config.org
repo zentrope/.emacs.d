@@ -564,30 +564,31 @@ need this?
 ** org-mode
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package org
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook 'turn-on-auto-fill)
-    (setq org-html-doctype "html5")
-    (setq org-export-with-smart-quotes t)
-    (setq org-replace-disputed-keys t)
-    (setq org-html-head "<style>
-                           html { font-family: helvetica, sans-serif; padding: 50px; }
-                           table { width: 100%; border-collapse: collapse; font-size: 10pt }
-                           p { line-height: 1.5em; }
-                           li { line-height: 1.5em; }
-                           tr:nth-child(odd) {background: aliceblue}
-                           tr:nth-child(even) {background: #fff}
-                           th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
-                                background-color: #f6f6f6; text-align: left !important; }
-                           td { padding: 4px; border: 1px solid #d8d8d8; }
-                         </style>")
-    (setq org-src-fontify-natively t)
-    (use-package org-bullets
-      :disabled t
+    (use-package org-plus-contrib
       :ensure t
+      :pin org
       :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
+      (add-hook 'org-mode-hook 'turn-on-auto-fill)
+      (setq org-html-doctype "html5")
+      (setq org-export-with-smart-quotes t)
+      (setq org-replace-disputed-keys t)
+      (setq org-html-head "<style>
+                             html { font-family: helvetica, sans-serif; padding: 50px; }
+                             table { width: 100%; border-collapse: collapse; font-size: 10pt }
+                             p { line-height: 1.5em; }
+                             li { line-height: 1.5em; }
+                             tr:nth-child(odd) {background: aliceblue}
+                             tr:nth-child(even) {background: #fff}
+                             th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
+                                  background-color: #f6f6f6; text-align: left !important; }
+                             td { padding: 4px; border: 1px solid #d8d8d8; }
+                           </style>")
+      (setq org-src-fontify-natively t)
+      (use-package org-bullets
+        :disabled t
+        :ensure t
+        :config
+        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
 #+end_src
 
 ** markdown
@@ -765,7 +766,8 @@ shell background is appropriate.
 
   ;; Turn off stuff that only makes sense in a regular buffer.
   (defadvice term-char-mode (after term-char-mode-fixes ())
-    (set (make-local-variable 'hl-line-mode) nil)
+    ;; Causes a compile-log warning. Do I even need this any more?
+    ;; (set (make-local-variable 'hl-line-mode) nil)
     (set (make-local-variable 'global-hl-line-mode) nil))
 
   (ad-activate 'term-char-mode)
@@ -940,6 +942,17 @@ This is last so that I can manage the appearance of everything above
 this. Or, well, at least I think I can do that. I'm not really sure
 about how ~use-package~ deals with lazy-loading and so on.
 
+** smart-mode-line
+
+#+begin_src emacs-lisp :tangle yes
+    ;; https://github.com/Malabarba/smart-mode-line
+    (use-package smart-mode-line
+      :ensure t
+      :config
+      (setq sml/no-confirm-load-theme t)
+      (setq sml/theme 'automatic)
+      (sml/setup))
+#+end_src
 ** dark: atom-one-dark
 
 This is my main theme. Bright where it needs to be, but nowhere
@@ -954,30 +967,31 @@ invoking =kfi-light= (see below).
     (defun kfi-dark ()
       (interactive)
       (load-theme 'atom-one-dark t)
-      (set-face-attribute 'fringe nil :background "#111711")
-      (set-face-attribute 'default nil :background "#111711")
-      (set-face-attribute 'mode-line nil
-                          :foreground "#ccc"
-                          :background "#374350"
-                          :underline nil
-                          :family "Monaco" :height 100 :weight 'normal
-                          :box '(:line-width 2 :color "#374350" :style nil))
+      ;; (set-face-attribute 'fringe nil :background "#111711")
+      ;; (set-face-attribute 'default nil :background "#111711")
+      ;; (set-face-attribute 'mode-line nil
+      ;;                     :foreground "#ccc"
+      ;;                     :background "#374350"
+      ;;                     :underline nil
+      ;;                     :family "Monaco" :height 100 :weight 'normal
+      ;;                     :box '(:line-width 2 :color "#374350" :style nil))
 
-      (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                          :background "gray15" :family "Menlo" :height 100
-                          :weight 'normal :italic nil
-                          :box '(:line-width 2 :color "gray15" :style nil))
+      ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+      ;;                     :background "gray15" :family "Menlo" :height 100
+      ;;                     :weight 'normal :italic nil
+      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
 
+      (sml/apply-theme 'dark)
       (set-face-attribute 'region nil :background "#369")
 
       ;; Linum customization
-      (set-face-attribute 'linum nil :foreground "#333")
+      (set-face-attribute 'linum nil :foreground "#555")
 
       ;; ERC customizations
       (set-face-attribute 'erc-prompt-face nil
-                          :foreground "darkorange" :background "#111711")
+                          :foreground "darkorange" :background "#292c34")
       (set-face-attribute 'erc-timestamp-face nil
-                          :foreground "gray25" :background "#111711"))
+                          :foreground "gray25" :background "#292c34"))
 
     (kfi-dark))
 #+end_src
@@ -990,21 +1004,24 @@ Sometimes I want the default white Emacs theme, so:
   (defun kfi-light ()
     (interactive)
     (disable-theme 'atom-one-dark)
-    (set-face-attribute 'fringe nil :background "#fff")
-    (set-face-attribute 'default nil :background "#fff")
-    (set-face-background hl-line-face "gray90")
+    ;; (set-face-attribute 'fringe nil :background "#fff")
+    ;; (set-face-attribute 'default nil :background "#fff")
+    ;; (set-face-background hl-line-face "gray90")
 
-    (set-face-attribute 'mode-line nil
-                        :foreground "dodgerblue"
-                        :background "gray90"
-                        :underline nil
-                        :family "Monaco" :height 100 :weight 'normal
-                        :box '(:line-width 2 :color "gray90" :style nil))
+    ;; (set-face-attribute 'mode-line nil
+    ;;                     :foreground "dodgerblue"
+    ;;                     :background "gray90"
+    ;;                     :underline nil
+    ;;                     :family "Monaco" :height 100 :weight 'normal
+    ;;                     :box '(:line-width 2 :color "gray90" :style nil))
 
-    (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                        :background "#f2f2f2" :family "Menlo" :height 100
-                        :weight 'normal :italic nil
-                        :box '(:line-width 2 :color "#f2f2f2" :style nil))
+    ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+    ;;                     :background "#f2f2f2" :family "Menlo" :height 100
+    ;;                     :weight 'normal :italic nil
+    ;;                     :box '(:line-width 2 :color "#f2f2f2" :style nil))
+
+    (sml/apply-theme 'light)
+    (set-face-attribute 'region nil :background "aquamarine")
 
     ;; Linum customization
     (set-face-attribute 'linum nil :foreground "#ccc")
