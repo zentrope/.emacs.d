@@ -91,6 +91,15 @@ demos, but I just like it for fun.
     :ensure t)
 #+end_src
 
+** fullframe
+
+[[https://github.com/tomterl/fullframe][home page]]
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package fullframe
+    :ensure t)
+#+end_src
+
 ** dired-details
 
 Shortens up the dired buffer, removing dates, file-sizes and so
@@ -422,7 +431,6 @@ theme customizations above.
 #+end_src
 
 * Web Programming
-
 ** web-mode
 
 #+begin_src emacs-lisp :tangle yes
@@ -452,6 +460,8 @@ theme customizations above.
 #+end_src
 
 ** restclient
+
+[[https://github.com/pashky/restclient.el][home page]]
 
 Handy mode for running raw web requests. Alas, not particularly good
 for web-sockets.
@@ -943,7 +953,7 @@ this. Or, well, at least I think I can do that. I'm not really sure
 about how ~use-package~ deals with lazy-loading and so on.
 
 ** smart-mode-line
-
+[[https://github.com/Malabarba/smart-mode-line][home page]]
 #+begin_src emacs-lisp :tangle yes
     ;; https://github.com/Malabarba/smart-mode-line
     (use-package smart-mode-line
@@ -960,40 +970,52 @@ else. I've added a command =kfi-dark= to invoke the theme after
 invoking =kfi-light= (see below).
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package atom-one-dark-theme
-    :if window-system
-    :ensure t
-    :config
-    (defun kfi-dark ()
-      (interactive)
-      (load-theme 'atom-one-dark t)
-      ;; (set-face-attribute 'fringe nil :background "#111711")
-      ;; (set-face-attribute 'default nil :background "#111711")
-      ;; (set-face-attribute 'mode-line nil
-      ;;                     :foreground "#ccc"
-      ;;                     :background "#374350"
-      ;;                     :underline nil
-      ;;                     :family "Monaco" :height 100 :weight 'normal
-      ;;                     :box '(:line-width 2 :color "#374350" :style nil))
+    (use-package atom-one-dark-theme
+      :if window-system
+      :ensure t
+      :config
+      (defun kfi-dark ()
+        (interactive)
+        (load-theme 'atom-one-dark t)
+        (set-face-attribute 'fringe nil :background "#000000")
+        (set-face-attribute 'default nil :background "#000000")
+        (set-face-attribute
+         'mode-line nil
+         :background "#292c34")
 
-      ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-      ;;                     :background "gray15" :family "Menlo" :height 100
-      ;;                     :weight 'normal :italic nil
-      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
+        ;; (set-face-attribute 'mode-line nil
+        ;;                     :foreground "#ccc"
+        ;;                     :background "#374350"
+        ;;                     :underline nil
+        ;;                     :family "Monaco" :height 100 :weight 'normal
+        ;;                     :box '(:line-width 2 :color "#374350" :style nil))
 
-      (sml/apply-theme 'dark)
-      (set-face-attribute 'region nil :background "#369")
+        ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+        ;;                     :background "gray15" :family "Menlo" :height 100
+        ;;                     :weight 'normal :italic nil
+        ;;                     :box '(:line-width 2 :color "gray15" :style nil))
 
-      ;; Linum customization
-      (set-face-attribute 'linum nil :foreground "#555")
+        (sml/apply-theme 'dark)
+        (set-face-attribute 'region nil :background "#369")
 
-      ;; ERC customizations
-      (set-face-attribute 'erc-prompt-face nil
-                          :foreground "darkorange" :background "#292c34")
-      (set-face-attribute 'erc-timestamp-face nil
-                          :foreground "gray25" :background "#292c34"))
+        ;; Linum customization
+        (set-face-attribute 'linum nil :foreground "#555")
 
-    (kfi-dark))
+        ;; ERC customizations
+        (set-face-attribute
+         'erc-prompt-face nil
+         :foreground "darkorange"
+         :background "black"
+         ;;:background "#292c34"
+         )
+
+        (set-face-attribute
+         'erc-timestamp-face nil
+         :foreground "gray30"
+         ;; :background "#292c34"
+         :background "black"))
+
+      (kfi-dark))
 #+end_src
 
 ** light: default
