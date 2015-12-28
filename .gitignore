@@ -22,3 +22,4 @@ configs/*.elc
 /config.html
 /.org-id-locations
 /custom.el
+/notes
