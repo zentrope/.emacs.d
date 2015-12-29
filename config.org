@@ -574,31 +574,34 @@ need this?
 ** org-mode
 
 #+begin_src emacs-lisp :tangle yes
-    (use-package org-plus-contrib
-      :ensure t
-      :pin org
-      :config
-      (add-hook 'org-mode-hook 'turn-on-auto-fill)
-      (setq org-html-doctype "html5")
-      (setq org-export-with-smart-quotes t)
-      (setq org-replace-disputed-keys t)
-      (setq org-html-head "<style>
-                             html { font-family: helvetica, sans-serif; padding: 50px; }
-                             table { width: 100%; border-collapse: collapse; font-size: 10pt }
-                             p { line-height: 1.5em; }
-                             li { line-height: 1.5em; }
-                             tr:nth-child(odd) {background: aliceblue}
-                             tr:nth-child(even) {background: #fff}
-                             th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
-                                  background-color: #f6f6f6; text-align: left !important; }
-                             td { padding: 4px; border: 1px solid #d8d8d8; }
-                           </style>")
-      (setq org-src-fontify-natively t)
-      (use-package org-bullets
-        :disabled t
-        :ensure t
-        :config
-        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))))
+  (use-package org-plus-contrib
+    :ensure t
+    :pin org
+    :init
+    (add-hook 'org-mode-hook 'turn-on-auto-fill)
+    :config
+    (setq
+     org-html-doctype "html5"
+     org-export-with-smart-quotes t
+     org-replace-disputed-keys t
+     org-src-fontify-natively t)
+    (setq org-html-head "
+        <style>
+          html { font-family: helvetica, sans-serif; padding: 50px; }
+          table { width: 100%; border-collapse: collapse; font-size: 10pt }
+          p { line-height: 1.5em; }
+          li { line-height: 1.5em; }
+          tr:nth-child(odd) {background: aliceblue}
+          tr:nth-child(even) {background: #fff}
+          th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
+               background-color: #f6f6f6; text-align: left !important; }
+          td { padding: 4px; border: 1px solid #d8d8d8; }
+        </style>"))
+
+  (use-package org-bullets
+    :ensure t
+    :init
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+end_src
 
 ** markdown
@@ -725,10 +728,11 @@ project. But here we are anyway, just in case.
 #+begin_src emacs-lisp :tangle yes
   (setq mac-command-modifqier 'super)
 
-  ;; Have I duped this from somewhere else?
+  ;; Have I duped this somewhere else?
   (global-set-key (kbd "s-p") 'projectile-find-file)
 
-  ;; On OSX C-M-@ amd M-S-SPC doesn't work in a terminl.
+  ;; On OSX C-M-@ amd M-S-SPC doesn't work when running in a
+  ;; terminal.
   (global-set-key (kbd "C-M-SPC") 'mark-sexp)
   (global-set-key (kbd "M-RET") 'mark-sexp)
 
@@ -744,6 +748,17 @@ project. But here we are anyway, just in case.
 
   ;; Switch to next frame, if there is one.
   (global-set-key (kbd "M-`") 'other-frame)
+
+  ;; Quick access to sshell
+  (global-set-key (kbd "C-c h") 'eshell)
+
+  (global-set-key (kbd "C-c s")
+                  (lambda ()
+                    (interactive)
+                    (switch-to-buffer (get-buffer-create "*scratch*"))
+                    (emacs-lisp-mode)
+                    (when (eq (length (buffer-string)) 0)
+                      (insert ";; scratch\n\n"))))
 #+end_src
 
 ** emacs-server
@@ -906,7 +921,7 @@ Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.o
         scroll-preserve-screen-position 1)
 
   (setq mouse-wheel-follow-mouse 't)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (setq mouse-wheel-scroll-amount '(quote (0.01)))
 #+end_src
 
 ** OSX Environment
@@ -944,6 +959,12 @@ files, but I've never knowingly had a problem with glyphs.
   (prefer-coding-system 'utf-8)
   (when (display-graphic-p)
     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+end_src
+
+** Yes or no
+
+#+begin_src emacs-lisp :tangle yes
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 * Appearance
