@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: block-comment
-# key: ;;==
+# key: ===
 # binding: direct-keybinding
 # --
 ;;-----------------------------------------------------------------------------
