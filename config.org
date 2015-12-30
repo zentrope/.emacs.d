@@ -1047,8 +1047,8 @@ Sometimes I want the default white Emacs theme, so:
   (defun kfi-light ()
     (interactive)
     (disable-theme 'atom-one-dark)
-    ;; (set-face-attribute 'fringe nil :background "#fff")
-    ;; (set-face-attribute 'default nil :background "#fff")
+    (set-face-attribute 'fringe nil :background "#fff")
+    (set-face-attribute 'default nil :background "#fff")
     ;; (set-face-background hl-line-face "gray90")
 
     ;; (set-face-attribute 'mode-line nil
