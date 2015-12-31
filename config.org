@@ -752,6 +752,16 @@ project. But here we are anyway, just in case.
   ;; Quick access to sshell
   (global-set-key (kbd "C-c h") 'eshell)
 
+  (global-set-key (kbd "C-c m 1")
+                  (lambda ()
+                    (interactive)
+                    (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)))
+
+  (global-set-key (kbd "C-c m 2")
+                  (lambda ()
+                    (interactive)
+                    (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)))
+
   (global-set-key (kbd "C-c s")
                   (lambda ()
                     (interactive)
