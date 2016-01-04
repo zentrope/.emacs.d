@@ -166,41 +166,41 @@ sophisticated "ido" kind of thing.
     ;; http://tuhdo.github.io/helm-intro.html#sec-31
     :ensure t
     :diminish helm-mode
-    :config
-    (progn
+    :config (progn
 
-      (require 'helm-config)
+              (require 'helm-config)
 
-      (use-package helm-projectile
-        :ensure t
-        :commands helm-projectile
-        :bind ("s-p" . helm-projectile))
+              (use-package helm-projectile
+                :ensure t
+                :commands helm-projectile
+                :bind ("s-p" . helm-projectile))
 
-      (use-package helm-ag
-        :ensure t
-        :config
-        (setq helm-ag-base-command
-              "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
-        (setq helm-ag-command-option "--all-text")
-        (setq helm-ag-insert-at-point 'symbol))
+              (use-package helm-ag
+                :ensure t
+                :config
+                (setq helm-ag-base-command
+                      "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
+                (setq helm-ag-command-option "--all-text")
+                (setq helm-ag-insert-at-point 'symbol))
 
-      (helm-mode)
-      (helm-autoresize-mode t)
-      (setq helm-locate-command "mdfind -interpret -name %s %s"
-            helm-ff-newfile-prompt-p nil
-            helm-M-x-fuzzy-match t
-            helm-autoresize-max-height 40
-            helm-autoresize-min-height 40
-            helm-ff-skip-boring-files t)
-      ;; (let ((tmp helm-boring-file-regexp-list))
-      ;;   (setq helm-boring-file-regexp-list (append tmp '("\\.[A-Za-z]+"))))
-      ;; rebind tab to do persistent action
-      (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-      ;; make TAB works in terminal
-      (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-      ;; list actions using C-z
-      (define-key helm-map (kbd "C-z")  'helm-select-action)
-      (bind-key (kbd "M-x") 'helm-M-x))
+              (helm-mode)
+              (helm-autoresize-mode t)
+              (setq helm-locate-command "mdfind -interpret -name %s %s"
+                    helm-full-frame t
+                    helm-ff-newfile-prompt-p nil
+                    helm-M-x-fuzzy-match t
+                    helm-autoresize-max-height 40
+                    helm-autoresize-min-height 40
+                    helm-ff-skip-boring-files t)
+              ;; (let ((tmp helm-boring-file-regexp-list))
+              ;;   (setq helm-boring-file-regexp-list (append tmp '("\\.[A-Za-z]+"))))
+              ;; rebind tab to do persistent action
+              (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+              ;; make TAB works in terminal
+              (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+              ;; list actions using C-z
+              (define-key helm-map (kbd "C-z")  'helm-select-action)
+              (bind-key (kbd "M-x") 'helm-M-x))
 
     :bind (("C-c h" . helm-command-prefix)
            ("C-x b" . helm-mini)
@@ -577,26 +577,24 @@ need this?
   (use-package org-plus-contrib
     :ensure t
     :pin org
-    :init
-    (add-hook 'org-mode-hook 'turn-on-auto-fill)
-    :config
-    (setq
-     org-html-doctype "html5"
-     org-export-with-smart-quotes t
-     org-replace-disputed-keys t
-     org-src-fontify-natively t)
-    (setq org-html-head "
-        <style>
-          html { font-family: helvetica, sans-serif; padding: 50px; }
-          table { width: 100%; border-collapse: collapse; font-size: 10pt }
-          p { line-height: 1.5em; }
-          li { line-height: 1.5em; }
-          tr:nth-child(odd) {background: aliceblue}
-          tr:nth-child(even) {background: #fff}
-          th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
-               background-color: #f6f6f6; text-align: left !important; }
-          td { padding: 4px; border: 1px solid #d8d8d8; }
-        </style>"))
+    :init (add-hook 'org-mode-hook 'turn-on-auto-fill)
+    :config (progn
+              (setq
+               org-html-doctype "html5"
+               org-export-with-smart-quotes t
+               org-replace-disputed-keys t
+               org-src-fontify-natively t)
+              (setq org-html-head "<style>
+                  html { font-family: helvetica, sans-serif; padding: 50px; }
+                  table { width: 100%; border-collapse: collapse; font-size: 10pt }
+                  p { line-height: 1.5em; }
+                  li { line-height: 1.5em; }
+                  tr:nth-child(odd) {background: aliceblue}
+                  tr:nth-child(even) {background: #fff}
+                  th { padding: 4px; font-weight: 400; border: 1px solid #d6d6d6;
+                       background-color: #f6f6f6; text-align: left !important; }
+                  td { padding: 4px; border: 1px solid #d8d8d8; }
+                </style>")))
 
   (use-package org-bullets
     :ensure t
@@ -863,9 +861,9 @@ and all that needs to be integrated into the above outline.
   (setq-default standard-indent 2)
   (setq-default tab-width 2)
   (add-hook 'before-save-hook 'whitespace-cleanup)
-  ;;(set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+  (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
   ;;(set-face-attribute 'default nil :family "Inconsolata" :height 140 :weight 'normal)
-  (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
+  ;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
   (blink-cursor-mode 0)
   (set-default 'cursor-type 'hollow)
   (setq ring-bell-function 'ignore)
