@@ -2,6 +2,9 @@
 #+author: Keith Irwin
 #+startup: content
 
+Using org-mode for this because it's a bit easier to navigate around
+for endless tweaking. Any additional narrative is catch as catch can.
+
 * Environment & Packaging
 
 ** Buffer backups
@@ -59,7 +62,7 @@ that theme adjustments are above, not included here.
     (setq erc-fill-prefix "    ")
     (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
 
-    (setq erc-fill-column 78)
+    (setq erc-fill-column 90)
     (setq erc-scroll-to-bottom -2)
     (setq erc-truncate-buffer-on-save t)
     (setq erc-max-buffer-size 30000)
@@ -170,19 +173,6 @@ sophisticated "ido" kind of thing.
 
               (require 'helm-config)
 
-              (use-package helm-projectile
-                :ensure t
-                :commands helm-projectile
-                :bind ("s-p" . helm-projectile))
-
-              (use-package helm-ag
-                :ensure t
-                :config
-                (setq helm-ag-base-command
-                      "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
-                (setq helm-ag-command-option "--all-text")
-                (setq helm-ag-insert-at-point 'symbol))
-
               (helm-mode)
               (helm-autoresize-mode t)
               (setq helm-locate-command "mdfind -interpret -name %s %s"
@@ -207,6 +197,20 @@ sophisticated "ido" kind of thing.
            ("C-`" . helm-resume)
            ("M-x" . helm-M-x)
            ("C-x C-f" . helm-find-files)))
+
+  (use-package helm-projectile
+    :ensure t
+    :commands helm-projectile
+    :bind ("s-p" . helm-projectile))
+
+  (use-package helm-ag
+    :ensure t
+    :config
+    (setq helm-ag-base-command "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
+    (setq helm-ag-command-option "--all-text")
+    (setq helm-ag-insert-at-point 'symbol))
+
+  (global-set-key (kbd "C-c a") 'helm-do-grep-ag)
 #+end_src
 
 ** ido/smex
