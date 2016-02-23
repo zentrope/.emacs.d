@@ -1070,17 +1070,17 @@ Sometimes I want the default white Emacs theme, so:
     (set-face-attribute 'default nil :background "#fff")
     ;; (set-face-background hl-line-face "gray90")
 
-    ;; (set-face-attribute 'mode-line nil
-    ;;                     :foreground "dodgerblue"
-    ;;                     :background "gray90"
-    ;;                     :underline nil
-    ;;                     :family "Monaco" :height 100 :weight 'normal
-    ;;                     :box '(:line-width 2 :color "gray90" :style nil))
+    (set-face-attribute 'mode-line nil
+                        :foreground "dodgerblue"
+                        :background "gray90"
+                        :underline nil
+                        :family "Monaco" :height 100 :weight 'normal
+                        :box '(:line-width 2 :color "gray90" :style nil))
 
-    ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-    ;;                     :background "#f2f2f2" :family "Menlo" :height 100
-    ;;                     :weight 'normal :italic nil
-    ;;                     :box '(:line-width 2 :color "#f2f2f2" :style nil))
+    (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                        :background "#f2f2f2" :family "Menlo" :height 100
+                        :weight 'normal :italic nil
+                        :box '(:line-width 2 :color "#f2f2f2" :style nil))
 
     (sml/apply-theme 'light)
     (set-face-attribute 'region nil :background "aquamarine")
