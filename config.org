@@ -1055,7 +1055,8 @@ invoking =kfi-light= (see below).
                           ;; :background "#292c34"
                           :background "black"))
 
-    (kfi-dark))
+    (kfi-dark)
+    )
 #+end_src
 
 ** light: default
@@ -1093,4 +1094,6 @@ Sometimes I want the default white Emacs theme, so:
                         :foreground "dodgerblue" :background "white")
     (set-face-attribute 'erc-timestamp-face nil
                         :foreground "dodgerblue" :background "white"))
+
+  (kfi-light)
 #+end_src
