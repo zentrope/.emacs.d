@@ -118,7 +118,7 @@ on. Most of the time I just want a list of files.
 
 ** ivy-mode, swiper, counsel
 
-/Disabled for now./
+/Enabled for now./
 
 This is yet another version of ~ido~ or ~helm~ which claims to be
 simpler and cleaner than all the others. I. Want. To. Believe.
@@ -129,15 +129,18 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
  - [[http://pragmaticemacs.com/emacs/super-spotlight-search-with-counsel/][Super spotlight search with counsel]]
 
 #+begin_src emacs-lisp :tangle yes
+  (use-package ag
+    :ensure t)
+
   (use-package counsel
-    :disabled t
+    ;; :disabled t
     :ensure t
     :config
     ;; Hide .dot files, other 'hidden' detritus
     (setq counsel-find-file-ignore-regexp "\\(?:\\`[#.]\\)\\|\\(?:[#~]\\'\\)"))
 
   (use-package swiper
-    :disabled t
+    ;;:disabled t
     :ensure t
     :config
     (ivy-mode 1)
@@ -164,53 +167,58 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
 Trying out [[https://github.com/emacs-helm/helm][Helm]] which is a world unto itself. A much more
 sophisticated "ido" kind of thing.
 
+/Disabled for now./
+
 #+begin_src emacs-lisp :tangle yes
-  (use-package helm
-    ;; http://tuhdo.github.io/helm-intro.html#sec-31
-    :ensure t
-    :diminish helm-mode
-    :config (progn
+  ;; (use-package helm
+  ;;   ;; http://tuhdo.github.io/helm-intro.html#sec-31
+  ;;   :disabled t
+  ;;   :ensure t
+  ;;   :diminish helm-mode
+  ;;   :config (progn
 
-              (require 'helm-config)
+  ;;             (require 'helm-config)
 
-              (helm-mode)
-              (helm-autoresize-mode t)
-              (setq helm-locate-command "mdfind -interpret -name %s %s"
-                    helm-full-frame t
-                    helm-ff-newfile-prompt-p nil
-                    helm-M-x-fuzzy-match t
-                    helm-autoresize-max-height 40
-                    helm-autoresize-min-height 40
-                    helm-ff-skip-boring-files t)
-              ;; (let ((tmp helm-boring-file-regexp-list))
-              ;;   (setq helm-boring-file-regexp-list (append tmp '("\\.[A-Za-z]+"))))
-              ;; rebind tab to do persistent action
-              (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-              ;; make TAB works in terminal
-              (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-              ;; list actions using C-z
-              (define-key helm-map (kbd "C-z")  'helm-select-action)
-              (bind-key (kbd "M-x") 'helm-M-x))
+  ;;             (helm-mode)
+  ;;             (helm-autoresize-mode t)
+  ;;             (setq helm-locate-command "mdfind -interpret -name %s %s"
+  ;;                   helm-full-frame t
+  ;;                   helm-ff-newfile-prompt-p nil
+  ;;                   helm-M-x-fuzzy-match t
+  ;;                   helm-autoresize-max-height 40
+  ;;                   helm-autoresize-min-height 40
+  ;;                   helm-ff-skip-boring-files t)
+  ;;             ;; (let ((tmp helm-boring-file-regexp-list))
+  ;;             ;;   (setq helm-boring-file-regexp-list (append tmp '("\\.[A-Za-z]+"))))
+  ;;             ;; rebind tab to do persistent action
+  ;;             (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  ;;             ;; make TAB works in terminal
+  ;;             (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  ;;             ;; list actions using C-z
+  ;;             (define-key helm-map (kbd "C-z")  'helm-select-action)
+  ;;             (bind-key (kbd "M-x") 'helm-M-x))
 
-    :bind (("C-c h" . helm-command-prefix)
-           ("C-x b" . helm-mini)
-           ("C-`" . helm-resume)
-           ("M-x" . helm-M-x)
-           ("C-x C-f" . helm-find-files)))
+  ;;   :bind (("C-c h" . helm-command-prefix)
+  ;;          ("C-x b" . helm-mini)
+  ;;          ("C-`" . helm-resume)
+  ;;          ("M-x" . helm-M-x)
+  ;;          ("C-x C-f" . helm-find-files)))
 
-  (use-package helm-projectile
-    :ensure t
-    :commands helm-projectile
-    :bind ("s-p" . helm-projectile))
+  ;; (use-package helm-projectile
+  ;;   :disabled t
+  ;;   :ensure t
+  ;;   :commands helm-projectile
+  ;;   :bind ("s-p" . helm-projectile))
 
-  (use-package helm-ag
-    :ensure t
-    :config
-    (setq helm-ag-base-command "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
-    (setq helm-ag-command-option "--all-text")
-    (setq helm-ag-insert-at-point 'symbol))
+  ;; (use-package helm-ag
+  ;;   :disabled t
+  ;;   :ensure t
+  ;;   :config
+  ;;   (setq helm-ag-base-command "/usr/local/bin/ag --nocolor --nogroup --ignore-case")
+  ;;   (setq helm-ag-command-option "--all-text")
+  ;;   (setq helm-ag-insert-at-point 'symbol))
 
-  (global-set-key (kbd "C-c a") 'helm-do-grep-ag)
+  ;; (global-set-key (kbd "C-c a") 'helm-do-grep-ag)
 #+end_src
 
 ** ido/smex
@@ -352,7 +360,9 @@ application development which tends towards lots of files.
     :ensure t
     :commands projectile-global-mode
     :config
-    (setq projectile-completion-system 'helm))
+    (setq projectile-completion-system 'ivy)
+    ;;(setq projectile-completion-system 'helm)
+    )
 #+end_src
 
 ** dash
@@ -521,14 +531,14 @@ expressions over their syntax. Right?
     :config
     (setq clojure-defun-style-default-indent nil)
 
-    (defconst kfi-clj-anonfn
-      `(("\\(#\\)("
-         (0 (progn (compose-region (match-beginning 1)
-                                   (match-end 1) "ƒ")
-                   nil)))))
+    ;; (defconst kfi-clj-anonfn
+    ;;   `(("\\(#\\)("
+    ;;      (0 (progn (compose-region (match-beginning 1)
+    ;;                                (match-end 1) "9")
+    ;;                nil)))))
 
-    (font-lock-add-keywords 'clojure-mode       kfi-clj-anonfn)
-    (font-lock-add-keywords 'clojurescript-mode kfi-clj-anonfn)
+    ;; (font-lock-add-keywords 'clojure-mode       kfi-clj-anonfn)
+    ;; (font-lock-add-keywords 'clojurescript-mode kfi-clj-anonfn)
     (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
     (add-hook 'clojure-mode-hook 'paredit-mode)
     (add-hook 'clojure-mode-hook 'cider-mode))
@@ -1055,8 +1065,9 @@ invoking =kfi-light= (see below).
                           ;; :background "#292c34"
                           :background "black"))
 
-    (kfi-dark)
-    )
+    (when window-system
+      ;; Test not necessary.
+      (kfi-dark)))
 #+end_src
 
 ** light: default
@@ -1095,5 +1106,6 @@ Sometimes I want the default white Emacs theme, so:
     (set-face-attribute 'erc-timestamp-face nil
                         :foreground "dodgerblue" :background "white"))
 
-  (kfi-light)
+  ;; (when window-system
+  ;;   (kfi-light))
 #+end_src
