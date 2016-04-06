@@ -164,7 +164,8 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
     ;;(global-set-key (kbd "C-c j") 'counsel-git-grep)
     (global-set-key (kbd "C-c a") 'projectile-ag)
     (global-set-key (kbd "C-c k") 'counsel-ag)
-    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+    ;;(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+    ;;(setq ivy-re-builders-alist '((t . ivy--regex-plus)))
 
     (setq ivy-extra-directories nil)
 
