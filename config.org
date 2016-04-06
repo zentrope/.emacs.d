@@ -127,6 +127,8 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
 ~counsel~.
 
  - [[http://pragmaticemacs.com/emacs/super-spotlight-search-with-counsel/][Super spotlight search with counsel]]
+ - http://oremacs.com/swiper/
+ - https://github.com/abo-abo/swiper/wiki/Don%27t-open-directory-mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package ag
@@ -160,7 +162,26 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
     ;;(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     ;;(global-set-key (kbd "C-c g") 'counsel-git)
     ;;(global-set-key (kbd "C-c j") 'counsel-git-grep)
-    (global-set-key (kbd "C-c k") 'counsel-ag))
+    (global-set-key (kbd "C-c a") 'projectile-ag)
+    (global-set-key (kbd "C-c k") 'counsel-ag)
+    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+
+    (setq ivy-extra-directories nil)
+
+    (defun eh-ivy-open-current-typed-path ()
+      (interactive)
+      (when ivy--directory
+        (let* ((dir ivy--directory)
+               (text-typed ivy-text)
+               (path (concat dir text-typed)))
+          (delete-minibuffer-contents)
+          (ivy--done path))))
+
+    (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
+    (define-key ivy-minibuffer-map (kbd "C-f") 'eh-ivy-open-current-typed-path)
+    )
+
+
 #+end_src
 
 ** helm
