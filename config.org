@@ -181,8 +181,6 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
     (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
     (define-key ivy-minibuffer-map (kbd "C-f") 'eh-ivy-open-current-typed-path)
     )
-
-
 #+end_src
 
 ** helm
@@ -805,6 +803,12 @@ project. But here we are anyway, just in case.
                     (interactive)
                     (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)))
 
+  (global-set-key (kbd "C-c m 3")
+                  (lambda ()
+                    (interactive)
+                    (set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)
+                    ))
+
   (global-set-key (kbd "C-c s")
                   (lambda ()
                     (interactive)
@@ -906,7 +910,7 @@ and all that needs to be integrated into the above outline.
   (setq-default standard-indent 2)
   (setq-default tab-width 2)
   (add-hook 'before-save-hook 'whitespace-cleanup)
-  (set-face-attribute 'default nil :family "Menlo" :height 120 :weight 'normal)
+  (set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)
   ;;(set-face-attribute 'default nil :family "Inconsolata" :height 140 :weight 'normal)
   ;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
   (blink-cursor-mode 0)
