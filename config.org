@@ -923,14 +923,14 @@ and all that needs to be integrated into the above outline.
     (defun kfi-fix-echo-area ()
       (interactive)
       (with-current-buffer (get-buffer " *Echo Area 0*")
-        (setq-local face-remapping-alist '((default :family "Monaco" :height 100)))))
+        (setq-local face-remapping-alist '((default :family "Input Mono Narrow" :weight 'thin :height 100)))))
 
     ;; Make minibuffer have a smaller font
     (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
 
     (defun kfi-craft-minibuffer ()
       (set (make-local-variable 'face-remapping-alist)
-           '((default :family "Monaco" :height 100)))))
+           '((default :family "Input Mono Narrow" :weight 'thin :height 100)))))
 
   (setq ns-use-srgb-colorspace t)
 #+end_src
@@ -1061,6 +1061,7 @@ invoking =kfi-light= (see below).
        'mode-line nil
        :background "#292c34")
 
+
       ;; (set-face-attribute 'mode-line nil
       ;;                     :foreground "#ccc"
       ;;                     :background "#374350"
@@ -1092,6 +1093,9 @@ invoking =kfi-light= (see below).
                           ;; :background "#292c34"
                           :background "black"))
 
+    (set-face-attribute 'mode-line          nil :family "Input Mono Narrow" :height 100 :weight 'thin)
+    (set-face-attribute 'mode-line-inactive nil :family "Input Mono Narrow" :height 100 :weight 'thin)
+
     (when window-system
       ;; Test not necessary.
       (kfi-dark)))
@@ -1113,12 +1117,12 @@ Sometimes I want the default white Emacs theme, so:
                         :foreground "dodgerblue"
                         :background "gray90"
                         :underline nil
-                        :family "Monaco" :height 100 :weight 'normal
+                        :family "Input Mono Narrow" :height 100 :weight 'thin
                         :box '(:line-width 2 :color "gray90" :style nil))
 
     (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                        :background "#f2f2f2" :family "Menlo" :height 100
-                        :weight 'normal :italic nil
+                        :background "#f2f2f2" :family "Input Mono Narrow" :height 100
+                        :weight 'thin :italic nil
                         :box '(:line-width 2 :color "#f2f2f2" :style nil))
 
     (sml/apply-theme 'light)
