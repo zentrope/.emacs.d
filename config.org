@@ -69,6 +69,7 @@ here.
 #+end_src
 
 
+
 * Extensions
 
 Packages for customizing Emacs itself.
@@ -612,8 +613,7 @@ servers and the like?
 #+end_src
 
 
-* Text Processing
-** htmlize
+* htmlize
 
 This helps org-mode export colorize code blocks. I think. Do I still
 need this?
@@ -623,7 +623,7 @@ need this?
     :ensure t)
 #+end_src
 
-** org-mode
+* org-mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package org-plus-contrib
@@ -654,7 +654,7 @@ need this?
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+end_src
 
-** markdown
+* markdown
 
 #+begin_src emacs-lisp :tangle yes
   (use-package markdown-mode
@@ -671,7 +671,7 @@ need this?
     (add-hook 'markdown-mode-hook 'kfi-markdown-mode-hook))
 #+end_src
 
-** HTML
+* html
 
 The idea is to not have to press tab at the beginning of every
 line. No that I type HTML much anymore.
@@ -680,6 +680,8 @@ line. No that I type HTML much anymore.
   (add-hook 'html-mode-hook '(lambda ()
     (local-set-key (kbd "RET") 'newline-and-indent)))
 #+end_src
+
+
 
 * Unsorted
 
@@ -733,7 +735,7 @@ symbols.
   (add-hook 'emacs-lisp-mode-hook #'kfi-elisp-hook)
 #+end_src
 
-** ibuffer
+** ibuffer - grouped buffer menu
 
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -744,6 +746,7 @@ symbols.
                  ("org" (mode . org-mode))
                  ("clojure" (mode . clojure-mode))
                  ("clojure-script" (mode . clojurescript-mode))
+                 ("go-lang" (mode . go-mode))
                  ("web" (or (mode . css-mode)
                             (mode . html-mode)
                             (mode . js-mode)))
