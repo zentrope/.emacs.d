@@ -5,9 +5,7 @@
 Using org-mode for this because it's a bit easier to navigate around
 for endless tweaking. Any additional narrative is catch as catch can.
 
-* Environment & Packaging
-
-** Buffer backups
+* buffer backups
 
 #+begin_src emacs-lisp :tangle yes
   (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
@@ -15,7 +13,7 @@ for endless tweaking. Any additional narrative is catch as catch can.
   (setq auto-save-default nil)
 #+end_src
 
-** Executable environment
+* executable environment
 
 #+begin_src emacs-lisp :tangle yes
   (setq default-directory "~/")
@@ -29,14 +27,11 @@ for endless tweaking. Any additional narrative is catch as catch can.
   (setq exec-path (append exec-path (list kfi-local-bin usr-local-bin)))
 #+end_src
 
-* Applications
+* erc (irc client)
 
-Customize applications run within an Emacs context, like IRC, etc.
-
-** erc (irc client)
-
-I like to close Emacs more often than IRC, but I still use this. Note
-that theme adjustments are above, not included here.
+I like to close Emacs more often than IRC, but I still use this
+sometimes. Note that theme adjustments are elsewhere, not included
+here.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package erc-hl-nicks
@@ -72,6 +67,7 @@ that theme adjustments are above, not included here.
               'erc-truncate-buffer)
     (setq erc-truncate-buffer-on-save t))
 #+end_src
+
 
 * Extensions
 
@@ -523,13 +519,8 @@ for web-sockets.
   :ensure t)
 #+end_src
 
-* Programming Languages
 
-** clojure
-
-I spend most of my time in Clojure and ClojureScript.
-
-*** paren-face
+* clojure: paren-face
 
 Diming the parenthesis really emphasizes the semantics of the
 expressions over their syntax. Right?
@@ -541,7 +532,7 @@ expressions over their syntax. Right?
     (global-paren-face-mode 1))
 #+end_src
 
-*** clojure-mode
+* clojure-mode
 
 #+begin_src emacs-lisp :tangle yes
   (use-package clojure-mode-extra-font-locking
@@ -569,7 +560,7 @@ References:
 
  - [[http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html?source=rss][pretty symbols]]
 
-*** cider
+* clojure: cider
 
 The Clojure IDE. A ton of features, most of which I can ignore.
 
@@ -587,7 +578,7 @@ The Clojure IDE. A ton of features, most of which I can ignore.
     (setq cider-repl-use-pretty-printing 1))
 #+end_src
 
-** javascript
+* javascript
 
 Can't avoid it, though I mostly do by using ClojureScript.
 
@@ -602,6 +593,7 @@ Can't avoid it, though I mostly do by using ClojureScript.
 
     (add-hook 'js-mode-hook #'kfi-js-mode-hook))
 #+end_src
+
 
 * Text Processing
 ** htmlize
@@ -1028,14 +1020,11 @@ files, but I've never knowingly had a problem with glyphs.
   (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
-* Appearance
 
-This is last so that I can manage the appearance of everything above
-this. Or, well, at least I think I can do that. I'm not really sure
-about how ~use-package~ deals with lazy-loading and so on.
+* smart-mode-line
 
-** smart-mode-line
-[[https://github.com/Malabarba/smart-mode-line][home page]]
+- [[https://github.com/Malabarba/smart-mode-line][smart-mode-line home page]]
+
 #+begin_src emacs-lisp :tangle yes
     ;; https://github.com/Malabarba/smart-mode-line
     (use-package smart-mode-line
@@ -1045,7 +1034,8 @@ about how ~use-package~ deals with lazy-loading and so on.
       (setq sml/theme 'automatic)
       (sml/setup))
 #+end_src
-** dark: atom-one-dark
+
+* dark theme: atom-one-dark
 
 This is my main theme. Bright where it needs to be, but nowhere
 else. I've added a command =kfi-dark= to invoke the theme after
@@ -1105,7 +1095,7 @@ invoking =kfi-light= (see below).
       (kfi-dark)))
 #+end_src
 
-** light: default
+* light theme: default
 
 Sometimes I want the default white Emacs theme, so:
 
