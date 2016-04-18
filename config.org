@@ -819,8 +819,7 @@ project. But here we are anyway, just in case.
   (global-set-key (kbd "C-c m 3")
                   (lambda ()
                     (interactive)
-                    (set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)
-                    ))
+                    (set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)))
 
   (global-set-key (kbd "C-c s")
                   (lambda ()
@@ -936,7 +935,7 @@ and all that needs to be integrated into the above outline.
     (defun kfi-fix-echo-area ()
       (interactive)
       (with-current-buffer (get-buffer " *Echo Area 0*")
-        (setq-local face-remapping-alist '((default :family "Input Mono Narrow" :weight 'thin :height 100)))))
+        (setq-local face-remapping-alist '((default :family "Input Mono Narrow" :weight thin :height 100)))))
 
     ;; Make minibuffer have a smaller font
     (add-hook 'minibuffer-setup-hook 'kfi-craft-minibuffer)
@@ -944,7 +943,7 @@ and all that needs to be integrated into the above outline.
     (defun kfi-craft-minibuffer ()
       (interactive)
       (set (make-local-variable 'face-remapping-alist)
-           '((default :family "Input Mono Narrow" :weight 'thin :height 100))))
+           '((default :family "Input Mono Narrow" :weight thin :height 100))))
 
     (kfi-fix-echo-area)
     (kfi-craft-minibuffer))
