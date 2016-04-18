@@ -520,7 +520,7 @@ for web-sockets.
 #+end_src
 
 
-* clojure: paren-face
+* clojure
 
 Diming the parenthesis really emphasizes the semantics of the
 expressions over their syntax. Right?
@@ -532,7 +532,7 @@ expressions over their syntax. Right?
     (global-paren-face-mode 1))
 #+end_src
 
-* clojure-mode
+Clojure mode proper.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package clojure-mode-extra-font-locking
@@ -556,13 +556,11 @@ expressions over their syntax. Right?
     (add-hook 'clojure-mode-hook 'cider-mode))
 #+end_src
 
+Cider! The Clojure IDE. A ton of features, most of which I can ignore.
+
 References:
 
  - [[http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html?source=rss][pretty symbols]]
-
-* clojure: cider
-
-The Clojure IDE. A ton of features, most of which I can ignore.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package cider
@@ -592,6 +590,25 @@ Can't avoid it, though I mostly do by using ClojureScript.
       (local-set-key (kbd "RET") 'newline-and-indent))
 
     (add-hook 'js-mode-hook #'kfi-js-mode-hook))
+#+end_src
+
+* golang
+
+Maybe this is worth getting into for simple, small-memory-footprint
+servers and the like?
+
+- http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/
+- https://github.com/dominikh/go-mode.el
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package go-mode
+    :ensure t
+    :config
+    (add-hook 'before-save-hook 'gofmt-before-save)
+    (defun kfi-go-mode-hook ()
+      (local-set-key (kbd "C-c C-r" 'go-remove-unused-imports))
+      (local-set-key (kbd "C-c i" 'go-goto-imports)))
+    (add-hook 'go-mode-hook #'kfi-go-mode-hook))
 #+end_src
 
 
