@@ -523,7 +523,7 @@ for web-sockets.
 
 * clojure
 
-Diming the parenthesis really emphasizes the semantics of the
+Dimming the parenthesis really emphasizes the semantics of the
 expressions over their syntax. Right?
 
 #+begin_src emacs-lisp :tangle yes
@@ -572,8 +572,9 @@ References:
     (setq cider-overlays-use-font-lock t)
     (add-hook 'cider-repl-mode-hook 'paredit-mode)
     (add-hook 'cider-repl-mode-hook 'company-mode)
+    (add-hook 'cider-repl-mode-hook #'eldoc-mode)
     (add-hook 'cider-mode-hook 'company-mode)
-    (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+    (add-hook 'cider-mode-hook #'eldoc-mode)
     (setq cider-repl-use-pretty-printing 1))
 #+end_src
 
