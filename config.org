@@ -523,6 +523,8 @@ for web-sockets.
 
 * clojure
 
+*paren-face**
+
 Dimming the parenthesis really emphasizes the semantics of the
 expressions over their syntax. Right?
 
@@ -533,7 +535,7 @@ expressions over their syntax. Right?
     (global-paren-face-mode 1))
 #+end_src
 
-Clojure mode proper.
+*clojure-mode*
 
 #+begin_src emacs-lisp :tangle yes
   (use-package clojure-mode-extra-font-locking
@@ -557,6 +559,8 @@ Clojure mode proper.
     (add-hook 'clojure-mode-hook 'cider-mode))
 #+end_src
 
+*cider*
+
 Cider! The Clojure IDE. A ton of features, most of which I can ignore.
 
 References:
@@ -575,7 +579,11 @@ References:
     (add-hook 'cider-repl-mode-hook #'eldoc-mode)
     (add-hook 'cider-mode-hook 'company-mode)
     (add-hook 'cider-mode-hook #'eldoc-mode)
-    (setq cider-repl-use-pretty-printing 1))
+    (setq cider-repl-use-pretty-printing 1)
+    (setq cider-cljs-lein-repl
+          (concat "(do (require 'user) "
+                  "    (user/start-cljs)"
+                  "    (user/repl-cljs))")))
 #+end_src
 
 * javascript
