@@ -1077,9 +1077,9 @@ invoking =kfi-light= (see below).
     (defun kfi-dark ()
       (interactive)
       (load-theme 'atom-one-dark t)
-      (set-face-attribute 'fringe nil :background "#000000")
-      (set-face-attribute 'default nil :background "#000000")
-      (set-face-attribute 'mode-line nil :background "#292c34")
+      ;; (set-face-attribute 'fringe nil :background "#212121")
+      ;; (set-face-attribute 'default nil :background "#212121")
+      ;;(set-face-attribute 'mode-line nil :background "#292c34")
 
       ;; (set-face-attribute 'mode-line nil
       ;;                     :foreground "#ccc"
@@ -1093,14 +1093,23 @@ invoking =kfi-light= (see below).
       ;;                     :weight 'normal :italic nil
       ;;                     :box '(:line-width 2 :color "gray15" :style nil))
 
+
       (set-face-attribute 'mode-line          nil :family "Input Mono Narrow" :height 100 :weight 'thin
-                          :box '(:line-width 2 :color "gray15" :style nil))
+                          ;;:box '(:line-width 2 :color "gray15" :style nil)
+                          )
       (set-face-attribute 'mode-line-inactive nil :family "Input Mono Narrow" :height 100 :weight 'thin
-                          :box '(:line-width 2 :color "gray15" :style nil))
+                          ;;:box '(:line-width 2 :color "gray15" :style nil)
+                          )
+
+
+      ;; (set-face-attribute 'mode-line          nil :family "Input Mono Narrow" :height 100 :weight 'thin
+      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
+      ;; (set-face-attribute 'mode-line-inactive nil :family "Input Mono Narrow" :height 100 :weight 'thin
+      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
 
       (sml/apply-theme 'dark)
-      (set-face-attribute 'region nil :background "#369")
-      (set-face-attribute 'mode-line nil :background "#292c34")
+      ;; (set-face-attribute 'region nil :background "#369")
+      ;; (set-face-attribute 'mode-line nil :background "#292c34")
 
       ;; Linum customization
       (set-face-attribute 'linum nil :foreground "#555")
