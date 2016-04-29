@@ -961,8 +961,8 @@ and all that needs to be integrated into the above outline.
   (setq ns-use-srgb-colorspace t)
 #+end_src
 
-* Extras
-** Sync buffers to what's on the file system
+
+* Sync buffers to what's on the file system
 
 /Docs:/ Global Auto Revert mode is a global minor mode that reverts any buffer
 associated with a file when the file changes on disk.
@@ -971,19 +971,19 @@ associated with a file when the file changes on disk.
   (global-auto-revert-mode 1)
 #+end_src
 
-** Do not wrap lines when they're too long
+* Do not wrap lines when they're too long
 
 #+begin_src emacs-lisp :tangle yes
   (setq-default truncate-lines t)
 #+end_src
 
-** Don't attach a postamble to org-mode exports
+* Don't attach a postamble to org-mode exports
 
 #+begin_src emacs-lisp :tangle yes
   (setq org-html-postamble nil)
 #+end_src
 
-** Extend the EOL column
+* Extend the EOL column
 
 I've got truncate long lines on, but this should be appropriate for text
 oriented buffers like, say, the one in which I edit this file.
@@ -992,7 +992,7 @@ oriented buffers like, say, the one in which I edit this file.
   (setq fill-column 80)
 #+end_src
 
-** Try for a smooth scrolling experience
+* Try for a smooth scrolling experience
 
 Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.org][Joost Diepenmaat]] at [[https://github.com/joodie][Github]].
 
@@ -1007,20 +1007,7 @@ Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.o
   (setq mouse-wheel-scroll-amount '(quote (0.01)))
 #+end_src
 
-** OSX Environment
-
-So that Emacs on OSX follows the account's =$PATH=. I probably already
-have this fixed up enough in =init.el=, but here's this, too.
-
-Note: For some reason, =exec-path-from-shell-initialize= is undefined
-on my systems. Something to waste time investigating!
-
-#+begin_src emacs-lisp :tangle yes
-  ;; (when (memq window-system '(mac ns))
-  ;;   (exec-path-from-shell-initialize))
-#+end_src
-
-** Banish custom config to another file
+* Banish custom config to another file
 
 If I use any of the custom config facility, I want that stuff to go to
 a separate file:
@@ -1033,7 +1020,7 @@ a separate file:
 And I'm not even going to load it. The goal (for me) is to never need
 that file. So, uh, there.
 
-** UTF8 encoding
+* UTF8 encoding
 
 Is this kind of thing still needed? I see it in other peoples' config
 files, but I've never knowingly had a problem with glyphs.
@@ -1044,25 +1031,10 @@ files, but I've never knowingly had a problem with glyphs.
     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+end_src
 
-** Yes or no
+* Yes or no
 
 #+begin_src emacs-lisp :tangle yes
   (fset 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-
-* smart-mode-line
-
-- [[https://github.com/Malabarba/smart-mode-line][smart-mode-line home page]]
-
-#+begin_src emacs-lisp :tangle yes
-    ;; https://github.com/Malabarba/smart-mode-line
-    (use-package smart-mode-line
-      :ensure t
-      :config
-      (setq sml/no-confirm-load-theme t)
-      (setq sml/theme 'automatic)
-      (sml/setup))
 #+end_src
 
 * dark theme: atom-one-dark
@@ -1079,39 +1051,24 @@ invoking =kfi-light= (see below).
     (defun kfi-dark ()
       (interactive)
       (load-theme 'atom-one-dark t)
-      ;; (set-face-attribute 'fringe nil :background "#212121")
-      ;; (set-face-attribute 'default nil :background "#212121")
-      ;; (set-face-attribute 'mode-line nil :background "#292c34")
+      (set-face-attribute 'fringe nil :background "black")
+      (set-face-attribute 'default nil :background "black")
+      (set-face-attribute 'mode-line nil :background "#292c34")
 
-      ;; (set-face-attribute 'mode-line nil
-      ;;                     :foreground "#ccc"
-      ;;                     :background "#374350"
-      ;;                     :underline nil
-      ;;                     :family "Monaco" :height 100 :weight 'normal
-      ;;                     :box '(:line-width 2 :color "#374350" :style nil))
+      (set-face-attribute 'mode-line nil
+                          :foreground "#ccc"
+                          :background "#374350"
+                          :underline nil
+                          :family "Input Mono Narrow" :height 100 :weight 'thin
+                          :box '(:line-width 2 :color "#374350" :style nil))
 
-      ;; (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-      ;;                     :background "gray15" :family "Menlo" :height 100
-      ;;                     :weight 'normal :italic nil
-      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
-
-
-      (set-face-attribute 'mode-line          nil :family "Input Mono Narrow" :height 100 :weight 'thin
-                          ;;:box '(:line-width 2 :color "gray15" :style nil)
-                          )
-      (set-face-attribute 'mode-line-inactive nil :family "Input Mono Narrow" :height 100 :weight 'thin
-                          ;;:box '(:line-width 2 :color "gray15" :style nil)
-                          )
+      (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                          :background "gray15" :family "Input Mono Narrow" :height 100
+                          :weight 'thin :italic nil
+                          :box '(:line-width 2 :color "gray15" :style nil))
 
 
-      ;; (set-face-attribute 'mode-line          nil :family "Input Mono Narrow" :height 100 :weight 'thin
-      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
-      ;; (set-face-attribute 'mode-line-inactive nil :family "Input Mono Narrow" :height 100 :weight 'thin
-      ;;                     :box '(:line-width 2 :color "gray15" :style nil))
-
-      (sml/apply-theme 'dark)
       ;; (set-face-attribute 'region nil :background "#369")
-      ;; (set-face-attribute 'mode-line nil :background "#292c34")
 
       ;; Linum customization
       (set-face-attribute 'linum nil :foreground "#555")
@@ -1120,18 +1077,19 @@ invoking =kfi-light= (see below).
       (set-face-attribute 'erc-prompt-face nil
                           :foreground "darkorange"
                           ;;:background "#212121"
-                          :background "#292c34"
+                          :background "black"
                           )
 
       (set-face-attribute 'erc-timestamp-face nil
                           :foreground "gray30"
                           ;; :background "#292c34"
-                          :background "#292c34"))
+                          :background "black"))
 
 
     (when window-system
       ;; Test not necessary.
-      (kfi-dark)))
+      (kfi-dark))
+    )
 #+end_src
 
 * light theme: default
@@ -1158,7 +1116,7 @@ Sometimes I want the default white Emacs theme, so:
                         :weight 'thin :italic nil
                         :box '(:line-width 2 :color "#f2f2f2" :style nil))
 
-    (sml/apply-theme 'light)
+    ;;(sml/apply-theme 'light)
     (set-face-attribute 'region nil :background "aquamarine")
 
     ;; Linum customization
@@ -1172,4 +1130,17 @@ Sometimes I want the default white Emacs theme, so:
 
   ;; (when window-system
   ;;   (kfi-light))
+#+end_src
+* transparency stuff
+
+#+begin_src elisp :tangle yes
+  (defun kfi-transparency ()
+    (interactive)
+    (set-frame-parameter nil 'alpha '(95 95))
+    (add-to-list 'default-frame-alist '(alpha 95 95)))
+
+  (defun kfi-transparency-no ()
+    (interactive)
+    (set-frame-parameter nil 'alpha '(100 100))
+    (add-to-list 'default-frame-alist '(alpha 100 100)))
 #+end_src
