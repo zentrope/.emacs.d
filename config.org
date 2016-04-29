@@ -116,7 +116,7 @@ on. Most of the time I just want a list of files.
 
 ** ivy-mode, swiper, counsel
 
-/Enabled for now./
+/Disabled for now./
 
 This is yet another version of ~ido~ or ~helm~ which claims to be
 simpler and cleaner than all the others. I. Want. To. Believe.
@@ -133,14 +133,14 @@ Here's a link for integrating OSX's ~mdfind~ or Spotlight Search into
     :ensure t)
 
   (use-package counsel
-    ;; :disabled t
+    :disabled t
     :ensure t
     :config
     ;; Hide .dot files, other 'hidden' detritus
     (setq counsel-find-file-ignore-regexp "\\(?:\\`[#.]\\)\\|\\(?:[#~]\\'\\)"))
 
   (use-package swiper
-    ;;:disabled t
+    :disabled t
     :ensure t
     :config
     (ivy-mode 1)
@@ -247,7 +247,7 @@ which I might return to if helm makes my eyes bleed too much.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package ido
-    :disabled t
+    :ensure t
     :init
     (progn (ido-mode 1)
 
@@ -259,10 +259,11 @@ which I might return to if helm makes my eyes bleed too much.
              :init (ido-ubiquitous-mode))
            (use-package ido-vertical-mode
              :ensure t
-             :init (ido-vertical-mode 1))))
+             :init
+             (ido-vertical-mode 1)
+             (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))))
 
   (use-package smex
-    :disabled t
     :ensure t
     :bind ("M-x" . smex))
 #+end_src
@@ -348,7 +349,12 @@ Some functions I find useful, when I remember them.
     (interactive)
     (find-file "~/Documents/TextBox/worklog.org"))
 
+  (defun kfi-econfig ()
+    (interactive)
+    (find-file "~/.emacs.d/config.org"))
+
   (global-set-key (kbd "C-c w") 'kfi-worklog)
+  (global-set-key (kbd "C-c k") 'kfi-econfig)
 #+end_src
 
 * Program Facilities
