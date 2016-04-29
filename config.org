@@ -20,11 +20,12 @@ for endless tweaking. Any additional narrative is catch as catch can.
 
   (defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
   (defvar usr-local-bin "/usr/local/bin")
+  (defvar go-path (concat (getenv "HOME") "/workspace/go/bin") "Go workspace.")
 
-  (setenv "PATH" (concat usr-local-bin ":" (getenv "PATH") ":" kfi-local-bin))
+  (setenv "PATH" (concat usr-local-bin ":" (getenv "PATH") ":" kfi-local-bin ":" go-path))
   (setenv "LEIN_JVM_OPTS" "-Djava.awt.headless=true")
 
-  (setq exec-path (append exec-path (list kfi-local-bin usr-local-bin)))
+  (setq exec-path (append exec-path (list kfi-local-bin usr-local-bin go-path)))
 #+end_src
 
 * erc (irc client)
@@ -615,6 +616,7 @@ servers and the like?
     :ensure t
     :config
     (add-hook 'before-save-hook 'gofmt-before-save)
+    (setq gofmt-command "goimports")
     (defun kfi-go-mode-hook ()
       (local-set-key (kbd "C-c C-r" 'go-remove-unused-imports))
       (local-set-key (kbd "C-c i" 'go-goto-imports)))
@@ -1079,7 +1081,7 @@ invoking =kfi-light= (see below).
       (load-theme 'atom-one-dark t)
       ;; (set-face-attribute 'fringe nil :background "#212121")
       ;; (set-face-attribute 'default nil :background "#212121")
-      ;;(set-face-attribute 'mode-line nil :background "#292c34")
+      ;; (set-face-attribute 'mode-line nil :background "#292c34")
 
       ;; (set-face-attribute 'mode-line nil
       ;;                     :foreground "#ccc"
@@ -1117,14 +1119,14 @@ invoking =kfi-light= (see below).
       ;; ERC customizations
       (set-face-attribute 'erc-prompt-face nil
                           :foreground "darkorange"
-                          :background "black"
-                          ;;:background "#292c34"
+                          ;;:background "#212121"
+                          :background "#292c34"
                           )
 
       (set-face-attribute 'erc-timestamp-face nil
                           :foreground "gray30"
                           ;; :background "#292c34"
-                          :background "black"))
+                          :background "#292c34"))
 
 
     (when window-system
