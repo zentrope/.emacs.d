@@ -58,7 +58,7 @@ here.
     (setq erc-fill-prefix "    ")
     (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
 
-    (setq erc-fill-column 90)
+    (setq erc-fill-column 79)
     (setq erc-scroll-to-bottom -2)
     (setq erc-truncate-buffer-on-save t)
     (setq erc-max-buffer-size 30000)
