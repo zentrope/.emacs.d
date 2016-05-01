@@ -1139,7 +1139,7 @@ Sometimes I want the default white Emacs theme, so:
 #+end_src
 * transparency stuff
 
-#+begin_src elisp :tangle yes
+#+begin_src emacs-lisp :tangle yes
   (defun kfi-transparency ()
     (interactive)
     (set-frame-parameter nil 'alpha '(95 95))
