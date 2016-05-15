@@ -274,6 +274,21 @@ which I might return to if helm makes my eyes bleed too much.
 Some functions I find useful, when I remember them.
 
 #+begin_src emacs-lisp :tangle yes
+  ;; https://www.emacswiki.org/emacs/UnwrapLine
+  (defun kfi-unwrap-line ()
+    "Remove all newlines until we get to two consecutive ones.
+      Or until we reach the end of the buffer.
+      Great for unwrapping quotes before sending them on IRC."
+    (interactive)
+    (let ((start (point))
+          (end (copy-marker (or (search-forward "\n\n" nil t)
+                                (point-max))))
+          (fill-column (point-max)))
+      (fill-region start end)
+      (goto-char end)
+      (newline)
+      (goto-char start)))
+
   (defun kfi-set-frame-width (arg)
     (interactive "nFrame width: ")
     (set-frame-width (selected-frame) arg))
@@ -335,12 +350,12 @@ Some functions I find useful, when I remember them.
 
   (defun kfi-sort-words (reverse beg end)
     "Sort words in region alphabetically, in REVERSE if negative.
-         Prefixed with negative \\[universal-argument], sorts in reverse.
+           Prefixed with negative \\[universal-argument], sorts in reverse.
 
-         The variable `sort-fold-case' determines whether alphabetic case
-         affects the sort order.
+           The variable `sort-fold-case' determines whether alphabetic case
+           affects the sort order.
 
-         See `sort-regexp-fields'."
+           See `sort-regexp-fields'."
     (interactive "*P\nr")
     (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 
