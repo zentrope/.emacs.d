@@ -258,6 +258,12 @@ which I might return to if helm makes my eyes bleed too much.
            (use-package ido-ubiquitous
              :ensure t
              :init (ido-ubiquitous-mode))
+           (use-package flx-ido
+             :ensure t
+             :init
+             (flx-ido-mode 1)
+             (setq ido-enable-flex-matching t)
+             (setq ido-use-faces nil))
            (use-package ido-vertical-mode
              :ensure t
              :init
@@ -363,7 +369,7 @@ Some functions I find useful, when I remember them.
 
   (defun kfi-worklog ()
     (interactive)
-    (find-file "~/Documents/TextBox/worklog.org"))
+    (find-file "~/Documents/Textbox/worklog.org"))
 
   (defun kfi-econfig ()
     (interactive)
@@ -401,7 +407,7 @@ application development which tends towards lots of files.
     :ensure t
     :commands projectile-global-mode
     :config
-    (setq projectile-completion-system 'ivy)
+    (setq projectile-completion-system 'ido)
     ;;(setq projectile-completion-system 'helm)
     )
 #+end_src
