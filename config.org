@@ -722,6 +722,20 @@ line. No that I type HTML much anymore.
 
 
 
+* multi-term
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package multi-term
+    :ensure t
+    :config
+    ;; Turn off yas-snippers tab-complete when in a terminal
+    (defun kfi/restore-tab (f &rest args)
+      (apply f args)
+      (yas-minor-mode -1))
+
+    (advice-add 'multi-term :around #'kfi/restore-tab))
+#+end_src
+
 * Unsorted
 
 Random stuff I've not sorted into the outline because I just need to
@@ -736,12 +750,6 @@ Last update was 2013. Do I need this anymore?
     :ensure t)
 #+end_src
 
-** multi-term
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package multi-term
-    :ensure t)
-#+end_src
 
 ** multiple-cursors
 
