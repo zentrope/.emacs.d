@@ -850,7 +850,8 @@ project. But here we are anyway, just in case.
   (global-set-key (kbd "M-`") 'other-frame)
 
   ;; Quick access to sshell
-  (global-set-key (kbd "C-c h") 'eshell)
+  ;;(global-set-key (kbd "C-c h") 'eshell)
+  (global-set-key (kbd "C-c h") 'multi-term)
 
   (global-set-key (kbd "C-c m 1")
                   (lambda ()
