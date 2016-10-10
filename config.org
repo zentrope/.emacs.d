@@ -1104,6 +1104,7 @@ invoking =kfi-light= (see below).
                           :weight 'thin :italic nil
                           :box '(:line-width 2 :color "gray15" :style nil))
 
+      (set-face-attribute 'font-lock-comment-face nil :foreground "firebrick")
 
       (set-face-attribute 'region nil :background "#3E4451")
 
