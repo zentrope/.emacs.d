@@ -23,3 +23,5 @@ configs/*.elc
 /.org-id-locations
 /custom.el
 /notes
+/config.org[*Org Src config.org[ emacs-lisp ]*]
+/meghanada

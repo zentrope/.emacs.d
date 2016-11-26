@@ -809,19 +809,6 @@ symbols.
               (ibuffer-switch-to-saved-filter-groups "default")))
 #+end_src
 
-** java
-
-I almost never futz with Java in Emacs, at least not any "real"
-project. But here we are anyway, just in case.
-
-#+begin_src emacs-lisp :tangle yes
-  (defun kfi-java-hook ()
-    (setq c-basic-offset 2
-          tab-width 2
-          indent-tabs-mode nil))
-
-  (add-hook 'java-mode-hook #'kfi-java-hook)
-#+end_src
 
 ** keyboard
 
@@ -999,6 +986,29 @@ and all that needs to be integrated into the above outline.
 #+end_src
 
 
+* java
+
+I almost never futz with Java in Emacs, at least not any "real"
+project. But here we are anyway, just in case.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package meghanada
+    :ensure t
+    :config
+
+    (defun kfi-java-hook ()
+      (setq c-basic-offset 2
+            tab-width 2
+            indent-tabs-mode nil))
+
+    (defun kfi-meghanada-hook ()
+      (meghanada-mode t)
+      (add-hook 'before-save-hook 'delete-trailing-whitespace))
+
+    (add-hook 'java-mode-hook #'kfi-java-hook)
+    (add-hook 'java-mode-hook #'kfi-meghanada-hook))
+#+end_src
+
 * Sync buffers to what's on the file system
 
 /Docs:/ Global Auto Revert mode is a global minor mode that reverts any buffer
@@ -1110,6 +1120,7 @@ invoking =kfi-light= (see below).
 
       ;; Linum customization
       (set-face-attribute 'linum nil :foreground "#555")
+      (set-face-attribute 'linum nil :background "#111")
 
       ;; ERC customizations
       (set-face-attribute 'erc-prompt-face nil
