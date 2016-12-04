@@ -1003,6 +1003,7 @@ project. But here we are anyway, just in case.
 
     (defun kfi-meghanada-hook ()
       (meghanada-mode t)
+      (meghanada-flycheck-enable)
       (add-hook 'before-save-hook 'delete-trailing-whitespace))
 
     (add-hook 'java-mode-hook #'kfi-java-hook)
