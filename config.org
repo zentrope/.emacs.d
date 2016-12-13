@@ -1099,8 +1099,9 @@ invoking =kfi-light= (see below).
     (defun kfi-dark ()
       (interactive)
       (load-theme 'atom-one-dark t)
-      (set-face-attribute 'fringe nil :background "black")
-      (set-face-attribute 'default nil :background "black")
+      (set-face-attribute 'fringe nil :background "#212121")
+      (set-face-attribute 'default nil :background "#212121")
+
       (set-face-attribute 'mode-line nil :background "#292c34")
 
       (set-face-attribute 'mode-line nil
