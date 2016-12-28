@@ -34,7 +34,6 @@
 (require 'diminish)
 (require 'bind-key)
 
-
 ;;(setq use-package-verbose t)
 
 ;;=============================================================================
@@ -49,6 +48,8 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+;;-----------------------------------------------------------------------------
+
 (require 'kfi-paths)
 (require 'kfi-omnibus)
 
@@ -57,8 +58,10 @@
 (require 'kfi-fuzzy)
 (require 'kfi-golang)
 (require 'kfi-irc)
+(require 'kfi-java)
 (require 'kfi-magit)
 (require 'kfi-org)
+(require 'kfi-preferences)
 (require 'kfi-projectile)
 (require 'kfi-snippets)
 (require 'kfi-terminal)

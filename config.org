@@ -1,10 +1,6 @@
 #+title: Emacs Configuration
 #+author: Keith Irwin
-#+startup: content
-
-Using org-mode for this because it's a bit easier to navigate around
-for endless tweaking. Any additional narrative is catch as catch can.
-
+#+startup: showall
 
 * markdown
 
@@ -33,18 +29,7 @@ line. No that I type HTML much anymore.
     (local-set-key (kbd "RET") 'newline-and-indent)))
 #+end_src
 
-
-
-
-* Unsorted
-
-Random stuff I've not sorted into the outline because I just need to
-get it ported to this file. Move later! Move later?
-
-** melpa-upstream-visit
-
-
-** multiple-cursors
+* multiple-cursors
 
 I need to figure out that mode where you can highlight a fragment,
 then optionally select the additional fragments. I use this /a lot/
@@ -61,7 +46,7 @@ symbols.
     (global-set-key (kbd "C->") 'mc/mark-next-like-this))
 #+end_src
 
-** emacs-lisp
+* emacs-lisp
 
 #+begin_src emacs-lisp :tangle yes
   (defun kfi-elisp-hook ()
@@ -75,7 +60,7 @@ symbols.
   (add-hook 'emacs-lisp-mode-hook #'kfi-elisp-hook)
 #+end_src
 
-** ibuffer - grouped buffer menu
+* ibuffer - grouped buffer menu
 
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -102,8 +87,7 @@ symbols.
               (ibuffer-switch-to-saved-filter-groups "default")))
 #+end_src
 
-
-** keyboard
+* keyboard
 
 #+begin_src emacs-lisp :tangle yes
   (setq mac-command-modifqier 'super)
@@ -157,22 +141,21 @@ symbols.
                       (insert ";; scratch\n\n"))))
 #+end_src
 
-** emacs-server
+* emacs-server
 
 #+begin_src emacs-lisp :tangle yes
   (when (not (server-running-p))
       (server-start))
 #+end_src
 
-** shell-script
+* shell-script
 
 #+begin_src emacs-lisp :tangle yes
   (setq sh-basic-offset 2)
   (setq sh-indentation 2)
 #+end_src
 
-
-** catch-all (old 'theme' file)
+* catch-all (old 'theme' file)
 
 I used to put everything that wasn't explicitly part of a package
 configuration into the "theme" config file. Here's all that remains
@@ -230,100 +213,6 @@ and all that needs to be integrated into the above outline.
     (kfi-craft-minibuffer))
 
   (setq ns-use-srgb-colorspace t)
-#+end_src
-
-
-* java
-
-I almost never futz with Java in Emacs, at least not any "real"
-project. But here we are anyway, just in case.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package meghanada
-    :ensure t
-    :config
-
-    (defun kfi-java-hook ()
-      (setq c-basic-offset 2
-            tab-width 2
-            indent-tabs-mode nil))
-
-    (defun kfi-meghanada-hook ()
-      (meghanada-mode t)
-      (meghanada-flycheck-enable)
-      (add-hook 'before-save-hook 'delete-trailing-whitespace))
-
-    (add-hook 'java-mode-hook #'kfi-java-hook)
-    (add-hook 'java-mode-hook #'kfi-meghanada-hook))
-#+end_src
-
-* Sync buffers to what's on the file system
-
-/Docs:/ Global Auto Revert mode is a global minor mode that reverts any buffer
-associated with a file when the file changes on disk.
-
-#+begin_src emacs-lisp :tangle yes
-  (global-auto-revert-mode 1)
-#+end_src
-
-* Do not wrap lines when they're too long
-
-#+begin_src emacs-lisp :tangle yes
-  (setq-default truncate-lines t)
-#+end_src
-
-* Extend the EOL column
-
-I've got truncate long lines on, but this should be appropriate for text
-oriented buffers like, say, the one in which I edit this file.
-
-#+begin_src emacs-lisp :tangle yes
-  (setq fill-column 80)
-#+end_src
-
-* Try for a smooth scrolling experience
-
-Courtesy of [[https://github.com/joodie/emacs-literal-config/blob/master/emacs.org][Joost Diepenmaat]] at [[https://github.com/joodie][Github]].
-
-#+begin_src emacs-lisp :tangle yes
-  (setq redisplay-dont-pause t
-        scroll-margin 1
-        scroll-step 1
-        scroll-conservatively 10000
-        scroll-preserve-screen-position 1)
-
-  (setq mouse-wheel-follow-mouse 't)
-  (setq mouse-wheel-scroll-amount '(quote (0.01)))
-#+end_src
-
-* Banish custom config to another file
-
-If I use any of the custom config facility, I want that stuff to go to
-a separate file:
-
-#+begin_src emacs-lisp :tangle yes
-  (setq custom-file "~/.emacs.d/custom.el")
-  ;; (load custom-file)
-#+end_src
-
-And I'm not even going to load it. The goal (for me) is to never need
-that file. So, uh, there.
-
-* UTF8 encoding
-
-Is this kind of thing still needed? I see it in other peoples' config
-files, but I've never knowingly had a problem with glyphs.
-
-#+begin_src emacs-lisp :tangle yes
-  (prefer-coding-system 'utf-8)
-  (when (display-graphic-p)
-    (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
-#+end_src
-
-* Yes or no
-
-#+begin_src emacs-lisp :tangle yes
-  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 * dark theme: atom-one-dark
@@ -422,17 +311,4 @@ Sometimes I want the default white Emacs theme, so:
 
   ;; (when window-system
   ;;   (kfi-light))
-#+end_src
-* transparency stuff
-
-#+begin_src emacs-lisp :tangle yes
-  (defun kfi-transparency ()
-    (interactive)
-    (set-frame-parameter nil 'alpha '(95 95))
-    (add-to-list 'default-frame-alist '(alpha 95 95)))
-
-  (defun kfi-transparency-no ()
-    (interactive)
-    (set-frame-parameter nil 'alpha '(100 100))
-    (add-to-list 'default-frame-alist '(alpha 100 100)))
 #+end_src
