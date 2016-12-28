@@ -1,0 +1,85 @@
+(use-package atom-one-dark-theme
+  :if window-system
+  :ensure t
+  :config
+
+  (defun kfi-dark ()
+    (interactive)
+    (load-theme 'atom-one-dark t)
+    (set-face-attribute 'fringe nil :background "#212121")
+    (set-face-attribute 'default nil :background "#212121")
+
+    (set-face-attribute 'mode-line nil :background "#292c34")
+
+    (set-face-attribute 'mode-line nil
+                        :foreground "#ccc"
+                        :background "#374350"
+                        :underline nil
+                        :family "Input Mono Narrow" :height 100 :weight 'thin
+                        :box '(:line-width 2 :color "#374350" :style nil))
+
+    (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                        :background "gray15" :family "Input Mono Narrow" :height 100
+                        :weight 'thin :italic nil
+                        :box '(:line-width 2 :color "gray15" :style nil))
+
+    (set-face-attribute 'font-lock-comment-face nil :foreground "firebrick")
+
+    (set-face-attribute 'region nil :background "#3E4451")
+
+    ;; Linum customization
+    (set-face-attribute 'linum nil :foreground "#555")
+    (set-face-attribute 'linum nil :background "#111")
+
+    ;; ERC customizations
+    (set-face-attribute 'erc-prompt-face nil
+                        :foreground "darkorange"
+                        ;;:background "#212121"
+                        :background "black"
+                        )
+
+    (set-face-attribute 'erc-timestamp-face nil
+                        :foreground "gray30"
+                        ;; :background "#292c34"
+                        :background "black"))
+
+
+  (when window-system
+    ;; Test not necessary.
+    (kfi-dark)))
+
+(defun kfi-light ()
+  (interactive)
+  (disable-theme 'atom-one-dark)
+  (set-face-attribute 'fringe nil :background "#fff")
+  (set-face-attribute 'default nil :background "#fff")
+  ;; (set-face-background hl-line-face "gray90")
+
+  (set-face-attribute 'mode-line nil
+                      :foreground "dodgerblue"
+                      :background "gray90"
+                      :underline nil
+                      :family "Input Mono Narrow" :height 100 :weight 'thin
+                      :box '(:line-width 2 :color "gray90" :style nil))
+
+  (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                      :background "#f2f2f2" :family "Input Mono Narrow" :height 100
+                      :weight 'thin :italic nil
+                      :box '(:line-width 2 :color "#f2f2f2" :style nil))
+
+  ;;(sml/apply-theme 'light)
+  (set-face-attribute 'region nil :background "aquamarine")
+
+  ;; Linum customization
+  (set-face-attribute 'linum nil :foreground "#ccc")
+
+  ;; ERC customizations
+  (set-face-attribute 'erc-prompt-face nil
+                      :foreground "dodgerblue" :background "white")
+  (set-face-attribute 'erc-timestamp-face nil
+                      :foreground "dodgerblue" :background "white"))
+
+;; (when window-system
+;;   (kfi-light))
+
+(provide 'kfi-theme)

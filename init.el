@@ -53,22 +53,29 @@
 (require 'kfi-paths)
 (require 'kfi-omnibus)
 
+(require 'kfi-buffers)
 (require 'kfi-clojure)
+(require 'kfi-cursors)
+(require 'kfi-elisp)
 (require 'kfi-functions)
 (require 'kfi-fuzzy)
 (require 'kfi-golang)
+(require 'kfi-html)
 (require 'kfi-irc)
 (require 'kfi-java)
+(require 'kfi-keyboard)
 (require 'kfi-magit)
+(require 'kfi-markdown)
 (require 'kfi-org)
 (require 'kfi-preferences)
 (require 'kfi-projectile)
+(require 'kfi-shell)
 (require 'kfi-snippets)
 (require 'kfi-terminal)
+(require 'kfi-theme)
 (require 'kfi-web)
 
-;;=============================================================================
-
-(org-babel-load-file (concat user-emacs-directory "config.org"))
+(when (not (server-running-p))
+  (server-start))
 
 ;;=============================================================================
