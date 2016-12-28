@@ -37,4 +37,52 @@
 
 ;;(setq use-package-verbose t)
 
+;;=============================================================================
+
+(add-to-list 'load-path "~/.emacs.d/kfi/")
+
+;;-----------------------------------------------------------------------------
+;; buffer backups
+;;-----------------------------------------------------------------------------
+
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
+(setq backup-inhibited t)
+(setq auto-save-default nil)
+
+;;-----------------------------------------------------------------------------
+;; executable environment
+;;-----------------------------------------------------------------------------
+
+(setq default-directory "~/")
+
+(defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
+(defvar usr-local-bin "/usr/local/bin")
+(defvar tex-bin "/Library/TeX/texbin")
+(defvar go-path (concat (getenv "HOME") "/workspace/go/bin") "Go workspace.")
+
+(setenv "PATH" (concat usr-local-bin ":" (getenv "PATH") ":" kfi-local-bin ":" go-path ":" tex-bin))
+(setenv "LEIN_JVM_OPTS" "-Djava.awt.headless=true")
+
+(setq exec-path (append exec-path (list kfi-local-bin usr-local-bin go-path tex-bin)))
+
+;;-----------------------------------------------------------------------------
+
+(require 'kfi-omnibus)
+
+(require 'kfi-clojure)
+(require 'kfi-functions)
+(require 'kfi-fuzzy)
+(require 'kfi-golang)
+(require 'kfi-irc)
+(require 'kfi-magit)
+(require 'kfi-org)
+(require 'kfi-projectile)
+(require 'kfi-snippets)
+(require 'kfi-terminal)
+(require 'kfi-web)
+
+;;=============================================================================
+
 (org-babel-load-file (concat user-emacs-directory "config.org"))
+
+;;=============================================================================
