@@ -55,6 +55,7 @@
 
 (require 'kfi-buffers)
 (require 'kfi-clojure)
+(require 'kfi-cluj)
 (require 'kfi-cursors)
 (require 'kfi-elisp)
 (require 'kfi-functions)
