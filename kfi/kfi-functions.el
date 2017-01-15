@@ -86,17 +86,6 @@
   (interactive "*P\nr")
   (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 
-(defun kfi-worklog ()
-  (interactive)
-  (find-file "~/Documents/Textbox/worklog.org"))
-
-(defun kfi-econfig ()
-  (interactive)
-  (find-file "~/.emacs.d/config.org"))
-
-(global-set-key (kbd "C-c w") 'kfi-worklog)
-(global-set-key (kbd "C-c k") 'kfi-econfig)
-
 (defun kfi-transparency ()
   (interactive)
   (set-frame-parameter nil 'alpha '(95 95))
