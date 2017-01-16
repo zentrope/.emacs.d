@@ -29,7 +29,7 @@
 
     ;; Linum customization
     (set-face-attribute 'linum nil :foreground "#555")
-    (set-face-attribute 'linum nil :background "#111")
+    (set-face-attribute 'linum nil :background "#212121")
 
     ;; ERC customizations
     (set-face-attribute 'erc-prompt-face nil
