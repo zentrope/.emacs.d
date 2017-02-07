@@ -6,8 +6,8 @@
   (defun kfi-dark ()
     (interactive)
     (load-theme 'atom-one-dark t)
-    (set-face-attribute 'fringe nil :background "#212121")
-    (set-face-attribute 'default nil :background "#212121")
+    (set-face-attribute 'fringe nil :background kfi/background)
+    (set-face-attribute 'default nil :background kfi/background)
 
     (set-face-attribute 'mode-line nil :background "#292c34")
 
@@ -29,20 +29,20 @@
 
     ;; Linum customization
     (set-face-attribute 'linum nil :foreground "#555")
-    (set-face-attribute 'linum nil :background "#212121")
+    (set-face-attribute 'linum nil :background kfi/background ;;"#212121"
+                        )
 
     ;; ERC customizations
     (set-face-attribute 'erc-prompt-face nil
                         :foreground "darkorange"
                         ;;:background "#212121"
-                        :background "black"
+                        :background kfi/background
                         )
 
     (set-face-attribute 'erc-timestamp-face nil
                         :foreground "gray30"
                         ;; :background "#292c34"
-                        :background "black"))
-
+                        :background kfi/background))
 
   (when window-system
     ;; Test not necessary.

@@ -50,6 +50,7 @@
 
 ;;-----------------------------------------------------------------------------
 
+(require 'kfi-globals)
 (require 'kfi-paths)
 (require 'kfi-omnibus)
 

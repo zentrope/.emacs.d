@@ -1,3 +1,5 @@
+(require 'kfi-globals)
+
 (use-package multi-term
   :ensure t
   :config
@@ -16,7 +18,7 @@
   (ad-activate 'term-char-mode)
 
   (setq multi-term-program "/bin/bash")
-  (set-face-attribute 'term nil :background "#212121")
+  (set-face-attribute 'term nil :background kfi/background)
   (set-face-attribute 'term nil :foreground "#aaaaaa")
   (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
   (set-face-attribute 'term-color-black nil :foreground "gray50")
