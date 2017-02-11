@@ -25,27 +25,4 @@
 ;;(global-set-key (kbd "C-c h") 'eshell)
 (global-set-key (kbd "C-c h") 'multi-term)
 
-(global-set-key (kbd "C-c m 1")
-                (lambda ()
-                  (interactive)
-                  (set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)))
-
-(global-set-key (kbd "C-c m 2")
-                (lambda ()
-                  (interactive)
-                  (set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'normal)))
-
-(global-set-key (kbd "C-c m 3")
-                (lambda ()
-                  (interactive)
-                  (set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)))
-
-(global-set-key (kbd "C-c s")
-                (lambda ()
-                  (interactive)
-                  (switch-to-buffer (get-buffer-create "*scratch*"))
-                  (emacs-lisp-mode)
-                  (when (eq (length (buffer-string)) 0)
-                    (insert ";; scratch\n\n"))))
-
 (provide 'kfi-keyboard)

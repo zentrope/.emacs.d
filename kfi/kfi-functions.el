@@ -96,4 +96,40 @@
   (set-frame-parameter nil 'alpha '(100 100))
   (add-to-list 'default-frame-alist '(alpha 100 100)))
 
+;; Make these functions because I use them so infrequently I'm likely
+;; to forget the key commands.
+
+(defun kfi/set-font (name weight)
+  (set-face-attribute 'default nil :family name :height 120 :weight weight))
+
+(defun kfi/monaco-font ()
+  (interactive)
+  (kfi/set-font "Monaco" 'normal))
+
+(defun kfi/normal-font ()
+  (interactive)
+  (kfi/set-font "Input Mono Narrow" 'normal))
+
+(defun kfi/thin-font ()
+  (interactive)
+  (kfi/set-font "Input Mono Narrow" 'thin))
+
+(global-set-key (kbd "C-c m 1") 'kfi/monaco-font)
+(global-set-key (kbd "C-c m 2") 'kfi/normal-font)
+(global-set-key (kbd "C-c m 3") 'kfi/thin-font)
+
+(defun kfi/write-mode ()
+  (interactive)
+  (global-hl-line-mode 0)
+  (olivetti-mode 1)
+  (kfi-light)
+  (kfi/monaco-font))
+
+(defun kfi/unwrite-mode ()
+  (interactive)
+  (global-hl-line-mode 1)
+  (olivetti-mode 0)
+  (kfi-dark)
+  (kfi/normal-font))
+
 (provide 'kfi-functions)
