@@ -100,11 +100,11 @@
 ;; to forget the key commands.
 
 (defun kfi/set-font (name weight)
-  (set-face-attribute 'default nil :family name :height 120 :weight weight))
+  (set-face-attribute 'default nil :family name :weight weight))
 
-(defun kfi/monaco-font ()
+(defun kfi/heavy-font ()
   (interactive)
-  (kfi/set-font "Monaco" 'normal))
+  (kfi/set-font "Menlo" 'normal))
 
 (defun kfi/normal-font ()
   (interactive)
@@ -118,14 +118,16 @@
 (global-set-key (kbd "C-c m 2") 'kfi/normal-font)
 (global-set-key (kbd "C-c m 3") 'kfi/thin-font)
 
+;; (setq-default line-spacing 5)
+
 (defun kfi/write-mode ()
   (interactive)
+  (kfi-light)
+  (kfi/heavy-font)
   (global-hl-line-mode 0)
   (olivetti-mode 1)
   (flyspell-mode 1)
-  (flyspell-buffer)
-  (kfi-light)
-  (kfi/monaco-font))
+  (flyspell-buffer))
 
 (defun kfi/unwrite-mode ()
   (interactive)
@@ -135,6 +137,7 @@
   (kfi-dark)
   (kfi/normal-font))
 
+;; Convenience command to jump to the init file.
 
 (defun kfi/edit-init-el ()
   (interactive)
