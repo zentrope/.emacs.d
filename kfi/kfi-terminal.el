@@ -3,7 +3,7 @@
 (use-package multi-term
   :ensure t
   :config
-  ;; Turn off yas-snippers tab-complete when in a terminal
+  ;; Turn off yas-snippets tab-complete when in a terminal
   (defun kfi/restore-tab (f &rest args)
     (apply f args)
     (yas-minor-mode -1))
@@ -18,8 +18,10 @@
   (ad-activate 'term-char-mode)
 
   (setq multi-term-program "/bin/bash")
-  (set-face-attribute 'term nil :background kfi/background)
-  (set-face-attribute 'term nil :foreground "#aaaaaa")
+  (set-face-attribute 'term nil :inherit 'default ;;:background kfi/background
+                      )
+  (set-face-attribute 'term nil :inherit 'default ;; :foreground "#aaaaaa"
+                      )
   (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
   (set-face-attribute 'term-color-black nil :foreground "gray50")
   (set-face-attribute 'term-color-yellow nil :foreground "peru")

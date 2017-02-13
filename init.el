@@ -66,6 +66,7 @@
 (require 'kfi-irc)
 (require 'kfi-java)
 (require 'kfi-keyboard)
+(require 'kfi-latex)
 (require 'kfi-magit)
 (require 'kfi-markdown)
 (require 'kfi-org)

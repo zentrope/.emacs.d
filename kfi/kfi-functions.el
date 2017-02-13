@@ -122,6 +122,8 @@
   (interactive)
   (global-hl-line-mode 0)
   (olivetti-mode 1)
+  (flyspell-mode 1)
+  (flyspell-buffer)
   (kfi-light)
   (kfi/monaco-font))
 
@@ -129,7 +131,13 @@
   (interactive)
   (global-hl-line-mode 1)
   (olivetti-mode 0)
+  (flyspell-mode 0)
   (kfi-dark)
   (kfi/normal-font))
+
+
+(defun kfi/edit-init-el ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
 
 (provide 'kfi-functions)
