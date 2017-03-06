@@ -58,6 +58,7 @@
 (require 'kfi-clojure)
 (require 'kfi-cluj)
 (require 'kfi-cursors)
+(require 'kfi-docker)
 (require 'kfi-elisp)
 (require 'kfi-functions)
 (require 'kfi-fuzzy)
