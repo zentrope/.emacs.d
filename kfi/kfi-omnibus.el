@@ -1,3 +1,6 @@
+;;
+;; Grabag of minimally configured stuff.
+;;
 (use-package command-log-mode
   :ensure t)
 
@@ -32,6 +35,12 @@
   :ensure t)
 
 (use-package melpa-upstream-visit
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
+(use-package dockerfile-mode
   :ensure t)
 
 (provide 'kfi-omnibus)
