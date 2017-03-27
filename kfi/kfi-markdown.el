@@ -7,7 +7,9 @@
          "\\.mdwn$" "\\.text$")
   :config
   (defun kfi/markdown-mode-hook ()
-    (auto-fill-mode 1))
+    (set (make-local-variable 'global-hl-line-mode) nil)
+    (auto-fill-mode 0)
+    (visual-line-mode 1))
 
   (add-hook 'markdown-mode-hook 'kfi/markdown-mode-hook))
 
