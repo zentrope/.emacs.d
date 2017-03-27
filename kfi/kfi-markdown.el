@@ -9,6 +9,7 @@
   (defun kfi/markdown-mode-hook ()
     (set (make-local-variable 'global-hl-line-mode) nil)
     (auto-fill-mode 0)
+    (flyspell-mode 1)
     (visual-line-mode 1))
 
   (add-hook 'markdown-mode-hook 'kfi/markdown-mode-hook))
