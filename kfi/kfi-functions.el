@@ -104,7 +104,7 @@
 
 (defun kfi/heavy-font ()
   (interactive)
-  (kfi/set-font "Menlo" 'normal))
+  (kfi/set-font "Monaco" 'normal))
 
 (defun kfi/normal-font ()
   (interactive)
@@ -114,7 +114,7 @@
   (interactive)
   (kfi/set-font "Input Mono Narrow" 'thin))
 
-(global-set-key (kbd "C-c m 1") 'kfi/monaco-font)
+(global-set-key (kbd "C-c m 1") 'kfi/heavy-font)
 (global-set-key (kbd "C-c m 2") 'kfi/normal-font)
 (global-set-key (kbd "C-c m 3") 'kfi/thin-font)
 
