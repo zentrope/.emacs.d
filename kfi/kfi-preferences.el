@@ -59,9 +59,9 @@
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)
+;;(set-face-attribute 'default nil :family "Input Mono Narrow" :height 120 :weight 'thin)
 ;;(set-face-attribute 'default nil :family "Inconsolata" :height 140 :weight 'normal)
-;;(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
+(set-face-attribute 'default nil :family "Monaco" :height 120 :weight 'normal)
 (blink-cursor-mode 0)
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
@@ -72,7 +72,7 @@
   (defun kfi/fix-echo-area ()
     (interactive)
     (with-current-buffer (get-buffer " *Echo Area 0*")
-      (setq-local face-remapping-alist '((default :family "Input Mono Narrow" :weight thin :height 100)))))
+      (setq-local face-remapping-alist '((default :family "Monaco" :weight normal :height 100)))))
 
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
@@ -80,13 +80,12 @@
   (defun kfi/craft-minibuffer ()
     (interactive)
     (set (make-local-variable 'face-remapping-alist)
-         '((default :family "Input Mono Narrow" :weight thin :height 100))))
+         '((default :family "Monaco" :weight normal :height 100))))
 
   (kfi/fix-echo-area)
   (kfi/craft-minibuffer))
 
 (setq ns-use-srgb-colorspace t)
-
 
 
 (provide 'kfi-preferences)

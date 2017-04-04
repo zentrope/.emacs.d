@@ -15,12 +15,12 @@
                         :foreground "#ccc"
                         :background "#374350"
                         :underline nil
-                        :family "Input Mono Narrow" :height 100 :weight 'thin
+                        :family "Monaco" :height 100 :weight 'normal
                         :box '(:line-width 2 :color "#374350" :style nil))
 
     (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                        :background "gray15" :family "Input Mono Narrow" :height 100
-                        :weight 'thin :italic nil
+                        :background "gray15" :family "Monaco" :height 100
+                        :weight 'normal :italic nil
                         :box '(:line-width 2 :color "gray15" :style nil))
 
     (set-face-attribute 'font-lock-comment-face nil :foreground "firebrick")
@@ -46,40 +46,43 @@
 
   (when window-system
     ;; Test not necessary.
-    (kfi-dark)))
+    (kfi-dark))
 
-(defun kfi-light ()
-  (interactive)
-  (disable-theme 'atom-one-dark)
-  (set-face-attribute 'fringe nil :background "#fff")
-  (set-face-attribute 'default nil :background "#fff")
-  ;; (set-face-background hl-line-face "gray90")
+  (defun kfi-light ()
+    (interactive)
+    (disable-theme 'atom-one-dark)
+    (set-face-attribute 'fringe nil :background "#fff")
+    (set-face-attribute 'default nil :background "#fff")
+    ;; (set-face-background hl-line-face "gray90")
 
-  (set-face-attribute 'mode-line nil
-                      :foreground "dodgerblue"
-                      :background "gray90"
-                      :underline nil
-                      :family "Input Mono Narrow" :height 100 :weight 'thin
-                      :box '(:line-width 2 :color "gray90" :style nil))
+    (set-face-attribute 'mode-line nil
+                        :foreground "dodgerblue"
+                        :background "gray90"
+                        :underline nil
+                        :family "Monaco" :height 100 :weight 'normal
+                        :box '(:line-width 2 :color "gray90" :style nil))
 
-  (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "#f2f2f2" :family "Input Mono Narrow" :height 100
-                      :weight 'thin :italic nil
-                      :box '(:line-width 2 :color "#f2f2f2" :style nil))
+    (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
+                        :background "#f2f2f2" :family "Monaco" :height 100
+                        :weight 'normal :italic nil
+                        :box '(:line-width 2 :color "#f2f2f2" :style nil))
 
-  ;;(sml/apply-theme 'light)
-  (set-face-attribute 'region nil :background "aquamarine")
+    ;;(sml/apply-theme 'light)
+    (set-face-attribute 'region nil :background "aquamarine")
 
-  ;; Linum customization
-  (set-face-attribute 'linum nil :foreground "#ccc")
+    ;; Linum customization
+    (set-face-attribute 'linum nil :foreground "#ccc")
 
-  ;; ERC customizations
-  (set-face-attribute 'erc-prompt-face nil
-                      :foreground "dodgerblue" :background "white")
-  (set-face-attribute 'erc-timestamp-face nil
-                      :foreground "dodgerblue" :background "white"))
+    ;; ERC customizations
+    (set-face-attribute 'erc-prompt-face nil
+                        :foreground "dodgerblue" :background "white")
+    (set-face-attribute 'erc-timestamp-face nil
+                        :foreground "dodgerblue" :background "white"))
 
-;; (when window-system
-;;   (kfi-light))
+  (when window-system
+    (kfi-light))
+
+  ;; end use-package
+  )
 
 (provide 'kfi-theme)
