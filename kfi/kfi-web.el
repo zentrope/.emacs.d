@@ -14,11 +14,18 @@
   (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
   (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
 
+(use-package css-eldoc
+  :ensure t)
+
 (use-package css-mode
   :ensure t
   :config
   (setq css-indent-offset 2)
   (add-hook 'css-mode-hook '(lambda ()
+                              (company-mode 1)
+                              ;; (set (make-local-variable 'company-backends) '(company-css))
+                              ;; (turn-on-css-eldoc)
+                              (local-set-key (kbd "s-right") 'company-complete)
                               (local-set-key (kbd "RET") 'newline-and-indent))))
 
 (use-package restclient
