@@ -25,3 +25,4 @@ configs/*.elc
 /notes
 /config.org[*Org Src config.org[ emacs-lisp ]*]
 /meghanada
+/network-security.data
