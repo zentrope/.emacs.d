@@ -71,7 +71,7 @@
     (set-face-attribute 'region nil :background "aquamarine")
 
     ;; Linum customization
-    (set-face-attribute 'linum nil :foreground "#ccc")
+    (set-face-attribute 'linum nil :foreground "#bbb" :background "white")
 
     ;; ERC customizations
     (set-face-attribute 'erc-prompt-face nil
