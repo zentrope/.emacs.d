@@ -29,8 +29,7 @@
 
     ;; Linum customization
     (set-face-attribute 'linum nil :foreground "#555")
-    (set-face-attribute 'linum nil :background kfi/background ;;"#212121"
-                        )
+    (set-face-attribute 'linum nil :background "#111")
 
     ;; ERC customizations
     (set-face-attribute 'erc-prompt-face nil
@@ -71,7 +70,7 @@
     (set-face-attribute 'region nil :background "aquamarine")
 
     ;; Linum customization
-    (set-face-attribute 'linum nil :foreground "#bbb" :background "white")
+    (set-face-attribute 'linum nil :foreground "#888" :background "#f2f2f2")
 
     ;; ERC customizations
     (set-face-attribute 'erc-prompt-face nil
