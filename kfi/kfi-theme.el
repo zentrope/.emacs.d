@@ -78,8 +78,8 @@
     (set-face-attribute 'erc-timestamp-face nil
                         :foreground "dodgerblue" :background "white"))
 
-  (when window-system
-    (kfi-light))
+ ;; (when window-system
+ ;;    (kfi-light))
 
   ;; end use-package
   )
