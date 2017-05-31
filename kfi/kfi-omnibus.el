@@ -29,7 +29,8 @@
 (use-package linum
   :ensure t
   :config
-  (setq linum-format "%4d "))
+  (setq linum-format "%4d ")
+  (global-linum-mode 1))
 
 (use-package htmlize
   :ensure t)
