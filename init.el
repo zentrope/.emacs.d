@@ -81,4 +81,7 @@
 (when (not (server-running-p))
   (server-start))
 
+(when (file-exists-p "local.el")
+  (load "local.el"))
+
 ;;=============================================================================
