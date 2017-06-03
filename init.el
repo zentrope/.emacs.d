@@ -81,7 +81,7 @@
 (when (not (server-running-p))
   (server-start))
 
-(when (file-exists-p "local.el")
-  (load "local.el"))
+(when (file-exists-p "~/.emacs.d/local.el")
+  (load "~/.emacs.d/local.el"))
 
 ;;=============================================================================
