@@ -43,16 +43,12 @@
                         ;; :background "#292c34"
                         :background kfi/background))
 
-  (when window-system
-    ;; Test not necessary.
-    (kfi-dark))
-
   (defun kfi-light ()
     (interactive)
     (disable-theme 'atom-one-dark)
     (set-face-attribute 'fringe nil :background "#fff")
-    (set-face-attribute 'default nil :background "#fff")
-    ;; (set-face-background hl-line-face "gray90")
+    (set-face-attribute 'default nil :foreground "#444" :background "white")
+    (set-face-background hl-line-face "gray90")
 
     (set-face-attribute 'mode-line nil
                         :foreground "dodgerblue"
@@ -78,10 +74,11 @@
     (set-face-attribute 'erc-timestamp-face nil
                         :foreground "dodgerblue" :background "white"))
 
- ;; (when window-system
- ;;    (kfi-light))
+  (when window-system
+    ;;(kfi-dark)
+    (kfi-light))
 
-  ;; end use-package
-  )
+ ;; end use-package
+ )
 
 (provide 'kfi-theme)

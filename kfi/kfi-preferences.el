@@ -8,7 +8,6 @@
 ;; Extend the EOL column
 (setq fill-column 80)
 
-
 ;; Try for a smooth scrolling experience
 ;; - https://github.com/joodie/emacs-literal-config/blob/master/emacs.org
 (setq redisplay-dont-pause t
@@ -68,24 +67,25 @@
 
 (when window-system
   ;;
-  ;; Not sure if this works.
+  ;;
   (defun kfi/fix-echo-area ()
     (interactive)
-    (with-current-buffer (get-buffer " *Echo Area 0*")
-      (setq-local face-remapping-alist '((default :family "Monaco" :weight normal :height 100)))))
-
+    (let ((buf (get-buffer " *Echo Area 0*")))
+      (when buf
+        (with-current-buffer buf
+          (setq-local face-remapping-alist '((default :family "Monaco" :weight normal :height 100)))))))
+  ;;
   ;; Make minibuffer have a smaller font
   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
-
+  ;;
   (defun kfi/craft-minibuffer ()
     (interactive)
     (set (make-local-variable 'face-remapping-alist)
          '((default :family "Monaco" :weight normal :height 100))))
-
+  ;;
   (kfi/fix-echo-area)
   (kfi/craft-minibuffer))
 
 (setq ns-use-srgb-colorspace t)
-
 
 (provide 'kfi-preferences)
