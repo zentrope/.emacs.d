@@ -38,4 +38,7 @@
 (use-package dockerfile-mode
   :ensure t)
 
+(use-package olivetti
+  :ensure t)
+
 (provide 'kfi-omnibus)
