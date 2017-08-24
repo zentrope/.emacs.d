@@ -65,6 +65,18 @@
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
 
+
+;;-----------------------------------------------------------------------------
+;; Line numbers mode
+;;-----------------------------------------------------------------------------
+
+(when (version<= "26.0.50" emacs-version)
+  (global-display-line-numbers-mode 1)
+  (setq display-line-numbers-grow-only t)
+  (setq display-line-numbers-width-start 1000))
+
+;;-----------------------------------------------------------------------------
+
 (when window-system
   ;;
   ;;

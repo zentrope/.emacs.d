@@ -25,8 +25,8 @@
 
   (set-face-attribute 'region nil :background "#3E4451")
 
-  ;; Linum customization
-  (set-face-attribute 'linum nil :foreground "#555" :background "#111")
+  ;; Line number customization
+  (set-face-attribute 'line-number nil :foreground "#555" :background "black" :height 100)
 
   ;; ERC customizations
   (set-face-attribute 'erc-prompt-face nil
@@ -61,8 +61,8 @@
 
   (set-face-attribute 'region nil :background "aquamarine")
 
-  ;; Linum customization
-  (set-face-attribute 'linum nil :foreground "#888" :background "#f2f2f2")
+  ;; Line number customization
+  (set-face-attribute 'line-number nil :foreground "#ccc" :background "white" :height 100)
 
   ;; ERC customizations
   (set-face-attribute 'erc-prompt-face nil
