@@ -122,7 +122,7 @@
 
 (defun kfi/write-mode ()
   (interactive)
-  (setq display-line-numbers nil)
+  (display-line-numbers-mode -1)
   (global-hl-line-mode 0)
   (olivetti-mode 1)
   (flyspell-mode 1)
@@ -133,7 +133,7 @@
   (global-hl-line-mode 1)
   (olivetti-mode 0)
   (flyspell-mode 0)
-  (setq display-line-numbers 1))
+  (display-line-numbers-mode 1))
 
 ;; Convenience command to jump to the init file.
 
