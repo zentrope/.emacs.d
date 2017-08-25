@@ -3,9 +3,9 @@
 ;;
 (defun kfi/dark ()
   (interactive)
-  (load-theme 'atom-one-dark t)
   (set-face-attribute 'fringe nil :background kfi/background)
-  (set-face-attribute 'default nil :background kfi/background)
+  (set-face-attribute 'default nil :foreground "#ccc" :background kfi/background)
+  (set-face-background hl-line-face "gray30")
 
   (set-face-attribute 'mode-line nil :background "#292c34")
 
@@ -31,18 +31,14 @@
   ;; ERC customizations
   (set-face-attribute 'erc-prompt-face nil
                       :foreground "darkorange"
-                      ;;:background "#212121"
-                      :background kfi/background
-                      )
+                      :background kfi/background)
 
   (set-face-attribute 'erc-timestamp-face nil
                       :foreground "gray30"
-                      ;; :background "#292c34"
                       :background kfi/background))
 
 (defun kfi/light ()
   (interactive)
-  (disable-theme 'atom-one-dark)
   (set-face-attribute 'fringe nil :background "#fff")
   (set-face-attribute 'default nil :foreground "#444" :background "white")
   (set-face-background hl-line-face "gray90")
