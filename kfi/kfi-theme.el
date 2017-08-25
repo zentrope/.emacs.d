@@ -5,7 +5,7 @@
   (interactive)
   (set-face-attribute 'fringe nil :background kfi/background)
   (set-face-attribute 'default nil :foreground "#ccc" :background kfi/background)
-  (set-face-background hl-line-face "gray30")
+  (set-face-background hl-line-face "gray15")
 
   (set-face-attribute 'mode-line nil :background "#292c34")
 
