@@ -14,8 +14,7 @@
 (setq package-archives
       (list '("melpa"        . "https://melpa.org/packages/")
             '("melpa-stable" . "https://stable.melpa.org/packages/")
-            '("gnu"          . "http://elpa.gnu.org/packages/")
-            '("org"          . "http://orgmode.org/elpa/")))
+            '("gnu"          . "http://elpa.gnu.org/packages/")))
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
