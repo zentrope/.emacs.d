@@ -30,9 +30,7 @@
                (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
   (defun kfi/inhibit-line-numbers ()
-    (add-hook 'after-change-major-mode-hook
-              (lambda ()
-                (display-line-numbers-mode -1))))
+    (display-line-numbers-mode -1))
 
   (defun kfi/term-allow-pasting-to-shell ()
     (define-key term-raw-map (kbd "C-y") 'term-paste)
