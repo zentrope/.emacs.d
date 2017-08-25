@@ -73,7 +73,6 @@
 (require 'kfi-preferences)
 (require 'kfi-projectile)
 (require 'kfi-shell)
-(require 'kfi-snippets)
 (require 'kfi-terminal)
 (require 'kfi-theme)
 (require 'kfi-web)

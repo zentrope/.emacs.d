@@ -1,8 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: clj_
-# key: clj_
-# binding: direct-keybinding
-# --
-#+begin_src clojure
-  $0
-#+end_src
