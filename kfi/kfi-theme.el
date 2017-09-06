@@ -13,11 +13,11 @@
                       :foreground "#ccc"
                       :background "#374350"
                       :underline nil
-                      :family "Monaco" :height 100 :weight 'normal
+                      :family "Menlo" :height 100 :weight 'normal
                       :box '(:line-width 2 :color "#374350" :style nil))
 
   (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "gray15" :family "Monaco" :height 100
+                      :background "gray15" :family "Menlo" :height 100
                       :weight 'normal :italic nil
                       :box '(:line-width 2 :color "gray15" :style nil))
 
@@ -47,11 +47,11 @@
                       :foreground "dodgerblue"
                       :background "gray90"
                       :underline nil
-                      :family "Monaco" :height 100 :weight 'normal
+                      :family "Menlo" :height 100 :weight 'normal
                       :box '(:line-width 2 :color "gray90" :style nil))
 
   (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "#f2f2f2" :family "Monaco" :height 100
+                      :background "#f2f2f2" :family "Menlo" :height 100
                       :weight 'normal :italic nil
                       :box '(:line-width 2 :color "#f2f2f2" :style nil))
 
