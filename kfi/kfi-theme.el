@@ -66,5 +66,7 @@
   (set-face-attribute 'erc-timestamp-face nil
                       :foreground "dodgerblue" :background "white"))
 
-(kfi/light)
+(when window-system
+  (kfi/light))
+
 (provide 'kfi-theme)
