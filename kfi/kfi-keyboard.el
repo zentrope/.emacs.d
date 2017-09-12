@@ -2,6 +2,7 @@
 
 ;; Have I duped this somewhere else?
 (global-set-key (kbd "s-p") 'projectile-find-file)
+(global-set-key (kbd "C-c p") 'projectile-find-file)
 
 ;; On OSX C-M-@ amd M-S-SPC doesn't work when running in a
 ;; terminal.
