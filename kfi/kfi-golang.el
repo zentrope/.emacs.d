@@ -8,4 +8,7 @@
     (local-set-key (kbd "C-c i" 'go-goto-imports)))
   (add-hook 'go-mode-hook #'kfi-go-mode-hook))
 
+(use-package golint
+  :ensure t)
+
 (provide 'kfi-golang)
