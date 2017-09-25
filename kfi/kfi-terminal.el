@@ -4,11 +4,11 @@
   :ensure t
   :config
   ;; Turn off yas-snippets tab-complete when in a terminal
-  (defun kfi/restore-tab (f &rest args)
-    (apply f args)
-    (yas-minor-mode -1))
+  ;; (defun kfi/restore-tab (f &rest args)
+  ;;   (apply f args)
+  ;;   (yas-minor-mode -1))
 
-  (advice-add 'multi-term :around #'kfi/restore-tab)
+  ;; (advice-add 'multi-term :around #'kfi/restore-tab)
 
   (defadvice term-char-mode (after term-char-mode-fixes ())
     ;; Causes a compile-log warning. Do I even need this any more?
