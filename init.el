@@ -52,6 +52,7 @@
 (require 'kfi-globals)
 (require 'kfi-paths)
 (require 'kfi-omnibus)
+(require 'kfi-flycheck)
 
 (require 'kfi-buffers)
 (require 'kfi-clojure)
