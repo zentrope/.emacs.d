@@ -1,11 +1,21 @@
-;;
-;;
-;;
+;;; kfi-theme -- colors
+;;;
+;;; Commentary:
+;;;
+;;; Provides functions to customize the theme to my liking.
+;;;
+;;; Code:
+;;;
+
+(defconst kfi/background "#000000")
+(defconst kfi/line-face hl-line-face)
+
 (defun kfi/dark ()
+  "Turn on the dark-background theme."
   (interactive)
   (set-face-attribute 'fringe nil :background kfi/background)
   (set-face-attribute 'default nil :foreground "#ccc" :background kfi/background)
-  (set-face-background hl-line-face "gray15")
+  (set-face-background kfi/line-face "gray15")
 
   (set-face-attribute 'mode-line nil :background "#292c34")
 
@@ -38,10 +48,11 @@
                       :background kfi/background))
 
 (defun kfi/light ()
+  "Turn on the light-background theme."
   (interactive)
   (set-face-attribute 'fringe nil :background "#fff")
   (set-face-attribute 'default nil :foreground "#444" :background "white")
-  (set-face-background hl-line-face "gray90")
+  (set-face-background kfi/line-face "gray90")
 
   (set-face-attribute 'mode-line nil
                       :foreground "dodgerblue"
@@ -70,3 +81,4 @@
   (kfi/light))
 
 (provide 'kfi-theme)
+;;; kfi-theme ends here

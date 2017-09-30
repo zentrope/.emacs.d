@@ -1,6 +1,10 @@
-;;-----------------------------------------------------------------------------
-;; And so it begins
-;;-----------------------------------------------------------------------------
+;;; init.el --- My emacs configuration
+;;;
+;;; Commentary:
+;;;
+;;; And so it begins
+;;;
+;;; Code:
 
 (when window-system
   (menu-bar-mode 1)
@@ -82,4 +86,4 @@
 (when (file-exists-p "~/.emacs.d/local.el")
   (load "~/.emacs.d/local.el"))
 
-;;=============================================================================
+;;; init.el ends here

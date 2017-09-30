@@ -102,3 +102,5 @@
 (setq ns-use-srgb-colorspace t)
 
 (provide 'kfi-preferences)
+
+;;; kfi-preferences ends here
