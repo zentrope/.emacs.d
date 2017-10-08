@@ -67,7 +67,6 @@
 
 ;;-----------------------------------------------------------------------------
 
-(require 'kfi-globals)
 (require 'kfi-paths)
 (require 'kfi-omnibus)
 (require 'kfi-flycheck)
@@ -75,7 +74,6 @@
 (require 'kfi-abbrev)
 (require 'kfi-buffers)
 (require 'kfi-clojure)
-(require 'kfi-cluj)
 (require 'kfi-cursors)
 (require 'kfi-elisp)
 (require 'kfi-functions)
