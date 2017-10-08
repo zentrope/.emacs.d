@@ -85,7 +85,6 @@
 (require 'kfi-keyboard)
 (require 'kfi-magit)
 (require 'kfi-markdown)
-(require 'kfi-org)
 (require 'kfi-preferences)
 (require 'kfi-projectile)
 (require 'kfi-shell)
