@@ -23,17 +23,15 @@
 
 (setq default-directory "~/")
 
-(defvar kfi-local-bin (concat (getenv "HOME") "/bin") "Local execs.")
-(defvar usr-local-bin "/usr/local/bin")
-(defvar tex-bin "/Library/TeX/texbin")
-(defvar go-path (concat (getenv "HOME") "/workspace/golang/bin") "Go workspace.")
-(defvar go-path2 (concat (getenv "HOME") "/workspace/go/bin") "Go workspace.")
-(defvar go-path3 (concat (getenv "HOME") "/Go/bin") "Go workspace.")
+;; This loads the path from my shell which, basically, means that all
+;; those linter apps can work even when Emacs is launched from the
+;; Dock or Spotlight or Alfred.
 
-(setenv "PATH" (concat usr-local-bin ":" (getenv "PATH") ":" kfi-local-bin ":" go-path ":" go-path2 ":" tex-bin ":" go-path3))
-(setenv "LEIN_JVM_OPTS" "-Djava.awt.headless=true")
-
-(setq exec-path (append exec-path (list kfi-local-bin usr-local-bin go-path go-path2 go-path3 tex-bin)))
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (provide 'kfi-paths)
 ;;; kfi-paths ends here
