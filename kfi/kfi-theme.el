@@ -23,7 +23,7 @@
 
 (require 'erc)
 
-(defconst kfi/background "#000000")
+(defconst kfi/background "#101019")
 
 (defun kfi/dark ()
   "Turn on the dark-background theme."
@@ -51,7 +51,7 @@
   (set-face-attribute 'region nil :background "#3E4451")
 
   ;; Line number customization
-  (set-face-attribute 'line-number nil :foreground "#555" :background "black" :height 100)
+  (set-face-attribute 'line-number nil :foreground "#555" :background kfi/background :height 100)
 
   ;; ERC customizations
   (set-face-attribute 'erc-prompt-face nil
