@@ -72,15 +72,11 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
-(require 'kfi-paths)
-(require 'kfi-omnibus)
-(require 'kfi-flycheck)
-(require 'kfi-abbrev)
-
 (require 'kfi-buffers)
 (require 'kfi-clojure)
 (require 'kfi-cursors)
 (require 'kfi-elisp)
+(require 'kfi-flycheck)
 (require 'kfi-functions)
 (require 'kfi-fuzzy)
 (require 'kfi-golang)
@@ -90,6 +86,8 @@
 (require 'kfi-keyboard)
 (require 'kfi-magit)
 (require 'kfi-markdown)
+(require 'kfi-omnibus)
+(require 'kfi-paths)
 (require 'kfi-preferences)
 (require 'kfi-projectile)
 (require 'kfi-shell)
