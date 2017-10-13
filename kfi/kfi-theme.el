@@ -21,6 +21,8 @@
 ;;; Code:
 ;;;
 
+(require 'erc)
+
 (defconst kfi/background "#000000")
 
 (defun kfi/dark ()

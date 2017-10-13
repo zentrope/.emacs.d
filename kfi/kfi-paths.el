@@ -28,10 +28,10 @@
 ;; Dock or Spotlight or Alfred.
 
 (use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
   :ensure t
   :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
 
 (provide 'kfi-paths)
 ;;; kfi-paths ends here
