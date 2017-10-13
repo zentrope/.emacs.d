@@ -54,7 +54,7 @@
 (require 'diminish)
 (require 'bind-key)
 
-(setq use-package-verbose t)
+;; (setq use-package-verbose t)
 
 ;;=============================================================================
 
@@ -103,4 +103,5 @@
 (when (file-exists-p "~/.emacs.d/local.el")
   (load "~/.emacs.d/local.el"))
 
+(provide 'init)
 ;;; init.el ends here
