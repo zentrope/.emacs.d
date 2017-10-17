@@ -81,7 +81,8 @@
     flycheck
     flycheck-gometalinter
     fullframe
-    go
+    go-mode
+    go-eldoc
     golint
     htmlize
     ido
