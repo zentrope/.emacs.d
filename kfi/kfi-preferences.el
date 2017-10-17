@@ -33,11 +33,6 @@
 ;; Extend the EOL column
 (setq fill-column 80)
 
-;; (use-package smooth-scrolling
-;;   :ensure t
-;;   :config
-;;   (smooth-scrolling-mode 1))
-
 ;; banish custom config to another file
 (setq custom-file "~/.emacs.d/custom.el")
 

@@ -19,16 +19,11 @@
 ;;;
 ;;; Code:
 
-(use-package flycheck
-  :ensure t
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
-(use-package flycheck-gometalinter
-  :ensure t
-  :config
-  (progn
-    (flycheck-gometalinter-setup)))
+(require 'flycheck-gometalinter)
+(flycheck-gometalinter-setup)
 
 (provide 'kfi-flycheck)
 ;;; kfi-flycheck ends here

@@ -41,20 +41,8 @@
 
 (package-initialize)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
 (unless package-archive-contents
   (package-refresh-contents))
-
-;; https://github.com/jwiegley/use-package
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish)
-(require 'bind-key)
-
-;; (setq use-package-verbose t)
 
 ;;=============================================================================
 
@@ -72,28 +60,86 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
-(require 'kfi-buffers)
-(require 'kfi-clojure)
-(require 'kfi-cursors)
-(require 'kfi-elisp)
-(require 'kfi-flycheck)
-(require 'kfi-functions)
-(require 'kfi-fuzzy)
-(require 'kfi-golang)
-(require 'kfi-html)
-(require 'kfi-irc)
-(require 'kfi-java)
-(require 'kfi-keyboard)
-(require 'kfi-magit)
-(require 'kfi-markdown)
-(require 'kfi-omnibus)
-(require 'kfi-paths)
-(require 'kfi-preferences)
-(require 'kfi-projectile)
-(require 'kfi-shell)
-(require 'kfi-terminal)
-(require 'kfi-theme)
-(require 'kfi-web)
+(defvar kfi-packages
+  '(
+    ag
+    cider
+    clojure-mode
+    clojure-mode-extra-font-locking
+    command-log-mode
+    company
+    css-mode
+    css-eldoc
+    dired-details
+    dirtree
+    dockerfile-mode
+    erc
+    erc-hl-nicks
+    exec-path-from-shell
+    fish-mode
+    flx-ido
+    flycheck
+    flycheck-gometalinter
+    fullframe
+    go
+    golint
+    htmlize
+    ido
+    ido-completing-read+
+    ido-vertical-mode
+    js
+    json-mode
+    magit
+    markdown-mode
+    melpa-upstream-visit
+    multi-term
+    multiple-cursors
+    olivetti
+    paredit
+    paren-face
+    projectile
+    restclient
+    smex
+    web-mode
+    yaml-mode
+    ))
+
+(defun package-require (pkg)
+  "Install PKG if it's not already installed."
+  (when (not (package-installed-p pkg))
+    (package-install pkg)))
+
+(dolist (p kfi-packages)
+  (package-require p))
+
+(defvar kfi-customizations
+  '(
+    kfi-buffers
+    kfi-clojure
+    kfi-cursors
+    kfi-elisp
+    kfi-flycheck
+    kfi-functions
+    kfi-fuzzy
+    kfi-golang
+    kfi-html
+    kfi-irc
+    kfi-java
+    kfi-keyboard
+    kfi-magit
+    kfi-markdown
+    kfi-omnibus
+    kfi-paths
+    kfi-preferences
+    kfi-projectile
+    kfi-shell
+    kfi-terminal
+    kfi-theme
+    kfi-web
+    ))
+
+(dolist (config kfi-customizations)
+  (require config))
 
 ;; (when (not (server-running-p))
 ;;   (server-start))

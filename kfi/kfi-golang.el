@@ -15,18 +15,13 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 
-(use-package go-mode
-  :ensure t
-  :config
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (setq gofmt-command "goimports")
-  (defun kfi/go-mode-hook ()
-    (local-set-key (kbd "C-c C-r" 'go-remove-unused-imports))
-    (local-set-key (kbd "C-c i" 'go-goto-imports)))
-  (add-hook 'go-mode-hook 'flycheck-mode)
-  (add-hook 'go-mode-hook #'kfi/go-mode-hook))
-
-(use-package golint
-  :ensure t)
+(require 'go-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
+(setq gofmt-command "goimports")
+(defun kfi/go-mode-hook ()
+  (local-set-key (kbd "C-c C-r" 'go-remove-unused-imports))
+  (local-set-key (kbd "C-c i" 'go-goto-imports)))
+(add-hook 'go-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook #'kfi/go-mode-hook)
 
 (provide 'kfi-golang)

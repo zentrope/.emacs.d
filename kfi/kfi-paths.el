@@ -28,10 +28,9 @@
 ;; those linter apps can work even when Emacs is launched from the
 ;; Dock or Spotlight or Alfred.
 
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
-  :ensure t
-  :config
+(require 'exec-path-from-shell)
+
+(when (memq window-system '(mac ns))
   (exec-path-from-shell-copy-env "JAVA_HOME")
   (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-initialize))

@@ -1,17 +1,12 @@
-(use-package markdown-mode
-  :ensure t
-  :mode ("\\.markdown$" "\\.md$"
-         "\\.mkd$"
-         "\\.mkdn$"
-         "\\.mdown$"
-         "\\.mdwn$" "\\.text$")
-  :config
-  (defun kfi/markdown-mode-hook ()
-    (set (make-local-variable 'global-hl-line-mode) nil)
-    (auto-fill-mode 0)
-    (flyspell-mode 1)
-    (visual-line-mode 1))
+(require 'markdown-mode)
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-  (add-hook 'markdown-mode-hook 'kfi/markdown-mode-hook))
+(autoload 'gfm-mode "markdown-mode"
+   "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("readme\\.md\\'" . gfm-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 (provide 'kfi-markdown)
