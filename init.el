@@ -23,7 +23,7 @@
 ;;;
 ;;; Code:
 
-(when window-system
+(when (display-graphic-p)
   (menu-bar-mode 1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
@@ -40,7 +40,6 @@
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (package-initialize)
-
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -140,10 +139,12 @@
     ))
 
 (dolist (config kfi-customizations)
+  (message "Loading %s" config)
   (require config))
 
-;; (when (not (server-running-p))
-;;   (server-start))
+(require 'server)
+(or (server-running-p)
+    (server-start))
 
 (when (file-exists-p "~/.emacs.d/local.el")
   (load "~/.emacs.d/local.el"))

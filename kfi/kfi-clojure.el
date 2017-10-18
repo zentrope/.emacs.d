@@ -25,26 +25,28 @@
 (require 'paren-face)
 (global-paren-face-mode 1)
 
-(require 'clojure-mode)
-(setq clojure-indent-style nil)
-(add-hook 'clojure-mode-hook 'prettify-symbols-mode)
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'cider-mode)
+(eval-after-load 'clojure-mode
+  '(progn (setq clojure-indent-style nil)
+          (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+          (add-hook 'clojure-mode-hook 'paredit-mode)
+          (add-hook 'clojure-mode-hook 'cider-mode)
+          (require 'cider)))
 
-(require 'cider)
-(setq cider-font-lock-dynamically '(macro core function var))
-(setq cider-repl-use-clojure-font-lock t)
-(setq cider-overlays-use-font-lock t)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
-(add-hook 'cider-repl-mode-hook 'company-mode)
-(add-hook 'cider-repl-mode-hook #'eldoc-mode)
-(add-hook 'cider-mode-hook 'company-mode)
-(add-hook 'cider-mode-hook #'eldoc-mode)
-(setq cider-repl-use-pretty-printing 1)
-(setq cider-cljs-lein-repl
-      (concat "(do (require 'user) "
-              "    (user/start-cljs)"
-              "    (user/repl-cljs))"))
+(eval-after-load 'cider
+  '(progn
+     (setq cider-font-lock-dynamically '(macro core function var))
+     (setq cider-repl-use-clojure-font-lock t)
+     (setq cider-overlays-use-font-lock t)
+     (add-hook 'cider-repl-mode-hook 'paredit-mode)
+     (add-hook 'cider-repl-mode-hook 'company-mode)
+     (add-hook 'cider-repl-mode-hook #'eldoc-mode)
+     (add-hook 'cider-mode-hook 'company-mode)
+     (add-hook 'cider-mode-hook #'eldoc-mode)
+     (setq cider-repl-use-pretty-printing 1)
+     (setq cider-cljs-lein-repl
+           (concat "(do (require 'user) "
+                   "    (user/start-cljs)"
+                   "    (user/repl-cljs))"))))
 
 (provide 'kfi-clojure)
 ;;; kfi-clojure.el ends here

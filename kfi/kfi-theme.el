@@ -1,28 +1,3 @@
-;;; kfi-theme -- colors
-;;;
-;;; Commentary:
-;;;
-;;; Copyright (c) 2017 Keith Irwin
-;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU General Public License as published
-;;; by the Free Software Foundation, either version 3 of the License,
-;;; or (at your option) any later version.
-;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU General Public License for more details.
-;;;
-;;; You should have received a copy of the GNU General Public License
-;;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
-;;; Provides functions to customize the theme to my liking.
-;;;
-;;; Code:
-;;;
-
-(require 'erc)
-
 (defconst kfi/background "#101019")
 
 (defun kfi/dark ()
@@ -54,9 +29,10 @@
   (set-face-attribute 'line-number nil :foreground "#555" :background kfi/background :height 100)
 
   ;; ERC customizations
-  (set-face-attribute 'erc-prompt-face nil
-                      :foreground "darkorange"
-                      :background kfi/background)
+  (when (boundp 'erc-prompt-face)
+    (set-face-attribute 'erc-prompt-face nil
+                        :foreground "darkorange"
+                        :background kfi/background))
 
   (set-face-attribute 'erc-timestamp-face nil
                       :foreground "gray30"
@@ -87,13 +63,13 @@
   (set-face-attribute 'line-number nil :foreground "#ccc" :background "white" :height 100)
 
   ;; ERC customizations
-  (set-face-attribute 'erc-prompt-face nil
-                      :foreground "dodgerblue" :background "white")
-  (set-face-attribute 'erc-timestamp-face nil
-                      :foreground "dodgerblue" :background "white"))
+  (when (boundp 'erc-prompt-face)
+    (set-face-attribute 'erc-prompt-face nil
+                        :foreground "dodgerblue" :background "white")
+    (set-face-attribute 'erc-timestamp-face nil
+                        :foreground "dodgerblue" :background "white")))
 
-(when window-system
+(when (display-graphic-p)
   (kfi/light))
 
 (provide 'kfi-theme)
-;;; kfi-theme ends here

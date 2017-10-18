@@ -21,10 +21,13 @@
 ;;; Code:
 ;;;
 
-(require 'dired-details)
-
-(setq-default dired-details-hidden-string "--- ")
-(dired-details-install)
+(eval-after-load 'dired
+  '(progn
+     (when (string= system-type "darwin")
+       (setq dired-use-ls-dired nil))
+     (require 'dired-details)
+     (setq-default dired-details-hidden-string "--- ")
+     (dired-details-install)))
 
 (provide 'kfi-omnibus)
 ;;; kfi-omnibus ends here
