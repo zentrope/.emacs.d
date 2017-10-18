@@ -32,11 +32,10 @@
   (when (boundp 'erc-prompt-face)
     (set-face-attribute 'erc-prompt-face nil
                         :foreground "darkorange"
-                        :background kfi/background))
-
-  (set-face-attribute 'erc-timestamp-face nil
-                      :foreground "gray30"
-                      :background kfi/background))
+                        :background kfi/background)
+    (set-face-attribute 'erc-timestamp-face nil
+                        :foreground "gray30"
+                        :background kfi/background)))
 
 (defun kfi/light ()
   "Turn on the light-background theme."
