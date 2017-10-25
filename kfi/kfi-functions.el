@@ -50,7 +50,7 @@
 (defun kfi/open-this ()
   "Open the buffer using MacOS defaults."
   (interactive)
-  (shell-command (concat "open '" (buffer-name) "'")))
+  (shell-command (concat "open '" (buffer-file-name) "'")))
 
 (global-set-key (kbd "C-c C-x o") 'kfi/open-this)
 (global-set-key (kbd "C-c C-x w") 'kfi/dw)
