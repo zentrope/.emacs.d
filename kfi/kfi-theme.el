@@ -1,4 +1,9 @@
+;;; kfi-theme --- config
+;;; Commentary:
+;;; Code:
+
 (defconst kfi/background "#101019")
+(defconst kfi/font "Menlo")
 
 (defun kfi/dark ()
   "Turn on the dark-background theme."
@@ -13,11 +18,11 @@
                       :foreground "#ccc"
                       :background "#374350"
                       :underline nil
-                      :family "Menlo" :height 100 :weight 'normal
+                      :family kfi/font :height 100 :weight 'normal
                       :box '(:line-width 2 :color "#374350" :style nil))
 
   (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "gray15" :family "Menlo" :height 100
+                      :background "gray15" :family kfi/font :height 100
                       :weight 'normal :italic nil
                       :box '(:line-width 2 :color "gray15" :style nil))
 
@@ -48,18 +53,19 @@
                       :foreground "dodgerblue"
                       :background "gray90"
                       :underline nil
-                      :family "Menlo" :height 100 :weight 'normal
+                      :family kfi/font :height 100 :weight 'normal
                       :box '(:line-width 2 :color "gray90" :style nil))
 
   (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "#f2f2f2" :family "Menlo" :height 100
+                      :background "#f2f2f2" :family kfi/font :height 100
                       :weight 'normal :italic nil
                       :box '(:line-width 2 :color "#f2f2f2" :style nil))
 
   (set-face-attribute 'region nil :background "aquamarine")
 
   ;; Line number customization
-  (set-face-attribute 'line-number nil :foreground "#ccc" :background "white" :height 100)
+  (set-face-attribute 'line-number nil :foreground "#ccc"
+                      :background "white" :height 100)
 
   ;; ERC customizations
   (when (boundp 'erc-prompt-face)
@@ -72,3 +78,4 @@
   (kfi/light))
 
 (provide 'kfi-theme)
+;;; kfi-theme.el ends here

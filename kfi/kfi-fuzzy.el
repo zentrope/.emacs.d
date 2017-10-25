@@ -1,5 +1,7 @@
-;;;
-;;;
+;;; kfi-fuzzy --- config
+;;; Commentary:
+;;; Code:
+
 (require 'ido)
 (ido-mode 1)
 (ido-everywhere 1)
@@ -20,3 +22,4 @@
 (global-set-key (kbd "M-x") 'smex)
 
 (provide 'kfi-fuzzy)
+;;; kfi-fuzzy.el ends here

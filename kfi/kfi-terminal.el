@@ -1,29 +1,10 @@
 ;;; kfi-terminal -- embedded terminal stuff
-;;;
 ;;; Commentary:
-;;;
-;;;  Copyright (c) 2017 Keith Irwin
-;;;
-;;;  This program is free software: you can redistribute it and/or modify
-;;;  it under the terms of the GNU General Public License as published
-;;;  by the Free Software Foundation, either version 3 of the License,
-;;;  or (at your option) any later version.
-;;;
-;;;  This program is distributed in the hope that it will be useful,
-;;;  but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;;  GNU General Public License for more details.
-;;;
-;;;  You should have received a copy of the GNU General Public License
-;;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-;;;  Provides functions to customize the theme to my liking.
-;;;
 ;;; Code:
-;;;
 
 (require 'multi-term)
 (defadvice term-char-mode (after term-char-mode-fixes ())
-  ;; Causes a compile-log warning. Do I even need this any more?
+  "Causes a compile-log warning."
   ;; (set (make-local-variable 'hl-line-mode) nil)
   (set (make-local-variable 'global-hl-line-mode) nil))
 
@@ -42,9 +23,11 @@
              (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
 (defun kfi/inhibit-line-numbers ()
+  "Turn off line numbers."
   (display-line-numbers-mode -1))
 
 (defun kfi/term-allow-pasting-to-shell ()
+  "Allow pasting into the shell."
   (define-key term-raw-map (kbd "C-y") 'term-paste)
   (define-key term-raw-map (kbd "C-v") 'term-paste)
   (define-key term-raw-map (kbd "s-v") 'term-paste))

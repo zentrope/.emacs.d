@@ -1,27 +1,6 @@
 ;;; kfi-preferences -- general settings and preferences
-;;;
-;;; License:
-;;;
-;;;   Copyright (c) 2017 Keith Irwin
-;;;
-;;;   This program is free software: you can redistribute it and/or modify
-;;;   it under the terms of the GNU General Public License as published
-;;;   by the Free Software Foundation, either version 3 of the License,
-;;;   or (at your option) any later version.
-;;;
-;;;   This program is distributed in the hope that it will be useful,
-;;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;;   GNU General Public License for more details.
-;;;
-;;;   You should have received a copy of the GNU General Public License
-;;;   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-;;;   Provides functions to customize the theme to my liking.
-;;;
 ;;; Commentary:
-;;;
 ;;; Code:
-;;;
 
 ;; Global Auto Revert mode is a global minor mode that reverts any
 ;; buffer associated with a file when the file changes on disk.
@@ -97,14 +76,14 @@
   (let ((buf (get-buffer " *Echo Area 0*")))
     (when buf
       (with-current-buffer buf
-        (setq-local face-remapping-alist '((default :family "Monaco" :weight normal :height 100)))))))
+        (setq-local face-remapping-alist '((default :family "Menlo" :weight normal :height 100)))))))
 
 (defun kfi/craft-minibuffer ()
   "Set the font for the minibuffer."
   (set (make-local-variable 'face-remapping-alist)
-       '((default :family "Monaco" :weight normal :height 100))))
+       '((default :family "Menlo" :weight normal :height 100))))
 
-(when window-system
+(when (display-graphic-p)
   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
   (kfi/fix-echo-area)
   (kfi/craft-minibuffer))

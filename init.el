@@ -22,19 +22,11 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-;;=============================================================================
-
 (add-to-list 'load-path "~/.emacs.d/kfi/")
-
-;;-----------------------------------------------------------------------------
-;; buffer backups
-;;-----------------------------------------------------------------------------
 
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
-;;-----------------------------------------------------------------------------
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
