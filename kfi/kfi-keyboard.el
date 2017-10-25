@@ -1,3 +1,6 @@
+;;; kfi-keyboard --- configure multiple-cursors
+;;; Commentary:
+;;; Code:
 (setq mac-command-modifier 'super)
 
 ;; Have I duped this somewhere else?
@@ -27,3 +30,4 @@
 (global-set-key (kbd "C-c h") 'multi-term)
 
 (provide 'kfi-keyboard)
+;;; kfi-keyboard.el ends here

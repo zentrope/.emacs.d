@@ -1,7 +1,13 @@
+;;; kfi-buffers.el -- buffers
+;;; Commentary:
+;;; Code:
+
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<C-tab>") 'ibuffer)
 
-(setq ibuffer-saved-filter-groups
+(declare-function ibuffer-switch-to-saved-filter-groups "ibuf-ext.el")
+
+(defvar ibuffer-saved-filter-groups
       (quote (("default"
                ("org" (mode . org-mode))
                ("clojure" (mode . clojure-mode))
@@ -22,3 +28,4 @@
             (ibuffer-switch-to-saved-filter-groups "default")))
 
 (provide 'kfi-buffers)
+;;; kfi-buffers.el ends here
