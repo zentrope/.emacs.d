@@ -117,7 +117,7 @@ affects the sort order.  See `sort-regexp-fields'."
 (defun kfi/normal-font ()
   "Change to a normal font."
   (interactive)
-  (kfi/set-font "Input Mono Narrow" 'normal))
+  (kfi/set-font "Menlo" 'normal))
 
 (defun kfi/thin-font ()
   "Change to a thin font."
