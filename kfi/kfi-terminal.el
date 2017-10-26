@@ -3,6 +3,7 @@
 ;;; Code:
 
 (require 'multi-term)
+
 (defadvice term-char-mode (after term-char-mode-fixes ())
   "Causes a compile-log warning."
   ;; (set (make-local-variable 'hl-line-mode) nil)
@@ -14,6 +15,7 @@
 (set-face-attribute 'term nil :inherit 'default)
 (set-face-attribute 'term nil :inherit 'default)
 (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
+(set-face-attribute 'term-color-blue nil :foreground "dodgerblue")
 (set-face-attribute 'term-color-black nil :foreground "gray50")
 (set-face-attribute 'term-color-yellow nil :foreground "peru")
 
@@ -32,8 +34,8 @@
   (define-key term-raw-map (kbd "C-v") 'term-paste)
   (define-key term-raw-map (kbd "s-v") 'term-paste))
 
-(add-hook 'term-mode-hook 'kfi/inhibit-line-numbers)
-(add-hook 'term-mode-hook 'kfi/term-allow-pasting-to-shell)
+(add-hook 'term-mode-hook #'kfi/inhibit-line-numbers)
+(add-hook 'term-mode-hook #'kfi/term-allow-pasting-to-shell)
 
 (provide 'kfi-terminal)
 ;;; kfi-terminal ends here
