@@ -25,8 +25,8 @@
 ;; Switch to next frame, if there is one.
 (global-set-key (kbd "M-`") 'other-frame)
 
-;; Quick access to sshell
-;;(global-set-key (kbd "C-c h") 'eshell)
+;; Quick access to shell
+(global-set-key (kbd "C-c e") 'eshell)
 (global-set-key (kbd "C-c h") 'multi-term)
 
 (provide 'kfi-keyboard)
