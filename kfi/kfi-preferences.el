@@ -30,7 +30,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-(if window-system
+(if (display-graphic-p)
     (progn (scroll-bar-mode 0)
            (global-hl-line-mode 1)
            (fringe-mode '(10 . 10)))
@@ -38,6 +38,7 @@
          (set-face-background 'hl-line "gray13")
          (menu-bar-mode 0)))
 
+(pixel-scroll-mode 1)
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)
@@ -59,10 +60,12 @@
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
 
-
 ;;-----------------------------------------------------------------------------
 ;; Line numbers mode
 ;;-----------------------------------------------------------------------------
+
+(defvar display-line-numbers-grow-only)
+(defvar display-line-numbers-width-start)
 
 (when (version<= "26.0.50" emacs-version)
   (global-display-line-numbers-mode 1)
