@@ -36,6 +36,7 @@
 
 (add-hook 'term-mode-hook #'kfi/inhibit-line-numbers)
 (add-hook 'term-mode-hook #'kfi/term-allow-pasting-to-shell)
+(add-hook 'eshell-mode-hook #'kfi/inhibit-line-numbers)
 
 (provide 'kfi-terminal)
 ;;; kfi-terminal ends here
