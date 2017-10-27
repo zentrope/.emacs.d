@@ -6,6 +6,7 @@
 (defvar dired-use-ls-dired)
 
 (with-eval-after-load 'dired
+  (global-set-key (kbd "C-c C-w C-d") 'wdired-change-to-wdired-mode)
   (when (string= system-type "darwin")
      (setq dired-use-ls-dired nil))
   (require 'dired-details)
