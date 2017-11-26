@@ -9,6 +9,7 @@
 (defvar web-mode-content-types)
 (defvar web-mode-content-types)
 (defvar js-indent-level)
+(defvar css-indent-offset)
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
@@ -26,6 +27,7 @@
   (company-mode 1)
   ;; (set (make-local-variable 'company-backends) '(company-css))
   ;; (turn-on-css-eldoc)
+  (setq css-indent-offset 2)
   (local-set-key (kbd "TAB") 'company-complete)
   (local-set-key (kbd "RET") 'newline-and-indent))
 
