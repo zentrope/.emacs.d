@@ -2,7 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defconst kfi/background "#101019")
+(defconst kfi/background
+  "#000000"
+  ;;"#101019"
+  )
+
 (defconst kfi/font "Menlo")
 
 (defun kfi/dark ()
@@ -26,7 +30,8 @@
                       :weight 'normal :italic nil
                       :box '(:line-width 2 :color "gray15" :style nil))
 
-  (set-face-attribute 'font-lock-comment-face nil :foreground "firebrick")
+  (set-face-attribute 'font-lock-string-face nil :foreground "PaleGreen3")
+  (set-face-attribute 'font-lock-comment-face nil :foreground "#777" :slant 'italic)
 
   (set-face-attribute 'region nil :background "#3E4451")
 
@@ -46,8 +51,11 @@
   "Turn on the light-background theme."
   (interactive)
   (set-face-attribute 'fringe nil :background "#fff")
-  (set-face-attribute 'default nil :foreground "#444" :background "white")
+  (set-face-attribute 'default nil :foreground "black" :background "white")
   (set-face-background 'hl-line "gray90")
+
+  (set-face-attribute 'font-lock-string-face nil :foreground "SeaGreen")
+  (set-face-attribute 'font-lock-comment-face nil :foreground "#777" :slant 'italic)
 
   (set-face-attribute 'mode-line nil
                       :foreground "dodgerblue"
