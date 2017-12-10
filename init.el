@@ -60,14 +60,9 @@
     flx-ido
     flycheck
     flycheck-gometalinter
-    go-mode
-    go-eldoc
-    golint
     ido
     ido-completing-read+
     ido-vertical-mode
-    ;; melpa-upstream-visit
-    ;; multi-term
     smex
     ))
 
@@ -82,8 +77,6 @@
     kfi-flycheck
     kfi-functions
     kfi-fuzzy
-    kfi-golang
-    kfi-html
     kfi-irc
     kfi-keyboard
     kfi-paths

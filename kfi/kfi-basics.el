@@ -100,6 +100,29 @@
 (use-package fullframe
   :ensure t)
 
+(use-package go-eldoc
+  :ensure t)
+
+(defvar gofmt-command)
+(use-package go-mode
+  :ensure t
+  :commands go-mode
+  :init
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'go-mode-hook 'flycheck-mode)
+  :config
+  (setq gofmt-command "goimports"))
+
+(use-package golint
+  :ensure t)
+
+(use-package html-mode
+  :commands html-mode
+  :init
+  (add-hook 'html-mode-hook
+            (lambda ()
+              (local-set-key (kbd "RET") 'newline-and-indent))))
+
 (use-package htmlize
   :ensure t)
 
@@ -121,9 +144,10 @@
              ("dirs" (mode . dired-mode))
              ("temps" (name . "^\\*.*\\*$"))))))
   (add-hook 'ibuffer-mode-hook
-            (lambda ()
-              (ibuffer-switch-to-saved-filter-groups "default"))))
+            '(lambda ()
+               (ibuffer-switch-to-saved-filter-groups "default"))))
 
+(defvar js-indent-level)
 (use-package js-mode
   :commands js-mode
   :init
@@ -205,19 +229,14 @@
              (lambda ()
                (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
-  (defun kfi/inhibit-line-numbers ()
-    "Turn off line numbers."
-    (display-line-numbers-mode -1))
-
-  (defun kfi/term-allow-pasting-to-shell ()
-    "Allow pasting into the shell."
-    (define-key term-raw-map (kbd "C-y") 'term-paste)
-    (define-key term-raw-map (kbd "C-v") 'term-paste)
-    (define-key term-raw-map (kbd "s-v") 'term-paste))
-
-  (add-hook 'term-mode-hook #'kfi/inhibit-line-numbers)
-  (add-hook 'term-mode-hook #'kfi/term-allow-pasting-to-shell)
-  (add-hook 'eshell-mode-hook #'kfi/inhibit-line-numbers))
+  (add-hook 'term-mode-hook (lambda ()
+                              (display-line-numbers-mode -1)))
+  (add-hook 'term-mode-hook (lambda ()
+                              (define-key term-raw-map (kbd "C-y") 'term-paste)
+                              (define-key term-raw-map (kbd "C-v") 'term-paste)
+                              (define-key term-raw-map (kbd "s-v") 'term-paste)))
+  (add-hook 'eshell-mode-hook (lambda ()
+                                (display-line-numbers-mode -1))))
 
 (use-package multiple-cursors
   :commands multiple-cursors-mode
@@ -260,8 +279,7 @@
   (setq web-mode-indent-style 2)
   (setq web-mode-content-types (cons '("jsx" . "\\.js\\'") web-mode-content-types))
   (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
-  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod")
-  )
+  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
 
 (use-package yaml-mode
   :commands yaml-mode
