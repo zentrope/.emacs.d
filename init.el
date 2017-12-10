@@ -29,10 +29,13 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(defun package-require (pkg)
+  "Install PKG if it's not already installed."
+  (when (not (package-installed-p pkg))
+    (package-install pkg)))
 
 (dolist (p '(delight diminish bind-key))
-  (when (not (package-installed-p p))
-    (package-install p)))
+  (package-require p))
 
 (eval-when-compile
   (require 'use-package))
@@ -51,25 +54,14 @@
 
 (defvar kfi-packages
   '(
-    ag
-    ;; cider
-    ;; clojure-mode
-    ;; clojure-mode-extra-font-locking
-    ;; command-log-mode
-    company
     css-mode
     css-eldoc
-    dired-details
-    dirtree
-    ;; dockerfile-mode
     erc
     erc-hl-nicks
     exec-path-from-shell
-    ;; fish-mode
     flx-ido
     flycheck
     flycheck-gometalinter
-    fullframe
     go-mode
     go-eldoc
     golint
@@ -79,25 +71,12 @@
     ido-vertical-mode
     js
     json-mode
-    magit
-    markdown-mode
     melpa-upstream-visit
     multi-term
-    ;; multiple-cursors
-    olivetti
-    ;; paredit
-    ;; paren-face
-    projectile
-    ;; restclient
     smex
     web-mode
-    ;; yaml-mode
     ))
 
-(defun package-require (pkg)
-  "Install PKG if it's not already installed."
-  (when (not (package-installed-p pkg))
-    (package-install pkg)))
 
 (dolist (p kfi-packages)
   (package-require p))
@@ -114,12 +93,8 @@
     kfi-html
     kfi-irc
     kfi-keyboard
-    kfi-magit
-    kfi-markdown
-    kfi-omnibus
     kfi-paths
     kfi-preferences
-    kfi-projectile
     kfi-shell
     kfi-terminal
     kfi-theme
