@@ -26,10 +26,13 @@
 ;;-----------------------------------------------------------------------------
 
 (when (not (package-installed-p 'use-package))
-  ;;(package-refresh-contents)
-  (package-install 'use-package)
-  (package-install 'delight)
-  )
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+
+(dolist (p '(delight diminish bind-key))
+  (when (not (package-installed-p p))
+    (package-install p)))
 
 (eval-when-compile
   (require 'use-package))
