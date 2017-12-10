@@ -94,21 +94,19 @@
 
 (use-package prog-mode
   :init
-  (defun kfi/elisp-hook ()
-    "Set up elisp prefs when invoked."
-    (paredit-mode 1)
-    (setq indent-tabs-mode nil)
-    (local-set-key (kbd "RET") 'newline-and-indent))
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'emacs-lisp-mode-hook #'kfi/elisp-hook))
+  (add-hook 'emacs-lisp-mode-hook '(lambda ()
+                                     (paredit-mode 1)
+                                     (setq indent-tabs-mode nil)
+                                     (local-set-key (kbd "RET") 'newline-and-indent))))
 
 (defvar erc-truncate-buffer-on-save)
 (defvar erc-max-buffer-size)
 (defvar erc-scroll-to-bottom)
-(defvar erc-scrolltobottom-mode)
-(defvar erc-update-modules)
+(declare-function erc-scrolltobottom-mode "erc.el")
+(declare-function erc-update-modules "erc.el")
 
 (use-package erc
   :config
