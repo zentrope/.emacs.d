@@ -9,6 +9,9 @@
 ;; Do not wrap lines when they're too long
 (setq-default truncate-lines t)
 
+;; Toggle automatic parens pairing (Electric Pair mode).
+(electric-pair-mode 1)
+
 ;; Extend the EOL column
 (setq fill-column 80)
 

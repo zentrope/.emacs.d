@@ -22,6 +22,22 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+
+;;-----------------------------------------------------------------------------
+
+(when (not (package-installed-p 'use-package))
+  ;;(package-refresh-contents)
+  (package-install 'use-package)
+  (package-install 'delight)
+  )
+
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+
+;;-----------------------------------------------------------------------------
+
 (add-to-list 'load-path "~/.emacs.d/kfi/")
 
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
@@ -33,20 +49,20 @@
 (defvar kfi-packages
   '(
     ag
-    cider
-    clojure-mode
-    clojure-mode-extra-font-locking
-    command-log-mode
+    ;; cider
+    ;; clojure-mode
+    ;; clojure-mode-extra-font-locking
+    ;; command-log-mode
     company
     css-mode
     css-eldoc
     dired-details
     dirtree
-    dockerfile-mode
+    ;; dockerfile-mode
     erc
     erc-hl-nicks
     exec-path-from-shell
-    fish-mode
+    ;; fish-mode
     flx-ido
     flycheck
     flycheck-gometalinter
@@ -64,15 +80,15 @@
     markdown-mode
     melpa-upstream-visit
     multi-term
-    multiple-cursors
+    ;; multiple-cursors
     olivetti
-    paredit
-    paren-face
+    ;; paredit
+    ;; paren-face
     projectile
-    restclient
+    ;; restclient
     smex
     web-mode
-    yaml-mode
+    ;; yaml-mode
     ))
 
 (defun package-require (pkg)
@@ -85,9 +101,8 @@
 
 (defvar kfi-customizations
   '(
+    kfi-basics
     kfi-buffers
-    kfi-clojure
-    kfi-cursors
     kfi-elisp
     kfi-flycheck
     kfi-functions
@@ -95,7 +110,6 @@
     kfi-golang
     kfi-html
     kfi-irc
-    kfi-java
     kfi-keyboard
     kfi-magit
     kfi-markdown
