@@ -22,7 +22,6 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-
 ;;-----------------------------------------------------------------------------
 
 (when (not (package-installed-p 'use-package))
@@ -32,6 +31,7 @@
 (defun package-require (pkg)
   "Install PKG if it's not already installed."
   (when (not (package-installed-p pkg))
+    (message "Loading %s" pkg)
     (package-install pkg)))
 
 (dolist (p '(delight diminish bind-key))
@@ -52,36 +52,12 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
-(defvar kfi-packages
-  '(
-    erc
-    erc-hl-nicks
-    exec-path-from-shell
-    flx-ido
-    flycheck
-    flycheck-gometalinter
-    ido
-    ido-completing-read+
-    ido-vertical-mode
-    smex
-    ))
-
-
-(dolist (p kfi-packages)
-  (package-require p))
-
 (defvar kfi-customizations
   '(
     kfi-basics
-    kfi-elisp
-    kfi-flycheck
     kfi-functions
-    kfi-fuzzy
-    kfi-irc
     kfi-keyboard
-    kfi-paths
     kfi-preferences
-    kfi-shell
     kfi-theme
     ))
 

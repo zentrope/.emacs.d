@@ -1,5 +1,4 @@
 ;;; kfi-basics --- configure basic packages
-;;;
 ;;
 ;; Copyright © 2017-present Keith Irwin
 ;;
@@ -93,9 +92,76 @@
   :commands dockerfile-mode
   :ensure t)
 
+(use-package prog-mode
+  :init
+  (defun kfi/elisp-hook ()
+    "Set up elisp prefs when invoked."
+    (paredit-mode 1)
+    (setq indent-tabs-mode nil)
+    (local-set-key (kbd "RET") 'newline-and-indent))
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook #'kfi/elisp-hook))
+
+(defvar erc-truncate-buffer-on-save)
+(defvar erc-max-buffer-size)
+(defvar erc-scroll-to-bottom)
+(defvar erc-scrolltobottom-mode)
+(defvar erc-update-modules)
+
+(use-package erc
+  :config
+  (defun kfi/erc-mode-hook ()
+    (make-local-variable 'global-hl-line-mode)
+    (setq global-hl-line-mode nil))
+
+  (add-hook 'erc-mode-hook 'kfi/erc-mode-hook)
+
+  ;; Not sure if this is necessary.
+  (add-to-list 'erc-modules 'truncate)
+  (add-to-list 'erc-modules 'scrolltobottom)
+  (erc-update-modules)
+
+  (erc-scrolltobottom-mode 1)
+
+  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  (setq erc-fill-prefix "    ")
+  (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
+
+  (setq erc-fill-column 79)
+  (setq erc-scroll-to-bottom -2)
+  (setq erc-truncate-buffer-on-save t)
+  (setq erc-max-buffer-size 30000)
+
+  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
+  (setq erc-truncate-buffer-on-save t))
+
+(use-package erc-hl-nicks
+  :ensure t)
+
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config
+  (exec-path-from-shell-copy-env "JAVA_HOME")
+  (exec-path-from-shell-copy-env "GOPATH")
+  (exec-path-from-shell-initialize))
+
 (use-package fish-mode
   :commands fish-mode
   :ensure t)
+
+(use-package flycheck
+  :ensure t
+  :commands (flycheck-mode global-flycheck-mode)
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package flycheck-gometalinter
+  :ensure t
+  :config
+  (flycheck-gometalinter-setup))
 
 (use-package fullframe
   :ensure t)
@@ -146,6 +212,42 @@
   (add-hook 'ibuffer-mode-hook
             '(lambda ()
                (ibuffer-switch-to-saved-filter-groups "default"))))
+
+(declare-function ido-everywhere "ido.el")
+
+(use-package ido
+  :commands ido-mode
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (setq ido-enable-flex-matching t))
+
+(use-package ido-completing-read+
+  :ensure t
+  :defer t
+  :commands ido-ubiquitous-mode
+  :config
+  (ido-ubiquitous-mode 1))
+
+(use-package flx-ido
+  :ensure t
+  :defer t
+  :config
+  (flx-ido-mode 1)
+  (setq ido-use-faces nil))
+
+(defvar ido-vertical-define-keys)
+
+(use-package ido-vertical-mode
+  :ensure t
+  :config
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+
+(use-package smex
+  :ensure t
+  :defer t
+  :bind (("M-x" . smex)))
 
 (defvar js-indent-level)
 (use-package js-mode
@@ -267,6 +369,12 @@
          ("C-c p" . projectile-find-file))
   :init
   (setq projectile-completion-system 'ido))
+
+(use-package sh-script
+  :commands shell-script-mode
+  :init
+  (add-hook 'sh-mode-hook '(lambda ()
+                             (setq sh-basic-offset 2))))
 
 (use-package web-mode
   :ensure t

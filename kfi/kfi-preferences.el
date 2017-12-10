@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq default-directory "~/")
+
 ;; Global Auto Revert mode is a global minor mode that reverts any
 ;; buffer associated with a file when the file changes on disk.
 (global-auto-revert-mode 1)
