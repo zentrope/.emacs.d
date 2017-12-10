@@ -54,8 +54,6 @@
 
 (defvar kfi-packages
   '(
-    css-mode
-    css-eldoc
     erc
     erc-hl-nicks
     exec-path-from-shell
@@ -65,16 +63,12 @@
     go-mode
     go-eldoc
     golint
-    htmlize
     ido
     ido-completing-read+
     ido-vertical-mode
-    js
-    json-mode
-    melpa-upstream-visit
-    multi-term
+    ;; melpa-upstream-visit
+    ;; multi-term
     smex
-    web-mode
     ))
 
 
@@ -84,7 +78,6 @@
 (defvar kfi-customizations
   '(
     kfi-basics
-    kfi-buffers
     kfi-elisp
     kfi-flycheck
     kfi-functions
@@ -96,9 +89,7 @@
     kfi-paths
     kfi-preferences
     kfi-shell
-    kfi-terminal
     kfi-theme
-    kfi-web
     ))
 
 (dolist (config kfi-customizations)

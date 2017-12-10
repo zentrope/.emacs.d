@@ -27,7 +27,6 @@
 
 ;; Quick access to shell
 (global-set-key (kbd "C-c e") 'eshell)
-(global-set-key (kbd "C-c h") 'multi-term)
 
 (provide 'kfi-keyboard)
 ;;; kfi-keyboard.el ends here

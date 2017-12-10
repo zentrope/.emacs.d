@@ -61,6 +61,20 @@
 (use-package company
   :ensure t)
 
+(use-package css-mode
+  :commands css-mode
+  :init
+  (add-hook 'css-mode-hook (lambda ()
+                             (company-mode 1)
+                             ;; (set (make-local-variable 'company-backends) '(company-css))
+                             ;; (turn-on-css-eldoc)
+                             (setq css-indent-offset 2)
+                             (local-set-key (kbd "TAB") 'company-complete)
+                             (local-set-key (kbd "RET") 'newline-and-indent))))
+
+(use-package css-eldoc
+  :ensure t)
+
 (use-package dired
   :bind ("C-c C-w C-d" . wdired-change-to-wdired-mode)
   :config
@@ -85,6 +99,47 @@
 
 (use-package fullframe
   :ensure t)
+
+(use-package htmlize
+  :ensure t)
+
+(use-package ibuffer
+  :bind (("C-x C-b" . ibuffer)
+         ("<C-tab>" . ibuffer))
+  :config
+  (defvar ibuffer-saved-filter-groups
+    (quote (("default"
+             ("org" (mode . org-mode))
+             ("clojure" (mode . clojure-mode))
+             ("clojure-script" (mode . clojurescript-mode))
+             ("go-lang" (mode . go-mode))
+             ("web" (or (mode . css-mode)
+                        (mode . html-mode)
+                        (mode . js-mode)))
+             ("erc" (name . "^\\#"))
+             ("elisp" (mode . emacs-lisp-mode))
+             ("dirs" (mode . dired-mode))
+             ("temps" (name . "^\\*.*\\*$"))))))
+  (add-hook 'ibuffer-mode-hook
+            (lambda ()
+              (ibuffer-switch-to-saved-filter-groups "default"))))
+
+(use-package js-mode
+  :commands js-mode
+  :init
+  (add-hook 'js-mode-hook (lambda ()
+                            (setq indent-tabs-mode nil)
+                            (setq js-indent-level 2)
+                            (local-set-key (kbd "RET") 'newline-and-indent))))
+
+(use-package json-mode
+  :ensure t
+  :commands json-mode
+  :init
+  (add-hook 'js-mode-hook (lambda ()
+                            (setq indent-tabs-mode nil)
+                            (setq js-indent-level 2)
+                            (local-set-key (kbd "RET") 'newline-and-indent))))
 
 (use-package magit
   :ensure t
@@ -112,9 +167,7 @@
     "Quit the magit session and restore windows."
     (interactive)
     (kill-buffer)
-    (jump-to-register :magit-fullscreen))
-
-  )
+    (jump-to-register :magit-fullscreen)))
 
 (use-package markdown-mode
   :ensure t
@@ -123,6 +176,48 @@
          ("readme\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
+
+(use-package melpa-upstream-visit
+  :ensure t)
+
+(use-package multi-term
+  :ensure t
+  :commands multi-term
+  :bind (("C-c h" . multi-term))
+  :config
+  (defadvice term-char-mode (after term-char-mode-fixes ())
+    "Causes a compile-log warning."
+    ;; (set (make-local-variable 'hl-line-mode) nil)
+    (set (make-local-variable 'global-hl-line-mode) nil))
+
+  (ad-activate 'term-char-mode)
+
+  (setq multi-term-program "/usr/local/bin/fish")
+  (set-face-attribute 'term nil :inherit 'default)
+  (set-face-attribute 'term nil :inherit 'default)
+  (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
+  (set-face-attribute 'term-color-blue nil :foreground "dodgerblue")
+  (set-face-attribute 'term-color-black nil :foreground "gray50")
+  (set-face-attribute 'term-color-yellow nil :foreground "peru")
+
+  (add-hook 'term-exec-hook
+            (function
+             (lambda ()
+               (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
+  (defun kfi/inhibit-line-numbers ()
+    "Turn off line numbers."
+    (display-line-numbers-mode -1))
+
+  (defun kfi/term-allow-pasting-to-shell ()
+    "Allow pasting into the shell."
+    (define-key term-raw-map (kbd "C-y") 'term-paste)
+    (define-key term-raw-map (kbd "C-v") 'term-paste)
+    (define-key term-raw-map (kbd "s-v") 'term-paste))
+
+  (add-hook 'term-mode-hook #'kfi/inhibit-line-numbers)
+  (add-hook 'term-mode-hook #'kfi/term-allow-pasting-to-shell)
+  (add-hook 'eshell-mode-hook #'kfi/inhibit-line-numbers))
 
 (use-package multiple-cursors
   :commands multiple-cursors-mode
@@ -154,10 +249,23 @@
   :init
   (setq projectile-completion-system 'ido))
 
+(use-package web-mode
+  :ensure t
+  :commands web-mode
+  :mode (("\\.html?\\'" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-indent-style 2)
+  (setq web-mode-content-types (cons '("jsx" . "\\.js\\'") web-mode-content-types))
+  (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
+  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod")
+  )
+
 (use-package yaml-mode
   :commands yaml-mode
   :ensure t)
-
 
 (provide 'kfi-basics)
 ;;; kfi-basics.el ends here
