@@ -300,7 +300,10 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("readme\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode)))
+         ("\\.markdown\\'" . markdown-mode))
+  :config
+  (add-hook 'markdown-mode-hook (lambda ()
+                                  (auto-fill-mode 1))))
 
 (use-package melpa-upstream-visit
   :ensure t)
