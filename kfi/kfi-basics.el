@@ -200,6 +200,7 @@
              ("org" (mode . org-mode))
              ("clojure" (mode . clojure-mode))
              ("clojure-script" (mode . clojurescript-mode))
+             ("haki-script" (mode . lisp-mode))
              ("go-lang" (mode . go-mode))
              ("web" (or (mode . css-mode)
                         (mode . html-mode)
@@ -294,6 +295,12 @@
     (kill-buffer)
     (jump-to-register :magit-fullscreen)))
 
+(use-package lisp-mode
+  :mode (("\\.haki\\'" . lisp-mode))
+  :config
+  (add-hook 'lisp-mode-hook (lambda ()
+                              (paredit-mode 1))))
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -358,7 +365,7 @@
 (use-package paredit
   :ensure t
   :commands paredit-mode
-  :delight " par ")
+  :delight " ❡")
 
 (use-package paren-face
   :ensure t
