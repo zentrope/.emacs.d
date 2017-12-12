@@ -27,3 +27,4 @@ configs/*.elc
 /meghanada
 /network-security.data
 /local.el
+flycheck_*
