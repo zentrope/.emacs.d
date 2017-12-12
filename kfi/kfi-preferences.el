@@ -96,6 +96,24 @@
   (kfi/fix-echo-area)
   (kfi/craft-minibuffer))
 
+(setq mac-command-modifier 'super)
+
+;; GUI
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<left>") 'windmove-left)
+(global-set-key (kbd "s-<up>") 'windmove-up)
+(global-set-key (kbd "s-<down>") 'windmove-down)
+
+;; Mimics normal Mac keybindings for font resizing
+(global-set-key (kbd "s-+") 'text-scale-increase)
+(global-set-key (kbd "s-_") 'text-scale-decrease)
+
+;; Switch to next frame, if there is one.
+(global-set-key (kbd "M-`") 'other-frame)
+
+;; Quick access to shell
+(global-set-key (kbd "C-c e") 'eshell)
+
 (setq ns-use-srgb-colorspace t)
 
 (provide 'kfi-preferences)

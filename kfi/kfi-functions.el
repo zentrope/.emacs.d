@@ -102,31 +102,6 @@ affects the sort order.  See `sort-regexp-fields'."
   (set-frame-parameter nil 'alpha '(100 100))
   (add-to-list 'default-frame-alist '(alpha 100 100)))
 
-;; Make these functions because I use them so infrequently I'm likely
-;; to forget the key commands.
-
-(defun kfi/set-font (name weight)
-  "Set a font to NAME and its WEIGHT."
-  (set-face-attribute 'default nil :family name :weight weight))
-
-(defun kfi/heavy-font ()
-  "Change to a heavy font."
-  (interactive)
-  (kfi/set-font "Monaco" 'normal))
-
-(defun kfi/normal-font ()
-  "Change to a normal font."
-  (interactive)
-  (kfi/set-font "Menlo" 'normal))
-
-(defun kfi/thin-font ()
-  "Change to a thin font."
-  (interactive)
-  (kfi/set-font "Input Mono Narrow" 'thin))
-
-(global-set-key (kbd "C-c m 1") 'kfi/heavy-font)
-(global-set-key (kbd "C-c m 2") 'kfi/normal-font)
-(global-set-key (kbd "C-c m 3") 'kfi/thin-font)
 
 ;; (setq-default line-spacing 5)
 

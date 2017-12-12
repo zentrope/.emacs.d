@@ -9,6 +9,25 @@
 
 (defconst kfi/font "Menlo")
 
+(defun kfi/set-font (name weight)
+  "Set a font to NAME and its WEIGHT."
+  (set-face-attribute 'default nil :family name :weight weight))
+
+(defun kfi/heavy-font ()
+  "Change to a heavy font."
+  (interactive)
+  (kfi/set-font "Monaco" 'normal))
+
+(defun kfi/normal-font ()
+  "Change to a normal font."
+  (interactive)
+  (kfi/set-font "Menlo" 'normal))
+
+(defun kfi/thin-font ()
+  "Change to a thin font."
+  (interactive)
+  (kfi/set-font "Input Mono Narrow" 'thin))
+
 (defun kfi/dark ()
   "Turn on the dark-background theme."
   (interactive)
@@ -82,8 +101,8 @@
     (set-face-attribute 'erc-timestamp-face nil
                         :foreground "dodgerblue" :background "white")))
 
-(when (display-graphic-p)
-  (kfi/light))
+;; (when (display-graphic-p)
+;;   (kfi/light))
 
 (provide 'kfi-theme)
 ;;; kfi-theme.el ends here

@@ -76,16 +76,17 @@
 
 (use-package dired
   :bind ("C-c C-w C-d" . wdired-change-to-wdired-mode)
+  :after dired-details
   :config
+  ;;
+  (dired-details-install)
   (when (string= system-type "darwin")
     (setq dired-use-ls-dired nil)))
 
 (use-package dired-details
   :ensure t
-  :commands dired-details-install
-  :init
-  (setq-default dired-details-hidden-string "--- ")
   :config
+  (setq-default dired-details-hidden-string "[…] ")
   (dired-details-install))
 
 (use-package dockerfile-mode

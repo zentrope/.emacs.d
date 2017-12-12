@@ -52,18 +52,20 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
-(defvar kfi-customizations
-  '(
-    kfi-basics
-    kfi-functions
-    kfi-keyboard
-    kfi-preferences
-    kfi-theme
-    ))
+(use-package kfi-basics      :load-path "kfi/kfi-basics")
+(use-package kfi-functions   :load-path "kfi/kfi-functions")
+(use-package kfi-preferences :load-path "kfi/kfi-preferences")
 
-(dolist (config kfi-customizations)
-  (message "Loading %s" config)
-  (require config))
+(use-package kfi-theme
+  :demand
+  :load-path "kfi/kfi-theme"
+  :bind (("C-c m 1" . kfi/heavy-font)
+         ("C-c m 2" . kfi/normal-font)
+         ("C-c m 3" . kfi/thin-font))
+  :config
+  (when (display-graphic-p)
+    (kfi/light)
+    (kfi/normal-font)))
 
 (require 'server)
 (or (server-running-p)
