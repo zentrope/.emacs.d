@@ -55,6 +55,9 @@
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
   (add-hook 'clojure-mode-hook 'cider-mode)
+  (add-hook 'clojure-mode-hook (lambda ()
+                                 (put-clojure-indent 'POST 2)
+                                 (put-clojure-indent 'GET 2)))
   (setq clojure-indent-style nil))
 
 (use-package company
