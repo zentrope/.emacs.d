@@ -69,7 +69,7 @@
                       :weight 'normal :italic nil
                       :box '(:line-width 2 :color "gray15" :style nil))
 
-  (set-face-attribute 'font-lock-string-face nil :foreground "PaleGreen3")
+  (set-face-attribute 'font-lock-string-face nil :foreground "Peru")
   (set-face-attribute 'font-lock-comment-face nil :foreground "#777" :slant 'italic)
 
   (set-face-attribute 'region nil :background "#3E4451")
