@@ -49,7 +49,15 @@
 (use-package monroe
   ;; https://github.com/sanel/monroe/
   :commands clojure-mode
-  :ensure t)
+  :ensure t
+  :bind ("C-c C-e" . kfi-monroe-eval-sexp)
+  :init
+  (defun kfi-monroe-eval-sexp ()
+    (interactive)
+    (save-excursion
+      (let ((end (point)))
+        (backward-sexp)
+        (monroe-eval-region (point) end)))))
 
 (use-package company
   :ensure t)
