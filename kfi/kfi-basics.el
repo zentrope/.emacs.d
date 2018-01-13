@@ -28,22 +28,6 @@
                               (setq tab-width 2)
                               (setq indent-tabs-mode nil))))
 
-(use-package cider
-  :commands cider-mode
-  :ensure t
-  :delight "cidr"
-  :init
-  (add-hook 'cider-repl-mode-hook 'paredit-mode)
-  (add-hook 'cider-repl-mode-hook 'company-mode)
-  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  (add-hook 'cider-mode-hook 'company-mode)
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  :config
-  (setq cider-font-lock-dynamically '(macro core function var))
-  (setq cider-repl-use-clojure-font-lock t)
-  (setq cider-overlays-use-font-lock t)
-  (setq cider-repl-use-pretty-printing 1))
-
 (use-package clojure-mode-extra-font-locking
   :ensure t)
 
@@ -54,11 +38,18 @@
   :config
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
-  (add-hook 'clojure-mode-hook 'cider-mode)
+  ;; (add-hook 'clojure-mode-hook 'cider-mode)
   (add-hook 'clojure-mode-hook (lambda ()
                                  (put-clojure-indent 'POST 2)
                                  (put-clojure-indent 'GET 2)))
   (setq clojure-indent-style nil))
+
+(use-package monroe
+  ;; https://github.com/sanel/monroe/
+  :commands clojure-mode
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook 'monroe-interaction-mode))
 
 (use-package company
   :ensure t)
