@@ -42,14 +42,14 @@
   (add-hook 'clojure-mode-hook (lambda ()
                                  (put-clojure-indent 'POST 2)
                                  (put-clojure-indent 'GET 2)))
+  (add-hook 'clojure-mode-hook (lambda ()
+                                 (monroe-interaction-mode t)))
   (setq clojure-indent-style nil))
 
 (use-package monroe
   ;; https://github.com/sanel/monroe/
   :commands clojure-mode
-  :ensure t
-  :config
-  (add-hook 'clojure-mode-hook 'monroe-interaction-mode))
+  :ensure t)
 
 (use-package company
   :ensure t)
