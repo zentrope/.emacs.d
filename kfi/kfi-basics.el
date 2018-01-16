@@ -38,7 +38,6 @@
   :config
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
-  ;; (add-hook 'clojure-mode-hook 'cider-mode)
   (add-hook 'clojure-mode-hook (lambda ()
                                  (put-clojure-indent 'POST 2)
                                  (put-clojure-indent 'GET 2)))
@@ -50,14 +49,10 @@
   ;; https://github.com/sanel/monroe/
   :commands clojure-mode
   :ensure t
-  :bind ("C-x C-e" . kfi/monroe-eval-sexp)
+  :bind (:map monroe-interaction-mode-map
+         ("C-x C-e" . monroe-eval-expression-at-point))
   :init
-  (defun kfi/monroe-eval-sexp ()
-    (interactive)
-    (save-excursion
-      (let ((end (point)))
-        (backward-sexp)
-        (monroe-eval-region (point) end)))))
+  (setq monroe-detail-stacktraces t))
 
 (use-package company
   :ensure t)
