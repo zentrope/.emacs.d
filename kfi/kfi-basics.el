@@ -50,9 +50,26 @@
   :commands clojure-mode
   :ensure t
   :bind (:map monroe-interaction-mode-map
-         ("C-x C-e" . monroe-eval-expression-at-point))
+         ("C-x C-e" . kfi/monroe-eval-expression-at-point)
+         ("C-c C-c" . kfi/monroe-eval-defun))
   :init
-  (setq monroe-detail-stacktraces t))
+  (setq monroe-detail-stacktraces t)
+  (defun kfi/monroe-eval-defun ()
+    (interactive)
+    (monroe-eval-namespace)
+    (monroe-eval-defun))
+  (defun kfi/monroe-eval-expression-at-point ()
+    (interactive)
+    (monroe-eval-namespace)
+    (monroe-eval-expression-at-point)))
+
+;; (use-package spiral
+;;   ;; https://github.com/Unrepl/spiral
+;;   :commands clojure-mode
+;;   :ensure t
+;;   :bind (:map spiral-mode-map
+;;               ("M-p" . spiral-repl-previous-input)
+;;               ("M-n" . spiral-repl-next-input)))
 
 (use-package company
   :ensure t)
