@@ -28,11 +28,12 @@
 
 ;; Development
 (setq package-archives
-      (list '("melpa"        . "https://melpa.org/packages/")
-            '("melpa-stable" . "https://stable.melpa.org/packages/")
-            '("gnu"          . "https://elpa.gnu.org/packages/")))
+      (list '("melpa"     . "https://melpa.org/packages/")
+            ;; '("melpa-stable" . "https://stable.melpa.org/packages/")
+            '("marmalade" . "https://marmalade-repo.org/packages/")
+            '("gnu"       . "https://elpa.gnu.org/packages/")))
 
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+;; (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (package-initialize)
 (unless package-archive-contents
