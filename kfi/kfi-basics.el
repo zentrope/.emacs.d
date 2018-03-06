@@ -36,6 +36,12 @@
   :ensure t
   :delight "clj"
   :config
+  (put-clojure-indent 'Conditional 1)
+  (put-clojure-indent 'ControlBar 0)
+  (put-clojure-indent 'DisplayBlock 1)
+  (put-clojure-indent 'Container 1)
+  (put-clojure-indent 'IncludeIf 0)
+  (put-clojure-indent 'Table 1)
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
   (add-hook 'clojure-mode-hook (lambda ()
