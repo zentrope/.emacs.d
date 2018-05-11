@@ -28,3 +28,4 @@ configs/*.elc
 /network-security.data
 /local.el
 flycheck_*
+.cache
