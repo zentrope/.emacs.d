@@ -28,6 +28,21 @@
                               (setq tab-width 2)
                               (setq indent-tabs-mode nil))))
 
+(use-package cider
+  :ensure t
+  :after company
+  :pin melpa-stable
+  :config
+  (setq cider-font-lock-dynamically '(macro core function var))
+  (setq cider-eldoc-display-context-dependent-info t)
+  (setq cider-repl-use-clojure-font-lock t)
+  (setq cider-repl-use-pretty-printing t)
+  (setq cider-repl-wrap-history t)
+  (setq cider-repl-history-size 3000)
+  (add-hook 'cider-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (add-hook 'cider-mode-hook #'company-mode))
+
 (use-package clojure-mode-extra-font-locking
   :ensure t)
 
@@ -42,32 +57,31 @@
   (put-clojure-indent 'Container 2)
   (put-clojure-indent 'IncludeIf 0)
   (put-clojure-indent 'Table 1)
+  (put-clojure-indent 'protobuf 1)
+  (put-clojure-indent 'POST 2)
+  (put-clojure-indent 'GET 2)
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
-  (add-hook 'clojure-mode-hook (lambda ()
-                                 (put-clojure-indent 'POST 2)
-                                 (put-clojure-indent 'GET 2)))
-  (add-hook 'clojure-mode-hook (lambda ()
-                                 (monroe-interaction-mode t)))
+  (add-hook 'clojure-mode-hook 'cider-mode)
   (setq clojure-indent-style nil))
 
-(use-package monroe
-  ;; https://github.com/sanel/monroe/
-  :commands clojure-mode
-  :ensure t
-  :bind (:map monroe-interaction-mode-map
-         ("C-x C-e" . kfi/monroe-eval-expression-at-point)
-         ("C-c C-c" . kfi/monroe-eval-defun))
-  :init
-  (setq monroe-detail-stacktraces t)
-  (defun kfi/monroe-eval-defun ()
-    (interactive)
-    (monroe-eval-namespace)
-    (monroe-eval-defun))
-  (defun kfi/monroe-eval-expression-at-point ()
-    (interactive)
-    (monroe-eval-namespace)
-    (monroe-eval-expression-at-point)))
+;; (use-package monroe
+;;   ;; https://github.com/sanel/monroe/
+;;   :commands clojure-mode
+;;   :ensure t
+;;   :bind (:map monroe-interaction-mode-map
+;;          ("C-x C-e" . kfi/monroe-eval-expression-at-point)
+;;          ("C-c C-c" . kfi/monroe-eval-defun))
+;;   :init
+;;   (setq monroe-detail-stacktraces t)
+;;   (defun kfi/monroe-eval-defun ()
+;;     (interactive)
+;;     (monroe-eval-namespace)
+;;     (monroe-eval-defun))
+;;   (defun kfi/monroe-eval-expression-at-point ()
+;;     (interactive)
+;;     (monroe-eval-namespace)
+;;     (monroe-eval-expression-at-point)))
 
 ;; (use-package spiral
 ;;   ;; https://github.com/Unrepl/spiral
