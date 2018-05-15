@@ -31,9 +31,9 @@
 (use-package swift-mode
   :config
   (add-hook 'swift-mode-hook (lambda ()
-                               (setq swift-mode:basic-offset 2)
+                               ;; (setq swift-mode:basic-offset 4)
                                ;; Doesn't also indent body.
-                               (setq swift-mode:switch-case-offset 0)
+                               ;; (setq swift-mode:switch-case-offset 0)
                                (setq indent-tabs-mode nil))))
 
 (use-package cider
