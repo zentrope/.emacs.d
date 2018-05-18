@@ -350,7 +350,24 @@
          ("readme\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
+  :bind (("s-b" . markdown-insert-bold)
+         ("s-i" . markdown-insert-italic)
+         ("s-k" . kfi/markdown-insert-small))
   :config
+  ;; Cut/paste from markdown-mode.el
+  (defun kfi/markdown-insert-small ()
+    (interactive)
+    (if (markdown-use-region-p)
+        ;; Active region
+        (let ((bounds (markdown-unwrap-things-in-region
+                       (region-beginning) (region-end)
+                       markdown-regex-code 1 3)))
+          (markdown-wrap-or-insert
+           "<small>" "</small>" nil (car bounds) (cdr bounds)))
+      (if (markdown-inline-code-at-point)
+          (markdown-unwrap-thing-at-point nil 0 2)
+        (markdown-wrap-or-insert "<small>" "</small>" 'word nil nil))))
+  ;;
   (add-hook 'markdown-mode-hook (lambda ()
                                   (auto-fill-mode 1))))
 

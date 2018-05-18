@@ -18,10 +18,26 @@
 ;;; Commentary:
 ;;; Code:
 
+;; report”
+
+(defun kfi/unsmart ()
+  "Remove smart quotes from buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "’" nil t)
+      (replace-match "'"))
+    (goto-char (point-min))
+    (while (re-search-forward "”" nil t)
+      (replace-match "\""))
+    (goto-char (point-min))
+    (while (re-search-forward "“" nil t)
+      (replace-match "\""))))
+
 (defun kfi/unwrap-line ()
   "Remove newlines until end-of-paragram."
   (interactive)
-  (let ((start (point))
+  (let ((start (point-min))
         (end (copy-marker (or (search-forward "\n\n" nil t)
                               (point-max))))
         (fill-column (point-max)))
