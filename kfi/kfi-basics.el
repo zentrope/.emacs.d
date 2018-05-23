@@ -28,6 +28,10 @@
                               (setq tab-width 2)
                               (setq indent-tabs-mode nil))))
 
+(use-package groovy-mode
+  :mode (("\\.groovy" . groovy-mode)
+         ("\\.gradle" . groovy-mode)))
+
 (use-package swift-mode
   :config
   (add-hook 'swift-mode-hook (lambda ()
