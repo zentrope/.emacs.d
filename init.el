@@ -35,7 +35,9 @@
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
-(package-initialize)
+(when (version< emacs-version "27.0.50")
+  (package-initialize))
+
 (unless package-archive-contents
   (package-refresh-contents))
 
