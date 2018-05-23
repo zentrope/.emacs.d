@@ -29,10 +29,12 @@
                               (setq indent-tabs-mode nil))))
 
 (use-package groovy-mode
+  :ensure t
   :mode (("\\.groovy" . groovy-mode)
          ("\\.gradle" . groovy-mode)))
 
 (use-package swift-mode
+  :ensure t
   :config
   (add-hook 'swift-mode-hook (lambda ()
                                ;; (setq swift-mode:basic-offset 4)

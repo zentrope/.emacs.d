@@ -28,10 +28,10 @@
 
 ;; Development
 (setq package-archives
-      (list '("melpa"     . "https://melpa.org/packages/")
+      (list '("melpa"        . "https://melpa.org/packages/")
             '("melpa-stable" . "https://stable.melpa.org/packages/")
-            '("marmalade" . "https://marmalade-repo.org/packages/")
-            '("gnu"       . "https://elpa.gnu.org/packages/")))
+            '("marmalade"    . "https://marmalade-repo.org/packages/")
+            '("gnu"          . "https://elpa.gnu.org/packages/")))
 
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
@@ -53,7 +53,9 @@
     (message "Loading %s" pkg)
     (package-install pkg)))
 
-(dolist (p '(delight diminish bind-key))
+(defconst pre-reqs '(delight diminish bind-key))
+
+(dolist (p pre-reqs)
   (package-require p))
 
 (eval-when-compile
