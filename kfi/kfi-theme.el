@@ -78,13 +78,14 @@
   (set-face-attribute 'line-number nil :foreground "#555" :background kfi/background :height 100)
 
   ;; ERC customizations
-  (when (boundp 'erc-prompt-face)
-    (set-face-attribute 'erc-prompt-face nil
-                        :foreground "darkorange"
-                        :background kfi/background)
-    (set-face-attribute 'erc-timestamp-face nil
-                        :foreground "gray30"
-                        :background kfi/background)))
+  (set-face-attribute 'erc-prompt-face nil
+                      :foreground "darkorange"
+                      :background kfi/background)
+  (set-face-attribute 'erc-timestamp-face nil
+                      :foreground "gray30"
+                      :background kfi/background)
+  ;;
+  )
 
 (defun kfi/light ()
   "Turn on the light-background theme."
@@ -115,11 +116,12 @@
                       :background "white" :height 100)
 
   ;; ERC customizations
-  (when (boundp 'erc-prompt-face)
-    (set-face-attribute 'erc-prompt-face nil
-                        :foreground "dodgerblue" :background "white")
-    (set-face-attribute 'erc-timestamp-face nil
-                        :foreground "dodgerblue" :background "white")))
+  (set-face-attribute 'erc-prompt-face nil
+                      :foreground "dodgerblue" :background "white")
+  (set-face-attribute 'erc-timestamp-face nil
+                      :foreground "dodgerblue" :background "white")
+  ;;
+  )
 
 ;; (when (display-graphic-p)
 ;;   (kfi/light))
