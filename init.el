@@ -38,7 +38,9 @@
 (when (version< emacs-version "27.0.50")
   (package-initialize))
 
+
 (unless package-archive-contents
+  (package-initialize)
   (package-refresh-contents))
 
 ;;-----------------------------------------------------------------------------
