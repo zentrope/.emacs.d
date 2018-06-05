@@ -374,6 +374,7 @@
           (markdown-unwrap-thing-at-point nil 0 2)
         (markdown-wrap-or-insert "<small>" "</small>" 'word nil nil))))
   ;;
+  (add-hook 'markdown-mode-hook 'turn-on-flyspell)
   (add-hook 'markdown-mode-hook (lambda ()
                                   (auto-fill-mode 1))))
 
