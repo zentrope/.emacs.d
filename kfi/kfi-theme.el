@@ -22,13 +22,6 @@
 ;;
 ;;; Code:
 
-(defconst kfi/background
-  "#000000"
-  ;;"#101019"
-  )
-
-(defconst kfi/font "Menlo")
-
 (defun kfi/set-font (name weight)
   "Set a font to NAME and its WEIGHT."
   (set-face-attribute 'default nil :family name :weight weight))
@@ -48,42 +41,67 @@
   (interactive)
   (kfi/set-font "Input Mono Narrow" 'thin))
 
+(defconst kfi/dark-bg "#1a1c24")
+(defconst kfi/dark-hl "#252732")
+(defconst kfi/font    "Menlo")
+
 (defun kfi/dark ()
   "Turn on the dark-background theme."
   (interactive)
-  (set-face-attribute 'fringe nil :background kfi/background)
-  (set-face-attribute 'default nil :foreground "#ccc" :background kfi/background)
-  (set-face-background 'hl-line "gray13")
+  (set-face-attribute 'fringe nil
+                      :background kfi/dark-bg)
 
-  (set-face-attribute 'mode-line nil :background "#292c34")
+  (set-face-attribute 'default nil
+                      :foreground "#cccccc"
+                      :background kfi/dark-bg)
+
+  (set-face-background 'hl-line kfi/dark-hl)
+
+  (set-face-attribute 'mode-line nil
+                      :background "#292c34")
 
   (set-face-attribute 'mode-line nil
                       :foreground "#ccc"
                       :background "#374350"
                       :underline nil
-                      :family kfi/font :height 100 :weight 'normal
-                      :box '(:line-width 2 :color "#374350" :style nil))
+                      :family kfi/font
+                      :height 120
+                      :weight 'normal
+                      :box nil)
 
-  (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "gray15" :family kfi/font :height 100
-                      :weight 'normal :italic nil
-                      :box '(:line-width 2 :color "gray15" :style nil))
+  (set-face-attribute 'mode-line-inactive nil
+                      :foreground "gray60"
+                      :background "gray15"
+                      :family kfi/font
+                      :height 120
+                      :weight 'normal
+                      :italic nil
+                      :box nil)
 
-  (set-face-attribute 'font-lock-string-face nil :foreground "Peru")
-  (set-face-attribute 'font-lock-comment-face nil :foreground "#777" :slant 'italic)
+  (set-face-attribute 'font-lock-string-face nil
+                      :foreground "#b0c2e7")
 
-  (set-face-attribute 'region nil :background "#3E4451")
+  (set-face-attribute 'font-lock-comment-face nil
+                      :foreground "#777"
+                      :slant 'italic)
+
+  (set-face-attribute 'region nil
+                      :background "#3E4451")
 
   ;; Line number customization
-  (set-face-attribute 'line-number nil :foreground "#555" :background kfi/background :height 100)
+  (set-face-attribute 'line-number nil
+                      :foreground "#555"
+                      :background kfi/dark-bg
+                      :height 100)
 
   ;; ERC customizations
   (set-face-attribute 'erc-prompt-face nil
                       :foreground "darkorange"
-                      :background kfi/background)
+                      :background kfi/dark-bg)
+
   (set-face-attribute 'erc-timestamp-face nil
                       :foreground "gray30"
-                      :background kfi/background)
+                      :background kfi/dark-bg)
   ;;
   )
 
@@ -94,20 +112,20 @@
   (set-face-attribute 'default nil :foreground "black" :background "white")
   (set-face-background 'hl-line "gray90")
 
-  (set-face-attribute 'font-lock-string-face nil :foreground "SeaGreen")
+  (set-face-attribute 'font-lock-string-face nil :foreground "#666")
   (set-face-attribute 'font-lock-comment-face nil :foreground "#777" :slant 'italic)
 
   (set-face-attribute 'mode-line nil
                       :foreground "dodgerblue"
                       :background "gray90"
                       :underline nil
-                      :family kfi/font :height 100 :weight 'normal
-                      :box '(:line-width 2 :color "gray90" :style nil))
+                      :family kfi/font :height 120 :weight 'normal
+                      :box nil)
 
   (set-face-attribute 'mode-line-inactive nil :foreground "gray60"
-                      :background "#f2f2f2" :family kfi/font :height 100
+                      :background "#f2f2f2" :family kfi/font :height 120
                       :weight 'normal :italic nil
-                      :box '(:line-width 2 :color "#f2f2f2" :style nil))
+                      :box nil)
 
   (set-face-attribute 'region nil :background "aquamarine")
 
@@ -122,9 +140,6 @@
                       :foreground "dodgerblue" :background "white")
   ;;
   )
-
-;; (when (display-graphic-p)
-;;   (kfi/light))
 
 (provide 'kfi-theme)
 ;;; kfi-theme.el ends here
