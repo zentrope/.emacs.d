@@ -53,6 +53,7 @@
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-wrap-history t)
   (setq cider-repl-history-size 3000)
+  (setq cider-repl-display-help-banner nil)
   (add-hook 'cider-mode-hook #'eldoc-mode)
   (add-hook 'cider-repl-mode-hook #'company-mode)
   (add-hook 'cider-mode-hook #'company-mode))
