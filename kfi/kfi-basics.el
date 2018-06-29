@@ -28,20 +28,6 @@
                               (setq tab-width 2)
                               (setq indent-tabs-mode nil))))
 
-(use-package groovy-mode
-  :ensure t
-  :mode (("\\.groovy" . groovy-mode)
-         ("\\.gradle" . groovy-mode)))
-
-(use-package swift-mode
-  :ensure t
-  :config
-  (add-hook 'swift-mode-hook (lambda ()
-                               ;; (setq swift-mode:basic-offset 4)
-                               ;; Doesn't also indent body.
-                               ;; (setq swift-mode:switch-case-offset 0)
-                               (setq indent-tabs-mode nil))))
-
 (use-package cider
   :ensure t
   :after company
@@ -80,32 +66,6 @@
   (add-hook 'clojure-mode-hook 'cider-mode)
   (setq clojure-indent-style nil))
 
-;; (use-package monroe
-;;   ;; https://github.com/sanel/monroe/
-;;   :commands clojure-mode
-;;   :ensure t
-;;   :bind (:map monroe-interaction-mode-map
-;;          ("C-x C-e" . kfi/monroe-eval-expression-at-point)
-;;          ("C-c C-c" . kfi/monroe-eval-defun))
-;;   :init
-;;   (setq monroe-detail-stacktraces t)
-;;   (defun kfi/monroe-eval-defun ()
-;;     (interactive)
-;;     (monroe-eval-namespace)
-;;     (monroe-eval-defun))
-;;   (defun kfi/monroe-eval-expression-at-point ()
-;;     (interactive)
-;;     (monroe-eval-namespace)
-;;     (monroe-eval-expression-at-point)))
-
-;; (use-package spiral
-;;   ;; https://github.com/Unrepl/spiral
-;;   :commands clojure-mode
-;;   :ensure t
-;;   :bind (:map spiral-mode-map
-;;               ("M-p" . spiral-repl-previous-input)
-;;               ("M-n" . spiral-repl-next-input)))
-
 (use-package company
   :ensure t)
 
@@ -141,6 +101,11 @@
 (use-package dockerfile-mode
   :commands dockerfile-mode
   :ensure t)
+
+(use-package groovy-mode
+  :ensure t
+  :mode (("\\.groovy" . groovy-mode)
+         ("\\.gradle" . groovy-mode)))
 
 (use-package prog-mode
   :init
@@ -298,6 +263,15 @@
   :defer t
   :bind (("M-x" . smex)))
 
+(use-package swift-mode
+  :ensure t
+  :config
+  (add-hook 'swift-mode-hook (lambda ()
+                               ;; (setq swift-mode:basic-offset 4)
+                               ;; Doesn't also indent body.
+                               ;; (setq swift-mode:switch-case-offset 0)
+                               (setq indent-tabs-mode nil))))
+
 (defvar js-indent-level)
 (use-package js-mode
   :commands js-mode
@@ -445,6 +419,10 @@
          ("C-c p" . projectile-find-file))
   :init
   (setq projectile-completion-system 'ido))
+
+(use-package ripgrep
+  :ensure t
+  :bind (("C-M-s-f" . projectile-ripgrep)))
 
 (use-package sh-script
   :commands shell-script-mode
