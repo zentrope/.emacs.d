@@ -81,6 +81,13 @@
 (set-default 'cursor-type 'hollow)
 (setq ring-bell-function 'ignore)
 
+;; Set the frame title to the visited file's path
+;; using the abbreviated form (~ for home).
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
 ;;-----------------------------------------------------------------------------
 ;; Line numbers mode
 ;;-----------------------------------------------------------------------------
