@@ -21,6 +21,10 @@
 (use-package ag
   :ensure t)
 
+(use-package browse-kill-ring
+  :ensure t
+  :bind ("M-y" . browse-kill-ring))
+
 (use-package cc-mode
   :init
   (add-hook 'java-mode-hook (lambda ()
