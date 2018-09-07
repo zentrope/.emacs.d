@@ -167,7 +167,9 @@
 
 (use-package fish-mode
   :commands fish-mode
-  :ensure t)
+  :ensure t
+  :init
+  (setq fish-indent-offset 2))
 
 (use-package flycheck
   :ensure t
