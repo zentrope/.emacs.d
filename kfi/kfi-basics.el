@@ -220,6 +220,7 @@
              ("org" (mode . org-mode))
              ("clojure" (mode . clojure-mode))
              ("clojure-script" (mode . clojurescript-mode))
+             ("python" (mode . python-mode))
              ("haki-script" (mode . lisp-mode))
              ("go-lang" (mode . go-mode))
              ("web" (or (mode . css-mode)
