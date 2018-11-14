@@ -111,6 +111,10 @@
   :mode (("\\.groovy" . groovy-mode)
          ("\\.gradle" . groovy-mode)))
 
+(use-package py-autopep8
+  :init
+  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+
 (use-package prog-mode
   :init
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
@@ -175,7 +179,8 @@
   :ensure t
   :commands (flycheck-mode global-flycheck-mode)
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (setq flycheck-python-pycompile-executable "python3"))
 
 (use-package flycheck-gometalinter
   :ensure t
