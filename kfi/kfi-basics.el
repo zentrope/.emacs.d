@@ -111,7 +111,13 @@
   :mode (("\\.groovy" . groovy-mode)
          ("\\.gradle" . groovy-mode)))
 
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
 (use-package py-autopep8
+  :ensure t
   :init
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
 
