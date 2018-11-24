@@ -41,6 +41,12 @@
   (interactive)
   (kfi/set-font "Input Mono Narrow" 'thin))
 
+;; Good for light theme.
+(defun kfi/input-font ()
+  "Change to a input mono font."
+  (interactive)
+  (kfi/set-font "Input Mono" 'normal))
+
 (defconst kfi/dark-bg "#1a1c24")
 (defconst kfi/dark-hl "#252732")
 (defconst kfi/font    "Menlo")
