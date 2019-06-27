@@ -18,6 +18,8 @@
 ;;; Commentary:
 ;;; Code:
 
+;;(setq use-package-verbose t)
+
 (use-package ag
   :ensure t)
 
@@ -71,7 +73,8 @@
   (setq clojure-indent-style nil))
 
 (use-package company
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package css-mode
   :commands css-mode
@@ -85,7 +88,8 @@
                              (local-set-key (kbd "RET") 'newline-and-indent))))
 
 (use-package css-eldoc
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package dired
   :bind ("C-c C-w C-d" . wdired-change-to-wdired-mode)
@@ -104,20 +108,24 @@
 
 (use-package dockerfile-mode
   :commands dockerfile-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package groovy-mode
   :ensure t
+  :defer t
   :mode (("\\.groovy" . groovy-mode)
          ("\\.gradle" . groovy-mode)))
 
 (use-package elpy
   :ensure t
+  :defer t
   :init
-  (elpy-enable))
+  (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package py-autopep8
   :ensure t
+  :defer t
   :init
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
 
@@ -283,6 +291,7 @@
 
 (use-package swift-mode
   :ensure t
+  :defer t
   :config
   (add-hook 'swift-mode-hook (lambda ()
                                ;; (setq swift-mode:basic-offset 4)

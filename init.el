@@ -36,15 +36,18 @@
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (when (version< emacs-version "27.0.50")
+  (message "package initialize")
   (package-initialize))
-
 
 (unless package-archive-contents
   (package-initialize)
-  (package-refresh-contents))
+  ;; This is what calls out to the net on start up.
+  ;; (package-refresh-contents)
+  )
 
 ;;-----------------------------------------------------------------------------
 
+(message "checking for use package")
 (when (not (package-installed-p 'use-package))
   (package-refresh-contents)
   (package-install 'use-package))
@@ -57,6 +60,7 @@
 
 (defconst pre-reqs '(delight diminish bind-key))
 
+(message "requiring packages")
 (dolist (p pre-reqs)
   (package-require p))
 
@@ -75,8 +79,11 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
+(message "loading kfi-basics")
 (use-package kfi-basics      :load-path "kfi/kfi-basics")
+(message "loading kfi-functions")
 (use-package kfi-functions   :load-path "kfi/kfi-functions")
+(message "loading kfi-preferences")
 (use-package kfi-preferences :load-path "kfi/kfi-preferences")
 
 (use-package kfi-theme
@@ -87,12 +94,13 @@
          ("C-c m 3" . kfi/thin-font))
   :config
   (when (display-graphic-p)
-    (kfi/light)
-    (kfi/normal-font)))
+    (kfi/dark)
+    (kfi/heavy-font)
+    (setq-default line-spacing 1)))
 
-(require 'server)
-(or (server-running-p)
-    (server-start))
+;; (require 'server)
+;; (or (server-running-p)
+;;     (server-start))
 
 (when (file-exists-p "~/.emacs.d/local.el")
   (load "~/.emacs.d/local.el"))

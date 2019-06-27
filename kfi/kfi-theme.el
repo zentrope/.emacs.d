@@ -47,7 +47,8 @@
   (interactive)
   (kfi/set-font "Input Mono" 'normal))
 
-(defconst kfi/dark-bg "#1a1c24")
+;;(defconst kfi/dark-bg "#1a1c24")
+(defconst kfi/dark-bg "black")
 (defconst kfi/dark-hl "#252732")
 (defconst kfi/font    "Menlo")
 
