@@ -395,7 +395,7 @@
 
   (ad-activate 'term-char-mode)
 
-  (setq multi-term-program "/usr/local/bin/fish")
+  (setq multi-term-program "/bin/zsh")
   (set-face-attribute 'term nil :inherit 'default)
   (set-face-attribute 'term nil :inherit 'default)
   (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")

@@ -94,8 +94,8 @@
          ("C-c m 3" . kfi/thin-font))
   :config
   (when (display-graphic-p)
-    (kfi/dark)
-    (kfi/heavy-font)
+    (kfi/light)
+    (kfi/normal-font)
     (setq-default line-spacing 1)))
 
 ;; (require 'server)
