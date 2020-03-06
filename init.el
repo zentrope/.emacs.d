@@ -76,6 +76,7 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
 (setq backup-inhibited t)
 (setq auto-save-default nil)
+(setq auto-save-list-file-prefix nil)
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 

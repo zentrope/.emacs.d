@@ -134,7 +134,6 @@ affects the sort order.  See `sort-regexp-fields'."
   (set-frame-parameter nil 'alpha '(100 100))
   (add-to-list 'default-frame-alist '(alpha 100 100)))
 
-
 ;; (setq-default line-spacing 5)
 
 (defun kfi/write-mode ()

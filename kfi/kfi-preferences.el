@@ -59,7 +59,8 @@
          (set-face-background 'hl-line "gray13")
          (menu-bar-mode 0)))
 
-(pixel-scroll-mode 1)
+(setq ns-use-mwheel-momentum nil)
+(pixel-scroll-mode 0)
 (column-number-mode 1)
 (cua-mode 1)
 (show-paren-mode t)

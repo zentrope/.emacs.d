@@ -442,7 +442,9 @@
                              (visual-fill-column-mode 1)
                              (org-bullets-mode 1)
                              (org-indent-mode 1)
-                             (set-fill-column 90))))
+                             (set-fill-column 90)
+                             (setq-local global-hl-line-mode nil)
+                             )))
 
 (use-package olivetti
   :ensure t)
