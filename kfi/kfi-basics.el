@@ -427,6 +427,23 @@
          ("C-<" . mc/mark-previous-like-this)
          ("C->" . mc/mark-next-like-this)))
 
+(use-package org-bullets
+  :ensure t)
+
+(use-package visual-fill-column
+  :ensure t)
+
+(use-package org
+  :ensure t
+  :init
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+                             (visual-line-mode 1)
+                             (visual-fill-column-mode 1)
+                             (org-bullets-mode 1)
+                             (org-indent-mode 1)
+                             (set-fill-column 90))))
+
 (use-package olivetti
   :ensure t)
 
