@@ -95,8 +95,9 @@
 (use-package cc-mode
   :init
   (add-hook 'java-mode-hook (lambda ()
-                              (setq c-basic-offset 2)
-                              (setq tab-width 2)
+                              (hl-line-mode t)
+                              (setq c-basic-offset 4)
+                              (setq tab-width 4)
                               (setq indent-tabs-mode nil))))
 
 (use-package cider
