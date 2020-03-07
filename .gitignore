@@ -1,3 +1,10 @@
+# Treemacs
+workspace
+
+# Java LSP
+.dap-breakpoints
+.lsp-session*
+
 elpa
 auto-save-list
 backups
