@@ -56,13 +56,16 @@
 
 (defvar doom-themes-treemacs-theme)
 
+(use-package all-the-icons
+  :ensure t)
+
 (use-package doom-themes
   ;; https://github.com/hlissner/emacs-doom-themes
   :ensure t
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
+  (load-theme 'doom-vibrant t)
   (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
   (setq doom-themes-treemacs-theme "doom-colors")
   (doom-themes-treemacs-config)
@@ -83,7 +86,7 @@
   :after treemacs projectile
   :ensure t)
 
-;; --- the rest of the story ---
+;; --- /theme ---
 
 (use-package ag
   :ensure t)
