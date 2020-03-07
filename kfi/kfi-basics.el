@@ -20,6 +20,39 @@
 
 ;;(setq use-package-verbose t)
 
+;; --- theme ---
+
+(defvar doom-themes-treemacs-theme)
+
+(use-package doom-themes
+  ;; https://github.com/hlissner/emacs-doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-one t)
+  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+(use-package treemacs
+  ;; https://github.com/Alexander-Miller/treemacs#installation
+  :ensure t
+  :defer t
+  :config
+  (treemacs-resize-icons 16))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+;; --- the rest of the story ---
+
 (use-package ag
   :ensure t)
 

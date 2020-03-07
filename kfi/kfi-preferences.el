@@ -53,10 +53,10 @@
 
 (if (display-graphic-p)
     (progn (scroll-bar-mode 0)
-           (global-hl-line-mode 1)
+           ;;(global-hl-line-mode 1)
            (fringe-mode '(10 . 10)))
-  (progn (global-hl-line-mode 1)
-         (set-face-background 'hl-line "gray13")
+  (progn ;;(global-hl-line-mode 1)
+         ;;(set-face-background 'hl-line "gray13")
          (menu-bar-mode 0)))
 
 (setq ns-use-mwheel-momentum nil)
@@ -97,7 +97,7 @@
 (defvar display-line-numbers-width-start)
 
 (when (version<= "26.0.50" emacs-version)
-  (global-display-line-numbers-mode 1)
+  ;; (global-display-line-numbers-mode 1)
   (setq display-line-numbers-grow-only t)
   (setq display-line-numbers-width-start 1000))
 
@@ -115,10 +115,10 @@
   (set (make-local-variable 'face-remapping-alist)
        '((default :family "Menlo" :weight normal :height 100))))
 
-(when (display-graphic-p)
-  (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
-  (kfi/fix-echo-area)
-  (kfi/craft-minibuffer))
+;; (when (display-graphic-p)
+;;   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
+;;   (kfi/fix-echo-area)
+;;   (kfi/craft-minibuffer))
 
 (setq mac-command-modifier 'super)
 

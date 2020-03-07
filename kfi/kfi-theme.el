@@ -62,7 +62,7 @@
                       :foreground "#cccccc"
                       :background kfi/dark-bg)
 
-  (set-face-background 'hl-line kfi/dark-hl)
+  ;;(set-face-background 'hl-line kfi/dark-hl)
 
   (set-face-attribute 'mode-line nil
                       :background "#292c34")
@@ -117,7 +117,7 @@
   (interactive)
   (set-face-attribute 'fringe nil :background "#fff")
   (set-face-attribute 'default nil :foreground "black" :background "white")
-  (set-face-background 'hl-line "gray90")
+  ;;(set-face-background 'hl-line "gray90")
 
   (set-face-attribute 'font-lock-string-face nil :foreground "#666")
   (set-face-attribute 'font-lock-comment-face nil :foreground "#777" :slant 'italic)

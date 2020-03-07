@@ -80,24 +80,22 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
-(message "loading kfi-basics")
 (use-package kfi-basics      :load-path "kfi/kfi-basics")
-(message "loading kfi-functions")
 (use-package kfi-functions   :load-path "kfi/kfi-functions")
-(message "loading kfi-preferences")
 (use-package kfi-preferences :load-path "kfi/kfi-preferences")
 
-(use-package kfi-theme
-  :demand
-  :load-path "kfi/kfi-theme"
-  :bind (("C-c m 1" . kfi/heavy-font)
-         ("C-c m 2" . kfi/normal-font)
-         ("C-c m 3" . kfi/thin-font))
-  :config
-  (when (display-graphic-p)
-    (kfi/light)
-    (kfi/normal-font)
-    (setq-default line-spacing 1)))
+;; (use-package kfi-theme
+;;   :demand
+;;   :load-path "kfi/kfi-theme"
+;;   :bind (("C-c m 1" . kfi/heavy-font)
+;;          ("C-c m 2" . kfi/normal-font)
+;;          ("C-c m 3" . kfi/thin-font))
+;;   :config
+;;   (when (display-graphic-p)
+;;     (kfi/light)
+;;     (kfi/normal-font)
+;;     (setq-default line-spacing 1))
+;;   )
 
 ;; (require 'server)
 ;; (or (server-running-p)
