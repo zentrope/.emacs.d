@@ -1,0 +1,13 @@
+#+TITLE: Advice
+#+DESCRIPTION: What to do when Emacs gives you trouble.
+
+
+* How do I fix issues with lsp-java always wanting to rename packages?
+
+Quit emacs, then go into =~/.emacs.d= and remove the workspace directory. When you restart, things should be better.
+
+Also, visit build.gradle and run ~M-x lsp-java-update-project-configuration~, and make ~lsp-restart-workspace~.
+
+* How do I add a new project to Treemacs without triggering "project already exists"?
+
+When you enter in the path to the new project for your workspace, remove the trailing ~/~ from the path.
