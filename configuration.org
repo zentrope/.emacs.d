@@ -10,6 +10,23 @@
     ;; I can't get this to work as a minor mode, for some reason.
     (yas-global-mode))
 #+end_src
+** Treemacs
+
+[[https://github.com/Alexander-Miller/treemacs]]
+
+#+begin_src emacs-lisp
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (treemacs-resize-icons 16))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+#+end_src
+
+* Appearance
 ** All the icons
 
 #+begin_src emacs-lisp
@@ -42,22 +59,6 @@
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
-#+end_src
-
-** Treemacs
-
-[[https://github.com/Alexander-Miller/treemacs]]
-
-#+begin_src emacs-lisp
-(use-package treemacs
-  :ensure t
-  :defer t
-  :config
-  (treemacs-resize-icons 16))
-
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
 #+end_src
 
 * Modes
