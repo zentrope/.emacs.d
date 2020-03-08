@@ -5,8 +5,8 @@ workspace
 .dap-breakpoints
 .lsp-session*
 
-# Org based Config
-kfi/emacs-config.el
+# org-mode based generated config file
+configuration.el
 
 elpa
 auto-save-list

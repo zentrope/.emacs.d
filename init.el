@@ -83,7 +83,7 @@
 
 ;; FIXME: Only do this if you can figure out if the org file is older
 ;; maybe [[https://www.reddit.com/r/emacs/comments/8gbopk/tip_how_to_speed_up_your_emacs_config_by_03/]]
-(org-babel-load-file "~/.emacs.d/kfi/emacs-config.org")
+(org-babel-load-file "~/.emacs.d/configuration.org")
 
 (use-package kfi-basics :load-path "kfi/kfi-basics")
 
