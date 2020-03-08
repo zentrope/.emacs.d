@@ -80,26 +80,12 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
-(use-package kfi-basics      :load-path "kfi/kfi-basics")
-(use-package kfi-functions   :load-path "kfi/kfi-functions")
-(use-package kfi-preferences :load-path "kfi/kfi-preferences")
 
-;; (use-package kfi-theme
-;;   :demand
-;;   :load-path "kfi/kfi-theme"
-;;   :bind (("C-c m 1" . kfi/heavy-font)
-;;          ("C-c m 2" . kfi/normal-font)
-;;          ("C-c m 3" . kfi/thin-font))
-;;   :config
-;;   (when (display-graphic-p)
-;;     (kfi/light)
-;;     (kfi/normal-font)
-;;     (setq-default line-spacing 1))
-;;   )
+;; FIXME: Only do this if you can figure out if the org file is older
+;; maybe [[https://www.reddit.com/r/emacs/comments/8gbopk/tip_how_to_speed_up_your_emacs_config_by_03/]]
+(org-babel-load-file "~/.emacs.d/kfi/emacs-config.org")
 
-;; (require 'server)
-;; (or (server-running-p)
-;;     (server-start))
+(use-package kfi-basics :load-path "kfi/kfi-basics")
 
 (when (file-exists-p "~/.emacs.d/local.el")
   (load "~/.emacs.d/local.el"))

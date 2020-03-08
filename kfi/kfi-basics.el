@@ -20,74 +20,6 @@
 
 ;;(setq use-package-verbose t)
 
-;; --- java ---
-
-(use-package yasnippet
-  :ensure t)
-
-(use-package lsp-mode
-  :ensure t)
-
-(use-package hydra
-  :ensure t)
-
-(use-package company-lsp
-  :ensure t)
-
-(use-package lsp-ui
-  :ensure t)
-
-(use-package lsp-java
-  :ensure t
-  :after lsp
-  :config (add-hook 'java-mode-hook #'lsp))
-
-(use-package dap-mode
-  :ensure t
-  :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
-
-;; --- /java ---
-
-
-;; --- theme ---
-
-(defvar doom-themes-treemacs-theme)
-
-(use-package all-the-icons
-  :ensure t)
-
-(use-package doom-themes
-  ;; https://github.com/hlissner/emacs-doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-vibrant t)
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
-  (setq doom-themes-treemacs-theme "doom-colors")
-  (doom-themes-treemacs-config)
-  (doom-themes-org-config))
-
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-
-(use-package treemacs
-  ;; https://github.com/Alexander-Miller/treemacs#installation
-  :ensure t
-  :defer t
-  :config
-  (treemacs-resize-icons 16))
-
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
-
-;; --- /theme ---
-
 (use-package ag
   :ensure t)
 
@@ -95,13 +27,7 @@
   :ensure t
   :bind ("M-y" . browse-kill-ring))
 
-(use-package cc-mode
-  :init
-  (add-hook 'java-mode-hook (lambda ()
-                              (hl-line-mode t)
-                              (setq c-basic-offset 4)
-                              (setq tab-width 4)
-                              (setq indent-tabs-mode nil))))
+
 
 (use-package cider
   :ensure t
@@ -496,24 +422,6 @@
          ("C-<" . mc/mark-previous-like-this)
          ("C->" . mc/mark-next-like-this)))
 
-(use-package org-bullets
-  :ensure t)
-
-(use-package visual-fill-column
-  :ensure t)
-
-(use-package org
-  :ensure t
-  :init
-  :config
-  (add-hook 'org-mode-hook (lambda ()
-                             (visual-line-mode 1)
-                             (visual-fill-column-mode 1)
-                             (org-bullets-mode 1)
-                             (org-indent-mode 1)
-                             (set-fill-column 90)
-                             (setq-local global-hl-line-mode nil)
-                             )))
 
 (use-package olivetti
   :ensure t)

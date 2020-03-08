@@ -1,0 +1,417 @@
+#+title: Emacs Configuration
+
+* Packages
+** Yasnippet
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :init
+    ;; I can't get this to work as a minor mode, for some reason.
+    (yas-global-mode))
+#+end_src
+** All the icons
+
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure t)
+#+end_src
+
+** Doom themes
+
+[[https://github.com/hlissner/emacs-doom-themes]]
+
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :ensure t
+    :config
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic t)
+    (load-theme 'doom-vibrant t)
+    (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+    (setq doom-themes-treemacs-theme "doom-colors")
+    (doom-themes-treemacs-config)
+    (doom-themes-org-config))
+#+end_src
+
+** Doom modeline
+
+[[https://github.com/seagle0128/doom-modeline]]
+
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+#+end_src
+
+** Treemacs
+
+[[https://github.com/Alexander-Miller/treemacs]]
+
+#+begin_src emacs-lisp
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (treemacs-resize-icons 16))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+#+end_src
+
+* Modes
+** Java Mode
+#+begin_src emacs-lisp
+  (use-package cc-mode
+    :init
+    (add-hook 'java-mode-hook (lambda ()
+                                (hl-line-mode t)
+                                (setq c-basic-offset 4)
+                                (setq tab-width 4)
+                                (setq indent-tabs-mode nil))))
+
+  (use-package lsp-mode
+    :ensure t)
+
+  (use-package hydra
+    :ensure t)
+
+  (use-package company-lsp
+    :ensure t)
+
+  (use-package lsp-ui
+    :ensure t)
+
+  (use-package lsp-java
+    :ensure t
+    :after lsp
+    :config (add-hook 'java-mode-hook #'lsp))
+
+  (use-package dap-mode
+    :ensure t
+    :after lsp-mode
+    :config
+    (dap-mode t)
+    (dap-ui-mode t))
+#+end_src
+** Org Mode
+
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t)
+
+  (use-package visual-fill-column
+    :ensure t)
+
+  (use-package org
+    :ensure t
+    :after yasnippet
+    :init
+    :config
+    (add-hook 'org-mode-hook (lambda ()
+                               (visual-line-mode 1)
+                               (visual-fill-column-mode 1)
+                               (org-bullets-mode 1)
+                               (org-indent-mode 1)
+                               (set-fill-column 90)
+                               (setq-local global-hl-line-mode nil)
+                               (yas-minor-mode-on))))
+#+end_src
+
+* Preferences
+** Settings
+#+begin_src emacs-lisp
+  (setq default-directory "~/")
+
+  ;; Global Auto Revert mode is a global minor mode that reverts any
+  ;; buffer associated with a file when the file changes on disk.
+  (global-auto-revert-mode 1)
+
+  ;; Do not wrap lines when they're too long
+  (setq-default truncate-lines t)
+
+  ;; Toggle automatic parens pairing (Electric Pair mode).
+  (electric-pair-mode 1)
+
+  ;; Extend the EOL column
+  (setq fill-column 80)
+
+  ;; banish custom config to another file
+  (setq custom-file "~/.emacs.d/custom.el")
+
+  ;; UTF0-8 (still necessary?)
+  (prefer-coding-system 'utf-8)
+  (when (display-graphic-p)
+    (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+
+  ;; Don't require spelling out yes or no.
+  (fset 'yes-or-no-p 'y-or-n-p)
+
+  (delete-selection-mode 1)
+
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+
+  (if (display-graphic-p)
+      (progn (scroll-bar-mode 0)
+             (fringe-mode '(10 . 10)))
+    (progn (menu-bar-mode 0)))
+
+  (setq ns-use-mwheel-momentum nil)
+  (pixel-scroll-mode 0)
+  (column-number-mode 1)
+  (cua-mode 1)
+  (show-paren-mode t)
+  (custom-set-variables '(indent-tabs-mode nil))
+  (setq-default line-spacing 1)
+  (setq-default inhibit-startup-screen t)
+  (setq-default standard-indent 2)
+  (setq-default tab-width 2)
+  (add-hook 'before-save-hook 'whitespace-cleanup)
+  (blink-cursor-mode 0)
+  ;;(set-default 'cursor-type 'hollow)
+  (setq ring-bell-function 'ignore)
+
+  ;; Set the frame title to the visited file's path
+  ;; using the abbreviated form (~ for home).
+  (setq frame-title-format
+        '((:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                   "%b"))))
+
+  ;;-----------------------------------------------------------------------------
+  ;; Line numbers mode
+  ;;-----------------------------------------------------------------------------
+
+  (defvar display-line-numbers-grow-only)
+  (defvar display-line-numbers-width-start)
+
+  (when (version<= "26.0.50" emacs-version)
+    ;; (global-display-line-numbers-mode 1)
+    (setq display-line-numbers-grow-only t)
+    (setq display-line-numbers-width-start 1000))
+
+  ;;-----------------------------------------------------------------------------
+
+  ;; (defun kfi/fix-echo-area ()
+  ;;   "Set the font for the message window."
+  ;;   (let ((buf (get-buffer " *Echo Area 0*")))
+  ;;     (when buf
+  ;;       (with-current-buffer buf
+  ;;         (setq-local face-remapping-alist '((default :family "Menlo" :weight normal :height 100)))))))
+
+  ;; (defun kfi/craft-minibuffer ()
+  ;;   "Set the font for the minibuffer."
+  ;;   (set (make-local-variable 'face-remapping-alist)
+  ;;        '((default :family "Menlo" :weight normal :height 100))))
+
+  ;; (when (display-graphic-p)
+  ;;   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
+  ;;   (kfi/fix-echo-area)
+  ;;   (kfi/craft-minibuffer))
+
+  (setq mac-command-modifier 'super)
+
+  ;; GUI
+  (global-set-key (kbd "s-<right>") 'windmove-right)
+  (global-set-key (kbd "s-<left>") 'windmove-left)
+  (global-set-key (kbd "s-<up>") 'windmove-up)
+  (global-set-key (kbd "s-<down>") 'windmove-down)
+
+  ;; Mimics normal Mac keybindings for font resizing
+  (global-set-key (kbd "s-+") 'text-scale-increase)
+  (global-set-key (kbd "s-_") 'text-scale-decrease)
+
+  ;; Switch to next frame, if there is one.
+  (global-set-key (kbd "M-`") 'other-frame)
+
+  ;; Quick access to shell
+  (global-set-key (kbd "C-c e") 'eshell)
+
+  (setq ns-use-srgb-colorspace t)
+#+end_src
+
+* Custom Functions
+** Remove smart quotes
+#+begin_src emacs-lisp
+  (defun kfi/unsmart ()
+    "Remove smart quotes from buffer."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "’" nil t)
+        (replace-match "'"))
+      (goto-char (point-min))
+      (while (re-search-forward "”" nil t)
+        (replace-match "\""))
+      (goto-char (point-min))
+      (while (re-search-forward "“" nil t)
+        (replace-match "\""))))
+#+end_src
+
+** Remove newlines until end of paragraph
+
+#+begin_src emacs-lisp
+  (defun kfi/unwrap-line ()
+    "Remove newlines until end-of-paragraph."
+    (interactive)
+    (let ((start (point-min))
+          (end (copy-marker (or (search-forward "\n\n" nil t)
+                                (point-max))))
+          (fill-column (point-max)))
+      (fill-region start end)
+      (goto-char end)
+      (newline)
+      (goto-char start)))
+#+end_src
+
+** Set frame sizing functions
+
+#+begin_src emacs-lisp
+  (defun kfi/set-frame-width (arg)
+    "Set the width of the frame to ARG."
+    (interactive "nFrame width: ")
+    (set-frame-width (selected-frame) arg))
+
+  (defun kfi/dw ()
+    "Set frame to double-wide."
+    (interactive)
+    (kfi/set-frame-width 180))
+
+  (defun kfi/sw ()
+    "Set frame to single-wide."
+    (interactive)
+    (kfi/set-frame-width 90))
+
+  (global-set-key (kbd "C-c C-x w") 'kfi/dw)
+  (global-set-key (kbd "C-c C-x s") 'kfi/sw)
+
+  (defun kfi/set-frame-height (arg)
+    "Set frame height to ARG."
+    (interactive "nFrame height: ")
+    (set-frame-height (selected-frame) arg))
+
+  (defun kfi/set-frame-dimensions (w h)
+    "Set frame dimensions to W and H."
+    (interactive "nFrame width: \nnFrame height: ")
+    (set-frame-width (selected-frame) w)
+    (set-frame-height (selected-frame) h))
+#+end_src
+
+** Go back to the previous window
+
+#+begin_src emacs-lisp
+  (defun kfi/back-window ()
+    "Go back to previously visited window."
+    (interactive)
+    (other-window -1))
+
+  (global-set-key (kbd "C-x p") 'kfi/back-window)
+#+end_src
+
+** Open the current file in whatever MacOS thinks is the appropriate handler
+#+begin_src emacs-lisp
+  (defun kfi/open-this ()
+    "Open the buffer using MacOS defaults."
+    (interactive)
+    (shell-command (concat "open '" (buffer-file-name) "'")))
+
+  (global-set-key (kbd "C-c C-x o") 'kfi/open-this)
+
+#+end_src
+
+** Font resizing functions
+
+#+begin_src emacs-lisp
+
+  (defun kfi/set-font-size (size)
+    "Set the font SIZE."
+    (interactive "nNew size: ")
+    (set-face-attribute 'default nil :height size))
+
+  (defun kfi/font-size-up ()
+    "Shift font size up by 10 units."
+    (interactive)
+    (kfi/set-font-size (+ (face-attribute 'default :height) 10)))
+
+  (defun kfi/font-size-down ()
+    "Shift font size down by 10 units."
+    (interactive)
+    (kfi/set-font-size (- (face-attribute 'default :height) 10)))
+#+end_src
+
+** Lorem ipsum output function
+
+#+begin_src emacs-lisp
+
+  (defun kfi/lorem ()
+    "Output a bunch of lorem ipsum text."
+    (interactive)
+    (insert "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
+            "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim"
+            "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
+            "aliquip ex ea commodo consequat. Duis aute irure dolor in "
+            "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
+            "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
+            "culpa qui officia deserunt mollit anim id est laborum."))
+#+end_src
+
+** Sort words
+
+#+begin_src emacs-lisp
+  (defun kfi/sort-words (reverse beg end)
+    "Sort region words REVERSE if negative from BEG to END.
+  Prefixed with negative \\[universal-argument], sorts in reverse.
+  The variable `sort-fold-case' determines whether alphabetic case
+  affects the sort order.  See `sort-regexp-fields'."
+    (interactive "*P\nr")
+    (sort-regexp-fields reverse "\\w+" "\\&" beg end))
+#+end_src
+
+** Transparency on/off
+
+#+begin_src emacs-lisp
+  (defun kfi/transparency-on ()
+    "Turn on frame transparency."
+    (interactive)
+    (set-frame-parameter nil 'alpha '(95 95))
+    (add-to-list 'default-frame-alist '(alpha 95 95)))
+
+  (defun kfi/transparency-no ()
+    "Turn off frame transparency."
+    (interactive)
+    (set-frame-parameter nil 'alpha '(100 100))
+    (add-to-list 'default-frame-alist '(alpha 100 100)))
+
+#+end_src
+
+** Set/Unset prose writing mode
+
+#+begin_src emacs-lisp
+  (defun kfi/write-mode ()
+    "Set special prose writing mode."
+    (interactive)
+    (display-line-numbers-mode -1)
+    (global-hl-line-mode 0)
+    (olivetti-mode 1)
+    (flyspell-mode 1)
+    (flyspell-buffer))
+
+  (defun kfi/unwrite-mode ()
+    "Unset special prose writing mode."
+    (interactive)
+    (global-hl-line-mode 1)
+    (olivetti-mode 0)
+    (flyspell-mode 0)
+    (display-line-numbers-mode 1))
+#+end_src
+
+** Visit Emacs' init.el file
+
+#+begin_src emacs-lisp
+  (defun kfi/edit-init-el ()
+    "Visit the init.el file."
+    (interactive)
+    (find-file "~/.emacs.d/init.el"))
+#+end_src
