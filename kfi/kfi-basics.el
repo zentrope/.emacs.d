@@ -27,46 +27,6 @@
   :ensure t
   :bind ("M-y" . browse-kill-ring))
 
-
-
-(use-package cider
-  :ensure t
-  :after company
-  :pin melpa-stable
-  :config
-  (setq cider-font-lock-dynamically '(macro core function var))
-  (setq cider-eldoc-display-context-dependent-info t)
-  (setq cider-repl-use-clojure-font-lock t)
-  (setq cider-repl-use-pretty-printing t)
-  (setq cider-repl-wrap-history t)
-  (setq cider-repl-history-size 3000)
-  (setq cider-repl-display-help-banner nil)
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-  (add-hook 'cider-mode-hook #'company-mode))
-
-(use-package clojure-mode-extra-font-locking
-  :ensure t)
-
-(use-package clojure-mode
-  :commands clojure-mode
-  :ensure t
-  :delight "clj"
-  :config
-  (put-clojure-indent 'Conditional 1)
-  (put-clojure-indent 'ControlBar 0)
-  (put-clojure-indent 'DisplayBlock 1)
-  (put-clojure-indent 'Container 2)
-  (put-clojure-indent 'IncludeIf 0)
-  (put-clojure-indent 'Table 1)
-  (put-clojure-indent 'protobuf 1)
-  (put-clojure-indent 'POST 2)
-  (put-clojure-indent 'GET 2)
-  (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
-  (add-hook 'clojure-mode-hook 'paredit-mode)
-  (add-hook 'clojure-mode-hook 'cider-mode)
-  (setq clojure-indent-style nil))
-
 (use-package company
   :ensure t
   :defer t)
@@ -106,12 +66,6 @@
   :ensure t
   :defer t)
 
-(use-package groovy-mode
-  :ensure t
-  :defer t
-  :mode (("\\.groovy" . groovy-mode)
-         ("\\.gradle" . groovy-mode)))
-
 (use-package elpy
   :ensure t
   :defer t
@@ -133,42 +87,6 @@
                                      (paredit-mode 1)
                                      (setq indent-tabs-mode nil)
                                      (local-set-key (kbd "RET") 'newline-and-indent))))
-
-(defvar erc-truncate-buffer-on-save)
-(defvar erc-max-buffer-size)
-(defvar erc-scroll-to-bottom)
-(declare-function erc-scrolltobottom-mode "erc.el")
-(declare-function erc-update-modules "erc.el")
-
-(use-package erc
-  :config
-  (defun kfi/erc-mode-hook ()
-    (make-local-variable 'global-hl-line-mode)
-    (setq global-hl-line-mode nil))
-
-  (add-hook 'erc-mode-hook 'kfi/erc-mode-hook)
-
-  ;; Not sure if this is necessary.
-  (add-to-list 'erc-modules 'truncate)
-  (add-to-list 'erc-modules 'scrolltobottom)
-  (erc-update-modules)
-
-  (erc-scrolltobottom-mode 1)
-
-  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
-  (setq erc-fill-prefix "    ")
-  (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
-
-  (setq erc-fill-column 79)
-  (setq erc-scroll-to-bottom -2)
-  (setq erc-truncate-buffer-on-save t)
-  (setq erc-max-buffer-size 30000)
-
-  (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
-  (setq erc-truncate-buffer-on-save t))
-
-(use-package erc-hl-nicks
-  :ensure t)
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
@@ -323,35 +241,6 @@
   :config
   (add-hook 'lisp-mode-hook (lambda ()
                               (paredit-mode 1))))
-
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("readme\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :bind (("s-b" . markdown-insert-bold)
-         ("s-i" . markdown-insert-italic)
-         ("s-k" . kfi/markdown-insert-small))
-  :config
-  ;; Cut/paste from markdown-mode.el
-  (defun kfi/markdown-insert-small ()
-    (interactive)
-    (if (markdown-use-region-p)
-        ;; Active region
-        (let ((bounds (markdown-unwrap-things-in-region
-                       (region-beginning) (region-end)
-                       markdown-regex-code 1 3)))
-          (markdown-wrap-or-insert
-           "<small>" "</small>" nil (car bounds) (cdr bounds)))
-      (if (markdown-inline-code-at-point)
-          (markdown-unwrap-thing-at-point nil 0 2)
-        (markdown-wrap-or-insert "<small>" "</small>" 'word nil nil))))
-  ;;
-  (add-hook 'markdown-mode-hook 'turn-on-flyspell)
-  (add-hook 'markdown-mode-hook (lambda ()
-                                  (auto-fill-mode 1))))
 
 (use-package melpa-upstream-visit
   :ensure t)

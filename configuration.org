@@ -96,7 +96,95 @@
   :init (doom-modeline-mode 1))
 #+end_src
 
-* Modes
+** Erc (IRC Client)
+
+#+begin_src emacs-lisp
+  (use-package erc
+    :config
+    (defun kfi/erc-mode-hook ()
+      (make-local-variable 'global-hl-line-mode)
+      (setq global-hl-line-mode nil))
+
+    (add-hook 'erc-mode-hook 'kfi/erc-mode-hook)
+
+    ;; Not sure if this is necessary.
+    (add-to-list 'erc-modules 'truncate)
+    (add-to-list 'erc-modules 'scrolltobottom)
+    (erc-update-modules)
+
+    (erc-scrolltobottom-mode 1)
+
+    (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+    (setq erc-fill-prefix "    ")
+    (setq erc-prompt (lambda () (concat "\n" (buffer-name) " >")))
+
+    (setq erc-fill-column 79)
+    (setq erc-scroll-to-bottom -2)
+    (setq erc-truncate-buffer-on-save t)
+    (setq erc-max-buffer-size 30000)
+
+    (add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
+    (setq erc-truncate-buffer-on-save t))
+
+  (use-package erc-hl-nicks
+    :ensure t)
+#+end_src
+
+* Programming Modes
+** Clojure Mode
+
+This needs to be revisited if I start using Clojure again.
+
+#+begin_src emacs-lisp
+  (use-package cider
+    :ensure t
+    :after company
+    :pin melpa-stable
+    :config
+    (setq cider-font-lock-dynamically '(macro core function var))
+    (setq cider-eldoc-display-context-dependent-info t)
+    (setq cider-repl-use-clojure-font-lock t)
+    (setq cider-repl-use-pretty-printing t)
+    (setq cider-repl-wrap-history t)
+    (setq cider-repl-history-size 3000)
+    (setq cider-repl-display-help-banner nil)
+    (add-hook 'cider-mode-hook #'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode))
+
+  (use-package clojure-mode-extra-font-locking
+    :ensure t)
+
+  (use-package clojure-mode
+    :commands clojure-mode
+    :ensure t
+    :delight "clj"
+    :config
+    (put-clojure-indent 'Conditional 1)
+    (put-clojure-indent 'ControlBar 0)
+    (put-clojure-indent 'DisplayBlock 1)
+    (put-clojure-indent 'Container 2)
+    (put-clojure-indent 'IncludeIf 0)
+    (put-clojure-indent 'Table 1)
+    (put-clojure-indent 'protobuf 1)
+    (put-clojure-indent 'POST 2)
+    (put-clojure-indent 'GET 2)
+    (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+    (add-hook 'clojure-mode-hook 'paredit-mode)
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (setq clojure-indent-style nil))
+#+end_src
+
+** Groovy Mode
+
+#+begin_src emacs-lisp
+  (use-package groovy-mode
+    :ensure t
+    :defer t
+    :mode (("\\.groovy" . groovy-mode)
+           ("\\.gradle" . groovy-mode)))
+#+end_src
+
 ** Java Mode
 
 - [[https://github.com/emacs-lsp/lsp-ui]]
@@ -139,6 +227,40 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
       :config (progn (dap-mode t)
                      (dap-ui-mode t)))
 #+end_src
+* Document Modes
+** Markdown Mode
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("readme\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :bind (("s-b" . markdown-insert-bold)
+           ("s-i" . markdown-insert-italic)
+           ("s-k" . kfi/markdown-insert-small))
+    :config
+    ;; Cut/paste from markdown-mode.el
+    (defun kfi/markdown-insert-small ()
+      (interactive)
+      (if (markdown-use-region-p)
+          ;; Active region
+          (let ((bounds (markdown-unwrap-things-in-region
+                         (region-beginning) (region-end)
+                         markdown-regex-code 1 3)))
+            (markdown-wrap-or-insert
+             "<small>" "</small>" nil (car bounds) (cdr bounds)))
+        (if (markdown-inline-code-at-point)
+            (markdown-unwrap-thing-at-point nil 0 2)
+          (markdown-wrap-or-insert "<small>" "</small>" 'word nil nil))))
+    ;;
+    (add-hook 'markdown-mode-hook 'turn-on-flyspell)
+    (add-hook 'markdown-mode-hook (lambda ()
+                                    (auto-fill-mode 1))))
+#+end_src
+
 ** Org Mode
 
 #+begin_src emacs-lisp
@@ -339,7 +461,7 @@ Mimics normal Mac keybindings for font resizing.
 #+end_src
 
 * Custom Functions
-** Remove smart quote
+** Remove smart quotes from a buffer
 #+begin_src emacs-lisp
   (defun kfi/unsmart ()
     "Remove smart quotes from buffer."
@@ -356,7 +478,9 @@ Mimics normal Mac keybindings for font resizing.
         (replace-match "\""))))
 #+end_src
 
-** Remove newlines until end of paragraph
+** Remove newlines until end of paragraph @bug
+
+Actually, this doesn't do what I think it does: it seems to go to the stop of the buffer, when it should instead find the beginning of the paragraph. I wonder what the original intent was?
 
 #+begin_src emacs-lisp
   (defun kfi/unwrap-line ()
@@ -427,10 +551,9 @@ Mimics normal Mac keybindings for font resizing.
 
 #+end_src
 
-** Font resizing functions
+** Adjust font size up or down
 
 #+begin_src emacs-lisp
-
   (defun kfi/set-font-size (size)
     "Set the font SIZE."
     (interactive "nNew size: ")
@@ -447,23 +570,23 @@ Mimics normal Mac keybindings for font resizing.
     (kfi/set-font-size (- (face-attribute 'default :height) 10)))
 #+end_src
 
-** Lorem ipsum output function
+** Generate some lorem ipsum text
 
 #+begin_src emacs-lisp
-
   (defun kfi/lorem ()
     "Output a bunch of lorem ipsum text."
     (interactive)
-    (insert "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
-            "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim"
-            "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
-            "aliquip ex ea commodo consequat. Duis aute irure dolor in "
-            "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
-            "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
-            "culpa qui officia deserunt mollit anim id est laborum."))
+    (insert
+     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
+     "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim"
+     "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
+     "aliquip ex ea commodo consequat. Duis aute irure dolor in "
+     "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
+     "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
+     "culpa qui officia deserunt mollit anim id est laborum."))
 #+end_src
 
-** Sort words
+** Sort the words in the current selection
 
 #+begin_src emacs-lisp
   (defun kfi/sort-words (reverse beg end)
@@ -475,7 +598,7 @@ Mimics normal Mac keybindings for font resizing.
     (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 #+end_src
 
-** Transparency on/off
+** Make the background (and foreground) slight transparent (or not)
 
 #+begin_src emacs-lisp
   (defun kfi/transparency-on ()
@@ -489,7 +612,6 @@ Mimics normal Mac keybindings for font resizing.
     (interactive)
     (set-frame-parameter nil 'alpha '(100 100))
     (add-to-list 'default-frame-alist '(alpha 100 100)))
-
 #+end_src
 
 ** Set/Unset prose writing mode
@@ -520,4 +642,13 @@ Mimics normal Mac keybindings for font resizing.
     "Visit the init.el file."
     (interactive)
     (find-file "~/.emacs.d/init.el"))
+#+end_src
+
+** Visit configuration.org for Emacs
+
+#+begin_src emacs-lisp
+  (defun kfi/my-config ()
+    "Visit the configuration.org file for Emacs."
+    (interactive)
+    (find-file "~/.emacs.d/configuration.org"))
 #+end_src
