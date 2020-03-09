@@ -25,16 +25,7 @@
               '(lambda ()
                  (ibuffer-switch-to-saved-filter-groups "default"))))
 #+end_src
-** Yasnippet
-
-#+begin_src emacs-lisp
-  (use-package yasnippet
-    :ensure t
-    :init
-    ;; I can't get this to work as a minor mode, for some reason.
-    (yas-global-mode))
-#+end_src
-** Treemacs
+** treemacs
 
 [[https://github.com/Alexander-Miller/treemacs]]
 
@@ -50,6 +41,26 @@
     :ensure t)
 #+end_src
 
+** which-key
+
+=which-key= is a minor mode for Emacs that displays the key bindings following your currently entered incomplete command (a prefix) in a popup.
+
+[[https://github.com/justbur/emacs-which-key]]
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init (which-key-mode 1))
+#+end_src
+
+** yasnippet
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :init
+    ;; I can't get this to work as a minor mode, for some reason.
+    (yas-global-mode))
+#+end_src
 * Appearance
 ** All the icons
 
@@ -87,41 +98,44 @@
 
 * Modes
 ** Java Mode
+
 - [[https://github.com/emacs-lsp/lsp-ui]]
+
 #+begin_src emacs-lisp
-  (use-package cc-mode
-    :init
-    (add-hook 'java-mode-hook (lambda ()
-                                (hl-line-mode t)
-                                (display-line-numbers-mode 1)
-                                (setq c-basic-offset 4)
-                                (setq tab-width 4)
-                                (setq indent-tabs-mode nil))))
+    (use-package cc-mode
+      :init
+      (add-hook 'java-mode-hook (lambda ()
+                                  (hl-line-mode t)
+                                  (display-line-numbers-mode 1)
+                                  (setq c-basic-offset 4)
+                                  (setq tab-width 4)
+                                  (setq indent-tabs-mode nil))))
 
-  (use-package lsp-mode
-    :ensure t)
+    (use-package lsp-mode
+      :ensure t)
 
-  (use-package hydra
-    :ensure t)
+    (use-package hydra
+      :ensure t)
 
-  (use-package company-lsp
-    :ensure t)
+    (use-package company-lsp
+      :ensure t)
 
-  (use-package lsp-ui
-    :ensure t
-    :config (setq lsp-auto-configure nil))
+    (use-package lsp-ui
+      :ensure t
+      :config
+      ;; If the popups get too tiresome, use this:
+      (setq lsp-auto-configure nil))
 
-  (use-package lsp-java
-    :ensure t
-    :after lsp
-    :config (add-hook 'java-mode-hook #'lsp))
+    (use-package lsp-java
+      :ensure t
+      :after lsp
+      :config (add-hook 'java-mode-hook #'lsp))
 
-  (use-package dap-mode
-    :ensure t
-    :after lsp-mode
-    :config
-    (dap-mode t)
-    (dap-ui-mode t))
+    (use-package dap-mode
+      :ensure t
+      :after lsp-mode
+      :config (progn (dap-mode t)
+                     (dap-ui-mode t)))
 #+end_src
 ** Org Mode
 
@@ -149,121 +163,176 @@
 
 * Settings
 ** Default directory
+
 #+begin_src emacs-lisp
   (setq default-directory "~/")
 #+end_src
+
 ** Hollow cursor
+
 #+begin_src emacs-lisp
   (set-default 'cursor-type 'hollow)
 #+end_src
-** Old Preferences
+
+** Global auto revert files (load if changed on disk)
+
+Global Auto Revert mode is a global minor mode that reverts any buffer associated with a file when the file changes on disk.
+
 #+begin_src emacs-lisp
-
-  ;; Global Auto Revert mode is a global minor mode that reverts any
-  ;; buffer associated with a file when the file changes on disk.
   (global-auto-revert-mode 1)
+#+end_src
 
-  ;; Do not wrap lines when they're too long
+** Truncate lines
+
+Do not wrap lines when they're too long.
+
+#+begin_src emacs-lisp
   (setq-default truncate-lines t)
+#+end_src
 
-  ;; Toggle automatic parens pairing (Electric Pair mode).
+** Electric parens
+
+Toggle automatic parens pairing (Electric Pair mode).
+
+#+begin_src emacs-lisp
   (electric-pair-mode 1)
+#+end_src
 
-  ;; Extend the EOL column
-  (setq fill-column 80)
+** Replace selected text when you type something
 
-  ;; banish custom config to another file
-  (setq custom-file "~/.emacs.d/custom.el")
+When Delete Selection mode is enabled, typed text replaces the selection if the selection is active. Otherwise, typed text is just inserted at point regardless of any selection.
 
-  ;; UTF0-8 (still necessary?)
-  (prefer-coding-system 'utf-8)
-  (when (display-graphic-p)
-    (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
-
-  ;; Don't require spelling out yes or no.
-  (fset 'yes-or-no-p 'y-or-n-p)
-
+#+begin_src emacs-lisp
   (delete-selection-mode 1)
+#+end_src
 
-  (setq make-backup-files nil)
-  (setq auto-save-default nil)
+** Show column numbers in the mode line
 
-  (if (display-graphic-p)
-      (progn (scroll-bar-mode 0)
-             (fringe-mode '(10 . 10)))
-    (progn (menu-bar-mode 0)))
+Toggle column number display in the mode line (Column Number mode).
 
-  (setq ns-use-mwheel-momentum nil)
-  (pixel-scroll-mode 0)
+#+begin_src emacs-lisp
   (column-number-mode 1)
+#+end_src
+
+** Use regular keys for cut/copy/paste (cua-mode)
+
+CUA mode is a global minor mode. When enabled, typed text replaces the active selection, and you can use C-z, C-x, C-c, and C-v to undo, cut, copy, and paste in addition to the normal Emacs bindings. The C-x and C-c keys only do cut and copy when the region is active, so in most cases, they do not conflict with the normal function of these prefix keys.
+
+#+begin_src emacs-lisp
   (cua-mode 1)
+#+end_src
+
+** Show matching parens
+
+Toggle visualization of matching parens (Show Paren mode).
+
+#+begin_src emacs-lisp
   (show-paren-mode t)
-  (custom-set-variables '(indent-tabs-mode nil))
-  (setq-default line-spacing 1)
-  (setq-default inhibit-startup-screen t)
-  (setq-default standard-indent 2)
-  (setq-default tab-width 2)
-  (add-hook 'before-save-hook 'whitespace-cleanup)
-  (blink-cursor-mode 0)
-  (setq ring-bell-function 'ignore)
+#+end_src
 
-  ;; Set the frame title to the visited file's path
-  ;; using the abbreviated form (~ for home).
-  (setq frame-title-format
-        '((:eval (if (buffer-file-name)
-                     (abbreviate-file-name (buffer-file-name))
-                   "%b"))))
+** Font resizing keyboard bindings
 
-  ;;-----------------------------------------------------------------------------
-  ;; Line numbers mode
-  ;;-----------------------------------------------------------------------------
+Mimics normal Mac keybindings for font resizing.
 
-  (defvar display-line-numbers-grow-only)
-  (defvar display-line-numbers-width-start)
+#+begin_src emacs-lisp
+  (global-set-key (kbd "s-+") 'text-scale-increase)
+  (global-set-key (kbd "s-_") 'text-scale-decrease)
+#+end_src
 
-  (when (version<= "26.0.50" emacs-version)
-    ;; (global-display-line-numbers-mode 1)
-    (setq display-line-numbers-grow-only t)
-    (setq display-line-numbers-width-start 1000))
+** Window navigation keyboard commands
 
-  ;;-----------------------------------------------------------------------------
-
-  ;; (defun kfi/fix-echo-area ()
-  ;;   "Set the font for the message window."
-  ;;   (let ((buf (get-buffer " *Echo Area 0*")))
-  ;;     (when buf
-  ;;       (with-current-buffer buf
-  ;;         (setq-local face-remapping-alist '((default :family "Menlo" :weight normal :height 100)))))))
-
-  ;; (defun kfi/craft-minibuffer ()
-  ;;   "Set the font for the minibuffer."
-  ;;   (set (make-local-variable 'face-remapping-alist)
-  ;;        '((default :family "Menlo" :weight normal :height 100))))
-
-  ;; (when (display-graphic-p)
-  ;;   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
-  ;;   (kfi/fix-echo-area)
-  ;;   (kfi/craft-minibuffer))
-
-  (setq mac-command-modifier 'super)
-
-  ;; GUI
+#+begin_src emacs-lisp
+  (global-set-key (kbd "M-`") 'other-frame)
   (global-set-key (kbd "s-<right>") 'windmove-right)
   (global-set-key (kbd "s-<left>") 'windmove-left)
   (global-set-key (kbd "s-<up>") 'windmove-up)
   (global-set-key (kbd "s-<down>") 'windmove-down)
+#+end_src
 
-  ;; Mimics normal Mac keybindings for font resizing
-  (global-set-key (kbd "s-+") 'text-scale-increase)
-  (global-set-key (kbd "s-_") 'text-scale-decrease)
+** Uncategorized
 
-  ;; Switch to next frame, if there is one.
-  (global-set-key (kbd "M-`") 'other-frame)
+#+begin_src emacs-lisp
 
-  ;; Quick access to shell
-  (global-set-key (kbd "C-c e") 'eshell)
+    ;; banish custom config to another file
+    (setq custom-file "~/.emacs.d/custom.el")
 
-  (setq ns-use-srgb-colorspace t)
+    ;; UTF0-8 (still necessary?)
+    (prefer-coding-system 'utf-8)
+    (when (display-graphic-p)
+      (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+
+    ;; Don't require spelling out yes or no.
+    (fset 'yes-or-no-p 'y-or-n-p)
+
+    (setq make-backup-files nil)
+    (setq auto-save-default nil)
+
+    (if (display-graphic-p)
+        (progn (scroll-bar-mode 0)
+               (fringe-mode '(10 . 10)))
+      (progn (menu-bar-mode 0)))
+
+    (setq ns-use-mwheel-momentum nil)
+    (pixel-scroll-mode 0)
+
+    (custom-set-variables '(indent-tabs-mode nil))
+    (setq-default line-spacing 1)
+    (setq-default inhibit-startup-screen t)
+    (setq-default standard-indent 2)
+    (setq-default tab-width 2)
+    (add-hook 'before-save-hook 'whitespace-cleanup)
+    (blink-cursor-mode 0)
+    (setq ring-bell-function 'ignore)
+
+    ;; Set the frame title to the visited file's path
+    ;; using the abbreviated form (~ for home).
+    (setq frame-title-format
+          '((:eval (if (buffer-file-name)
+                       (abbreviate-file-name (buffer-file-name))
+                     "%b"))))
+
+    ;;-----------------------------------------------------------------------------
+    ;; Line numbers mode
+    ;;-----------------------------------------------------------------------------
+
+    (defvar display-line-numbers-grow-only)
+    (defvar display-line-numbers-width-start)
+
+    (when (version<= "26.0.50" emacs-version)
+      ;; (global-display-line-numbers-mode 1)
+      (setq display-line-numbers-grow-only t)
+      (setq display-line-numbers-width-start 1000))
+
+    ;;-----------------------------------------------------------------------------
+
+    ;; (defun kfi/fix-echo-area ()
+    ;;   "Set the font for the message window."
+    ;;   (let ((buf (get-buffer " *Echo Area 0*")))
+    ;;     (when buf
+    ;;       (with-current-buffer buf
+    ;;         (setq-local face-remapping-alist '((default :family "Menlo" :weight normal :height 100)))))))
+
+    ;; (defun kfi/craft-minibuffer ()
+    ;;   "Set the font for the minibuffer."
+    ;;   (set (make-local-variable 'face-remapping-alist)
+    ;;        '((default :family "Menlo" :weight normal :height 100))))
+
+    ;; (when (display-graphic-p)
+    ;;   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
+    ;;   (kfi/fix-echo-area)
+    ;;   (kfi/craft-minibuffer))
+
+    (setq mac-command-modifier 'super)
+
+    ;; GUI
+
+
+    ;; Switch to next frame, if there is one.
+
+    ;; Quick access to shell
+    (global-set-key (kbd "C-c e") 'eshell)
+
+    (setq ns-use-srgb-colorspace t)
 #+end_src
 
 * Custom Functions
@@ -449,3 +518,6 @@
     (interactive)
     (find-file "~/.emacs.d/init.el"))
 #+end_src
+* Future?
+** Which Key
+https://github.com/justbur/emacs-which-key
