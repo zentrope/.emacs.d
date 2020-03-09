@@ -101,6 +101,8 @@
 
 - [[https://github.com/emacs-lsp/lsp-ui]]
 
+TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blob/master/config.el][hlissner's config.el]] to see how I might customize lsp so it's not so facey.
+
 #+begin_src emacs-lisp
     (use-package cc-mode
       :init
@@ -337,7 +339,7 @@ Mimics normal Mac keybindings for font resizing.
 #+end_src
 
 * Custom Functions
-** Remove smart quotes
+** Remove smart quote
 #+begin_src emacs-lisp
   (defun kfi/unsmart ()
     "Remove smart quotes from buffer."
@@ -519,6 +521,3 @@ Mimics normal Mac keybindings for font resizing.
     (interactive)
     (find-file "~/.emacs.d/init.el"))
 #+end_src
-* Future?
-** Which Key
-https://github.com/justbur/emacs-which-key
