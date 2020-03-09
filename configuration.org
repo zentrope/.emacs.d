@@ -153,7 +153,7 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
     :after yasnippet
     :init
     :config
-    (setq org-ellipsis " ▼ ")
+    (setq org-ellipsis " … ")
     (add-hook 'org-mode-hook (lambda ()
                                (visual-line-mode 1)
                                (visual-fill-column-mode 1)
