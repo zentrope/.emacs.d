@@ -40,3 +40,4 @@ configs/*.elc
 flycheck_*
 .cache
 transient
+/elpy/

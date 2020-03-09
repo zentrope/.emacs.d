@@ -1,6 +1,30 @@
 #+title: Emacs Configuration
 
 * Packages
+** ibuffers
+#+begin_src emacs-lisp
+  (use-package ibuffer
+    :bind (("C-x C-b" . ibuffer)
+           ("<C-tab>" . ibuffer))
+    :config
+    (defvar ibuffer-saved-filter-groups
+      (quote (("default"
+               ("org" (mode . org-mode))
+               ("java" (mode . java-mode))
+               ("json" (mode . json-mode))
+               ("clojure" (mode . clojure-mode))
+               ("python" (mode . python-mode))
+               ("web" (or (mode . css-mode)
+                          (mode . html-mode)
+                          (mode . js-mode)))
+               ("erc" (name . "^\\#"))
+               ("elisp" (mode . emacs-lisp-mode))
+               ("dirs" (mode . dired-mode))
+               ("temps" (name . "^\\*.*\\*$"))))))
+    (add-hook 'ibuffer-mode-hook
+              '(lambda ()
+                 (ibuffer-switch-to-saved-filter-groups "default"))))
+#+end_src
 ** Yasnippet
 
 #+begin_src emacs-lisp
@@ -15,15 +39,15 @@
 [[https://github.com/Alexander-Miller/treemacs]]
 
 #+begin_src emacs-lisp
-(use-package treemacs
-  :ensure t
-  :defer t
-  :config
-  (treemacs-resize-icons 16))
+  (use-package treemacs
+    :ensure t
+    :defer t
+    :config
+    (treemacs-resize-icons 16))
 
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+  (use-package treemacs-projectile
+    :after treemacs projectile
+    :ensure t)
 #+end_src
 
 * Appearance
@@ -63,11 +87,13 @@
 
 * Modes
 ** Java Mode
+- [[https://github.com/emacs-lsp/lsp-ui]]
 #+begin_src emacs-lisp
   (use-package cc-mode
     :init
     (add-hook 'java-mode-hook (lambda ()
                                 (hl-line-mode t)
+                                (display-line-numbers-mode 1)
                                 (setq c-basic-offset 4)
                                 (setq tab-width 4)
                                 (setq indent-tabs-mode nil))))
@@ -82,7 +108,8 @@
     :ensure t)
 
   (use-package lsp-ui
-    :ensure t)
+    :ensure t
+    :config (setq lsp-auto-configure nil))
 
   (use-package lsp-java
     :ensure t
@@ -120,10 +147,17 @@
                                (yas-minor-mode-on))))
 #+end_src
 
-* Preferences
-** Settings
+* Settings
+** Default directory
 #+begin_src emacs-lisp
   (setq default-directory "~/")
+#+end_src
+** Hollow cursor
+#+begin_src emacs-lisp
+  (set-default 'cursor-type 'hollow)
+#+end_src
+** Old Preferences
+#+begin_src emacs-lisp
 
   ;; Global Auto Revert mode is a global minor mode that reverts any
   ;; buffer associated with a file when the file changes on disk.
@@ -171,7 +205,6 @@
   (setq-default tab-width 2)
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (blink-cursor-mode 0)
-  ;;(set-default 'cursor-type 'hollow)
   (setq ring-bell-function 'ignore)
 
   ;; Set the frame title to the visited file's path

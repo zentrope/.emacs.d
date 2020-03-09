@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: javasrc
+# key: javasrc
+# --
+#+begin_src java
+  $0
+#+end_src
