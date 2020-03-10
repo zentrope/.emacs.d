@@ -1,4 +1,5 @@
 #+title: Emacs Configuration
+#+startup: content
 
 * Packages
 ** ibuffers
@@ -97,6 +98,7 @@
   :init (doom-modeline-mode 1))
 #+end_src
 
+* Application Modes
 ** Erc (IRC Client)
 
 #+begin_src emacs-lisp
@@ -131,127 +133,119 @@
     :ensure t)
 #+end_src
 
-* Programming Modes
-** Clojure Mode
-
-This needs to be revisited if I start using Clojure again.
+** Magit (Git Client)
 
 #+begin_src emacs-lisp
-  (use-package cider
+  (use-package magit
     :ensure t
-    :after company
-    :pin melpa-stable
+    :bind (("C-c g" . kfi/magit-start-session)
+           ("C-c l"  . kfi/magit-log-session)
+           :map magit-status-mode-map
+           ("q" . kfi/magit-quit-session))
     :config
-    (setq cider-font-lock-dynamically '(macro core function var))
-    (setq cider-eldoc-display-context-dependent-info t)
-    (setq cider-repl-use-clojure-font-lock t)
-    (setq cider-repl-use-pretty-printing t)
-    (setq cider-repl-wrap-history t)
-    (setq cider-repl-history-size 3000)
-    (setq cider-repl-display-help-banner nil)
-    (add-hook 'cider-mode-hook #'eldoc-mode)
-    (add-hook 'cider-repl-mode-hook #'company-mode)
-    (add-hook 'cider-mode-hook #'company-mode))
 
-  (use-package clojure-mode-extra-font-locking
-    :ensure t)
+    (defun kfi/magit-start-session ()
+      "Go full screen when invoking magit-status."
+      (interactive)
+      (window-configuration-to-register :magit-fullscreen)
+      (call-interactively 'magit-status)
+      (delete-other-windows))
 
-  (use-package clojure-mode
-    :commands clojure-mode
+    (defun kfi/magit-log-session ()
+      "Go full screen when invoking magit-log."
+      (interactive)
+      (window-configuration-to-register :magit-fullscreen)
+      (call-interactively 'magit-log)
+      (delete-other-windows))
+
+    (defun kfi/magit-quit-session ()
+      "Quit the magit session and restore windows."
+      (interactive)
+      (kill-buffer)
+      (jump-to-register :magit-fullscreen)))
+#+end_src
+
+** Multi-Term (Terminal Client)
+
+#+begin_src emacs-lisp
+  (use-package multi-term
     :ensure t
-    :delight "clj"
+    :commands multi-term
+    :bind (("C-c h" . multi-term))
     :config
-    (put-clojure-indent 'Conditional 1)
-    (put-clojure-indent 'ControlBar 0)
-    (put-clojure-indent 'DisplayBlock 1)
-    (put-clojure-indent 'Container 2)
-    (put-clojure-indent 'IncludeIf 0)
-    (put-clojure-indent 'Table 1)
-    (put-clojure-indent 'protobuf 1)
-    (put-clojure-indent 'POST 2)
-    (put-clojure-indent 'GET 2)
-    (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
-    (add-hook 'clojure-mode-hook 'paredit-mode)
-    (add-hook 'clojure-mode-hook 'cider-mode)
-    (setq clojure-indent-style nil))
-#+end_src
+    (defadvice term-char-mode (after term-char-mode-fixes ())
+      "Causes a compile-log warning."
+      ;; (set (make-local-variable 'hl-line-mode) nil)
+      (set (make-local-variable 'global-hl-line-mode) nil))
 
-** Groovy Mode
+    (ad-activate 'term-char-mode)
 
-#+begin_src emacs-lisp
-  (use-package groovy-mode
-    :ensure t
-    :defer t
-    :mode (("\\.groovy" . groovy-mode)
-           ("\\.gradle" . groovy-mode)))
-#+end_src
+    (setq multi-term-program "/bin/zsh")
+    (set-face-attribute 'term nil :inherit 'default)
+    (set-face-attribute 'term nil :inherit 'default)
+    (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
+    (set-face-attribute 'term-color-blue nil :foreground "dodgerblue")
+    (set-face-attribute 'term-color-black nil :foreground "gray50")
+    (set-face-attribute 'term-color-yellow nil :foreground "peru")
 
-** Java Mode
+    (add-hook 'term-exec-hook
+              (function
+               (lambda ()
+                 (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
-- [[https://github.com/emacs-lsp/lsp-ui]]
-
-TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blob/master/config.el][hlissner's config.el]] to see how I might customize lsp so it's not so facey.
-
-#+begin_src emacs-lisp
-    (use-package cc-mode
-      :init
-      (add-hook 'java-mode-hook (lambda ()
-                                  (hl-line-mode t)
-                                  (display-line-numbers-mode 1)
-                                  (setq c-basic-offset 4)
-                                  (setq tab-width 4)
-                                  (setq indent-tabs-mode nil))))
-
-    (use-package lsp-mode
-      :ensure t)
-
-    (use-package hydra
-      :ensure t)
-
-    (use-package company-lsp
-      :ensure t)
-
-    (use-package lsp-ui
-      :ensure t
-      :config
-      ;; If the popups get too tiresome, use this:
-      (setq lsp-auto-configure nil))
-
-    (use-package lsp-java
-      :ensure t
-      :after lsp
-      :config (add-hook 'java-mode-hook #'lsp))
-
-    (use-package dap-mode
-      :ensure t
-      :after lsp-mode
-      :config (progn (dap-mode t)
-                     (dap-ui-mode t)))
-#+end_src
-** Python Mode
-
-#+begin_src emacs-lisp
-  ;; (use-package elpy
-  ;;   :ensure t
-  ;;   :defer t
-  ;;   :init
-  ;;   (advice-add 'python-mode :before 'elpy-enable))
-
-  ;; (use-package py-autopep8
-  ;;   :ensure t
-  ;;   :defer t
-  ;;   :init
-  ;;   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-  ;;   (setq flycheck-python-pycompile- executable "python3"))
-
-  (use-package lsp-python-ms
-    :ensure t
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-python-ms)
-                           (lsp))))
+    (add-hook 'term-mode-hook (lambda ()
+                                (display-line-numbers-mode -1)))
+    (add-hook 'term-mode-hook (lambda ()
+                                (define-key term-raw-map (kbd "C-y") 'term-paste)
+                                (define-key term-raw-map (kbd "C-v") 'term-paste)
+                                (define-key term-raw-map (kbd "s-v") 'term-paste)))
+    (add-hook 'eshell-mode-hook (lambda ()
+                                  (display-line-numbers-mode -1))))
 #+end_src
 
 * Document Modes
+** CSS Mode
+
+#+begin_src emacs-lisp
+  (use-package css-mode
+    :commands css-mode
+    :init
+    (add-hook 'css-mode-hook (lambda ()
+                               (company-mode 1)
+                               ;; (set (make-local-variable 'company-backends) '(company-css))
+                               ;; (turn-on-css-eldoc)
+                               (setq css-indent-offset 2)
+                               (local-set-key (kbd "TAB") 'company-complete)
+                               (local-set-key (kbd "RET") 'newline-and-indent))))
+
+  (use-package css-eldoc
+    :ensure t
+    :defer t)
+#+end_src
+
+** HTML Mode
+
+#+begin_src emacs-lisp
+  (use-package html-mode
+    :commands html-mode
+    :init
+    (add-hook 'html-mode-hook
+              (lambda ()
+                (local-set-key (kbd "RET") 'newline-and-indent))))
+#+end_src
+
+** JSON Mode
+
+#+begin_src emacs-lisp
+  (use-package json-mode
+    :ensure t
+    :commands json-mode
+    :init
+    (add-hook 'js-mode-hook (lambda ()
+                              (setq indent-tabs-mode nil)
+                              (setq js-indent-level 2)
+                              (local-set-key (kbd "RET") 'newline-and-indent))))
+#+end_src
 ** Markdown Mode
 
 #+begin_src emacs-lisp
@@ -308,6 +302,205 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
                                (set-fill-column 90)
                                (setq-local global-hl-line-mode nil)
                                (yas-minor-mode-on))))
+#+end_src
+
+** Web Mode
+
+Facilitates a web page with CSS, Javascript and HTML mixed together.
+
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :commands web-mode
+    :mode (("\\.html?\\'" . web-mode))
+    :config
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-indent-style 2)
+    (setq web-mode-content-types (cons '("jsx" . "\\.js\\'") web-mode-content-types))
+    (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
+    (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
+#+end_src
+
+** YAML Mode
+
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :commands yaml-mode
+    :ensure t)
+#+end_src
+
+* Programming Modes
+** Clojure Mode
+
+This needs to be revisited if I start using Clojure again.
+
+#+begin_src emacs-lisp
+  (use-package cider
+    :ensure t
+    :after company
+    :pin melpa-stable
+    :config
+    (setq cider-font-lock-dynamically '(macro core function var))
+    (setq cider-eldoc-display-context-dependent-info t)
+    (setq cider-repl-use-clojure-font-lock t)
+    (setq cider-repl-use-pretty-printing t)
+    (setq cider-repl-wrap-history t)
+    (setq cider-repl-history-size 3000)
+    (setq cider-repl-display-help-banner nil)
+    (add-hook 'cider-mode-hook #'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode))
+
+  (use-package clojure-mode-extra-font-locking
+    :ensure t)
+
+  (use-package clojure-mode
+    :commands clojure-mode
+    :ensure t
+    :delight "clj"
+    :config
+    (put-clojure-indent 'Conditional 1)
+    (put-clojure-indent 'ControlBar 0)
+    (put-clojure-indent 'DisplayBlock 1)
+    (put-clojure-indent 'Container 2)
+    (put-clojure-indent 'IncludeIf 0)
+    (put-clojure-indent 'Table 1)
+    (put-clojure-indent 'protobuf 1)
+    (put-clojure-indent 'POST 2)
+    (put-clojure-indent 'GET 2)
+    (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+    (add-hook 'clojure-mode-hook 'paredit-mode)
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (setq clojure-indent-style nil))
+#+end_src
+
+** Go Mode
+
+Revisit if I use Go again.
+
+#+begin_src emacs-lisp
+  (use-package flycheck-gometalinter
+    :ensure t
+    :config
+    (flycheck-gometalinter-setup))
+
+  (use-package go-eldoc
+    :ensure t)
+
+  (use-package go-mode
+    :ensure t
+    :commands go-mode
+    :init
+    (add-hook 'before-save-hook 'gofmt-before-save)
+    (add-hook 'go-mode-hook 'flycheck-mode)
+    :config
+    (setq gofmt-command "goimports"))
+
+  (use-package golint
+    :ensure t)
+#+end_src
+
+** Groovy Mode
+
+#+begin_src emacs-lisp
+  (use-package groovy-mode
+    :ensure t
+    :defer t
+    :mode (("\\.groovy" . groovy-mode)
+           ("\\.gradle" . groovy-mode)))
+#+end_src
+
+** Java Mode
+
+- [[https://github.com/emacs-lsp/lsp-ui]]
+
+TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blob/master/config.el][hlissner's config.el]] to see how I might customize lsp so it's not so facey.
+
+#+begin_src emacs-lisp
+    (use-package cc-mode
+      :init
+      (add-hook 'java-mode-hook (lambda ()
+                                  (hl-line-mode t)
+                                  (display-line-numbers-mode 1)
+                                  (setq c-basic-offset 4)
+                                  (setq tab-width 4)
+                                  (setq indent-tabs-mode nil))))
+
+    (use-package lsp-mode
+      :ensure t)
+
+    (use-package hydra
+      :ensure t)
+
+    (use-package company-lsp
+      :ensure t)
+
+    (use-package lsp-ui
+      :ensure t
+      :config
+      ;; If the popups get too tiresome, use this:
+      (setq lsp-auto-configure nil))
+
+    (use-package lsp-java
+      :ensure t
+      :after lsp
+      :config (add-hook 'java-mode-hook #'lsp))
+
+    (use-package dap-mode
+      :ensure t
+      :after lsp-mode
+      :config (progn (dap-mode t)
+                     (dap-ui-mode t)))
+#+end_src
+** Javascript Mode
+
+#+begin_src emacs-lisp
+  (use-package js-mode
+    :commands js-mode
+    :init
+    (add-hook 'js-mode-hook (lambda ()
+                              (setq indent-tabs-mode nil)
+                              (setq js-indent-level 2)
+                              (local-set-key (kbd "RET") 'newline-and-indent))))
+#+end_src
+
+** Python Mode
+
+#+begin_src emacs-lisp
+  ;; (use-package elpy
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :init
+  ;;   (advice-add 'python-mode :before 'elpy-enable))
+
+  ;; (use-package py-autopep8
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :init
+  ;;   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+  ;;   (setq flycheck-python-pycompile- executable "python3"))
+
+  (use-package lsp-python-ms
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-python-ms)
+                           (lsp))))
+#+end_src
+
+** Swift Mode
+
+#+begin_src emacs-lisp
+  (use-package swift-mode
+    :ensure t
+    :defer t
+    :config
+    (add-hook 'swift-mode-hook (lambda ()
+                                 ;; (setq swift-mode:basic-offset 4)
+                                 ;; Doesn't also indent body.
+                                 ;; (setq swift-mode:switch-case-offset 0)
+                                 (setq indent-tabs-mode nil))))
 #+end_src
 
 * Settings

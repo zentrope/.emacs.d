@@ -31,21 +31,6 @@
   :ensure t
   :defer t)
 
-(use-package css-mode
-  :commands css-mode
-  :init
-  (add-hook 'css-mode-hook (lambda ()
-                             (company-mode 1)
-                             ;; (set (make-local-variable 'company-backends) '(company-css))
-                             ;; (turn-on-css-eldoc)
-                             (setq css-indent-offset 2)
-                             (local-set-key (kbd "TAB") 'company-complete)
-                             (local-set-key (kbd "RET") 'newline-and-indent))))
-
-(use-package css-eldoc
-  :ensure t
-  :defer t)
-
 (use-package dired
   :bind ("C-c C-w C-d" . wdired-change-to-wdired-mode)
   :after dired-details
@@ -96,40 +81,11 @@
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
-(use-package flycheck-gometalinter
-  :ensure t
-  :config
-  (flycheck-gometalinter-setup))
-
 (use-package fullframe
   :ensure t)
 
-(use-package go-eldoc
-  :ensure t)
-
-(defvar gofmt-command)
-(use-package go-mode
-  :ensure t
-  :commands go-mode
-  :init
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (add-hook 'go-mode-hook 'flycheck-mode)
-  :config
-  (setq gofmt-command "goimports"))
-
-(use-package golint
-  :ensure t)
-
-(use-package html-mode
-  :commands html-mode
-  :init
-  (add-hook 'html-mode-hook
-            (lambda ()
-              (local-set-key (kbd "RET") 'newline-and-indent))))
-
 (use-package htmlize
   :ensure t)
-
 
 (declare-function ido-everywhere "ido.el")
 
@@ -167,104 +123,8 @@
   :defer t
   :bind (("M-x" . smex)))
 
-(use-package swift-mode
-  :ensure t
-  :defer t
-  :config
-  (add-hook 'swift-mode-hook (lambda ()
-                               ;; (setq swift-mode:basic-offset 4)
-                               ;; Doesn't also indent body.
-                               ;; (setq swift-mode:switch-case-offset 0)
-                               (setq indent-tabs-mode nil))))
-
-(defvar js-indent-level)
-(use-package js-mode
-  :commands js-mode
-  :init
-  (add-hook 'js-mode-hook (lambda ()
-                            (setq indent-tabs-mode nil)
-                            (setq js-indent-level 2)
-                            (local-set-key (kbd "RET") 'newline-and-indent))))
-
-(use-package json-mode
-  :ensure t
-  :commands json-mode
-  :init
-  (add-hook 'js-mode-hook (lambda ()
-                            (setq indent-tabs-mode nil)
-                            (setq js-indent-level 2)
-                            (local-set-key (kbd "RET") 'newline-and-indent))))
-
-(use-package magit
-  :ensure t
-  :bind (("C-c g" . kfi/magit-start-session)
-         ("C-c l"  . kfi/magit-log-session)
-         :map magit-status-mode-map
-         ("q" . kfi/magit-quit-session))
-  :config
-
-  (defun kfi/magit-start-session ()
-    "Go full screen when invoking magit-status."
-    (interactive)
-    (window-configuration-to-register :magit-fullscreen)
-    (call-interactively 'magit-status)
-    (delete-other-windows))
-
-  (defun kfi/magit-log-session ()
-    "Go full screen when invoking magit-log."
-    (interactive)
-    (window-configuration-to-register :magit-fullscreen)
-    (call-interactively 'magit-log)
-    (delete-other-windows))
-
-  (defun kfi/magit-quit-session ()
-    "Quit the magit session and restore windows."
-    (interactive)
-    (kill-buffer)
-    (jump-to-register :magit-fullscreen)))
-
-(use-package lisp-mode
-  :mode (("\\.haki\\'" . lisp-mode))
-  :config
-  (add-hook 'lisp-mode-hook (lambda ()
-                              (paredit-mode 1))))
-
 (use-package melpa-upstream-visit
   :ensure t)
-
-(use-package multi-term
-  :ensure t
-  :commands multi-term
-  :bind (("C-c h" . multi-term))
-  :config
-  (defadvice term-char-mode (after term-char-mode-fixes ())
-    "Causes a compile-log warning."
-    ;; (set (make-local-variable 'hl-line-mode) nil)
-    (set (make-local-variable 'global-hl-line-mode) nil))
-
-  (ad-activate 'term-char-mode)
-
-  (setq multi-term-program "/bin/zsh")
-  (set-face-attribute 'term nil :inherit 'default)
-  (set-face-attribute 'term nil :inherit 'default)
-  (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
-  (set-face-attribute 'term-color-blue nil :foreground "dodgerblue")
-  (set-face-attribute 'term-color-black nil :foreground "gray50")
-  (set-face-attribute 'term-color-yellow nil :foreground "peru")
-
-  (add-hook 'term-exec-hook
-            (function
-             (lambda ()
-               (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
-
-  (add-hook 'term-mode-hook (lambda ()
-                              (display-line-numbers-mode -1)))
-  (add-hook 'term-mode-hook (lambda ()
-                              (define-key term-raw-map (kbd "C-y") 'term-paste)
-                              (define-key term-raw-map (kbd "C-v") 'term-paste)
-                              (define-key term-raw-map (kbd "s-v") 'term-paste)))
-  (add-hook 'eshell-mode-hook (lambda ()
-                                (display-line-numbers-mode -1))))
 
 (use-package multiple-cursors
   :commands multiple-cursors-mode
@@ -307,22 +167,6 @@
   (add-hook 'sh-mode-hook '(lambda ()
                              (setq sh-basic-offset 2))))
 
-(use-package web-mode
-  :ensure t
-  :commands web-mode
-  :mode (("\\.html?\\'" . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-indent-style 2)
-  (setq web-mode-content-types (cons '("jsx" . "\\.js\\'") web-mode-content-types))
-  (set-face-attribute 'web-mode-html-tag-face nil :foreground "cornflowerblue")
-  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "goldenrod"))
-
-(use-package yaml-mode
-  :commands yaml-mode
-  :ensure t)
 
 (provide 'kfi-basics)
 ;;; kfi-basics.el ends here
