@@ -34,6 +34,7 @@
     :ensure t
     :defer t
     :config
+    (setq treemacs-width 30)
     (treemacs-resize-icons 16))
 
   (use-package treemacs-projectile
