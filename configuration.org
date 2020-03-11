@@ -313,14 +313,25 @@ https://github.com/akermu/emacs-libvterm
     :after yasnippet
     :init
     :config
-    (setq org-ellipsis " … ")
-    (setq org-src-window-setup 'split-window-right)
+    (setq org-ellipsis " … "
+          org-src-window-setup 'split-window-right
+          org-tags-column 85)
+
+    (defun kfi/org-align-tags ()
+      (interactive)
+      (org-align-tags t))
+
+    (defun kfi/org-keys-setup ()
+      (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+      (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags))
+
+    (add-hook 'org-mode-hook 'kfi/org-keys-setup)
     (add-hook 'org-mode-hook (lambda ()
                                (visual-line-mode 1)
                                (visual-fill-column-mode 1)
                                (org-bullets-mode 1)
                                (org-indent-mode 1)
-                               (set-fill-column 90)
+                               (set-fill-column 100)
                                (setq-local global-hl-line-mode nil)
                                (yas-minor-mode-on))))
 #+end_src
