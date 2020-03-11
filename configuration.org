@@ -1,6 +1,26 @@
 #+title: Emacs Configuration
 #+startup: content
 
+* Futures
+
+** Find a way for fly-spell to not check certain words
+
+Do something like the following, and have that function check for words beginning and ending with "=" or "@" or "#" or "~".
+
+#+begin_src emacs-lisp
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (setq flyspell-generic-check-word-predicate 'my-new-function)))
+#+end_src
+
+Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spellchecking in comments, though I'm not sure this will work in org-mode given it's not a programming mode. Hm.
+
+#+begin_src emacs-lisp
+  (setq flyspell-prog-text-faces
+        (delq 'font-lock-string-face
+              flyspell-prog-text-faces))
+#+end_src
+
 * Packages
 ** ibuffers
 #+begin_src emacs-lisp
