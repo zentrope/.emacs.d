@@ -78,8 +78,9 @@
 (use-package flycheck
   :ensure t
   :commands (flycheck-mode global-flycheck-mode)
-  :init
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  ;;:init
+  ;; (add-hook 'after-init-hook #'global-flycheck-mode)
+  )
 
 (use-package fullframe
   :ensure t)
