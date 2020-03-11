@@ -1,26 +1,6 @@
 #+title: Emacs Configuration
 #+startup: content
 
-* Futures
-
-** Find a way for fly-spell to not check certain words
-
-Do something like the following, and have that function check for words beginning and ending with "=" or "@" or "#" or "~".
-
-#+begin_src emacs-lisp
-  (add-hook 'java-mode-hook
-            (lambda ()
-              (setq flyspell-generic-check-word-predicate 'my-new-function)))
-#+end_src
-
-Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spellchecking in comments, though I'm not sure this will work in org-mode given it's not a programming mode. Hm.
-
-#+begin_src emacs-lisp
-  (setq flyspell-prog-text-faces
-        (delq 'font-lock-string-face
-              flyspell-prog-text-faces))
-#+end_src
-
 * Packages
 ** ibuffers
 #+begin_src emacs-lisp
@@ -185,42 +165,62 @@ Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spe
       (jump-to-register :magit-fullscreen)))
 #+end_src
 
-** Multi-Term (Terminal Client)
+** Multi-Term (Terminal Client -- retired)
 
 #+begin_src emacs-lisp
-  (use-package multi-term
+  ;; (use-package multi-term
+  ;;   :ensure t
+  ;;   :commands multi-term
+  ;;   :bind (("C-c h" . multi-term))
+  ;;   :config
+  ;;   (defadvice term-char-mode (after term-char-mode-fixes ())
+  ;;     "Causes a compile-log warning."
+  ;;     ;; (set (make-local-variable 'hl-line-mode) nil)
+  ;;     (set (make-local-variable 'global-hl-line-mode) nil))
+
+  ;;   (ad-activate 'term-char-mode)
+
+  ;;   (setq multi-term-program "/bin/zsh")
+  ;;   (set-face-attribute 'term nil :inherit 'default)
+  ;;   (set-face-attribute 'term nil :inherit 'default)
+  ;;   (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
+  ;;   (set-face-attribute 'term-color-blue nil :foreground "dodgerblue")
+  ;;   (set-face-attribute 'term-color-black nil :foreground "gray50")
+  ;;   (set-face-attribute 'term-color-yellow nil :foreground "peru")
+
+  ;;   (add-hook 'term-exec-hook
+  ;;             (function
+  ;;              (lambda ()
+  ;;                (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+
+  ;;   (add-hook 'term-mode-hook (lambda ()
+  ;;                               (display-line-numbers-mode -1)))
+  ;;   (add-hook 'term-mode-hook (lambda ()
+  ;;                               (define-key term-raw-map (kbd "C-y") 'term-paste)
+  ;;                               (define-key term-raw-map (kbd "C-v") 'term-paste)
+  ;;                               (define-key term-raw-map (kbd "s-v") 'term-paste)))
+  ;;   (add-hook 'eshell-mode-hook (lambda ()
+  ;;                                 (display-line-numbers-mode -1))))
+#+end_src
+
+** VTerm (Terminal Client)
+
+https://github.com/akermu/emacs-libvterm
+
+#+begin_src emacs-lisp
+  (use-package vterm
     :ensure t
-    :commands multi-term
-    :bind (("C-c h" . multi-term))
+    :bind (("C-c v" . vterm)
+           ("C-c h" . vterm))
+    :init (setq vterm-kill-buffer-on-exit t)
+    :hook (vterm-mode . (lambda ()
+                          (define-key vterm-mode-map (kbd "C-v") 'vterm-yank)
+                          (define-key vterm-mode-map (kbd "s-v") 'vterm-yank)))
     :config
-    (defadvice term-char-mode (after term-char-mode-fixes ())
-      "Causes a compile-log warning."
-      ;; (set (make-local-variable 'hl-line-mode) nil)
-      (set (make-local-variable 'global-hl-line-mode) nil))
-
-    (ad-activate 'term-char-mode)
-
-    (setq multi-term-program "/bin/zsh")
-    (set-face-attribute 'term nil :inherit 'default)
-    (set-face-attribute 'term nil :inherit 'default)
-    (set-face-attribute 'term-color-cyan nil :foreground "dodgerblue")
-    (set-face-attribute 'term-color-blue nil :foreground "dodgerblue")
-    (set-face-attribute 'term-color-black nil :foreground "gray50")
-    (set-face-attribute 'term-color-yellow nil :foreground "peru")
-
-    (add-hook 'term-exec-hook
-              (function
-               (lambda ()
-                 (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
-
-    (add-hook 'term-mode-hook (lambda ()
-                                (display-line-numbers-mode -1)))
-    (add-hook 'term-mode-hook (lambda ()
-                                (define-key term-raw-map (kbd "C-y") 'term-paste)
-                                (define-key term-raw-map (kbd "C-v") 'term-paste)
-                                (define-key term-raw-map (kbd "s-v") 'term-paste)))
-    (add-hook 'eshell-mode-hook (lambda ()
-                                  (display-line-numbers-mode -1))))
+    (set-face-attribute 'vterm-color-cyan nil :foreground "dodgerblue")
+    (set-face-attribute 'vterm-color-blue nil :foreground "dodgerblue")
+    (set-face-attribute 'vterm-color-black nil :foreground "gray50")
+    (set-face-attribute 'vterm-color-yellow nil :foreground "peru"))
 #+end_src
 
 * Document Modes
@@ -314,6 +314,7 @@ Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spe
     :init
     :config
     (setq org-ellipsis " … ")
+    (setq org-src-window-setup 'split-window-right)
     (add-hook 'org-mode-hook (lambda ()
                                (visual-line-mode 1)
                                (visual-fill-column-mode 1)
@@ -888,4 +889,23 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
     "Visit the configuration.org file for Emacs."
     (interactive)
     (find-file "~/.emacs.d/configuration.org"))
+#+end_src
+* Futures
+
+** Find a way for fly-spell to not check certain words
+
+Do something like the following, and have that function check for words beginning and ending with "=" or "@" or "#" or "~".
+
+#+begin_src block
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (setq flyspell-generic-check-word-predicate 'my-new-function)))
+#+end_src
+
+Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spellchecking in comments, though I'm not sure this will work in org-mode given it's not a programming mode. Hm.
+
+#+begin_src block
+  (setq flyspell-prog-text-faces
+        (delq 'font-lock-string-face
+              flyspell-prog-text-faces))
 #+end_src
