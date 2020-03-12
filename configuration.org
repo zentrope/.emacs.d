@@ -451,40 +451,42 @@ Revisit if I use Go again.
 TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blob/master/config.el][hlissner's config.el]] to see how I might customize lsp so it's not so facey.
 
 #+begin_src emacs-lisp
-    (use-package cc-mode
-      :init
-      (add-hook 'java-mode-hook (lambda ()
-                                  (hl-line-mode t)
-                                  (display-line-numbers-mode 1)
-                                  (setq c-basic-offset 4)
-                                  (setq tab-width 4)
-                                  (setq indent-tabs-mode nil))))
+  (use-package cc-mode
+    :init
+    (add-hook 'java-mode-hook (lambda ()
+                                (hl-line-mode t)
+                                (display-line-numbers-mode 1)
+                                (setq c-basic-offset 4)
+                                (setq tab-width 4)
+                                (setq indent-tabs-mode nil))))
 
-    (use-package lsp-mode
-      :ensure t)
+  (use-package lsp-mode
+    :ensure t)
 
-    (use-package hydra
-      :ensure t)
+  (use-package hydra
+    :ensure t)
 
-    (use-package company-lsp
-      :ensure t)
+  (use-package company-lsp
+    :ensure t)
 
-    (use-package lsp-ui
-      :ensure t
-      :config
-      ;; If the popups get too tiresome, use this:
-      (setq lsp-auto-configure nil))
+  (use-package lsp-ui
+    :ensure t
+    :config
+    ;; If the popups get too tiresome, use this:
+    (setq lsp-auto-configure nil))
 
-    (use-package lsp-java
-      :ensure t
-      :after lsp
-      :config (add-hook 'java-mode-hook #'lsp))
+  (use-package lsp-java
+    :ensure t
+    :after lsp
+    :config (add-hook 'java-mode-hook (lambda ()
+                                        (lsp)
+                                        (flycheck-mode 1))))
 
-    (use-package dap-mode
-      :ensure t
-      :after lsp-mode
-      :config (progn (dap-mode t)
-                     (dap-ui-mode t)))
+  (use-package dap-mode
+    :ensure t
+    :after lsp-mode
+    :config (progn (dap-mode t)
+                   (dap-ui-mode t)))
 #+end_src
 ** Javascript Mode
 
