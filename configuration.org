@@ -479,6 +479,7 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
     :ensure t
     :after lsp
     :config (add-hook 'java-mode-hook (lambda ()
+                                        (company-mode)
                                         (lsp)
                                         (flycheck-mode 1))))
 
