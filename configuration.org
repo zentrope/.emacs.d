@@ -996,7 +996,7 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
 
 #+begin_src emacs-lisp
   (defun kfi/my-config ()
-    "Visit the configuration.org file for Emacs."
+    "Visit my configuration.org file for Emacs."
     (interactive)
     (find-file "~/.emacs.d/configuration.org"))
 #+end_src
