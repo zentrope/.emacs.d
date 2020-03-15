@@ -41,3 +41,5 @@ flycheck_*
 .cache
 transient
 /elpy/
+/bookmarks
+/image-dired/
