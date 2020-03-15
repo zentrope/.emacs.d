@@ -2,7 +2,7 @@
 #+startup: content
 
 * Packages
-** Company
+** company
 
 #+begin_src emacs-lisp
   (use-package company
@@ -148,6 +148,9 @@ Completion utility ([[https://oremacs.com/swiper/]]).
 #+end_src
 
 ** yasnippet
+
+http://joaotavora.github.io/yasnippet/
+
 #+begin_src emacs-lisp
   (use-package yasnippet
     :ensure t
@@ -155,6 +158,7 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     ;; I can't get this to work as a minor mode, for some reason.
     (yas-global-mode))
 #+end_src
+
 * Appearance
 ** All the icons
 

@@ -3,5 +3,5 @@
 # key: quote
 # --
 #+begin_quote
-  $0
+${quote}
 #+end_quote
