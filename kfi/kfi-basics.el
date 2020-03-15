@@ -27,11 +27,8 @@
   :ensure t
   :bind ("M-y" . browse-kill-ring))
 
-(use-package company
-  :ensure t
-  :defer t)
-
 (use-package dired
+  ;; bound when in a dired buffer
   :bind ("C-c C-w C-d" . wdired-change-to-wdired-mode)
   :after dired-details
   :config
@@ -88,42 +85,6 @@
 (use-package htmlize
   :ensure t)
 
-(declare-function ido-everywhere "ido.el")
-
-(use-package ido
-  :commands ido-mode
-  :config
-  (ido-mode 1)
-  (ido-everywhere 1)
-  (setq ido-enable-flex-matching t))
-
-(use-package ido-completing-read+
-  :ensure t
-  :defer t
-  :commands ido-ubiquitous-mode
-  :config
-  (ido-ubiquitous-mode 1))
-
-(use-package flx-ido
-  :ensure t
-  :defer t
-  :config
-  (flx-ido-mode 1)
-  (setq ido-use-faces nil))
-
-(defvar ido-vertical-define-keys)
-
-(use-package ido-vertical-mode
-  :ensure t
-  :config
-  (ido-vertical-mode 1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
-
-(use-package smex
-  :ensure t
-  :defer t
-  :bind (("M-x" . smex)))
-
 (use-package melpa-upstream-visit
   :ensure t)
 
@@ -150,13 +111,6 @@
   :ensure t
   :config
   (global-paren-face-mode 1))
-
-(use-package projectile
-  :ensure t
-  :bind (("s-p" . projectile-find-file)
-         ("C-c p" . projectile-find-file))
-  :init
-  (setq projectile-completion-system 'ido))
 
 (use-package ripgrep
   :ensure t

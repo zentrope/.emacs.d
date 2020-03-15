@@ -2,6 +2,14 @@
 #+startup: content
 
 * Packages
+** Company
+
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :defer t)
+#+end_src
+
 ** ibuffers
 #+begin_src emacs-lisp
   (use-package ibuffer
@@ -26,6 +34,90 @@
               '(lambda ()
                  (ibuffer-switch-to-saved-filter-groups "default"))))
 #+end_src
+** ido
+
+Using =ivy= for the moment, but this is my =ido= configuration.
+
+#+begin_src elisp
+  ;; (use-package ido
+  ;;   :commands ido-mode
+  ;;   :config
+  ;;   (ido-mode 1)
+  ;;   (ido-everywhere 1)
+  ;;   (setq ido-enable-flex-matching t))
+
+  ;; (use-package ido-completing-read+
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :commands ido-ubiquitous-mode
+  ;;   :config
+  ;;   (ido-ubiquitous-mode 1))
+
+  ;; (use-package flx-ido
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :config
+  ;;   (flx-ido-mode 1)
+  ;;   (setq ido-use-faces nil))
+
+  ;; (defvar ido-vertical-define-keys)
+
+  ;; (use-package ido-vertical-mode
+  ;;   :ensure t
+  ;;   :config
+  ;;   (ido-vertical-mode 1)
+  ;;   (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+
+  ;; (use-package smex
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :bind (("M-x" . smex)))
+#+end_src
+
+** ivy
+
+Completion utility ([[https://oremacs.com/swiper/]]).
+
+#+begin_src emacs-lisp
+  (use-package ivy
+    :ensure t
+    :config
+    (ivy-mode 1)
+    (setq ivy-display-style 'fancy)
+    (setq ivy-use-virtual-buffers t)
+    ;; (setq ivy-count-format "(%d/%d) ")
+    (setq ivy-count-format "") ;; "("%d/%d) "
+    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+    (setq ivy-use-selectable-prompt t))
+  (use-package swiper
+    :ensure t
+    :after ivy)
+  (use-package counsel
+    :ensure t
+    :config
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "C-h v") 'counsel-describe-variable)
+    (global-set-key (kbd "C-h f") 'counsel-describe-function)
+    (global-set-key (kbd "M-x") 'counsel-M-x))
+  (use-package ivy-rich
+    :ensure t
+    :after ivy
+    :config
+    (ivy-rich-mode 1)
+    (setq ivy-rich-path-style 'abbrev))
+#+end_src
+
+** projectiles
+
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :bind (("s-p" . projectile-find-file)
+         ("C-c p" . projectile-find-file))
+  :init
+  (setq projectile-completion-system 'ivy))
+#+end_src
+
 ** treemacs
 
 [[https://github.com/Alexander-Miller/treemacs]]
@@ -230,13 +322,15 @@ https://github.com/akermu/emacs-libvterm
   (use-package css-mode
     :commands css-mode
     :init
-    (add-hook 'css-mode-hook (lambda ()
-                               (company-mode 1)
-                               ;; (set (make-local-variable 'company-backends) '(company-css))
-                               ;; (turn-on-css-eldoc)
-                               (setq css-indent-offset 2)
-                               (local-set-key (kbd "TAB") 'company-complete)
-                               (local-set-key (kbd "RET") 'newline-and-indent))))
+    (defun kfi/css-setup ()
+      (company-mode 1)
+      ;; (set (make-local-variable 'company-backends) '(company-css))
+      ;; (turn-on-css-eldoc)
+      (setq css-indent-offset 2)
+      (local-set-key (kbd "TAB") 'company-complete)
+      (local-set-key (kbd "RET") 'newline-and-indent))
+
+    (add-hook 'css-mode-hook 'kfi/css-setup))
 
   (use-package css-eldoc
     :ensure t
@@ -325,15 +419,17 @@ https://github.com/akermu/emacs-libvterm
       (define-key org-mode-map (kbd "C-c a") 'org-agenda)
       (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags))
 
+    (defun kfi/org-setup ()
+      (visual-line-mode 1)
+      (visual-fill-column-mode 1)
+      (org-bullets-mode 1)
+      (org-indent-mode 1)
+      (set-fill-column 100)
+      (setq-local global-hl-line-mode nil)
+      (yas-minor-mode-on))
+
     (add-hook 'org-mode-hook 'kfi/org-keys-setup)
-    (add-hook 'org-mode-hook (lambda ()
-                               (visual-line-mode 1)
-                               (visual-fill-column-mode 1)
-                               (org-bullets-mode 1)
-                               (org-indent-mode 1)
-                               (set-fill-column 100)
-                               (setq-local global-hl-line-mode nil)
-                               (yas-minor-mode-on))))
+    (add-hook 'org-mode-hook 'kfi/org-setup))
 #+end_src
 
 ** Web Mode
