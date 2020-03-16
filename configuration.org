@@ -813,6 +813,27 @@ Mimics normal Mac keybindings for font resizing.
 #+end_src
 
 * Custom Functions
+** Insert timestamp
+
+What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]].
+
+#+begin_src emacs-lisp
+  (defun kfi/timestamp ()
+    (interactive)
+    (let ((table (make-hash-table :test 'equal)))
+      (puthash "March 15, 2020 @ 9:33 PM" "%B %-d, %Y @ %-I:%M %p" table)
+      (puthash "2020-03-15T21:33:54" "%Y-%m-%dT%H:%M:%S" table)
+      (puthash "2020-03-15" "%Y-%m-%d" table)
+      (puthash "2020-03-15 09:35 PM" "%Y-%m-%d %I:%M %p" table)
+      (puthash "2020-03-15T21:39:20-0700" "%FT%T%z" table)
+      (let* ((choices (hash-table-keys table))
+             (choice (completing-read "Format:" choices))
+             (format (gethash choice table)))
+        (if format
+            (insert (format-time-string format))
+          (insert "Invalid choice.")))))
+#+end_src
+
 ** Remove smart quotes from a buffer
 #+begin_src emacs-lisp
   (defun kfi/unsmart ()
