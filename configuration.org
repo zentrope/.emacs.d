@@ -818,20 +818,23 @@ Mimics normal Mac keybindings for font resizing.
 What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]].
 
 #+begin_src emacs-lisp
+  (defvar kfi/timestamp-formats
+    '(("March 15, 2020 @ 9:33 PM" . "%B %-d, %Y @ %-I:%M %p")
+      ("2020-03-15T21:33:54"      . "%Y-%m-%dT%H:%M:%S")
+      ("2020-03-15"               . "%Y-%m-%d")
+      ("2020-03-15 09:35 PM"      . "%Y-%m-%d %I:%M %p")
+      ("2020-03-15T21:39:20-0700" . "%FT%T%z"))
+    "Formats for inserting a timestamp into a document.")
+
   (defun kfi/timestamp ()
     (interactive)
-    (let ((table (make-hash-table :test 'equal)))
-      (puthash "March 15, 2020 @ 9:33 PM" "%B %-d, %Y @ %-I:%M %p" table)
-      (puthash "2020-03-15T21:33:54" "%Y-%m-%dT%H:%M:%S" table)
-      (puthash "2020-03-15" "%Y-%m-%d" table)
-      (puthash "2020-03-15 09:35 PM" "%Y-%m-%d %I:%M %p" table)
-      (puthash "2020-03-15T21:39:20-0700" "%FT%T%z" table)
-      (let* ((choices (hash-table-keys table))
-             (choice (completing-read "Format:" choices))
-             (format (gethash choice table)))
-        (if format
-            (insert (format-time-string format))
-          (insert "Invalid choice.")))))
+    (let* ((table kfi/timestamp-formats)
+           (choices (mapcar #'car table))
+           (choice (completing-read "Format:" choices))
+           (format (cdr (assoc choice table))))
+      (if format
+          (insert (format-time-string format))
+        (insert "Invalid choice."))))
 #+end_src
 
 ** Remove smart quotes from a buffer
