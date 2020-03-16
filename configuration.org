@@ -818,7 +818,6 @@ Mimics normal Mac keybindings for font resizing.
 What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]]. Each of the formats could be made into a =yasnippet= (which is what I do with KB Maestro) using an elisp expression as its body. But I like the ~completing-read~ minibuffer menu thing here.
 
 #+begin_src emacs-lisp
-(setq orgs-tag-column 70)
   (defvar kfi/timestamp-formats
     '(("March 15, 2020 @ 9:33 PM" . "%B %-d, %Y @ %-I:%M %p")
       ("2020-03-15T21:33:54"      . "%Y-%m-%dT%H:%M:%S")
@@ -828,14 +827,14 @@ What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Ma
     "Formats for inserting a timestamp into a document.")
 
   (defun kfi/timestamp ()
+    "Choose a format, then insert a timestamp."
     (interactive)
-    (let* ((table kfi/timestamp-formats)
-           (choices (mapcar #'car table))
-           (choice (completing-read "Format:" choices))
-           (format (cdr (assoc choice table))))
-      (if format
-          (insert (format-time-string format))
-        (insert "<error:nil-selection>"))))
+    (if-let* ((table kfi/timestamp-formats)
+              (choices (mapcar #'car table))
+              (choice (completing-read "Format:" choices))
+              (format (cdr (assoc choice table))))
+        (insert (format-time-string format))
+      (insert "<error:nil-selection>")))
 #+end_src
 
 ** Remove smart quotes from a buffer
