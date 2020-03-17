@@ -79,6 +79,7 @@ Using =ivy= for the moment, but this is my =ido= configuration.
 ** ivy
 
 Completion utility ([[https://oremacs.com/swiper/]]).
+- https://github.com/tumashu/ivy-posframe
 
 #+begin_src emacs-lisp
   (use-package ivy
@@ -112,6 +113,15 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     :config
     (ivy-rich-mode 1)
     (setq ivy-rich-path-style 'abbrev))
+  (use-package ivy-posframe
+    :ensure t
+    :config
+    (setq ivy-posframe-display-functions-alist
+          '((t . ivy-posframe-display-at-frame-center)))
+    (setq ivy-posframe-parameters
+          '((left-fringe . 8)
+            (right-fringe . 8)))
+    (ivy-posframe-mode 1))
 #+end_src
 
 ** multiple-cursors
