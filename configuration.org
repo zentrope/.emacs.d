@@ -11,6 +11,7 @@
 #+end_src
 
 ** ibuffers
+
 #+begin_src emacs-lisp
   (use-package ibuffer
     :bind (("C-x C-b" . ibuffer)
@@ -34,6 +35,7 @@
               '(lambda ()
                  (ibuffer-switch-to-saved-filter-groups "default"))))
 #+end_src
+
 ** ido
 
 Using =ivy= for the moment, but this is my =ido= configuration.
@@ -76,7 +78,7 @@ Using =ivy= for the moment, but this is my =ido= configuration.
 
 ** ivy
 
-Completion utility ([[https://oremacs.com/swiper/]]).
+Completion utility ([[https://oremacs.com/swiper/]]). The one thing I don't like about this system is the "fuzzy" matching for M-x commands. You have to match the first letter. Not good. Is there something better than ~ivy--regex-fuzzy~ available?
 
 #+begin_src emacs-lisp
   (use-package ivy
@@ -107,7 +109,7 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     (setq ivy-rich-path-style 'abbrev))
 #+end_src
 
-** projectiles
+** projectile
 
 #+begin_src emacs-lisp
 (use-package projectile
@@ -364,6 +366,7 @@ https://github.com/akermu/emacs-libvterm
                               (setq js-indent-level 2)
                               (local-set-key (kbd "RET") 'newline-and-indent))))
 #+end_src
+
 ** Markdown Mode
 
 #+begin_src emacs-lisp
@@ -732,13 +735,15 @@ Rules:
  - Terminal windows appear at the bottom.
 
 #+begin_src emacs-lisp
-  (setq display-buffer-alist
-        '((".*vterm.*"
-           (display-buffer-in-side-window)
-           (window-parameters . ((mode-line-format . (" " mode-line-buffer-identification))))
-           (window-height . 0.2)
-           (side . bottom)
-           (slot . 0))))
+  (use-package emacs
+    :init
+    (setq display-buffer-alist
+          '((".*vterm.*"
+             (display-buffer-in-side-window)
+             (window-parameters . ((mode-line-format . (" " mode-line-buffer-identification))))
+             (window-height . 0.2)
+             (side . bottom)
+             (slot . 0)))))
 #+end_src
 
 ** Uncategorized
