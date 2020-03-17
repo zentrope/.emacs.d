@@ -923,6 +923,7 @@ What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Ma
 #+begin_src emacs-lisp
   (defvar kfi/timestamp-formats
     '(("March 15, 2020 @ 9:33 PM" . "%B %-d, %Y @ %-I:%M %p")
+      ("March 15, 2020"           . "%B %-d, %Y")
       ("2020-03-15T21:33:54"      . "%Y-%m-%dT%H:%M:%S")
       ("2020-03-15"               . "%Y-%m-%d")
       ("2020-03-15 09:35 PM"      . "%Y-%m-%d %I:%M %p")
@@ -932,10 +933,9 @@ What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Ma
   (defun kfi/timestamp ()
     "Choose a format, then insert a timestamp."
     (interactive)
-    (if-let* ((table kfi/timestamp-formats)
-              (choices (mapcar #'car table))
+    (if-let* ((choices (mapcar #'car kfi/timestamp-formats))
               (choice (completing-read "Format:" choices))
-              (format (cdr (assoc choice table))))
+              (format (cdr (assoc choice kfi/timestamp-formats))))
         (insert (format-time-string format))
       (insert "<error:nil-selection>")))
 #+end_src
