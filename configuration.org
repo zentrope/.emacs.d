@@ -179,7 +179,7 @@ http://joaotavora.github.io/yasnippet/
     :config
     (setq doom-themes-enable-bold t
           doom-themes-enable-italic t)
-    (load-theme 'doom-vibrant t)
+    (load-theme 'doom-one t)
     (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
     (setq doom-themes-treemacs-theme "doom-colors")
     (doom-themes-treemacs-config)
