@@ -50,13 +50,8 @@
 
 (use-package prog-mode
   :init
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'emacs-lisp-mode-hook '(lambda ()
-                                     (paredit-mode 1)
-                                     (setq indent-tabs-mode nil)
-                                     (local-set-key (kbd "RET") 'newline-and-indent))))
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
@@ -87,16 +82,6 @@
 
 (use-package melpa-upstream-visit
   :ensure t)
-
-(use-package multiple-cursors
-  :commands multiple-cursors-mode
-  :ensure t
-  :config
-  (setq mac-command-modifier 'super)
-  :bind (("C-S-c k" . mc/edit-lines)
-         ("C-M->" . mc/mark-all-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C->" . mc/mark-next-like-this)))
 
 
 (use-package olivetti

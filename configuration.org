@@ -78,7 +78,7 @@ Using =ivy= for the moment, but this is my =ido= configuration.
 
 ** ivy
 
-Completion utility ([[https://oremacs.com/swiper/]]). The one thing I don't like about this system is the "fuzzy" matching for M-x commands. You have to match the first letter. Not good. Is there something better than ~ivy--regex-fuzzy~ available?
+Completion utility ([[https://oremacs.com/swiper/]]).
 
 #+begin_src emacs-lisp
   (use-package ivy
@@ -100,13 +100,33 @@ Completion utility ([[https://oremacs.com/swiper/]]). The one thing I don't like
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "C-h v") 'counsel-describe-variable)
     (global-set-key (kbd "C-h f") 'counsel-describe-function)
-    (global-set-key (kbd "M-x") 'counsel-M-x))
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    ;; Has to be set here because counsel overrides ivy.
+    ;;  - Remove the ^ regex assumption for all searches
+    (setq ivy-initial-inputs-alist nil))
+  (use-package flx ; used by regex-fuzzy, I think.
+    :ensure t)
   (use-package ivy-rich
     :ensure t
     :after ivy
     :config
     (ivy-rich-mode 1)
     (setq ivy-rich-path-style 'abbrev))
+#+end_src
+
+** multiple-cursors
+
+#+begin_src emacs-lisp
+  (use-package multiple-cursors
+    :commands multiple-cursors-mode
+    :ensure t
+    :pin melpa
+    :config
+    (setq mac-command-modifier 'super)
+    :bind (("C-S-c k" . mc/edit-lines)
+           ("C-M->" . mc/mark-all-like-this)
+           ("C-<" . mc/mark-previous-like-this)
+           ("C->" . mc/mark-next-like-this)))
 #+end_src
 
 ** projectile
@@ -179,7 +199,7 @@ http://joaotavora.github.io/yasnippet/
     :config
     (setq doom-themes-enable-bold t
           doom-themes-enable-italic t)
-    (load-theme 'doom-one t)
+    (load-theme 'doom-acario-light t)
     (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
     (setq doom-themes-treemacs-theme "doom-colors")
     (doom-themes-treemacs-config)
@@ -511,6 +531,20 @@ This needs to be revisited if I start using Clojure again.
     (setq clojure-indent-style nil))
 #+end_src
 
+** Emacs Lisp Mode
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :ensure t
+    :init
+    (add-hook 'emacs-lisp-mode-hook (lambda ()
+                                      (paredit-mode 1)
+                                      (setq indent-tabs-mode nil)
+                                      (local-set-key (kbd "RET") 'newline-and-indent)
+                                      (company-mode 1)
+                                      (hl-line-mode 1))))
+#+end_src
+
 ** Go Mode
 
 Revisit if I use Go again.
@@ -833,6 +867,19 @@ Rules:
 #+end_src
 
 * Custom Functions
+** Theme Switchers
+
+#+begin_src emacs-lisp
+  (defun kfi/light ()
+    (interactive)
+    (load-theme 'doom-acario-light t))
+
+  (defun kfi/dark ()
+    "Apply the dark doom-one theme."
+    (interactive)
+    (load-theme 'doom-one t))
+#+end_src
+
 ** Insert timestamp
 
 What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]]. Each of the formats could be made into a =yasnippet= (which is what I do with KB Maestro) using an elisp expression as its body. But I like the ~completing-read~ minibuffer menu thing here.
