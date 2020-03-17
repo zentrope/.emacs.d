@@ -140,6 +140,32 @@ Completion utility ([[https://oremacs.com/swiper/]]).
   (setq projectile-completion-system 'ivy))
 #+end_src
 
+** restclient
+
+https://github.com/pashky/restclient.el
+https://github.com/alf/ob-restclient.el
+https://github.com/iquiw/company-restclient
+
+#+begin_src emacs-lisp
+  (use-package restclient
+    :ensure t
+    :config
+    (add-hook 'restclient-mode-hook (lambda ()
+                                      (company-mode 1))))
+
+  (use-package ob-restclient
+    :ensure t
+    :config
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((restclient . t))))
+
+  (use-package company-restclient
+    :ensure t
+    :config
+    (add-to-list 'company-backends 'company-restclient))
+#+end_src
+
 ** treemacs
 
 [[https://github.com/Alexander-Miller/treemacs]]
