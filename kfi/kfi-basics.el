@@ -83,7 +83,6 @@
 (use-package melpa-upstream-visit
   :ensure t)
 
-
 (use-package olivetti
   :ensure t)
 
@@ -106,7 +105,6 @@
   :init
   (add-hook 'sh-mode-hook '(lambda ()
                              (setq sh-basic-offset 2))))
-
 
 (provide 'kfi-basics)
 ;;; kfi-basics.el ends here
