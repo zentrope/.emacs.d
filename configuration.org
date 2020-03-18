@@ -1133,6 +1133,7 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
     (interactive)
     (find-file "~/.emacs.d/configuration.org"))
 #+end_src
+
 * Futures
 
 ** Find a way for fly-spell to not check certain words
