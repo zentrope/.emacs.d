@@ -908,11 +908,13 @@ Rules:
 #+begin_src emacs-lisp
   (defun kfi/light ()
     (interactive)
+    (disable-theme (car custom-enabled-themes))
     (load-theme 'doom-acario-light t))
 
   (defun kfi/dark ()
     "Apply the dark doom-one theme."
     (interactive)
+    (disable-theme (car custom-enabled-themes))
     (load-theme 'doom-one t))
 #+end_src
 
