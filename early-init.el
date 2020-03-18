@@ -2,5 +2,7 @@
 (setq frame-inhibit-implied-resize t)
 (setq gc-cons-threshold-original gc-cons-threshold)
 (setq gc-cons-threshold 100000000)
+(add-to-list 'initial-frame-alist '(width . 100))
+(add-to-list 'initial-frame-alist '(height . 50))
 (add-hook 'after-init-hook (lambda ()
                              (setq gc-cons-threshold gc-cons-threshold-original)))
