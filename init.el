@@ -81,10 +81,23 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 
+(defun kfi/refresh-config ()
+  "Convert and load the configuration.org file only if it's newer
+than the output file."
+  (interactive)
+  (let* ((root "~/.emacs.d/configuration")
+         (org-file (concat root ".org"))
+         (el-file (concat root ".el")))
+    (if (file-newer-than-file-p org-file el-file)
+        (progn
+          (message "Re-tangling %s because it's newer than %s." org-file el-file)
+          (org-babel-load-file org-file))
+      (progn
+  (message "No need to re-tangle %s." org-file)
+  (load el-file)))))
 
-;; FIXME: Only do this if you can figure out if the org file is older
-;; maybe [[https://www.reddit.com/r/emacs/comments/8gbopk/tip_how_to_speed_up_your_emacs_config_by_03/]]
-(org-babel-load-file "~/.emacs.d/configuration.org")
+(kfi/refresh-config)
+
 
 (use-package kfi-basics :load-path "kfi/kfi-basics")
 
