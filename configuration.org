@@ -472,7 +472,8 @@ https://github.com/akermu/emacs-libvterm
     :config
     (setq org-ellipsis " … "
           org-src-window-setup 'split-window-right
-          org-tags-column 85)
+          org-tags-column 85
+          org-support-shift-select t)
 
     (defun kfi/org-align-tags ()
       (interactive)
@@ -483,6 +484,7 @@ https://github.com/akermu/emacs-libvterm
       (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags))
 
     (defun kfi/org-setup ()
+
       (visual-line-mode 1)
       (visual-fill-column-mode 1)
       (org-bullets-mode 1)
