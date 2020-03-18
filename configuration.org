@@ -211,8 +211,8 @@ http://joaotavora.github.io/yasnippet/
 ** All the icons
 
 #+begin_src emacs-lisp
-(use-package all-the-icons
-  :ensure t)
+  (use-package all-the-icons
+    :ensure t)
 #+end_src
 
 ** Doom themes
