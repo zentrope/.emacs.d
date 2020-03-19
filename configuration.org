@@ -266,7 +266,9 @@ http://joaotavora.github.io/yasnippet/
     :hook ((dired-mode . dired-hide-details-mode)
            (dired-mode . hl-line-mode))
     :config
-    (setq delete-by-moving-to-trash t)
+    (when (eq system-type 'darwin)
+      (setq trash-directory "~/.Trash")
+      (setq delete-by-moving-to-trash t))
     (when (eq system-type 'darwin)
       (setq dired-use-ls-dired nil)))
 #+end_src
