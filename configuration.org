@@ -580,12 +580,14 @@ This needs to be revisited if I start using Clojure again.
   (use-package emacs
     :ensure t
     :init
-    (add-hook 'emacs-lisp-mode-hook (lambda ()
-                                      (paredit-mode 1)
-                                      (setq indent-tabs-mode nil)
-                                      (local-set-key (kbd "RET") 'newline-and-indent)
-                                      (company-mode 1)
-                                      (hl-line-mode 1))))
+    (defun kfi/emacs-lisp-mode-setup ()
+      (paredit-mode 1)
+      (setq indent-tabs-mode nil)
+      (local-set-key (kbd "RET") 'newline-and-indent)
+      (company-mode 1)
+      (when (display-graphic-p)
+        (hl-line-mode 1)))
+    (add-hook 'emacs-lisp-mode-hook 'kfi/emacs-lisp-mode-setup))
 #+end_src
 
 ** Go Mode
@@ -1109,7 +1111,6 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
     "Set special prose writing mode."
     (interactive)
     (display-line-numbers-mode -1)
-    (global-hl-line-mode 0)
     (olivetti-mode 1)
     (flyspell-mode 1)
     (flyspell-buffer))
@@ -1117,7 +1118,6 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
   (defun kfi/unwrite-mode ()
     "Unset special prose writing mode."
     (interactive)
-    (global-hl-line-mode 1)
     (olivetti-mode 0)
     (flyspell-mode 0)
     (display-line-numbers-mode 1))
