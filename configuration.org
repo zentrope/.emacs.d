@@ -258,6 +258,19 @@ http://joaotavora.github.io/yasnippet/
 #+end_src
 
 * Application Modes
+** Directory Editor (Dired)
+
+#+begin_src emacs-lisp
+  (use-package dired
+    :bind ("C-x C-q" . wdired-change-to-wdired-mode)
+    :hook ((dired-mode . dired-hide-details-mode)
+           (dired-mode . hl-line-mode))
+    :config
+    (setq delete-by-moving-to-trash t)
+    (when (eq system-type 'darwin)
+      (setq dired-use-ls-dired nil)))
+#+end_src
+
 ** Erc (IRC Client)
 
 #+begin_src emacs-lisp

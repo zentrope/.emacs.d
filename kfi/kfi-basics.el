@@ -27,22 +27,6 @@
   :ensure t
   :bind ("M-y" . browse-kill-ring))
 
-(use-package dired
-  ;; bound when in a dired buffer
-  :bind ("C-c C-w C-d" . wdired-change-to-wdired-mode)
-  :after dired-details
-  :config
-  ;;
-  (dired-details-install)
-  (when (string= system-type "darwin")
-    (setq dired-use-ls-dired nil)))
-
-(use-package dired-details
-  :ensure t
-  :config
-  (setq-default dired-details-hidden-string "[…] ")
-  (dired-details-install))
-
 (use-package dockerfile-mode
   :commands dockerfile-mode
   :ensure t
@@ -60,12 +44,6 @@
   (exec-path-from-shell-copy-env "JAVA_HOME")
   (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-initialize))
-
-(use-package fish-mode
-  :commands fish-mode
-  :ensure t
-  :init
-  (setq fish-indent-offset 2))
 
 (use-package flycheck
   :ensure t
