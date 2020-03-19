@@ -223,13 +223,14 @@ http://joaotavora.github.io/yasnippet/
   (use-package doom-themes
     :ensure t
     :config
-    (setq doom-themes-enable-bold t
-          doom-themes-enable-italic t)
-    (load-theme 'doom-acario-light t)
-    (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
-    (setq doom-themes-treemacs-theme "doom-colors")
-    (doom-themes-treemacs-config)
-    (doom-themes-org-config))
+    (when (display-graphic-p)
+      (setq doom-themes-enable-bold t
+            doom-themes-enable-italic t)
+      (load-theme 'doom-acario-light t)
+      (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+      (setq doom-themes-treemacs-theme "doom-colors")
+      (doom-themes-treemacs-config)
+      (doom-themes-org-config)))
 #+end_src
 
 ** Doom modeline
@@ -249,7 +250,7 @@ http://joaotavora.github.io/yasnippet/
     :ensure t
     :pin melpa
     :config
-    (when (eq system-type 'darwin)
+    (when (and (display-graphic-p) (eq system-type 'darwin))
       (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
       (add-to-list 'company-backends 'company-emoji)))
 #+end_src
