@@ -8,6 +8,9 @@ workspace
 # org-mode based generated config file
 configuration.el
 
+# Emacs Stuff that should be local
+abbrev_defs
+
 elpa
 auto-save-list
 backups

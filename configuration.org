@@ -495,43 +495,49 @@ https://github.com/akermu/emacs-libvterm
 Turn off indentation, pretty bullets and so on when running in terminal mode because it just makes things even uglier for those few times you need it.
 
 #+begin_src emacs-lisp
-  (use-package org-bullets
-    :ensure t)
+    (use-package org-bullets
+      :ensure t)
 
-  (use-package visual-fill-column
-    :ensure t)
+    (use-package visual-fill-column
+      :ensure t)
 
-  (use-package org
-    :ensure t
-    :after yasnippet
-    :init
-    :config
-    (setq org-src-window-setup 'split-window-below
-          org-tags-column 85
-          org-support-shift-select t)
+    (use-package org
+      :ensure t
+      :after yasnippet
+      :init
+      :config
+      (setq org-src-window-setup 'split-window-below
+            org-tags-column 85
+            org-support-shift-select t)
 
-    (defun kfi/org-align-tags ()
-      "Align tags if they've gotten messed up."
-      (interactive)
-      (org-align-tags t))
+      (defun kfi/org-align-tags ()
+        "Align tags if they've gotten messed up."
+        (interactive)
+        (org-align-tags t))
 
-    (defun kfi/org-keys-setup ()
-      (define-key org-mode-map (kbd "C-c a") 'org-agenda)
-      (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags))
+      (defun kfi/org-width ()
+        "Set org-buffer frame to comfortable width."
+        (interactive)
+        (set-frame-width (selected-frame) 104))
 
-    (defun kfi/org-setup ()
-      (visual-line-mode 1)
-      (visual-fill-column-mode 1)
-      (when (display-graphic-p)
-        (setq org-ellipsis " … ")
-        (org-indent-mode 1)
-        (org-bullets-mode 1)
-        (setq-local global-hl-line-mode nil))
-      (set-fill-column 100)
-      (yas-minor-mode-on))
+      (defun kfi/org-keys-setup ()
+        (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+        (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
+        (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
 
-    (add-hook 'org-mode-hook 'kfi/org-keys-setup)
-    (add-hook 'org-mode-hook 'kfi/org-setup))
+      (defun kfi/org-setup ()
+        (visual-line-mode 1)
+        (visual-fill-column-mode 1)
+        (when (display-graphic-p)
+          (setq org-ellipsis " … ")
+          (org-indent-mode 1)
+          (org-bullets-mode 1)
+          (setq-local global-hl-line-mode nil))
+        (set-fill-column 100)
+        (yas-minor-mode-on))
+
+      (add-hook 'org-mode-hook 'kfi/org-keys-setup)
+      (add-hook 'org-mode-hook 'kfi/org-setup))
 #+end_src
 
 ** Web Mode
