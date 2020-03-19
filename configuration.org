@@ -238,9 +238,11 @@ http://joaotavora.github.io/yasnippet/
 [[https://github.com/seagle0128/doom-modeline]]
 
 #+begin_src emacs-lisp
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+  (use-package doom-modeline
+    :ensure t
+    :init
+    (when (display-graphic-p)
+      (doom-modeline-mode 1)))
 #+end_src
 
 ** Emoji
@@ -474,7 +476,7 @@ https://github.com/akermu/emacs-libvterm
     :init
     :config
     (setq org-ellipsis " … "
-          org-src-window-setup 'split-window-right
+          org-src-window-setup 'split-window-below
           org-tags-column 85
           org-support-shift-select t)
 
