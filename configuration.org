@@ -257,15 +257,28 @@ http://joaotavora.github.io/yasnippet/
       (add-to-list 'company-backends 'company-emoji)))
 #+end_src
 
+** Emacs GUI
+
+#+begin_src emacs-lisp
+  (when (display-graphic-p)
+    (menu-bar-mode 1)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+    (tooltip-mode -1))
+#+end_src
+
 * Application Modes
 ** Directory Editor (Dired)
 
 #+begin_src emacs-lisp
   (use-package dired
     :bind ("C-x C-q" . wdired-change-to-wdired-mode)
-    :hook ((dired-mode . dired-hide-details-mode)
-           (dired-mode . hl-line-mode))
     :config
+    (defun kfi/dired-mode-hook ()
+      (dired-hide-details-mode)
+      (when (display-graphic-p)
+        (hl-line-mode)))
+    (add-hook 'dired-mode-hook 'kfi/dired-mode-hook)
     (when (eq system-type 'darwin)
       (setq trash-directory "~/.Trash")
       (setq delete-by-moving-to-trash t))
@@ -479,6 +492,8 @@ https://github.com/akermu/emacs-libvterm
 
 ** Org Mode
 
+Turn off indentation, pretty bullets and so on when running in terminal mode because it just makes things even uglier for those few times you need it.
+
 #+begin_src emacs-lisp
   (use-package org-bullets
     :ensure t)
@@ -491,12 +506,12 @@ https://github.com/akermu/emacs-libvterm
     :after yasnippet
     :init
     :config
-    (setq org-ellipsis " … "
-          org-src-window-setup 'split-window-below
+    (setq org-src-window-setup 'split-window-below
           org-tags-column 85
           org-support-shift-select t)
 
     (defun kfi/org-align-tags ()
+      "Align tags if they've gotten messed up."
       (interactive)
       (org-align-tags t))
 
@@ -505,13 +520,14 @@ https://github.com/akermu/emacs-libvterm
       (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags))
 
     (defun kfi/org-setup ()
-
       (visual-line-mode 1)
       (visual-fill-column-mode 1)
-      (org-bullets-mode 1)
-      (org-indent-mode 1)
+      (when (display-graphic-p)
+        (setq org-ellipsis " … ")
+        (org-indent-mode 1)
+        (org-bullets-mode 1)
+        (setq-local global-hl-line-mode nil))
       (set-fill-column 100)
-      (setq-local global-hl-line-mode nil)
       (yas-minor-mode-on))
 
     (add-hook 'org-mode-hook 'kfi/org-keys-setup)
