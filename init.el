@@ -26,6 +26,12 @@
             '("gnu"          . "https://elpa.gnu.org/packages/")
             '("org"          . "https://orgmode.org/elpa/")))
 
+;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
+;; This seems to matter when running on FreeBSD
+
+(when (eq system-type 'berkeley-unix)
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 (when (version< emacs-version "27.0.50")
   (message "package initialize")
   (package-initialize))
