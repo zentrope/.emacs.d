@@ -18,12 +18,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (display-graphic-p)
-  (menu-bar-mode 1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (tooltip-mode -1))
-
 (require 'package)
 
 ;; Development
@@ -32,44 +26,29 @@
             '("gnu"          . "https://elpa.gnu.org/packages/")
             '("org"          . "https://orgmode.org/elpa/")))
 
-;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
-;; This seems to matter when running on FreeBSD
-
-(when (eq system-type 'berkeley-unix)
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
-
-(when (version< emacs-version "27.0.50")
-  (message "package initialize")
+;; Initialise the packages, avoiding a re-initialisation.
+(unless (bound-and-true-p package--initialized)
+  (setq package-enable-at-startup nil)
   (package-initialize))
 
-(unless package-archive-contents
-  (package-initialize)
-  ;; This is what calls out to the net on start up.
-  ;; (package-refresh-contents)
-  )
-
-;;-----------------------------------------------------------------------------
-
-(message "checking for use package")
-(when (not (package-installed-p 'use-package))
+;; Make sure `use-package' is available.
+(unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-(defun package-require (pkg)
-  "Install PKG if it's not already installed."
-  (when (not (package-installed-p pkg))
-    (message "Loading %s" pkg)
-    (package-install pkg)))
+(defun kfi/package-require (pkgs)
+  "Install PKGs if not already installed."
+  (dolist (pkg pkgs)
+    (when (not (package-installed-p pkg))
+      (message "Loading %s" pkg)
+      (package-install pkg))))
 
-(defconst pre-reqs '(delight diminish bind-key))
-
-(message "requiring packages")
-(dolist (p pre-reqs)
-  (package-require p))
+(kfi/package-require '(delight diminish bind-key))
 
 (eval-when-compile
   (require 'use-package))
 (require 'diminish)
+(require 'delight)
 (require 'bind-key)
 
 ;;-----------------------------------------------------------------------------
