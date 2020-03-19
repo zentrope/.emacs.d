@@ -1,6 +1,5 @@
-#+TITLE: Advice
-#+DESCRIPTION: What to do when Emacs gives you trouble.
-
+#+title: Advice
+#+description: What to do when Emacs gives you trouble.
 
 * How do I fix issues with lsp-java always wanting to rename packages?
 
