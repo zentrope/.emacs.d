@@ -376,10 +376,11 @@ https://github.com/akermu/emacs-libvterm
                           (define-key vterm-mode-map (kbd "C-v") 'vterm-yank)
                           (define-key vterm-mode-map (kbd "s-v") 'vterm-yank)))
     :config
-    (set-face-attribute 'vterm-color-cyan nil :foreground "dodgerblue")
-    (set-face-attribute 'vterm-color-blue nil :foreground "dodgerblue")
-    (set-face-attribute 'vterm-color-black nil :foreground "gray50")
-    (set-face-attribute 'vterm-color-yellow nil :foreground "peru"))
+    (when (display-graphic-p)
+      (set-face-attribute 'vterm-color-cyan nil :foreground "dodgerblue")
+      (set-face-attribute 'vterm-color-blue nil :foreground "dodgerblue")
+      (set-face-attribute 'vterm-color-black nil :foreground "gray50")
+      (set-face-attribute 'vterm-color-yellow nil :foreground "peru")))
 #+end_src
 
 * Document Modes
