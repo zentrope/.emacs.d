@@ -538,7 +538,6 @@ This needs to be revisited if I start using Clojure again.
   (use-package cider
     :ensure t
     :after company
-    :pin melpa-stable
     :config
     (setq cider-font-lock-dynamically '(macro core function var))
     (setq cider-eldoc-display-context-dependent-info t)

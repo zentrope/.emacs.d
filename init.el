@@ -29,12 +29,8 @@
 ;; Development
 (setq package-archives
       (list '("melpa"        . "https://melpa.org/packages/")
-            '("melpa-stable" . "https://stable.melpa.org/packages/")
-            '("marmalade"    . "https://marmalade-repo.org/packages/")
             '("gnu"          . "https://elpa.gnu.org/packages/")
             '("org"          . "https://orgmode.org/elpa/")))
-
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (when (version< emacs-version "27.0.50")
   (message "package initialize")
