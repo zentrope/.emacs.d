@@ -390,6 +390,16 @@ http://joaotavora.github.io/yasnippet/
   ;;                                 (display-line-numbers-mode -1))))
 #+end_src
 
+** Persistent Scratch Buffer
+
+#+begin_src emacs-lisp
+  (use-package persistent-scratch
+    :ensure t
+    :config
+    (persistent-scratch-setup-default)
+    (persistent-scratch-autosave-mode 1))
+#+end_src
+
 ** VTerm (Terminal Client)
 
 https://github.com/akermu/emacs-libvterm
