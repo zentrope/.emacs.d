@@ -1,5 +1,5 @@
 #+title: Emacs Configuration
-#+startup: overview
+#+startup: content
 
 * Packages
 ** company
@@ -224,6 +224,16 @@ http://joaotavora.github.io/yasnippet/
     :ensure t
     :config
     (when (display-graphic-p)
+      (defvar kfi/font-choices
+        '("JetBrains Mono" "Menlo" "Monaco"))
+
+      (defun kfi/switch-font ()
+        "Choose a font."
+        (interactive)
+        (let ((font (completing-read "Font:" kfi/font-choices)))
+          (if font
+              (set-face-attribute 'default nil :family font)
+            (message "ERROR: Invalid font: %s." font))))
 
       (defun kfi/light ()
         "Switch to the predefined light theme."
@@ -239,8 +249,8 @@ http://joaotavora.github.io/yasnippet/
 
       (setq doom-themes-enable-bold t
             doom-themes-enable-italic t)
-      (load-theme 'doom-acario-light t)
-      (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+      (load-theme 'doom-one-light t)
+      (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'medium)
       (setq doom-themes-treemacs-theme "doom-colors")
       (doom-themes-treemacs-config)
       (doom-themes-org-config)))
@@ -752,6 +762,7 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
     :config (progn (dap-mode t)
                    (dap-ui-mode t)))
 #+end_src
+
 ** Javascript Mode
 
 #+begin_src emacs-lisp
@@ -888,6 +899,7 @@ Mimics normal Mac keybindings for font resizing.
   (global-set-key (kbd "s-<up>") 'windmove-up)
   (global-set-key (kbd "s-<down>") 'windmove-down)
 #+end_src
+
 ** Window placement
 
 Rules:
