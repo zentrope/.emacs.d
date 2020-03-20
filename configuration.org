@@ -224,6 +224,19 @@ http://joaotavora.github.io/yasnippet/
     :ensure t
     :config
     (when (display-graphic-p)
+
+      (defun kfi/light ()
+        "Switch to the predefined light theme."
+        (interactive)
+        (disable-theme (car custom-enabled-themes))
+        (load-theme 'doom-one-light t))
+
+      (defun kfi/dark ()
+        "Apply the dark doom-one theme."
+        (interactive)
+        (disable-theme (car custom-enabled-themes))
+        (load-theme 'doom-one t))
+
       (setq doom-themes-enable-bold t
             doom-themes-enable-italic t)
       (load-theme 'doom-acario-light t)
@@ -980,21 +993,6 @@ Rules:
 #+end_src
 
 * Custom Functions
-** Theme Switchers
-
-#+begin_src emacs-lisp
-  (defun kfi/light ()
-    (interactive)
-    (disable-theme (car custom-enabled-themes))
-    (load-theme 'doom-acario-light t))
-
-  (defun kfi/dark ()
-    "Apply the dark doom-one theme."
-    (interactive)
-    (disable-theme (car custom-enabled-themes))
-    (load-theme 'doom-one t))
-#+end_src
-
 ** Insert timestamp
 
 What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]]. Each of the formats could be made into a =yasnippet= (which is what I do with KB Maestro) using an elisp expression as its body. But I like the ~completing-read~ minibuffer menu thing here.
