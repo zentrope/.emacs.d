@@ -495,49 +495,70 @@ https://github.com/akermu/emacs-libvterm
 Turn off indentation, pretty bullets and so on when running in terminal mode because it just makes things even uglier for those few times you need it.
 
 #+begin_src emacs-lisp
-    (use-package org-bullets
-      :ensure t)
+  (use-package org-bullets
+    :ensure t)
 
-    (use-package visual-fill-column
-      :ensure t)
+  (use-package visual-fill-column
+    :ensure t)
 
-    (use-package org
-      :ensure t
-      :after yasnippet
-      :init
-      :config
-      (setq org-src-window-setup 'split-window-below
-            org-tags-column 85
-            org-support-shift-select t)
+  (use-package org
+    :ensure t
+    :after yasnippet
+    :init
+    :config
+    (defvar kfi/org-wide-fill-column 100
+      "Fill column for org mode when used for working with tasks/tags.")
+    (defvar kfi/org-wide-tags-column 85
+      "Tags column for org mode when used for working with tasks/tags.")
+    (defvar kfi/org-narrow-fill-column 80
+      "Fill column for org mode when used for prose/documentation.")
+    (defvar kfi/org-narrow-tags-column 65
+      "Tags column for org mode when used for prose/documentation.")
 
-      (defun kfi/org-align-tags ()
-        "Align tags if they've gotten messed up."
-        (interactive)
-        (org-align-tags t))
+    (setq org-src-window-setup 'split-window-below
+          org-tags-column kfi/org-wide-tags-column
+          org-support-shift-select t)
 
-      (defun kfi/org-width ()
-        "Set org-buffer frame to comfortable width."
-        (interactive)
-        (set-frame-width (selected-frame) 104))
+    (defun kfi/org-narrow-doc ()
+      "Reset org fill params for a prose focussed mode."
+      (interactive)
+      (set-fill-column kfi/org-narrow-fill-column)
+      (setq org-tags-column kfi/org-narrow-tags-column))
 
-      (defun kfi/org-keys-setup ()
-        (define-key org-mode-map (kbd "C-c a") 'org-agenda)
-        (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
-        (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
+    (defun kfi/org-widen-doc ()
+      "Reset org fill params for a task focussed mode."
+      (interactive)
+      (set-fill-column kfi/org-wide-fill-column)
+      (setq org-tags-column kfi/org-wide-tags-column))
 
-      (defun kfi/org-setup ()
-        (visual-line-mode 1)
-        (visual-fill-column-mode 1)
-        (when (display-graphic-p)
-          (setq org-ellipsis " … ")
-          (org-indent-mode 1)
-          (org-bullets-mode 1)
-          (setq-local global-hl-line-mode nil))
-        (set-fill-column 100)
-        (yas-minor-mode-on))
+    (defun kfi/org-align-tags ()
+      "Align tags if they've gotten messed up."
+      (interactive)
+      (org-align-tags t))
 
-      (add-hook 'org-mode-hook 'kfi/org-keys-setup)
-      (add-hook 'org-mode-hook 'kfi/org-setup))
+    (defun kfi/org-width ()
+      "Set org-buffer frame to comfortable width."
+      (interactive)
+      (set-frame-width (selected-frame) 104))
+
+    (defun kfi/org-keys-setup ()
+      (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+      (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
+      (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
+
+    (defun kfi/org-setup ()
+      (visual-line-mode 1)
+      (visual-fill-column-mode 1)
+      (when (display-graphic-p)
+        (setq org-ellipsis " … ")
+        (org-indent-mode 1)
+        (org-bullets-mode 1)
+        (setq-local global-hl-line-mode nil))
+      (set-fill-column 100)
+      (yas-minor-mode-on))
+
+    (add-hook 'org-mode-hook 'kfi/org-keys-setup)
+    (add-hook 'org-mode-hook 'kfi/org-setup))
 #+end_src
 
 ** Web Mode
