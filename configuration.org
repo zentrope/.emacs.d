@@ -572,7 +572,7 @@ Turn off indentation, pretty bullets and so on when running in terminal mode bec
     (defun kfi/org-width ()
       "Set org-buffer frame to comfortable width."
       (interactive)
-      (set-frame-width (selected-frame) 104))
+      (set-frame-width (selected-frame) (+ (or fill-column 100) 4)))
 
     (defun kfi/org-keys-setup ()
       (define-key org-mode-map (kbd "C-c a") 'org-agenda)
