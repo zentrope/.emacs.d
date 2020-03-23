@@ -322,10 +322,10 @@ http://joaotavora.github.io/yasnippet/
       :ensure t
       :disabled t
       :config
-      ;; (when (display-graphic-p)
-      ;;   (doom-modeline-mode 1))
-      )
-    (set-face-attribute 'mode-line nil :box nil))
+      (when (display-graphic-p)
+        (doom-modeline-mode 1)
+        ;; Some themes set this, so unset it just in case.
+        (set-face-attribute 'mode-line nil :box nil))))
 #+end_src
 
 ** Emoji
