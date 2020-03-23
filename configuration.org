@@ -282,28 +282,30 @@ http://joaotavora.github.io/yasnippet/
       :config
       (setq modus-operandi-theme-slanted-constructs t)
       (setq modus-operandi-theme-bold-constructs t)
-      (setq modus-operandi-theme-proportional-fonts t)
-      (setq modus-operandi-theme-scale-headings t))
+      (setq modus-operandi-theme-proportional-fonts nil)
+      (setq modus-operandi-theme-scale-headings nil))
 
     (use-package modus-vivendi-theme ; dark
       :ensure t
       :config
       (setq modus-vivendi-theme-slanted-constructs t)
-      (setq modus-vivendi-theme-bold-constructs nil)
-      (setq modus-vivendi-theme-proportional-fonts t)
-      (setq modus-vivendi-theme-scale-headings t))
+      (setq modus-vivendi-theme-bold-constructs t)
+      (setq modus-vivendi-theme-proportional-fonts nil)
+      (setq modus-vivendi-theme-scale-headings nil))
 
     (defun kfi/modus-light ()
       "Use the modus light theme."
       (interactive)
       (kfi/unload-themes)
-      (load-theme 'modus-operendi t))
+      (load-theme 'modus-operandi t)
+      (set-face-attribute 'mode-line nil :box nil))
 
     (defun kfi/modus-dark ()
       "Use the modus dark theme."
       (interactive)
       (kfi/unload-themes)
-      (load-theme 'modus-vivendi t))
+      (load-theme 'modus-vivendi t)
+      (set-face-attribute 'mode-line nil :box nil))
 
     (when (display-graphic-p)
       (kfi/modus-dark)))
