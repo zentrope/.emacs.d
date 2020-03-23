@@ -215,17 +215,14 @@ http://joaotavora.github.io/yasnippet/
     :ensure t)
 #+end_src
 
-** Doom themes
-
-[[https://github.com/hlissner/emacs-doom-themes]]
+** Fonts
 
 #+begin_src emacs-lisp
-  (use-package doom-themes
-    :ensure t
+  (use-package emacs
     :config
     (when (display-graphic-p)
-      (defvar kfi/font-choices
-        '("JetBrains Mono" "Menlo" "Monaco"))
+      (defvar kfi/font-choices '("JetBrains Mono" "Menlo" "Monaco")
+        "Font faces I'm fond of.")
 
       (defun kfi/switch-font ()
         "Choose a font."
@@ -235,37 +232,98 @@ http://joaotavora.github.io/yasnippet/
               (set-face-attribute 'default nil :family font)
             (message "ERROR: Invalid font: %s." font))))
 
-      (defun kfi/light ()
-        "Switch to the predefined light theme."
-        (interactive)
-        (disable-theme (car custom-enabled-themes))
-        (load-theme 'doom-one-light t))
-
-      (defun kfi/dark ()
-        "Apply the dark doom-one theme."
-        (interactive)
-        (disable-theme (car custom-enabled-themes))
-        (load-theme 'doom-one t))
-
-      (setq doom-themes-enable-bold t
-            doom-themes-enable-italic t)
-      (load-theme 'doom-one-light t)
-      (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'medium)
-      (setq doom-themes-treemacs-theme "doom-colors")
-      (doom-themes-treemacs-config)
-      (doom-themes-org-config)))
+      (set-face-attribute 'default nil
+                          :family "JetBrains Mono"
+                          :height 140
+                          :weight 'medium)))
 #+end_src
 
-** Doom modeline
+** Themes
+
+- [[https://github.com/hlissner/emacs-doom-themes]]
+- [[https://gitlab.com/protesilaos/modus-themes]]
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+
+    (defun kfi/unload-themes ()
+      "Disable all custom themes."
+      (interactive)
+      (dolist (theme custom-enabled-themes)
+        (disable-theme theme)))
+
+    (use-package doom-themes
+      :ensure t
+      :config
+      (setq doom-themes-enable-bold t)
+      (setq doom-themes-enable-italic t)
+      (setq doom-themes-treemacs-theme "doom-colors")
+      (doom-themes-treemacs-config)
+      (doom-themes-org-config)
+      ;; (when (display-graphic-p)
+      ;;   (load-theme 'doom-one-light t))
+      )
+
+    (defun kfi/doom-light ()
+      "Switch to the predefined light theme."
+      (interactive)
+      (kfi/unload-themes)
+      (load-theme 'doom-one-light t))
+
+    (defun kfi/doom-dark ()
+      "Apply the dark doom-one theme."
+      (interactive)
+      (kfi/unload-themes)
+      (load-theme 'doom-one t))
+
+    (use-package modus-operandi-theme ; light
+      :ensure t
+      :config
+      (setq modus-operandi-theme-slanted-constructs t)
+      (setq modus-operandi-theme-bold-constructs t)
+      (setq modus-operandi-theme-proportional-fonts t)
+      (setq modus-operandi-theme-scale-headings t))
+
+    (use-package modus-vivendi-theme ; dark
+      :ensure t
+      :config
+      (setq modus-vivendi-theme-slanted-constructs t)
+      (setq modus-vivendi-theme-bold-constructs nil)
+      (setq modus-vivendi-theme-proportional-fonts t)
+      (setq modus-vivendi-theme-scale-headings t))
+
+    (defun kfi/modus-light ()
+      "Use the modus light theme."
+      (interactive)
+      (kfi/unload-themes)
+      (load-theme 'modus-operendi t))
+
+    (defun kfi/modus-dark ()
+      "Use the modus dark theme."
+      (interactive)
+      (kfi/unload-themes)
+      (load-theme 'modus-vivendi t))
+
+    (when (display-graphic-p)
+      (kfi/modus-dark)))
+#+end_src
+
+** Modeline
 
 [[https://github.com/seagle0128/doom-modeline]]
 
 #+begin_src emacs-lisp
-  (use-package doom-modeline
-    :ensure t
-    :init
-    (when (display-graphic-p)
-      (doom-modeline-mode 1)))
+  (use-package emacs
+    :config
+    (use-package doom-modeline
+      :ensure t
+      :disabled t
+      :config
+      ;; (when (display-graphic-p)
+      ;;   (doom-modeline-mode 1))
+      )
+    (set-face-attribute 'mode-line nil :box nil))
 #+end_src
 
 ** Emoji
