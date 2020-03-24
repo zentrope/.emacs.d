@@ -596,6 +596,7 @@ Turn off indentation, pretty bullets and so on when running in terminal mode bec
 
   (use-package org
     :ensure t
+    :pin org
     :after yasnippet
     :init
     :config
