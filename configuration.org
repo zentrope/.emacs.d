@@ -596,9 +596,17 @@ Turn off indentation, pretty bullets and so on when running in terminal mode bec
   (use-package org
     :ensure t
     :pin org
-    :after yasnippet
     :init
     :config
+
+    (setq org-hide-emphasis-markers t)
+
+    (defun kfi/org-toggle-markers ()
+      "Toggle showing markup markers (italics, bold, etc)."
+      (interactive)
+      (setq org-hide-emphasis-markers (not (bound-and-true-p org-hide-emphasis-markers)))
+      (org-mode-restart))
+
     (defvar kfi/org-wide-fill-column 100
       "Fill column for org mode when used for working with tasks/tags.")
     (defvar kfi/org-wide-tags-column 85
