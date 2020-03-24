@@ -253,29 +253,29 @@ http://joaotavora.github.io/yasnippet/
       (dolist (theme custom-enabled-themes)
         (disable-theme theme)))
 
-    (use-package doom-themes
-      :ensure t
-      :config
-      (setq doom-themes-enable-bold t)
-      (setq doom-themes-enable-italic t)
-      (setq doom-themes-treemacs-theme "doom-colors")
-      (doom-themes-treemacs-config)
-      (doom-themes-org-config)
-      ;; (when (display-graphic-p)
-      ;;   (load-theme 'doom-one-light t))
-      )
+    ;; (use-package doom-themes
+    ;;   :ensure t
+    ;;   :config
+    ;;   (setq doom-themes-enable-bold t)
+    ;;   (setq doom-themes-enable-italic t)
+    ;;   (setq doom-themes-treemacs-theme "doom-colors")
+    ;;   (doom-themes-treemacs-config)
+    ;;   (doom-themes-org-config)
+    ;;   ;; (when (display-graphic-p)
+    ;;   ;;   (load-theme 'doom-one-light t))
+    ;;   )
 
-    (defun kfi/doom-light ()
-      "Switch to the predefined light theme."
-      (interactive)
-      (kfi/unload-themes)
-      (load-theme 'doom-one-light t))
+    ;; (defun kfi/doom-light ()
+    ;;   "Switch to the predefined light theme."
+    ;;   (interactive)
+    ;;   (kfi/unload-themes)
+    ;;   (load-theme 'doom-one-light t))
 
-    (defun kfi/doom-dark ()
-      "Apply the dark doom-one theme."
-      (interactive)
-      (kfi/unload-themes)
-      (load-theme 'doom-one t))
+    ;; (defun kfi/doom-dark ()
+    ;;   "Apply the dark doom-one theme."
+    ;;   (interactive)
+    ;;   (kfi/unload-themes)
+    ;;   (load-theme 'doom-one t))
 
     (use-package modus-operandi-theme ; light
       :ensure t
