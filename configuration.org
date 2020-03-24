@@ -320,7 +320,6 @@ http://joaotavora.github.io/yasnippet/
     :config
     (use-package doom-modeline
       :ensure t
-      :disabled t
       :config
       (when (display-graphic-p)
         (doom-modeline-mode 1)
