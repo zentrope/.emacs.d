@@ -106,6 +106,8 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     (setq ivy-initial-inputs-alist nil))
   (use-package flx ; used by regex-fuzzy, I think.
     :ensure t)
+  (use-package smex ; counsel-M-x will use this?
+    :ensure t)
   (use-package ivy-rich
     :ensure t
     :after ivy
