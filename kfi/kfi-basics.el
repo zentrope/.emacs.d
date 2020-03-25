@@ -20,9 +20,6 @@
 
 ;;(setq use-package-verbose t)
 
-(use-package ag
-  :ensure t)
-
 (use-package browse-kill-ring
   :ensure t
   :bind ("M-y" . browse-kill-ring))
@@ -58,31 +55,8 @@
 (use-package htmlize
   :ensure t)
 
-(use-package melpa-upstream-visit
-  :ensure t)
-
 (use-package olivetti
   :ensure t)
-
-(use-package paredit
-  :ensure t
-  :commands paredit-mode
-  :delight " ❡")
-
-(use-package paren-face
-  :ensure t
-  :config
-  (global-paren-face-mode 1))
-
-(use-package ripgrep
-  :ensure t
-  :bind (("C-M-s-f" . projectile-ripgrep)))
-
-(use-package sh-script
-  :commands shell-script-mode
-  :init
-  (add-hook 'sh-mode-hook '(lambda ()
-                             (setq sh-basic-offset 2))))
 
 (provide 'kfi-basics)
 ;;; kfi-basics.el ends here

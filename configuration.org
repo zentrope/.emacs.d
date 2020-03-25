@@ -5,7 +5,7 @@
 ** company
 
 #+begin_src emacs-lisp
-  (use-package company
+  Equals(use-package company
     :ensure t
     :defer t)
 #+end_src
@@ -131,6 +131,23 @@ Completion utility ([[https://oremacs.com/swiper/]]).
            ("C->" . mc/mark-next-like-this)))
 #+end_src
 
+** paredit
+
+#+begin_src emacs-lisp
+  (use-package paredit
+    :ensure t
+    :commands paredit-mode)
+#+end_src
+
+** paren-face
+
+#+begin_src emacs-lisp
+  (use-package paren-face
+    :ensure t
+    :config
+    (global-paren-face-mode 1))
+#+end_src
+
 ** projectile
 
 #+begin_src emacs-lisp
@@ -166,6 +183,16 @@ https://github.com/iquiw/company-restclient
     :ensure t
     :config
     (add-to-list 'company-backends 'company-restclient))
+#+end_src
+
+** ripgrep
+
+Control-meta-super-F
+
+#+begin_src emacs-lisp
+  (use-package ripgrep
+    :ensure t
+    :bind (("C-M-s-f" . projectile-ripgrep)))
 #+end_src
 
 ** treemacs
@@ -995,7 +1022,6 @@ Rules:
 ** Uncategorized
 
 #+begin_src emacs-lisp
-
     ;; banish custom config to another file
     (setq custom-file "~/.emacs.d/custom.el")
 
@@ -1034,43 +1060,7 @@ Rules:
                        (abbreviate-file-name (buffer-file-name))
                      "%b"))))
 
-    ;;-----------------------------------------------------------------------------
-    ;; Line numbers mode
-    ;;-----------------------------------------------------------------------------
-
-    (defvar display-line-numbers-grow-only)
-    (defvar display-line-numbers-width-start)
-
-    (when (version<= "26.0.50" emacs-version)
-      ;; (global-display-line-numbers-mode 1)
-      (setq display-line-numbers-grow-only t)
-      (setq display-line-numbers-width-start 1000))
-
-    ;;-----------------------------------------------------------------------------
-
-    ;; (defun kfi/fix-echo-area ()
-    ;;   "Set the font for the message window."
-    ;;   (let ((buf (get-buffer " *Echo Area 0*")))
-    ;;     (when buf
-    ;;       (with-current-buffer buf
-    ;;         (setq-local face-remapping-alist '((default :family "Menlo" :weight normal :height 100)))))))
-
-    ;; (defun kfi/craft-minibuffer ()
-    ;;   "Set the font for the minibuffer."
-    ;;   (set (make-local-variable 'face-remapping-alist)
-    ;;        '((default :family "Menlo" :weight normal :height 100))))
-
-    ;; (when (display-graphic-p)
-    ;;   (add-hook 'minibuffer-setup-hook 'kfi/craft-minibuffer)
-    ;;   (kfi/fix-echo-area)
-    ;;   (kfi/craft-minibuffer))
-
     (setq mac-command-modifier 'super)
-
-    ;; GUI
-
-
-    ;; Switch to next frame, if there is one.
 
     ;; Quick access to shell
     (global-set-key (kbd "C-c e") 'eshell)
@@ -1254,25 +1244,6 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
     (interactive)
     (set-frame-parameter nil 'alpha '(100 100))
     (add-to-list 'default-frame-alist '(alpha 100 100)))
-#+end_src
-
-** Set/Unset prose writing mode
-
-#+begin_src emacs-lisp
-  (defun kfi/write-mode ()
-    "Set special prose writing mode."
-    (interactive)
-    (display-line-numbers-mode -1)
-    (olivetti-mode 1)
-    (flyspell-mode 1)
-    (flyspell-buffer))
-
-  (defun kfi/unwrite-mode ()
-    "Unset special prose writing mode."
-    (interactive)
-    (olivetti-mode 0)
-    (flyspell-mode 0)
-    (display-line-numbers-mode 1))
 #+end_src
 
 ** Visit Emacs' init.el file
