@@ -285,6 +285,8 @@ http://joaotavora.github.io/yasnippet/
       (setq modus-operandi-theme-slanted-constructs t)
       (setq modus-operandi-theme-bold-constructs t)
       (setq modus-operandi-theme-proportional-fonts nil)
+      (setq modus-operandi-theme-distinct-org-blocks t)
+      (setq modus-operandi-theme-visible-fringes nil)
       (setq modus-operandi-theme-scale-headings nil))
 
     (use-package modus-vivendi-theme ; dark
@@ -293,6 +295,8 @@ http://joaotavora.github.io/yasnippet/
       (setq modus-vivendi-theme-slanted-constructs t)
       (setq modus-vivendi-theme-bold-constructs t)
       (setq modus-vivendi-theme-proportional-fonts nil)
+      (setq modus-vivendi-theme-distinct-org-blocks t)
+      (setq modus-vivendi-theme-visible-fringes nil)
       (setq modus-vivendi-theme-scale-headings nil))
 
     (defun kfi/modus-light ()
