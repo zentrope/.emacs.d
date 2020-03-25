@@ -1006,12 +1006,21 @@ Mimics normal Mac keybindings for font resizing.
 Rules:
 
  - Terminal windows appear at the bottom.
+ - Help windows appear docked on the left.
 
 #+begin_src emacs-lisp
   (use-package emacs
+    :hook ((help-mode . visual-line-mode))
     :init
     (setq display-buffer-alist
-          '((".*vterm.*"
+          '(("\\*Help.*"
+             (display-buffer-in-side-window)
+             (window-parameters . ((no-other-window . t)
+                                   (mode-line-format . (" " mode-line-buffer-identification))))
+             (window-width . 0.33)
+             (side . left)
+             (slot . 0))
+            ("\\*eshell.*"
              (display-buffer-in-side-window)
              (window-parameters . ((mode-line-format . (" " mode-line-buffer-identification))))
              (window-height . 0.2)
