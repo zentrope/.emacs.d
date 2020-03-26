@@ -676,6 +676,8 @@ Turn off indentation, pretty bullets and so on when running in terminal mode bec
       (set-frame-width (selected-frame) (+ (or fill-column 100) 4)))
 
     (defun kfi/org-keys-setup ()
+      (define-key org-mode-map (kbd "<f1>") 'org-tree-to-indirect-buffer)
+      (define-key org-mode-map (kbd "<escape><escape>") 'org-tree-to-indirect-buffer)
       (define-key org-mode-map (kbd "C-c a") 'org-agenda)
       (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
       (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
@@ -906,11 +908,11 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
     :ensure t
     :defer t
     :config
-    (add-hook 'swift-mode-hook (lambda ()
-                                 ;; (setq swift-mode:basic-offset 4)
-                                 ;; Doesn't also indent body.
-                                 ;; (setq swift-mode:switch-case-offset 0)
-                                 (setq indent-tabs-mode nil))))
+    (defun kfi/swift-mode ()
+      (setq swift-mode:basic-offset 4)
+      ;; (setq swift-mode:switch-case-offset 0)
+      (setq indent-tabs-mode nil))
+    (add-hook 'swift-mode-hook 'kfi/swift-mode))
 #+end_src
 
 * Settings
