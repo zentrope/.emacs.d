@@ -5,7 +5,7 @@
 ** company
 
 #+begin_src emacs-lisp
-  Equals(use-package company
+  (use-package company
     :ensure t
     :defer t)
 #+end_src
