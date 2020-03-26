@@ -1015,7 +1015,7 @@ Rules:
     (setq display-buffer-alist
           '(("\\*Help.*"
              (display-buffer-in-side-window)
-             (window-parameters . ((no-other-window . t)
+             (window-parameters . ( ;;(no-other-window . t)
                                    (mode-line-format . (" " mode-line-buffer-identification))))
              (window-width . 0.33)
              (side . left)
