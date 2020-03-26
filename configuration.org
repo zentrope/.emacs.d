@@ -679,7 +679,7 @@ Turn off indentation, pretty bullets and so on when running in terminal mode bec
 
     (defun kfi/org-keys-setup ()
       (define-key org-mode-map (kbd "<f1>") 'org-tree-to-indirect-buffer)
-      (define-key org-mode-map (kbd "<escape><escape>") 'org-tree-to-indirect-buffer)
+      (define-key org-mode-map (kbd "<s-escape>") 'org-tree-to-indirect-buffer)
       (define-key org-mode-map (kbd "C-c a") 'org-agenda)
       (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
       (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
