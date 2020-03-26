@@ -651,7 +651,9 @@ Turn off indentation, pretty bullets and so on when running in terminal mode bec
 
     (setq org-src-window-setup 'split-window-below
           org-tags-column kfi/org-wide-tags-column
-          org-support-shift-select t)
+          org-support-shift-select t
+          org-src-tab-actus-natively t
+          org-src-window-setup 'current-window)
 
     (defun kfi/org-narrow-doc ()
       "Reset org fill params for a prose focussed mode."
