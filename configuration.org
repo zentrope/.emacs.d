@@ -1,5 +1,6 @@
 #+title: Emacs Configuration
 #+startup: content
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
 
 * Packages
 ** company
@@ -125,7 +126,7 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     :pin melpa
     :config
     (setq mac-command-modifier 'super)
-    :bind (("C-S-c k" . mc/edit-lines)
+    :bind (("C-s-c k" . mc/edit-lines)
            ("C-M->" . mc/mark-all-like-this)
            ("C-<" . mc/mark-previous-like-this)
            ("C->" . mc/mark-next-like-this)))
