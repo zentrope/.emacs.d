@@ -1083,6 +1083,16 @@ Rules:
 #+end_src
 
 * Custom Functions
+** Sort lines (nocase)
+
+#+begin_src emacs-lisp
+  (defun kfi/sort-lines-nocase ()
+    "Sort lines ignoring case"
+    (interactive)
+    (let ((sort-fold-case t))
+      (call-interactively 'sort-lines)))
+#+end_src
+
 ** Insert timestamp
 
 What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]]. Each of the formats could be made into a =yasnippet= (which is what I do with KB Maestro) using an elisp expression as its body. But I like the ~completing-read~ minibuffer menu thing here.
