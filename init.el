@@ -79,9 +79,6 @@ than the output file."
 
 (kfi/refresh-config)
 
-
-(use-package kfi-basics :load-path "kfi/kfi-basics")
-
 (when (file-exists-p "~/.emacs.d/local.el")
   (load "~/.emacs.d/local.el"))
 
