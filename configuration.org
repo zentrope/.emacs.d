@@ -1,6 +1,5 @@
 #+title: Emacs Configuration
 #+startup: content
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
 
 * Packages
 ** company
