@@ -379,7 +379,9 @@ Control-meta-super-F
 
 ** which-key
 
-=which-key= is a minor mode for Emacs that displays the key bindings following your currently entered incomplete command (a prefix) in a popup.
+=which-key= is a minor mode for Emacs that displays the key bindings
+following your currently entered incomplete command (a prefix) in a
+popup.
 
 [[https://github.com/justbur/emacs-which-key]]
 
@@ -836,7 +838,8 @@ Revisit if I use Go again.
 
 - [[https://github.com/emacs-lsp/lsp-ui]]
 
-TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blob/master/config.el][hlissner's config.el]] to see how I might customize lsp so it's not so facey.
+TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blob/master/config.el][hlissner's config.el]] to see how I might
+customize lsp so it's not so facey.
 
 #+begin_src emacs-lisp
   (use-package cc-mode
@@ -942,7 +945,8 @@ TODO: Check out this config [[https://github.com/hlissner/doom-emacs-private/blo
 
 ** Global auto revert files (load if changed on disk)
 
-Global Auto Revert mode is a global minor mode that reverts any buffer associated with a file when the file changes on disk.
+Global Auto Revert mode is a global minor mode that reverts any buffer
+associated with a file when the file changes on disk.
 
 #+begin_src emacs-lisp
   (global-auto-revert-mode 1)
@@ -966,7 +970,9 @@ Toggle automatic parens pairing (Electric Pair mode).
 
 ** Replace selected text when you type something
 
-When Delete Selection mode is enabled, typed text replaces the selection if the selection is active. Otherwise, typed text is just inserted at point regardless of any selection.
+When Delete Selection mode is enabled, typed text replaces the
+selection if the selection is active. Otherwise, typed text is just
+inserted at point regardless of any selection.
 
 #+begin_src emacs-lisp
   (delete-selection-mode 1)
@@ -982,7 +988,12 @@ Toggle column number display in the mode line (Column Number mode).
 
 ** Use regular keys for cut/copy/paste (cua-mode)
 
-CUA mode is a global minor mode. When enabled, typed text replaces the active selection, and you can use C-z, C-x, C-c, and C-v to undo, cut, copy, and paste in addition to the normal Emacs bindings. The C-x and C-c keys only do cut and copy when the region is active, so in most cases, they do not conflict with the normal function of these prefix keys.
+CUA mode is a global minor mode. When enabled, typed text replaces the
+active selection, and you can use C-z, C-x, C-c, and C-v to undo, cut,
+copy, and paste in addition to the normal Emacs bindings. The C-x and
+C-c keys only do cut and copy when the region is active, so in most
+cases, they do not conflict with the normal function of these prefix
+keys.
 
 #+begin_src emacs-lisp
   (cua-mode 1)
@@ -1104,7 +1115,10 @@ Rules:
 
 ** Insert timestamp
 
-What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]]. Each of the formats could be made into a =yasnippet= (which is what I do with KB Maestro) using an elisp expression as its body. But I like the ~completing-read~ minibuffer menu thing here.
+What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Maestro]]. Each of the formats
+could be made into a =yasnippet= (which is what I do with KB Maestro)
+using an elisp expression as its body. But I like the ~completing-read~
+minibuffer menu thing here.
 
 #+begin_src emacs-lisp
   (defvar kfi/timestamp-formats
@@ -1127,6 +1141,7 @@ What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Ma
 #+end_src
 
 ** Remove smart quotes from a buffer
+
 #+begin_src emacs-lisp
   (defun kfi/unsmart ()
     "Remove smart quotes from buffer."
@@ -1145,7 +1160,9 @@ What I use when I can't use [[https://www.keyboardmaestro.com/main/][Keyboard Ma
 
 ** Remove newlines until end of paragraph @bug
 
-Actually, this doesn't do what I think it does: it seems to go to the stop of the buffer, when it should instead find the beginning of the paragraph. I wonder what the original intent was?
+Actually, this doesn't do what I think it does: it seems to go to the
+stop of the buffer, when it should instead find the beginning of the
+paragraph. I wonder what the original intent was?
 
 #+begin_src emacs-lisp
   (defun kfi/unwrap-line ()
@@ -1206,6 +1223,7 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
 #+end_src
 
 ** Open the current file in whatever MacOS thinks is the appropriate handler
+
 #+begin_src emacs-lisp
   (defun kfi/open-this ()
     "Open the buffer using MacOS defaults."
@@ -1263,7 +1281,7 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
     (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 #+end_src
 
-** Make the background (and foreground) slight transparent (or not)
+** Make the background (and foreground) slightly transparent (or not)
 
 #+begin_src emacs-lisp
   (defun kfi/transparency-on ()
@@ -1301,7 +1319,8 @@ Actually, this doesn't do what I think it does: it seems to go to the stop of th
 
 ** Find a way for fly-spell to not check certain words
 
-Do something like the following, and have that function check for words beginning and ending with "=" or "@" or "#" or "~".
+Do something like the following, and have that function check for
+words beginning and ending with "=" or "@" or "#" or "~".
 
 #+begin_src block
   (add-hook 'java-mode-hook
@@ -1309,7 +1328,9 @@ Do something like the following, and have that function check for words beginnin
               (setq flyspell-generic-check-word-predicate 'my-new-function)))
 #+end_src
 
-Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spellchecking in comments, though I'm not sure this will work in org-mode given it's not a programming mode. Hm.
+Also check: https://emacs.stackexchange.com/a/31302 for using faces to
+avoid spellchecking in comments, though I'm not sure this will work in
+org-mode given it's not a programming mode. Hm.
 
 #+begin_src block
   (setq flyspell-prog-text-faces
@@ -1319,10 +1340,13 @@ Also check: https://emacs.stackexchange.com/a/31302 for using faces to avoid spe
 * Advice
 ** How do I fix issues with lsp-java always wanting to rename packages?
 
-Quit emacs, then go into =~/.emacs.d= and remove the workspace directory. When you restart, things should be better.
+Quit emacs, then go into =~/.emacs.d= and remove the workspace
+directory. When you restart, things should be better.
 
-Also, visit build.gradle and run ~M-x lsp-java-update-project-configuration~, and make ~lsp-restart-workspace~.
+Also, visit build.gradle and run ~M-x
+lsp-java-update-project-configuration~, and make ~lsp-restart-workspace~.
 
 ** How do I add a new project to Treemacs without triggering "project already exists"?
 
-When you enter in the path to the new project for your workspace, remove the trailing ~/~ from the path.
+When you enter in the path to the new project for your workspace,
+remove the trailing ~/~ from the path.
