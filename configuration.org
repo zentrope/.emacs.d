@@ -1,6 +1,144 @@
 #+title: Emacs Configuration
 #+startup: content
 
+* Introduction
+
+This document is a way for me to organize and navigate my
+configuration more than an exercise in literate programming.
+
+* Appearance
+** Emacs GUI
+
+This goes first so that we don't see unsightly stuff appear while
+Emacs is loading.
+
+#+begin_src emacs-lisp
+  (when (display-graphic-p)
+    (menu-bar-mode 1)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+    (tooltip-mode -1))
+#+end_src
+
+** All the icons
+
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+    :ensure t)
+#+end_src
+
+** Fonts
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    (when (display-graphic-p)
+      (defvar kfi/font-choices '("JetBrains Mono" "Menlo" "Monaco")
+        "Font faces I'm fond of.")
+
+      (defun kfi/switch-font ()
+        "Choose a font."
+        (interactive)
+        (let ((font (completing-read "Font:" kfi/font-choices)))
+          (if font
+              (set-face-attribute 'default nil :family font)
+            (message "ERROR: Invalid font: %s." font))))
+
+      (set-face-attribute 'default nil
+                          :family "JetBrains Mono"
+                          :height 140
+                          :weight 'medium)))
+#+end_src
+
+** Themes
+
+A light theme:
+
+#+begin_src emacs-lisp
+  (use-package modus-operandi-theme     ; light
+    :ensure t
+    :config
+    (setq modus-operandi-theme-slanted-constructs t)
+    (setq modus-operandi-theme-bold-constructs t)
+    (setq modus-operandi-theme-proportional-fonts nil)
+    (setq modus-operandi-theme-distinct-org-blocks t)
+    (setq modus-operandi-theme-visible-fringes nil)
+    (setq modus-operandi-theme-scale-headings nil))
+#+end_src
+
+The corresponding dark theme:
+
+#+begin_src emacs-lisp
+  (use-package modus-vivendi-theme      ; dark
+    :ensure t
+    :config
+    (setq modus-vivendi-theme-slanted-constructs t)
+    (setq modus-vivendi-theme-bold-constructs t)
+    (setq modus-vivendi-theme-proportional-fonts nil)
+    (setq modus-vivendi-theme-distinct-org-blocks t)
+    (setq modus-vivendi-theme-visible-fringes nil)
+    (setq modus-vivendi-theme-scale-headings nil))
+#+end_src
+
+Some utility functions for switching themes. The dark theme switcher
+updates an =org-mode= face, so it has to be loaded /after/ org mode.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    (defun kfi/unload-themes ()
+      "Disable all custom themes."
+      (interactive)
+      (dolist (theme custom-enabled-themes)
+        (disable-theme theme)))
+
+    (defun kfi/modus-light ()
+      "Use the modus light theme."
+      (interactive)
+      (kfi/unload-themes)
+      (load-theme 'modus-operandi t)
+      (set-face-attribute 'mode-line nil :box nil))
+
+    (with-eval-after-load "org"
+      (defun kfi/modus-dark ()
+        "Use the modus dark theme."
+        (interactive)
+        (kfi/unload-themes)
+        (load-theme 'modus-vivendi t)
+        (set-face-attribute 'mode-line nil :box nil)
+        (set-face-attribute 'org-default nil :foreground "#c7c7c7"))
+      (when (display-graphic-p)
+        (kfi/modus-dark))))
+#+end_src
+
+** Modeline
+
+[[https://github.com/seagle0128/doom-modeline]]
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    (use-package doom-modeline
+      :ensure t
+      :config
+      (when (display-graphic-p)
+        (doom-modeline-mode 1)
+        ;; Some themes set this, so unset it just in case.
+        (set-face-attribute 'mode-line nil :box nil))))
+#+end_src
+
+** Emoji
+
+#+begin_src emacs-lisp
+  (use-package company-emoji
+    :ensure t
+    :pin melpa
+    :config
+    (when (and (display-graphic-p) (eq system-type 'darwin))
+      (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+      (add-to-list 'company-backends 'company-emoji)))
+#+end_src
+
 * Packages
 ** company
 
@@ -263,152 +401,6 @@ http://joaotavora.github.io/yasnippet/
     (yas-global-mode))
 #+end_src
 
-* Appearance
-** All the icons
-
-#+begin_src emacs-lisp
-  (use-package all-the-icons
-    :ensure t)
-#+end_src
-
-** Fonts
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :config
-    (when (display-graphic-p)
-      (defvar kfi/font-choices '("JetBrains Mono" "Menlo" "Monaco")
-        "Font faces I'm fond of.")
-
-      (defun kfi/switch-font ()
-        "Choose a font."
-        (interactive)
-        (let ((font (completing-read "Font:" kfi/font-choices)))
-          (if font
-              (set-face-attribute 'default nil :family font)
-            (message "ERROR: Invalid font: %s." font))))
-
-      (set-face-attribute 'default nil
-                          :family "JetBrains Mono"
-                          :height 140
-                          :weight 'medium)))
-#+end_src
-
-** Themes
-
-- [[https://github.com/hlissner/emacs-doom-themes]]
-- [[https://gitlab.com/protesilaos/modus-themes]]
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :config
-
-    (defun kfi/unload-themes ()
-      "Disable all custom themes."
-      (interactive)
-      (dolist (theme custom-enabled-themes)
-        (disable-theme theme)))
-
-    ;; (use-package doom-themes
-    ;;   :ensure t
-    ;;   :config
-    ;;   (setq doom-themes-enable-bold t)
-    ;;   (setq doom-themes-enable-italic t)
-    ;;   (setq doom-themes-treemacs-theme "doom-colors")
-    ;;   (doom-themes-treemacs-config)
-    ;;   (doom-themes-org-config)
-    ;;   ;; (when (display-graphic-p)
-    ;;   ;;   (load-theme 'doom-one-light t))
-    ;;   )
-
-    ;; (defun kfi/doom-light ()
-    ;;   "Switch to the predefined light theme."
-    ;;   (interactive)
-    ;;   (kfi/unload-themes)
-    ;;   (load-theme 'doom-one-light t))
-
-    ;; (defun kfi/doom-dark ()
-    ;;   "Apply the dark doom-one theme."
-    ;;   (interactive)
-    ;;   (kfi/unload-themes)
-    ;;   (load-theme 'doom-one t))
-
-    (use-package modus-operandi-theme ; light
-      :ensure t
-      :config
-      (setq modus-operandi-theme-slanted-constructs t)
-      (setq modus-operandi-theme-bold-constructs t)
-      (setq modus-operandi-theme-proportional-fonts nil)
-      (setq modus-operandi-theme-distinct-org-blocks t)
-      (setq modus-operandi-theme-visible-fringes nil)
-      (setq modus-operandi-theme-scale-headings nil))
-
-    (use-package modus-vivendi-theme ; dark
-      :ensure t
-      :config
-      (setq modus-vivendi-theme-slanted-constructs t)
-      (setq modus-vivendi-theme-bold-constructs t)
-      (setq modus-vivendi-theme-proportional-fonts nil)
-      (setq modus-vivendi-theme-distinct-org-blocks t)
-      (setq modus-vivendi-theme-visible-fringes nil)
-      (setq modus-vivendi-theme-scale-headings nil))
-
-    (defun kfi/modus-light ()
-      "Use the modus light theme."
-      (interactive)
-      (kfi/unload-themes)
-      (load-theme 'modus-operandi t)
-      (set-face-attribute 'mode-line nil :box nil))
-
-    (defun kfi/modus-dark ()
-      "Use the modus dark theme."
-      (interactive)
-      (kfi/unload-themes)
-      (load-theme 'modus-vivendi t)
-      (set-face-attribute 'mode-line nil :box nil))
-
-    (when (display-graphic-p)
-      (kfi/modus-dark)))
-#+end_src
-
-** Modeline
-
-[[https://github.com/seagle0128/doom-modeline]]
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :config
-    (use-package doom-modeline
-      :ensure t
-      :config
-      (when (display-graphic-p)
-        (doom-modeline-mode 1)
-        ;; Some themes set this, so unset it just in case.
-        (set-face-attribute 'mode-line nil :box nil))))
-#+end_src
-
-** Emoji
-
-#+begin_src emacs-lisp
-  (use-package company-emoji
-    :ensure t
-    :pin melpa
-    :config
-    (when (and (display-graphic-p) (eq system-type 'darwin))
-      (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
-      (add-to-list 'company-backends 'company-emoji)))
-#+end_src
-
-** Emacs GUI
-
-#+begin_src emacs-lisp
-  (when (display-graphic-p)
-    (menu-bar-mode 1)
-    (tool-bar-mode -1)
-    (scroll-bar-mode -1)
-    (tooltip-mode -1))
-#+end_src
-
 * Application Modes
 ** Directory Editor (Dired)
 
@@ -658,91 +650,61 @@ https://github.com/akermu/emacs-libvterm
 
 ** Org Mode
 
-Turn off indentation, pretty bullets and so on when running in terminal mode because it just makes things even uglier for those few times you need it.
+Turn off indentation, pretty bullets and so on when running in
+terminal mode because it just makes things even uglier for those few
+times you need it.
 
 #+begin_src emacs-lisp
-    (use-package org-bullets
+  (use-package org-bullets
+    :ensure t)
+
+  (use-package org
+    :ensure t
+    :pin org
+    :init
+    :config
+    (setq org-hide-emphasis-markers t)
+
+    (defun kfi/org-toggle-markers ()
+      "Toggle showing markup markers (italics, bold, etc)."
+      (interactive)
+      (org-toggle-link-display))
+
+    (setq org-src-window-setup 'split-window-below
+          org-support-shift-select t
+          org-src-tab-acts-natively t
+          org-src-window-setup 'current-window)
+
+    (defun kfi/org-keys-setup ()
+      (define-key org-mode-map (kbd "<f1>") 'org-tree-to-indirect-buffer)
+      (define-key org-mode-map (kbd "<s-escape>") 'org-tree-to-indirect-buffer)
+      (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+      (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
+      (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
+
+    (defun kfi/org-graphic-mode-setup ()
+      (when (display-graphic-p)
+        (setq org-ellipsis " … ")
+        ;; Have to set this so that I can adjust it when switching to
+        ;; the theme.
+        (buffer-face-set 'org-default)
+        (org-indent-mode 1)
+        (org-bullets-mode 1)
+        (setq-local global-hl-line-mode nil)))
+
+    (defun kfi/org-standard-setup ()
+      (auto-fill-mode 1)
+      ;;(set-fill-column 70)
+      (yas-minor-mode-on))
+
+    ;; Is this necessary? I have a vague memory that this
+    ;; helps with org exports to HTML.
+    (use-package htmlize
       :ensure t)
 
-    (use-package visual-fill-column
-      :ensure t)
-
-    (use-package org
-      :ensure t
-      :pin org
-      :init
-      :config
-
-      (setq org-hide-emphasis-markers t)
-
-      (defun kfi/org-toggle-markers ()
-        "Toggle showing markup markers (italics, bold, etc)."
-        (interactive)
-        (setq org-hide-emphasis-markers (not (bound-and-true-p org-hide-emphasis-markers)))
-        (org-mode-restart))
-
-      (defvar kfi/org-wide-fill-column 100
-        "Fill column for org mode when used for working with tasks/tags.")
-      (defvar kfi/org-wide-tags-column 85
-        "Tags column for org mode when used for working with tasks/tags.")
-      (defvar kfi/org-narrow-fill-column 80
-        "Fill column for org mode when used for prose/documentation.")
-      (defvar kfi/org-narrow-tags-column 65
-        "Tags column for org mode when used for prose/documentation.")
-
-      (setq org-src-window-setup 'split-window-below
-            org-tags-column kfi/org-wide-tags-column
-            org-support-shift-select t
-            org-src-tab-actus-natively t
-            org-src-window-setup 'current-window)
-
-      (defun kfi/org-narrow-doc ()
-        "Reset org fill params for a prose focussed mode."
-        (interactive)
-        (set-fill-column kfi/org-narrow-fill-column)
-        (setq org-tags-column kfi/org-narrow-tags-column))
-
-      (defun kfi/org-widen-doc ()
-        "Reset org fill params for a task focussed mode."
-        (interactive)
-        (set-fill-column kfi/org-wide-fill-column)
-        (setq org-tags-column kfi/org-wide-tags-column))
-
-      (defun kfi/org-align-tags ()
-        "Align tags if they've gotten messed up."
-        (interactive)
-        (org-align-tags t))
-
-      (defun kfi/org-width ()
-        "Set org-buffer frame to comfortable width."
-        (interactive)
-        (set-frame-width (selected-frame) (+ (or fill-column 100) 4)))
-
-      (defun kfi/org-keys-setup ()
-        (define-key org-mode-map (kbd "<f1>") 'org-tree-to-indirect-buffer)
-        (define-key org-mode-map (kbd "<s-escape>") 'org-tree-to-indirect-buffer)
-        (define-key org-mode-map (kbd "C-c a") 'org-agenda)
-        (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
-        (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
-
-      (defun kfi/org-setup ()
-        (visual-line-mode 1)
-        (visual-fill-column-mode 1)
-        (when (display-graphic-p)
-          (setq org-ellipsis " … ")
-          (org-indent-mode 1)
-          (org-bullets-mode 1)
-          (setq-local global-hl-line-mode nil))
-        (set-fill-column 100)
-        (yas-minor-mode-on))
-
-      ;; Is this necessary? I have a vague memory that this
-      ;; helps with org exports to HTML.
-      (use-package htmlize
-        :ensure t)
-
-      (add-hook 'org-mode-hook 'kfi/org-keys-setup)
-      (add-hook 'org-mode-hook 'kfi/org-setup))
+    (add-hook 'org-mode-hook 'kfi/org-graphic-mode-setup)
+    (add-hook 'org-mode-hook 'kfi/org-keys-setup)
+    (add-hook 'org-mode-hook 'kfi/org-standard-setup))
 #+end_src
 
 ** Web Mode
