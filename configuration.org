@@ -1,5 +1,5 @@
 #+title: Emacs Configuration
-#+startup: content
+#+startup: overview
 
 * Introduction
 
@@ -652,20 +652,33 @@ https://github.com/akermu/emacs-libvterm
 
 ** Org Mode
 
+Provide "pretty" bullets for =Org Mode=.
+
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t)
+#+end_src
+
+I've configured the =Org Mode= to use hard line-breaks for paragraphs at
+70 characters (rather than using visual-line mode) so that an =org=
+document will be readable (except for tags) at the command line.
+
 Turn off indentation, pretty bullets and so on when running in
 terminal mode because it just makes things even uglier for those few
 times you need it.
 
 #+begin_src emacs-lisp
-  (use-package org-bullets
-    :ensure t)
-
   (use-package org
     :ensure t
     :pin org
     :init
     :config
     (setq org-hide-emphasis-markers t)
+
+    (defun kfi/align-tags ()
+      "Align tags to their columns."
+      (interactive)
+      (org-align-tags t))
 
     (defun kfi/org-toggle-markers ()
       "Toggle showing markup markers (italics, bold, etc)."
