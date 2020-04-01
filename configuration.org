@@ -675,7 +675,7 @@ times you need it.
     :config
     (setq org-hide-emphasis-markers t)
 
-    (defun kfi/align-tags ()
+    (defun kfi/org-align-tags ()
       "Align tags to their columns."
       (interactive)
       (org-align-tags t))
@@ -694,8 +694,7 @@ times you need it.
       (define-key org-mode-map (kbd "<f1>") 'org-tree-to-indirect-buffer)
       (define-key org-mode-map (kbd "<s-escape>") 'org-tree-to-indirect-buffer)
       (define-key org-mode-map (kbd "C-c a") 'org-agenda)
-      (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags)
-      (define-key org-mode-map (kbd "C-c w") 'kfi/org-width))
+      (define-key org-mode-map (kbd "C-c t") 'kfi/org-align-tags))
 
     (defun kfi/org-graphic-mode-setup ()
       (when (display-graphic-p)
