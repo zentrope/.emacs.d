@@ -4,7 +4,8 @@
 * Introduction
 
 This document is a way for me to organize and navigate my
-configuration more than an exercise in literate programming.
+configuration. It's not a teaching moment or an exercise in literate
+programming.
 
 * Appearance
 ** Emacs GUI
@@ -674,6 +675,7 @@ times you need it.
     :init
     :config
     (setq org-hide-emphasis-markers t)
+    (setq org-agenda-start-on-weekday 0) ;; Sunday
 
     (defun kfi/org-align-tags ()
       "Align tags to their columns."
