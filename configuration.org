@@ -1038,6 +1038,9 @@ Mimics normal Mac keybindings for font resizing.
   (global-set-key (kbd "s-<left>") 'windmove-left)
   (global-set-key (kbd "s-<up>") 'windmove-up)
   (global-set-key (kbd "s-<down>") 'windmove-down)
+
+  (global-set-key (kbd "s-0") 'delete-window)
+  (global-set-key (kbd "s-1") 'delete-other-windows)
 #+end_src
 
 ** Window placement
