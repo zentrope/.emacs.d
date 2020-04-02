@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org-create-reset-source
+# key: restsrc
+# --
+#+begin_src restclient
+  $0
+#+end_src
