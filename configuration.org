@@ -657,7 +657,8 @@ Provide "pretty" bullets for =Org Mode=.
 
 #+begin_src emacs-lisp
   (use-package org-bullets
-    :ensure t)
+    :ensure t
+    :after org)
 #+end_src
 
 I've configured the =Org Mode= to use hard line-breaks for paragraphs at
@@ -672,10 +673,14 @@ times you need it.
   (use-package org
     :ensure t
     :pin org
-    :init
     :config
-    (setq org-hide-emphasis-markers t)
-    (setq org-agenda-start-on-weekday 0) ;; Sunday
+    (setq org-ellipsis " … "
+          org-agenda-start-on-weekday 0
+          org-hide-emphasis-markers t
+          org-src-window-setup 'split-window-below
+          org-support-shift-select t
+          org-src-tab-acts-natively t
+          org-src-window-setup 'current-window)
 
     (defun kfi/org-align-tags ()
       "Align tags to their columns."
@@ -687,11 +692,6 @@ times you need it.
       (interactive)
       (org-toggle-link-display))
 
-    (setq org-src-window-setup 'split-window-below
-          org-support-shift-select t
-          org-src-tab-acts-natively t
-          org-src-window-setup 'current-window)
-
     (defun kfi/org-keys-setup ()
       (define-key org-mode-map (kbd "<f1>") 'org-tree-to-indirect-buffer)
       (define-key org-mode-map (kbd "<s-escape>") 'org-tree-to-indirect-buffer)
@@ -700,7 +700,6 @@ times you need it.
 
     (defun kfi/org-graphic-mode-setup ()
       (when (display-graphic-p)
-        (setq org-ellipsis " … ")
         ;; Have to set this so that I can adjust it when switching to
         ;; the theme.
         (buffer-face-set 'org-default)
@@ -710,7 +709,6 @@ times you need it.
 
     (defun kfi/org-standard-setup ()
       (auto-fill-mode 1)
-      ;;(set-fill-column 70)
       (yas-minor-mode-on))
 
     ;; Is this necessary? I have a vague memory that this
