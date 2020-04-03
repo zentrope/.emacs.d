@@ -140,7 +140,7 @@ updates an =org-mode= face, so it has to be loaded /after/ org mode.
       (add-to-list 'company-backends 'company-emoji)))
 #+end_src
 
-* Packages
+* Features
 ** company
 
 #+begin_src emacs-lisp
