@@ -100,13 +100,18 @@ of thing up there.
 
   (font-lock-add-keywords
    'org-mode
-   `(("^\\(.*?[\\)\\.\\+\\-]+? \\[X\\] \\)\\(.*\\)$" 2 'org-checkbox-done-text prepend))
+   `(("^\\(.*?[\\)\\.\\+\\-]+? \\[X\\] \\)\\(.*\\)$"
+      2 ;; use the second match
+      'org-checkbox-done-text prepend))
    'append)
-  (set-face-attribute 'org-checkbox-done-text nil :strike-through t :foreground "gray40")
+
+  (set-face-attribute 'org-checkbox-done-text nil
+                      :strike-through t
+                      :foreground "gray40")
 #+end_src
 
 Some utility functions for switching themes. The dark theme switcher
-updates an =org-mode= face, so it has to be loaded /after/ org mode.
+updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
 
 #+begin_src emacs-lisp
   (use-package emacs
