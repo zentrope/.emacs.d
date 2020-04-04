@@ -1361,7 +1361,20 @@ org-mode given it's not a programming mode. Hm.
         (delq 'font-lock-string-face
               flyspell-prog-text-faces))
 #+end_src
+
 * Advice
+
+** How do you add words to the spell check local dictionary?
+
+Try =M-$=, then =i= then =yes= to accept the word. Maybe sure the word is
+highlighted.
+
+To double check your learned words, look in =~/.aspell.pws=.
+
+** Where does Flyspell put your "learned" words?
+
+Look in =~/.aspell.pws=.
+
 ** How do I fix issues with lsp-java always wanting to rename packages?
 
 Quit emacs, then go into =~/.emacs.d= and remove the workspace
