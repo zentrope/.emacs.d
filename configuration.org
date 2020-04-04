@@ -81,6 +81,30 @@ The corresponding dark theme:
     (setq modus-vivendi-theme-scale-headings nil))
 #+end_src
 
+Add a face for =Org Mode= checklists such that when you check them off,
+they grey out and get a strike through. The regex matcher isn't
+perfect because you can make your text contain another checklist, such
+as:
+
+#+begin_example
+  - [ ] Finish the task 2) [X] again
+#+end_example
+
+The word "again" will get the font face. I need to check for
+spaces/nums at the beginning, or something: or just don't do the kind
+of thing up there.
+
+#+begin_src emacs-lisp
+  (defface org-checkbox-done-text '((t (:inherit org-done)))
+    "Face for the text part of a checked org-mode checkbox.")
+
+  (font-lock-add-keywords
+   'org-mode
+   `(("^\\(.*?[\\)\\.\\+\\-]+? \\[X\\] \\)\\(.*\\)$" 2 'org-checkbox-done-text prepend))
+   'append)
+  (set-face-attribute 'org-checkbox-done-text nil :strike-through t :foreground "gray40")
+#+end_src
+
 Some utility functions for switching themes. The dark theme switcher
 updates an =org-mode= face, so it has to be loaded /after/ org mode.
 
@@ -98,16 +122,18 @@ updates an =org-mode= face, so it has to be loaded /after/ org mode.
       (interactive)
       (kfi/unload-themes)
       (load-theme 'modus-operandi t)
-      (set-face-attribute 'mode-line nil :box nil))
+      (set-face-attribute 'mode-line nil :box nil)
+      (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
 
-    (with-eval-after-load "org"
+    (with-eval-after-load 'org
       (defun kfi/modus-dark ()
         "Use the modus dark theme."
         (interactive)
         (kfi/unload-themes)
         (load-theme 'modus-vivendi t)
         (set-face-attribute 'mode-line nil :box nil)
-        (set-face-attribute 'org-default nil :foreground "#c7c7c7"))
+        (set-face-attribute 'org-default nil :foreground "#c7c7c7")
+        (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
       (when (display-graphic-p)
         (kfi/modus-dark))))
 #+end_src
@@ -675,6 +701,7 @@ times you need it.
     :pin org
     :config
     (setq org-ellipsis " … "
+          org-fontify-done-headline t
           org-agenda-start-on-weekday 0
           org-hide-emphasis-markers t
           org-src-window-setup 'split-window-below
