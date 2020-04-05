@@ -207,6 +207,15 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
     :ensure t)
 #+end_src
 
+** git-gutter
+
+#+begin_src emacs-lisp
+  (use-package git-gutter
+    :ensure t
+    :config
+    (global-git-gutter-mode 1))
+#+end_src
+
 ** ibuffers
 
 #+begin_src emacs-lisp
