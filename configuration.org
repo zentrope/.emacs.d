@@ -307,6 +307,7 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     (global-set-key (kbd "C-h v") 'counsel-describe-variable)
     (global-set-key (kbd "C-h f") 'counsel-describe-function)
     (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "s-f") 'swiper)
     ;; Has to be set here because counsel overrides ivy.
     ;;  - Remove the ^ regex assumption for all searches
     (setq ivy-initial-inputs-alist nil))
