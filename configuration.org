@@ -697,7 +697,7 @@ https://github.com/akermu/emacs-libvterm
 Provide "pretty" bullets for =Org Mode=.
 
 #+begin_src emacs-lisp
-  (use-package org-bullets
+  (use-package org-superstar
     :ensure t
     :after org)
 #+end_src
@@ -746,7 +746,7 @@ times you need it.
         ;; the theme.
         (buffer-face-set 'org-default)
         (org-indent-mode 1)
-        (org-bullets-mode 1)
+        (org-superstar-mode 1)
         (setq-local global-hl-line-mode nil)))
 
     (defun kfi/org-standard-setup ()
