@@ -138,6 +138,7 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
         (load-theme 'modus-vivendi t)
         (set-face-attribute 'mode-line nil :box nil)
         (set-face-attribute 'org-default nil :foreground "#c7c7c7")
+        (set-face-attribute 'bold nil :foreground "white")
         (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
       (when (display-graphic-p)
         (kfi/modus-dark))))
