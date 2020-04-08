@@ -150,15 +150,13 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
 [[https://github.com/seagle0128/doom-modeline]]
 
 #+begin_src emacs-lisp
-  (use-package emacs
+  (use-package doom-modeline
+    :ensure t
     :config
-    (use-package doom-modeline
-      :ensure t
-      :config
-      (when (display-graphic-p)
-        (doom-modeline-mode 1)
-        ;; Some themes set this, so unset it just in case.
-        (set-face-attribute 'mode-line nil :box nil))))
+    (when (display-graphic-p)
+      (doom-modeline-mode 1)
+      ;; Some themes set this, so unset it just in case.
+      (set-face-attribute 'mode-line nil :box nil)))
 #+end_src
 
 ** Emoji
