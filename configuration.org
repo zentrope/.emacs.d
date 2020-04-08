@@ -320,11 +320,6 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     :ensure t)
   (use-package smex ; counsel-M-x will use this?
     :ensure t)
-  (use-package amx
-    :disabled
-    :ensure t
-    :config
-    (amx-mode))
   (use-package ivy-rich
     :ensure t
     :after ivy
