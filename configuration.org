@@ -223,23 +223,28 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
     :bind (("C-x C-b" . ibuffer)
            ("<C-tab>" . ibuffer))
     :config
-    (defvar ibuffer-saved-filter-groups
+    (setq ibuffer-saved-filter-groups
       (quote (("default"
                ("org" (mode . org-mode))
-               ("java" (mode . java-mode))
-               ("json" (mode . json-mode))
-               ("clojure" (mode . clojure-mode))
-               ("python" (mode . python-mode))
+               ("swift" (mode . swift-mode))
+               ("elisp" (mode . emacs-lisp-mode))
                ("web" (or (mode . css-mode)
                           (mode . html-mode)
-                          (mode . js-mode)))
+                          (mode . nxml-mode)
+                          (mode . js-mode)
+                          (mode . web-mode)))
+               ("python" (mode . python-mode))
+               ("json" (mode . json-mode))
+               ("java" (mode . java-mode))
+               ("clojure" (mode . clojure-mode))
                ("erc" (name . "^\\#"))
-               ("elisp" (mode . emacs-lisp-mode))
                ("dirs" (mode . dired-mode))
                ("temps" (name . "^\\*.*\\*$"))))))
-    (add-hook 'ibuffer-mode-hook
-              '(lambda ()
-                 (ibuffer-switch-to-saved-filter-groups "default"))))
+
+    (defun kfi/use-ibuffer-default ()
+      (ibuffer-switch-to-saved-filter-groups "default"))
+
+    (add-hook 'ibuffer-mode-hook 'kfi/use-ibuffer-default))
 #+end_src
 
 ** COMMENT ido (disabled)
