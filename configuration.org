@@ -221,25 +221,26 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
 #+begin_src emacs-lisp
   (use-package ibuffer
     :bind (("C-x C-b" . ibuffer)
-           ("<C-tab>" . ibuffer))
+           ("<C-tab>" . ibuffer)
+           ("<s-8>" . ibuffer))
     :config
     (setq ibuffer-saved-filter-groups
-      (quote (("default"
-               ("org" (mode . org-mode))
-               ("swift" (mode . swift-mode))
-               ("elisp" (mode . emacs-lisp-mode))
-               ("web" (or (mode . css-mode)
-                          (mode . html-mode)
-                          (mode . nxml-mode)
-                          (mode . js-mode)
-                          (mode . web-mode)))
-               ("python" (mode . python-mode))
-               ("json" (mode . json-mode))
-               ("java" (mode . java-mode))
-               ("clojure" (mode . clojure-mode))
-               ("erc" (name . "^\\#"))
-               ("dirs" (mode . dired-mode))
-               ("temps" (name . "^\\*.*\\*$"))))))
+          (quote (("default"
+                   ("org" (mode . org-mode))
+                   ("swift" (mode . swift-mode))
+                   ("elisp" (mode . emacs-lisp-mode))
+                   ("web" (or (mode . css-mode)
+                              (mode . html-mode)
+                              (mode . nxml-mode)
+                              (mode . js-mode)
+                              (mode . web-mode)))
+                   ("python" (mode . python-mode))
+                   ("json" (mode . json-mode))
+                   ("java" (mode . java-mode))
+                   ("clojure" (mode . clojure-mode))
+                   ("erc" (name . "^\\#"))
+                   ("dirs" (mode . dired-mode))
+                   ("temps" (name . "^\\*.*\\*$"))))))
 
     (defun kfi/use-ibuffer-default ()
       (ibuffer-switch-to-saved-filter-groups "default"))
