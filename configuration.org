@@ -241,10 +241,11 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
                    ("dirs" (mode . dired-mode))
                    ("temps" (name . "^\\*.*\\*$"))))))
 
-    (defun kfi/use-ibuffer-default ()
+    (defun kfi/setup-ibuffer ()
+      (hl-line-mode 1)
       (ibuffer-switch-to-saved-filter-groups "default"))
 
-    (add-hook 'ibuffer-mode-hook 'kfi/use-ibuffer-default))
+    (add-hook 'ibuffer-mode-hook 'kfi/setup-ibuffer))
 #+end_src
 
 ** COMMENT ido (disabled)
