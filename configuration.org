@@ -221,8 +221,7 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
 #+begin_src emacs-lisp
   (use-package ibuffer
     :bind (("C-x C-b" . ibuffer)
-           ("<C-tab>" . ibuffer)
-           ("<s-8>" . ibuffer))
+           ("s-8" . ibuffer))
     :config
     (setq ibuffer-saved-filter-groups
           (quote (("default"
