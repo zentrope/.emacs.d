@@ -599,19 +599,17 @@ https://github.com/akermu/emacs-libvterm
     :bind (("C-c v" . vterm)
            ("C-c h" . vterm))
     :init (setq vterm-kill-buffer-on-exit t)
-    :hook (vterm-mode . (lambda ()
-                          (define-key vterm-mode-map (kbd "C-v") 'vterm-yank)
-                          (define-key vterm-mode-map (kbd "s-v") 'vterm-yank)))
     :config
-    (when (display-graphic-p)
-      ;; pastel
-      (set-face-attribute 'vterm-color-default nil :foreground "#c7c7c7")
-      (set-face-attribute 'vterm-color-cyan nil :foreground "#d0d3fd")
-      (set-face-attribute 'vterm-color-blue nil :foreground "#a8d6fd")
-      (set-face-attribute 'vterm-color-black nil :foreground "#626262")
-      (set-face-attribute 'vterm-color-yellow nil :foreground "#fffcc0")
-      (set-face-attribute 'vterm-color-green nil :foreground "#b9f87b")
-      (set-face-attribute 'vterm-color-white nil :foreground "#f1f1f2")))
+    (defun kfi/setup-vterm ()
+      (define-key vterm-mode-map (kbd "C-v") 'vterm-yank)
+      (define-key vterm-mode-map (kbd "s-v") 'vterm-yank)
+      (set-face-attribute 'vterm-color-cyan nil :foreground "dodgerblue")
+      (set-face-attribute 'vterm-color-yellow nil :foreground "peru")
+      (if (member 'modus-vivendi custom-enabled-themes)
+          (set-face-attribute 'vterm-color-default nil :foreground "#c7c7c7")
+        (set-face-attribute 'vterm-color-default nil :foreground "#444444")))
+
+    (add-hook 'vterm-mode-hook 'kfi/setup-vterm))
 #+end_src
 
 * Configuration Modes
