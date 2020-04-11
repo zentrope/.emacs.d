@@ -319,6 +319,7 @@ Completion utility ([[https://oremacs.com/swiper/]]).
     (global-set-key (kbd "C-h f") 'counsel-describe-function)
     (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "s-f") 'swiper)
+    (global-set-key (kbd "s-b") 'ivy-switch-buffer)
     ;; Has to be set here because counsel overrides ivy.
     ;;  - Remove the ^ regex assumption for all searches
     (setq ivy-initial-inputs-alist nil))
@@ -678,7 +679,7 @@ https://github.com/akermu/emacs-libvterm
            ("readme\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
-    :bind (("s-b" . markdown-insert-bold)
+    :bind (("C-b" . markdown-insert-bold)
            ("s-i" . markdown-insert-italic)
            ("s-k" . kfi/markdown-insert-small))
     :config
