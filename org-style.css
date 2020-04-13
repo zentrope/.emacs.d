@@ -1,0 +1,204 @@
+:root {
+    color-scheme: light dark;
+    --page-bg: #f2f2f2;
+    --content-bg: white;
+    --content-fg: black;
+    --link-fg: #369;
+    --content-border-fg: #ccc;
+    --issue-head: firebrick;
+    --issue-margin: #ebebeb;
+    --issue-bg: #f8f8f8;
+    --alert-bg: #f2f2f2;
+    --alert-margin: firebrick;
+    --row-border: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #222;
+    --content-bg: #333;
+    --content-fg: white;
+    --link-fg: dodgerblue;
+    --content-border-fg: #444;
+    --issue-head: darkorange;
+    --issue-margin: #555;
+    --issue-bg: #222;
+    --alert-bg: #222;
+    --alert-margin: red;
+    --row-border: black;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100%;
+  font-size: 11pt;
+  background-color: var(--page-bg);
+  color: var(--content-fg);
+}
+
+#content {
+  width: 750px;
+  margin: auto;
+  background-color: var(--content-bg);
+  padding: 4em;
+  border-right: 1px solid var(--content-border-fg);
+  border-left: 1px solid var(--content-border-fg);
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-fg);
+}
+
+h1, h2, h3, h4 {
+  font-family: sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 24pt;
+  text-align: center;
+  margin-bottom: 40pt;
+}
+
+h1 > span.subtitle {
+  font-size: 11pt;
+  font-family: sans-serif;
+  margin-top: 11pt;
+  color: var(--content-fg);
+  font-weight: normal;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 13pt;
+  font-size: 16pt;
+  margin-top: 4em;
+}
+
+h3 {
+  font-size: 12pt;
+}
+
+p {
+  font-size: 11pt;
+  line-height: 1.25em;
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+}
+
+code {
+  font-size: 10.5pt;
+  font-family: monospace;
+}
+
+.Alert {
+  background-color: var(--alert-bg);
+  border-left: 6px solid var(--alert-margin);
+  padding: 0.5em 1em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-left: 10px;
+}
+
+table tbody tr td:first-child {
+  width: 1.20in;
+  vertical-align: top;
+}
+
+table tbody tr td {
+  font-size: 11pt;
+  padding: 4px;
+  line-height: 1.33em;
+}
+
+.outline-2 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.outline-3 {
+  margin-top: 2em;
+}
+
+.outline-3 h3 {
+  margin: 0;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+}
+
+.Contacts td:nth-child(2) {
+  width: 2in;
+}
+
+.UpdatesAndChanges h3 {
+  color: var(--issue-head);
+}
+
+.UpdatesAndChanges table {
+  border-left: 4px solid var(--issue-margin);
+  background-color: var(--issue-bg);
+  margin-left: 0;
+}
+
+.UpdatesAndChanges table tbody tr td:first-child {
+  padding-left: 0.8em;
+  width: 1.20in;
+  font-weight: 600;
+}
+
+.UpdatesAndChanges table tbody tr td {
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+.UpdatesAndChanges table tbody tr td .section {
+  margin-bottom: 0.5em;
+}
+
+.UpdatesAndChanges table tbody tr td .section li {
+  padding-left: 5px;
+}
+
+.UpdatesAndChanges table tbody tr td .subhead {
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.DocumentHistory table {
+  margin-left: 0;
+}
+
+.DocumentHistory table thead th {
+  text-align: left;
+  padding: 4px;
+  font-weight: normal;
+  padding-left: 0;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.DocumentHistory tr {
+  border-bottom: 1px dotted var(--row-border);
+}
+
+.DocumentHistory table thead tr th:first-child  {
+  text-align: center;
+  width: 1.35in;
+}
+
+.DocumentHistory table thead tr th:nth-child(2)  {
+  width: 1.33in;
+}
+
+.DocumentHistory table tbody tr td:first-child  {
+  font-weight: normal;
+  text-align: center;
+}

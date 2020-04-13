@@ -735,6 +735,26 @@ times you need it.
           org-src-tab-acts-natively t
           org-src-window-setup 'current-window)
 
+    (defun kfi/inline-css-hook (exporter)
+      "Merge ./style.css or ~/.emacs.d/org-style.css into HTML document."
+      ;; credits: https://stackoverflow.com/a/37132338
+      (when (eq exporter 'html)
+        (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
+               (path (concat dir "style.css"))
+               (homestyle (or (null dir) (null (file-exists-p path))))
+               (final (if homestyle "~/.emacs.d/org-style.css" path))) ;; <- set your own style file path
+          (setq org-html-head-include-default-style nil)
+          (setq org-html-head (concat
+                               "<style type=\"text/css\">\n"
+                               "<!--/*--><![CDATA[/*><!--*/\n"
+                               (with-temp-buffer
+                                 (insert-file-contents final)
+                                 (buffer-string))
+                               "/*]]>*/-->\n"
+                               "</style>\n")))))
+
+    (add-hook 'org-export-before-processing-hook 'kfi/inline-css-hook)
+
     (defun kfi/org-align-tags ()
       "Align tags to their columns."
       (interactive)
