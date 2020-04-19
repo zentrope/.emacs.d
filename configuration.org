@@ -1165,12 +1165,13 @@ Rules:
              (window-width . 0.5)
              (side . left)
              (slot . 0))
-            ("\\*eshell.*"
-             (display-buffer-in-side-window)
-             (window-parameters . ((mode-line-format . (" " mode-line-buffer-identification))))
-             (window-height . 0.2)
-             (side . bottom)
-             (slot . 0)))))
+            ;; ("\\*eshell.*"
+            ;;  (display-buffer-in-side-window)
+            ;;  (window-parameters . ((mode-line-format . (" " mode-line-buffer-identification))))
+            ;;  (window-height . 0.2)
+            ;;  (side . bottom)
+            ;;  (slot . 0))
+            )))
 #+end_src
 
 ** Uncategorized
