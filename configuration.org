@@ -226,7 +226,9 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
     :config
     (setq ibuffer-saved-filter-groups
           (quote (("default"
-                   ("org" (mode . org-mode))
+                   ("documents" (or (mode . org-mode)
+                                    (mode . markdown-mode)
+                                    (mode . text-mode)))
                    ("swift" (mode . swift-mode))
                    ("elisp" (mode . emacs-lisp-mode))
                    ("web" (or (mode . css-mode)
@@ -234,6 +236,8 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
                               (mode . nxml-mode)
                               (mode . js-mode)
                               (mode . web-mode)))
+                   ("salesforce" (or (name . "[.]vfp$")
+                                     (name . "[.]apxc$")))
                    ("python" (mode . python-mode))
                    ("json" (mode . json-mode))
                    ("java" (mode . java-mode))
@@ -543,7 +547,7 @@ http://joaotavora.github.io/yasnippet/
       (jump-to-register :magit-fullscreen)))
 #+end_src
 
-** +Multi-Term (Terminal Client -- retired)+
+** COMMENT +Multi-Term (Terminal Client -- retired)+
 
 #+begin_src emacs-lisp
   ;; (use-package multi-term
@@ -802,7 +806,8 @@ Facilitates a web page with CSS, Javascript and HTML mixed together.
   (use-package web-mode
     :ensure t
     :commands web-mode
-    :mode (("\\.html?\\'" . web-mode))
+    :mode (("\\.html?\\'" . web-mode)
+           ("\\.vfp?\\'" . web-mode))
     :config
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-css-indent-offset 2)
