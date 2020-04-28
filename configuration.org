@@ -758,8 +758,6 @@ times you need it.
                                "/*]]>*/-->\n"
                                "</style>\n")))))
 
-    (add-hook 'org-export-before-processing-hook 'kfi/inline-css-hook)
-
     (defun kfi/org-align-tags ()
       "Align tags to their columns."
       (interactive)
@@ -794,6 +792,8 @@ times you need it.
     (use-package htmlize
       :ensure t)
 
+    (global-set-key (kbd "C-x <tab>") 'outline-hide-subtree)
+    (add-hook 'org-export-before-processing-hook 'kfi/inline-css-hook)
     (add-hook 'org-mode-hook 'kfi/org-graphic-mode-setup)
     (add-hook 'org-mode-hook 'kfi/org-keys-setup)
     (add-hook 'org-mode-hook 'kfi/org-standard-setup))
