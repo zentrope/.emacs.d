@@ -127,7 +127,7 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
       (interactive)
       (kfi/unload-themes)
       (load-theme 'modus-operandi t)
-      (set-face-attribute 'mode-line nil :box nil)
+      ;; (set-face-attribute 'mode-line nil :box nil)
       (set-face-attribute 'org-default nil :foreground "black")
       (set-face-attribute 'bold nil :foreground "black")
       (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
@@ -138,7 +138,7 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
         (interactive)
         (kfi/unload-themes)
         (load-theme 'modus-vivendi t)
-        (set-face-attribute 'mode-line nil :box nil)
+        ;; (set-face-attribute 'mode-line nil :box nil)
         (set-face-attribute 'org-default nil :foreground "#c7c7c7")
         (set-face-attribute 'bold nil :foreground "white")
         (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
@@ -146,13 +146,14 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
         (kfi/modus-dark))))
 #+end_src
 
-** Modeline
+** Modeline (disabled)
 
 [[https://github.com/seagle0128/doom-modeline]]
 
 #+begin_src emacs-lisp
   (use-package doom-modeline
     :ensure t
+    :disabled
     :config
     (when (display-graphic-p)
       (doom-modeline-mode 1)
