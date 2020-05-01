@@ -21,6 +21,23 @@ Emacs is loading.
     (tooltip-mode -1))
 #+end_src
 
+** Emacs Menu
+
+Is this a useful thing, I wonder?
+
+#+begin_src emacs-lisp
+  (easy-menu-define keith-menu nil "My Menu"
+    '("Keith"
+      ["Light Theme" kfi/modus-light]
+      ["Dark Theme" kfi/modus-dark]
+      "-----------"
+      ["Double Width" kfi/dw]
+      ["Single Width" kfi/sw]))
+
+  (define-key-after global-map [menu-bar keith]
+    (cons "Keith" keith-menu) 'tools)
+#+end_src
+
 ** All the icons
 
 #+begin_src emacs-lisp
@@ -968,6 +985,7 @@ customize lsp so it's not so facey.
 
   (use-package dap-mode
     :ensure t
+    :disabled
     :after lsp-mode
     :config (progn (dap-mode t)
                    (dap-ui-mode t)))
