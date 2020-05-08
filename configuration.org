@@ -494,9 +494,11 @@ http://joaotavora.github.io/yasnippet/
       (when (display-graphic-p)
         (hl-line-mode)))
     (add-hook 'dired-mode-hook 'kfi/dired-mode-hook)
+    (setq dired-listing-switches "-l")
     (when (eq system-type 'darwin)
       (setq trash-directory "~/.Trash")
       (setq delete-by-moving-to-trash t))
+
     (when (eq system-type 'darwin)
       (setq dired-use-ls-dired nil)))
 #+end_src
