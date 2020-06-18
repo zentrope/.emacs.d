@@ -1029,6 +1029,24 @@ customize lsp so it's not so facey.
                            (lsp))))
 #+end_src
 
+** Scheme Mode
+
+See also: http://wiki.call-cc.org/emacs
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :init
+    ;; http://wiki.call-cc.org/emacs
+    (defun scheme-module-indent (state indent-point normal-indent) 2)
+    (put 'module 'scheme-indent-function 'scheme-module-indent)
+    (put 'and-let* 'scheme-indent-function 1)
+    (put 'parameterize 'scheme-indent-function 1)
+    (put 'handle-exceptions 'scheme-indent-function 1)
+    (put 'when 'scheme-indent-function 1)
+    (put 'unless 'scheme-indent-function 1)
+    (put 'match 'scheme-indent-function 1))
+#+end_src
+
 ** Swift Mode
 
 #+begin_src emacs-lisp
