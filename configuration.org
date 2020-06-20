@@ -1044,7 +1044,10 @@ See also: http://wiki.call-cc.org/emacs
     (put 'handle-exceptions 'scheme-indent-function 1)
     (put 'when 'scheme-indent-function 1)
     (put 'unless 'scheme-indent-function 1)
-    (put 'match 'scheme-indent-function 1))
+    (put 'match 'scheme-indent-function 1)
+    (defun kfi/scheme-mode-hook ()
+      (paredit-mode 1))
+    (add-hook 'scheme-mode-hook 'kfi/scheme-mode-hook))
 #+end_src
 
 ** Swift Mode
