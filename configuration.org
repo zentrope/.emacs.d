@@ -1035,6 +1035,7 @@ See also: http://wiki.call-cc.org/emacs
 
 #+begin_src emacs-lisp
   (use-package emacs
+    ;; :ensure t
     :init
     ;; http://wiki.call-cc.org/emacs
     (defun scheme-module-indent (state indent-point normal-indent) 2)
@@ -1043,9 +1044,11 @@ See also: http://wiki.call-cc.org/emacs
     (put 'parameterize 'scheme-indent-function 1)
     (put 'handle-exceptions 'scheme-indent-function 1)
     (put 'when 'scheme-indent-function 1)
+    (put 'if 'scheme-indent-function 1)
     (put 'unless 'scheme-indent-function 1)
     (put 'match 'scheme-indent-function 1)
     (defun kfi/scheme-mode-hook ()
+      (company-mode 1)
       (paredit-mode 1))
     (add-hook 'scheme-mode-hook 'kfi/scheme-mode-hook))
 #+end_src
