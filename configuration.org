@@ -1034,9 +1034,18 @@ customize lsp so it's not so facey.
 See also: http://wiki.call-cc.org/emacs
 
 #+begin_src emacs-lisp
+  (use-package racket-mode
+    :ensure t
+    :config
+    (defun kfi/racket-mode-hook ()
+      (company-mode 1)
+      (paredit-mode 1))
+    (add-hook 'racket-mode-hook 'kfi/racket-mode-hook)
+    (add-hook 'racket-repl-mode-hook 'kfi/racket-mode-hook))
+
   (use-package emacs
     ;; :ensure t
-    :init
+    :config
     ;; http://wiki.call-cc.org/emacs
     (defun scheme-module-indent (state indent-point normal-indent) 2)
     (put 'module 'scheme-indent-function 'scheme-module-indent)
