@@ -22,8 +22,8 @@
 
 ;; Development
 (setq package-archives
-      (list '("melpa"        . "https://melpa.org/packages/")
-            '("gnu"          . "https://elpa.gnu.org/packages/")
+      (list '("melpa"        . "http://melpa.org/packages/")
+            '("gnu"          . "http://elpa.gnu.org/packages/")
             '("org"          . "https://orgmode.org/elpa/")))
 
 ;; Initialise the packages, avoiding a re-initialisation.
