@@ -71,10 +71,8 @@ Is this a useful thing, I wonder?
 
 ** Themes
 
-A light theme:
-
 #+begin_src emacs-lisp
-  (use-package modus-operandi-theme     ; light
+  (use-package modus-themes
     :ensure t
     :config
     (setq modus-operandi-theme-slanted-constructs t)
@@ -83,20 +81,6 @@ A light theme:
     (setq modus-operandi-theme-distinct-org-blocks t)
     (setq modus-operandi-theme-visible-fringes nil)
     (setq modus-operandi-theme-scale-headings nil))
-#+end_src
-
-The corresponding dark theme:
-
-#+begin_src emacs-lisp
-  (use-package modus-vivendi-theme      ; dark
-    :ensure t
-    :config
-    (setq modus-vivendi-theme-slanted-constructs t)
-    (setq modus-vivendi-theme-bold-constructs t)
-    (setq modus-vivendi-theme-proportional-fonts nil)
-    (setq modus-vivendi-theme-distinct-org-blocks t)
-    (setq modus-vivendi-theme-visible-fringes nil)
-    (setq modus-vivendi-theme-scale-headings nil))
 #+end_src
 
 Add a face for =Org Mode= checklists such that when you check them off,
@@ -161,7 +145,7 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
         (set-face-attribute 'bold nil :foreground "white")
         (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
       (when (display-graphic-p)
-        (kfi/modus-dark))))
+        (kfi/modus-light))))
 #+end_src
 
 ** Modeline (disabled)
@@ -232,11 +216,15 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
 
 ** git-gutter
 
+Ok, I've discovered this annoys me more than it helps. Editors with
+more, uh, graphical affordances make this kind of thing work
+well. Emacs, not so much, or not this module, anyway. I'll keep it
+here in case I want to flip it on, but for now, it's default off.
 #+begin_src emacs-lisp
   (use-package git-gutter
     :ensure t
     :config
-    (global-git-gutter-mode 1))
+    (global-git-gutter-mode 0))
 #+end_src
 
 ** ibuffers
@@ -919,24 +907,38 @@ This needs to be revisited if I start using Clojure again.
 
 Revisit if I use Go again.
 
-#+begin_src emacs-lisp
-  (use-package flycheck-gometalinter
-    :ensure t
-    :config
-    (flycheck-gometalinter-setup))
+https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
 
-  (use-package go-eldoc
-    :ensure t)
+
+#+begin_src emacs-lisp
+  (use-package flycheck-golangci-lint
+    :ensure t
+    :hook (go-mode . flycheck-golangci-lint-setup))
+
+  ;; (use-package flycheck-gometalinter
+  ;;   :ensure t
+  ;;   :config
+  ;;   (flycheck-gometalinter-setup))
+
+  ;; (use-package go-eldoc
+  ;;   :ensure t)
 
   (use-package go-mode
     :ensure t
     :commands go-mode
     :init
-    (add-hook 'before-save-hook 'gofmt-before-save)
+
+    ;; (defun kfi/go-mode-hook ()
+    ;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    ;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+    ;; (add-hook 'before-save-hook 'gofmt-before-save)
     (add-hook 'go-mode-hook 'flycheck-mode)
-    (add-hook 'go-mode-hook 'lsp-deferred)
+    ;; (add-hook 'go-mode-hook 'lsp-deferred)
+    ;; (add-hook 'go-mode-hook #'kfi/go-mode-hook)
     :config
-    (setq gofmt-command "goimports"))
+    ;;(setq gofmt-command "goimports")
+    )
 
   (use-package golint
     :ensure t)
@@ -969,35 +971,35 @@ customize lsp so it's not so facey.
                                 (setq tab-width 4)
                                 (setq indent-tabs-mode nil))))
 
-  (use-package lsp-mode
-    :ensure t)
+  ;; (use-package lsp-mode
+  ;;   :ensure t)
 
-  (use-package hydra
-    :ensure t)
+  ;; (use-package hydra
+  ;;   :ensure t)
 
-  (use-package company-lsp
-    :ensure t)
+  ;; (use-package company-lsp
+  ;;   :ensure t)
 
-  (use-package lsp-ui
-    :ensure t
-    :config
-    ;; If the popups get too tiresome, use this:
-    (setq lsp-auto-configure nil))
+  ;; (use-package lsp-ui
+  ;;   :ensure t
+  ;;   :config
+  ;;   ;; If the popups get too tiresome, use this:
+  ;;   (setq lsp-auto-configure nil))
 
-  (use-package lsp-java
-    :ensure t
-    :after lsp
-    :config (add-hook 'java-mode-hook (lambda ()
-                                        (company-mode)
-                                        (lsp)
-                                        (flycheck-mode 1))))
+  ;; (use-package lsp-java
+  ;;   :ensure t
+  ;;   :after lsp
+  ;;   :config (add-hook 'java-mode-hook (lambda ()
+  ;;                                       (company-mode)
+  ;;                                       (lsp)
+  ;;                                       (flycheck-mode 1))))
 
-  (use-package dap-mode
-    :ensure t
-    :disabled
-    :after lsp-mode
-    :config (progn (dap-mode t)
-                   (dap-ui-mode t)))
+  ;; (use-package dap-mode
+  ;;   :ensure t
+  ;;   :disabled
+  ;;   :after lsp-mode
+  ;;   :config (progn (dap-mode t)
+  ;;                  (dap-ui-mode t)))
 #+end_src
 
 ** Javascript Mode
@@ -1010,6 +1012,44 @@ customize lsp so it's not so facey.
                               (setq indent-tabs-mode nil)
                               (setq js-indent-level 2)
                               (local-set-key (kbd "RET") 'newline-and-indent))))
+#+end_src
+
+** LSP Mode
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t
+    :commands (lsp lsp-deferred)
+    :hook (go-mode . lsp-deferred)
+    :config
+
+    (defun kfi/lsp-go-install-save-hooks ()
+      (add-hook 'before-save-hook #'lsp-format-buffer t t)
+      (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+    (add-hook 'go-mode-hook #'kfi/lsp-go-install-save-hooks)
+
+    ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+    (setq lsp-gopls-staticcheck t)
+    (setq lsp-eldoc-render-all t)
+    (setq lsp-eldoc-enable-hover t)
+    (setq lsp-ui-doc-enable nil) ;; doc popups above cursor word
+    (setq lsp-rust-analyzer-proc-macro-enable t)
+    (setq lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
+    (setq lsp-gopls-complete-unimported t))
+
+  (use-package lsp-ui
+    :ensure t
+    :commands lsp-ui-mode
+    :init
+    (setq lsp-ui-doc-enable nil
+          lsp-ui-peek-enable t
+          lsp-ui-sideline-enable t
+          lsp-ui-imenu-enable t
+          lsp-ui-flycheck-enable t))
+
+  (use-package company-lsp
+    :ensure t)
 #+end_src
 
 ** Python Mode
@@ -1033,6 +1073,27 @@ customize lsp so it's not so facey.
     :hook (python-mode . (lambda ()
                            (require 'lsp-python-ms)
                            (lsp))))
+#+end_src
+
+** Rust Mode
+
+Check: https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/
+
+#+begin_src emacs-lisp
+  (use-package rustic
+    :ensure t
+    :init
+    (setq rustic-lsp-server 'rust-analyzer)
+    (setq rustic-flycheck-setup-mode-line-p nil)
+    :hook ((rustic-mode . (lambda ()
+                            (lsp-ui-doc-mode)
+                            (company-mode))))
+    :config
+    (setq rust-indent-method-chain t)
+    (setq rustic-format-on-save t))
+
+  (use-package flycheck-rust
+    :ensure t)
 #+end_src
 
 ** Scheme Mode
