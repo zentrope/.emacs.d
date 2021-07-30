@@ -52,7 +52,7 @@ Is this a useful thing, I wonder?
   (use-package emacs
     :config
     (when (display-graphic-p)
-      (defvar kfi/font-choices '("JetBrains Mono" "Menlo" "Monaco")
+      (defvar kfi/font-choices '("Menlo" "Monaco")
         "Font faces I'm fond of.")
 
       (defun kfi/switch-font ()
@@ -64,7 +64,7 @@ Is this a useful thing, I wonder?
             (message "ERROR: Invalid font: %s." font))))
 
       (set-face-attribute 'default nil
-                          :family "JetBrains Mono"
+                          :family "Menlo"
                           :height 140
                           :weight 'medium)))
 #+end_src
@@ -1048,8 +1048,9 @@ customize lsp so it's not so facey.
           lsp-ui-imenu-enable t
           lsp-ui-flycheck-enable t))
 
-  (use-package company-lsp
-    :ensure t)
+  ;; No longer available
+  ;; (use-package company-lsp
+  ;;   :ensure t)
 #+end_src
 
 ** Python Mode
