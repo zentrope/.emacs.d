@@ -144,8 +144,10 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
         (set-face-attribute 'org-default nil :foreground "#c7c7c7")
         (set-face-attribute 'bold nil :foreground "white")
         (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
-      (when (display-graphic-p)
-        (kfi/modus-light))))
+      (if (display-graphic-p)
+        (kfi/modus-light)
+        (progn (kfi/modus-dark)
+               (global-hl-line-mode 1)))))
 #+end_src
 
 ** Modeline (disabled)
@@ -822,7 +824,9 @@ Facilitates a web page with CSS, Javascript and HTML mixed together.
     :ensure t
     :commands web-mode
     :mode (("\\.html?\\'" . web-mode)
-           ("\\.vfp?\\'" . web-mode))
+           ("\\.vfp?\\'" . web-mode)
+           ("\\.cmp?\\'" . web-mode)
+           ("\\.design?\\'" . web-mode))
     :config
     (setq web-mode-markup-indent-offset 2
           web-mode-css-indent-offset 2
@@ -1010,7 +1014,7 @@ customize lsp so it's not so facey.
     :init
     (add-hook 'js-mode-hook (lambda ()
                               (setq indent-tabs-mode nil)
-                              (setq js-indent-level 2)
+                              (setq js-indent-level 4)
                               (local-set-key (kbd "RET") 'newline-and-indent))))
 #+end_src
 
@@ -1102,14 +1106,14 @@ Check: https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/
 See also: http://wiki.call-cc.org/emacs
 
 #+begin_src emacs-lisp
-  (use-package racket-mode
-    :ensure t
-    :config
-    (defun kfi/racket-mode-hook ()
-      (company-mode 1)
-      (paredit-mode 1))
-    (add-hook 'racket-mode-hook 'kfi/racket-mode-hook)
-    (add-hook 'racket-repl-mode-hook 'kfi/racket-mode-hook))
+  ;; (use-package racket-mode
+  ;;   :ensure t
+  ;;   :config
+  ;;   (defun kfi/racket-mode-hook ()
+  ;;     (company-mode 1)
+  ;;     (paredit-mode 1))
+  ;;   (add-hook 'racket-mode-hook 'kfi/racket-mode-hook)
+  ;;   (add-hook 'racket-repl-mode-hook 'kfi/racket-mode-hook))
 
   (use-package emacs
     ;; :ensure t
