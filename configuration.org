@@ -144,10 +144,8 @@ updates an =Org Mode= face, so it has to be loaded /after/ =Org Mode=.
         (set-face-attribute 'org-default nil :foreground "#c7c7c7")
         (set-face-attribute 'bold nil :foreground "white")
         (set-face-attribute 'org-headline-done nil :strike-through t :foreground "gray40"))
-      (if (display-graphic-p)
-        (kfi/modus-light)
-        (progn (kfi/modus-dark)
-               (global-hl-line-mode 1)))))
+      (when (display-graphic-p)
+        (kfi/modus-light))))
 #+end_src
 
 ** Modeline (disabled)
