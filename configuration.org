@@ -850,6 +850,7 @@ This needs to be revisited if I start using Clojure again.
 
 #+begin_src emacs-lisp
   (use-package cider
+    :disabled
     :ensure t
     :after company
     :config
@@ -865,9 +866,11 @@ This needs to be revisited if I start using Clojure again.
     (add-hook 'cider-mode-hook #'company-mode))
 
   (use-package clojure-mode-extra-font-locking
+    :disabled
     :ensure t)
 
   (use-package clojure-mode
+    :disabled
     :commands clojure-mode
     :ensure t
     :delight "clj"
@@ -913,47 +916,34 @@ https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
 
 
 #+begin_src emacs-lisp
-  (use-package flycheck-golangci-lint
-    :ensure t
-    :hook (go-mode . flycheck-golangci-lint-setup))
-
-  ;; (use-package flycheck-gometalinter
+  ;; (use-package flycheck-golangci-lint
   ;;   :ensure t
+  ;;   :hook (go-mode . flycheck-golangci-lint-setup))
+
+  ;; (use-package go-mode
+  ;;   :ensure t
+  ;;   :commands go-mode
+  ;;   :init
+
+  ;;   (add-hook 'go-mode-hook 'flycheck-mode)
+
   ;;   :config
-  ;;   (flycheck-gometalinter-setup))
+  ;;   ;;(setq gofmt-command "goimports")
+  ;;   )
 
-  ;; (use-package go-eldoc
+  ;; (use-package golint
   ;;   :ensure t)
-
-  (use-package go-mode
-    :ensure t
-    :commands go-mode
-    :init
-
-    ;; (defun kfi/go-mode-hook ()
-    ;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    ;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-    ;; (add-hook 'before-save-hook 'gofmt-before-save)
-    (add-hook 'go-mode-hook 'flycheck-mode)
-    ;; (add-hook 'go-mode-hook 'lsp-deferred)
-    ;; (add-hook 'go-mode-hook #'kfi/go-mode-hook)
-    :config
-    ;;(setq gofmt-command "goimports")
-    )
-
-  (use-package golint
-    :ensure t)
 #+end_src
 
 ** Groovy Mode
 
 #+begin_src emacs-lisp
-  (use-package groovy-mode
-    :ensure t
-    :defer t
-    :mode (("\\.groovy" . groovy-mode)
-           ("\\.gradle" . groovy-mode)))
+  ;; (use-package groovy-mode
+  ;;   :disabled
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :mode (("\\.groovy" . groovy-mode)
+  ;;          ("\\.gradle" . groovy-mode)))
 #+end_src
 
 ** Java Mode
@@ -1083,20 +1073,20 @@ customize lsp so it's not so facey.
 Check: https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/
 
 #+begin_src emacs-lisp
-  (use-package rustic
-    :ensure t
-    :init
-    (setq rustic-lsp-server 'rust-analyzer)
-    (setq rustic-flycheck-setup-mode-line-p nil)
-    :hook ((rustic-mode . (lambda ()
-                            (lsp-ui-doc-mode)
-                            (company-mode))))
-    :config
-    (setq rust-indent-method-chain t)
-    (setq rustic-format-on-save t))
+  ;; (use-package rustic
+  ;;   :ensure t
+  ;;   :init
+  ;;   (setq rustic-lsp-server 'rust-analyzer)
+  ;;   (setq rustic-flycheck-setup-mode-line-p nil)
+  ;;   :hook ((rustic-mode . (lambda ()
+  ;;                           (lsp-ui-doc-mode)
+  ;;                           (company-mode))))
+  ;;   :config
+  ;;   (setq rust-indent-method-chain t)
+  ;;   (setq rustic-format-on-save t))
 
-  (use-package flycheck-rust
-    :ensure t)
+  ;; (use-package flycheck-rust
+  ;;   :ensure t)
 #+end_src
 
 ** Scheme Mode
@@ -1113,51 +1103,51 @@ See also: http://wiki.call-cc.org/emacs
   ;;   (add-hook 'racket-mode-hook 'kfi/racket-mode-hook)
   ;;   (add-hook 'racket-repl-mode-hook 'kfi/racket-mode-hook))
 
-  (use-package emacs
-    ;; :ensure t
-    :config
-    ;; http://wiki.call-cc.org/emacs
-    (defun scheme-module-indent (state indent-point normal-indent) 2)
-    (put 'module 'scheme-indent-function 'scheme-module-indent)
-    (put 'and-let* 'scheme-indent-function 1)
-    (put 'parameterize 'scheme-indent-function 1)
-    (put 'handle-exceptions 'scheme-indent-function 1)
-    (put 'when 'scheme-indent-function 1)
-    (put 'if 'scheme-indent-function 1)
-    (put 'unless 'scheme-indent-function 1)
-    (put 'match 'scheme-indent-function 1)
-    (defun kfi/scheme-mode-hook ()
-      (company-mode 1)
-      (paredit-mode 1))
-    (add-hook 'scheme-mode-hook 'kfi/scheme-mode-hook))
+  ;; (use-package emacs
+  ;;   ;; :ensure t
+  ;;   :config
+  ;;   ;; http://wiki.call-cc.org/emacs
+  ;;   (defun scheme-module-indent (state indent-point normal-indent) 2)
+  ;;   (put 'module 'scheme-indent-function 'scheme-module-indent)
+  ;;   (put 'and-let* 'scheme-indent-function 1)
+  ;;   (put 'parameterize 'scheme-indent-function 1)
+  ;;   (put 'handle-exceptions 'scheme-indent-function 1)
+  ;;   (put 'when 'scheme-indent-function 1)
+  ;;   (put 'if 'scheme-indent-function 1)
+  ;;   (put 'unless 'scheme-indent-function 1)
+  ;;   (put 'match 'scheme-indent-function 1)
+  ;;   (defun kfi/scheme-mode-hook ()
+  ;;     (company-mode 1)
+  ;;     (paredit-mode 1))
+  ;;   (add-hook 'scheme-mode-hook 'kfi/scheme-mode-hook))
 #+end_src
 
 ** Swift Mode
 
 #+begin_src emacs-lisp
-  (use-package swift-mode
-    :ensure t
-    :defer t
-    :config
-    (defun kfi/swift-mode ()
-      ;;(lsp) ;; I don't think this works for XCode projects.
-      (setq swift-mode:basic-offset 4)
-      (setq indent-tabs-mode nil)
-      (hl-line-mode 1)
-      (company-mode 1))
-    (add-hook 'swift-mode-hook 'kfi/swift-mode))
+  ;; (use-package swift-mode
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :config
+  ;;   (defun kfi/swift-mode ()
+  ;;     ;;(lsp) ;; I don't think this works for XCode projects.
+  ;;     (setq swift-mode:basic-offset 4)
+  ;;     (setq indent-tabs-mode nil)
+  ;;     (hl-line-mode 1)
+  ;;     (company-mode 1))
+  ;;   (add-hook 'swift-mode-hook 'kfi/swift-mode))
 #+end_src
 
 See if =lsp-sourcekit= is a pleasant diversion from Xcode.
 
 #+begin_src emacs-lisp
-  (use-package lsp-sourcekit
-    :after lsp-mode
-    :ensure t
-    :config
-    (setenv "SOURCEKIT_TOOLCHAIN_PATH" "/Library/Developer/Toolchains/swift-latest.xctoolchain")
-    ;; xcrun --find sourcekit-lsp
-    (setq lsp-sourcekit-executable (expand-file-name "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp")))
+  ;; (use-package lsp-sourcekit
+  ;;   :after lsp-mode
+  ;;   :ensure t
+  ;;   :config
+  ;;   (setenv "SOURCEKIT_TOOLCHAIN_PATH" "/Library/Developer/Toolchains/swift-latest.xctoolchain")
+  ;;   ;; xcrun --find sourcekit-lsp
+  ;;   (setq lsp-sourcekit-executable (expand-file-name "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp")))
 #+end_src
 
 I don't think this works too well if you point it at a random Xcode
